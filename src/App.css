@@ -1,38 +1,199 @@
-.App {
-  text-align: center;
+:root{
+  font-size: 1em;
+  font-family: 'Open Sans';
+  --bg-primary: rgb(55, 55, 55);
+  --bg-secondary: white;
+  --txt-primary: white;
+  --txt-secondary: black;
+  --hs-red: #E3000B;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+*{
+  background-color: transparent;
+  border: 0; 
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+body{
+  background-color:var(--bg-primary);
+  background-image: url("images/BackgroundBig.png");
+  background-repeat: repeat;
+  background-position: center top;
+}
+
+#menu{
+  position: fixed;
+  top: 0.4rem;
+  left: 0.4rem;
+  height: 2rem;
+  width: 2rem;
+  background-color: rgb(125, 125, 125, 0.5);
+  border-radius: 0.5rem;
+  transition: 1s;
+}
+
+#menu.open{ /* .open*/
+  height: 8.3rem;
+  left:0;
+  width: 2.4rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+#btnMenu{
+  height: 2rem;
+  width: 2rem;
+  margin-left: 0.2rem;
+}
+
+#bar1, #bar2, #bar3{
+  position: absolute;
+  width: 1.4rem;
+  height: 0.15rem;
+  background-color: black;
+  margin: 0 0.3rem;
+  transition: 0.4s;
+}
+
+#bar1{
+  margin-top: 0.45rem;
+}
+
+#bar2{
+  margin-top: 0.95rem;
+}
+
+#bar3{
+  margin-top: 1.45rem;
+}
+
+#bar1.open{
+  transform: rotate(-45deg) translate(-0.42rem, 0.32rem);
+}
+
+#bar2.open {opacity: 0;}
+
+#bar3.open {
+  transform: rotate(45deg) translate(-0.36rem, -0.34rem);
+}
+
+#btnMenu.closedMenu{
+  margin: 0;
+}
+
+#btnHelp{
+  height: 2rem;
+  width: 2rem;
+  margin-left: 0.2rem 0.1rem;
+  font-size: 1.2rem;
+  transition: 1s;
+}
+
+#btnHelp.closedMenu{
+  margin-left: -6rem;
+}
+
+#infoPanel{
+  position: fixed;
+  top: 9rem;
+  left: 0;
+  height: 5.4rem;
+  width: 17.5rem;
+  overflow: hidden;
+  background-color: white;
+  border-radius: 0 0.5rem 0.5rem 0;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+  transition: 1s ease-in-out;
+}
+
+#infoPanel.closedInfo, #infoPanel.closedMenu{
+  top: 9.7rem;
+  left: -17.5rem;
+  height: 4rem;
+}
+
+#hsaLogo{
+  position:fixed;
+  top: 9rem;
+  left: 0;
+  height: 5.4rem;
+  background-color: white;
+  border-radius: 0 0.5rem 0.5rem 0;
+  transition: 1s ease-in-out;
+}
+
+#hsaLogo.closedInfo, #hsaLogo.closedMenu{
+  top: 9.7rem;
+  left: 0;
+  height: 4rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+}
+
+#hsaLogo.closedMenu, #btnInfo.closedMenu{
+  left: -6rem;
+}
+
+#btnInfo{
+  position: fixed;
+  top: 9.7rem;
+  left: 0;
+  height: 4rem;
+  width: 3rem;
+}
+
+
+/* display: flex;
+justify-content: space-between; */
+
+.infoPanelText{
+  position:absolute;
+  height: 100%;
+  margin-left: 24%;
+  color: var(--hs-red);
+  font-weight: 500;
+  /* line-height: 1.2rem; */
+}
+
+.arrow{
+  position: absolute;
+  right: -2%;
+  top: 29%;
+  height: 2.3rem;
+  width: 2.3rem;
+  border-top: 0.3rem solid var(--hs-red);
+  border-right: 0.3rem solid var(--hs-red);
+  border-top-right-radius: 10%;
+  transition: all .3s ease-in-out;
+
+  /* arrow Left & Breiter */
+  transform: rotate(-135deg) skew(20deg, 20deg);
+}
+
+.arrow:hover{
+  border-top: 0.5rem solid var(--hs-red);
+  border-right: 0.5rem solid var(--hs-red);
+}
+
+button:hover, #btnMenu:hover{
+  cursor: pointer;
+}
+
+.hidden{
+  visibility: hidden;
+}
+
+@media(max-width: 499px){
+  :root{
+    font-size: 0.9em;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media(min-width: 500px){
+  :root{
+    font-size: 1em;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media(min-width: 1300px){
+  :root{
+    font-size: 1.5em;
   }
 }
