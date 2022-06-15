@@ -1,6 +1,7 @@
 import './App.css';
 import Logo from './images/HSA_Logo.png';
 import Popup from './components/Popup';
+import PopupS from './components/PopupSmall';
 import React, { useState } from 'react';
 // import{ useState } from 'react';
 
@@ -16,7 +17,7 @@ export default function App(){
 
   function menu(){
     const openElements = ['menu', 'bar1', 'bar2', 'bar3'];
-    const closedElements = ['btnMenu', 'hsaLogo', 'btnInfo', 'infoPanel', 'btnHelp'];
+    const closedElements = ['btnMenu', 'hsaLogo', 'btnInfo', 'infoPanel', 'btnHelp', 'btnLang', 'btnColor'];
     toggleClass('open', openElements);
     toggleClass('closedMenu', closedElements);
     closeInfo();
@@ -78,7 +79,11 @@ export default function App(){
           <div id='bar2'/>
           <div id='bar3'/>
         </div>
-        <button id='btnHelp' className='closedMenu' onClick={() => setIsOpen(true)}>?</button>
+        <div id='btnLang' className='menuBtns closedMenu'>DE</div>
+        <button id='btnHelp' className='menuBtns closedMenu' onClick={() => setIsOpen(true)}>?</button>
+        <div id='btnColor' className='menuBtns closedMenu'>
+          <div id='colorCircle'/>
+        </div>
       </div>
 
       <div id='infoPanel' className='closedInfo closedMenu'>
@@ -94,9 +99,24 @@ export default function App(){
       </div>
       
       <Popup trigger={isOpen} setTrigger={setIsOpen}>
-        <h3>Hilfe-Fenster</h3>
-        <p>Hier werden die Grundfunktionen erklärt!</p>
+        <h className='popupTitle'>Hilfe-Fenster</h>
+        <p className='popupText'>Hier werden die Grundfunktionen erklärt!</p>
       </Popup>
+      
+      <PopupS trigger={isOpen} setTrigger={setIsOpen}>
+        <div className='animationContainer'>
+            <div class="drop">⬤</div>
+            <div class="drop">⬤</div>
+            <div class="drop">⬤</div>
+            <div class="drop">⬤</div>
+            <div class="drop">⬤</div>
+            <div class="drop">⬤</div>
+            <div class="drop">⬤</div>
+        </div>
+        <div className='bubbles hidden'/>
+        <div className='bubbles bubbles2 hidden'/>
+        <div className='popupCutout'>GEWONNEN</div>
+      </PopupS>
     </body>
   )
 }

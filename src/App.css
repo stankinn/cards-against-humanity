@@ -6,6 +6,16 @@
   --txt-primary: white;
   --txt-secondary: black;
   --hs-red: #E3000B;
+  --animation-gradient: repeating-linear-gradient(90deg, #ff0000, #ff8400, #feff00, #1dff00, #00beff, #b500ff, #ff0000);
+  --radGradientRed: radial-gradient(circle, #ff0000 20%, transparent 20%);
+  --radGradientOrange: radial-gradient(circle, #ff8400 20%, transparent 20%);
+  --radGradientYellow: radial-gradient(circle, #feff00 20%, transparent 20%);
+  --radGradientGreen: radial-gradient(circle, #1dff00 20%, transparent 20%);
+  --radGradientBlue: radial-gradient(circle, #00beff 20%, transparent 20%);
+  --radGradientViolet: radial-gradient(circle, #8800ff 20%, transparent 20%);
+  --radGradientPurple: radial-gradient(circle, #b500ff 20%, transparent 20%);
+  --radGradient2Orange: radial-gradient(circle, transparent 20%, #ff8400 20%, transparent 30%);
+  --radGradient2Green: radial-gradient(circle, transparent 10%, #1dff00 15%, transparent 20%);
 }
 
 *{
@@ -24,76 +34,95 @@ body{
   position: fixed;
   top: 0.4rem;
   left: 0.4rem;
-  height: 2rem;
-  width: 2rem;
-  background-color: rgb(125, 125, 125, 0.5);
+  height: 2.75rem;
+  width: 2.75rem;
+  background-color: rgba(50, 50, 50, 0.5);
   border-radius: 0.5rem;
   transition: 1s;
 }
 
-#menu.open{ /* .open*/
-  height: 8.3rem;
+#menu.open{
+  height: 11.3rem;
   left:0;
-  width: 2.4rem;
+  width: 2.9rem;
   border-radius: 0 0.5rem 0.5rem 0;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
 }
 
 #btnMenu{
-  height: 2rem;
-  width: 2rem;
-  margin-left: 0.2rem;
+  height: 2.75rem;
+  width: 2.75rem;
+  margin-left: 0.15rem;
 }
 
 #bar1, #bar2, #bar3{
   position: absolute;
-  width: 1.4rem;
-  height: 0.15rem;
-  background-color: black;
-  margin: 0 0.3rem;
-  transition: 0.4s;
+  width: 1.9rem;
+  border-top: 0.25rem solid black;
+  transition: 0.8s;
 }
 
 #bar1{
-  margin-top: 0.45rem;
+  margin: 0.55rem 0.45rem;
 }
 
 #bar2{
-  margin-top: 0.95rem;
+  margin: 1.25rem 0.45rem;
 }
 
 #bar3{
-  margin-top: 1.45rem;
+  margin: 1.95rem 0.45rem;
 }
 
 #bar1.open{
-  transform: rotate(-45deg) translate(-0.42rem, 0.32rem);
+  transform: rotate(-45deg) translate(-0.52rem, 0.48rem);
 }
 
-#bar2.open {opacity: 0;}
+#bar2.open{
+  border-top: 0;
+}
 
 #bar3.open {
-  transform: rotate(45deg) translate(-0.36rem, -0.34rem);
+  transform: rotate(45deg) translate(-0.5rem, -0.45rem);
 }
+
 
 #btnMenu.closedMenu{
   margin: 0;
 }
 
-#btnHelp{
-  height: 2rem;
-  width: 2rem;
-  margin-left: 0.2rem 0.1rem;
-  font-size: 1.2rem;
+.menuBtns{
+  position: relative;
+  left: 0.15rem;
+  height: 2.75rem;
+  width: 2.75rem;
+  margin-top: 0.1rem;
+  letter-spacing: -0.1rem;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
   transition: 1s;
 }
 
-#btnHelp.closedMenu{
+#btnLang.closedMenu, #btnHelp.closedMenu , #btnColor.closedMenu{
   margin-left: -6rem;
 }
 
+#colorCircle{
+  position: relative;
+  top: 0.3rem;
+  left: 0.3rem;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 100%;
+  border: 0.25rem solid black;
+  background-image: linear-gradient(135deg, var(--bg-primary) 50%, var(--bg-secondary) 50%);
+}
+
+
 #infoPanel{
   position: fixed;
-  top: 9rem;
+  top: 12rem;
   left: 0;
   height: 5.4rem;
   width: 17.5rem;
@@ -105,14 +134,14 @@ body{
 }
 
 #infoPanel.closedInfo, #infoPanel.closedMenu{
-  top: 9.7rem;
+  top: 12.7rem;
   left: -17.5rem;
   height: 4rem;
 }
 
 #hsaLogo{
   position:fixed;
-  top: 9rem;
+  top: 12rem;
   left: 0;
   height: 5.4rem;
   background-color: white;
@@ -121,7 +150,7 @@ body{
 }
 
 #hsaLogo.closedInfo, #hsaLogo.closedMenu{
-  top: 9.7rem;
+  top: 12.7rem;
   left: 0;
   height: 4rem;
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
@@ -133,7 +162,7 @@ body{
 
 #btnInfo{
   position: fixed;
-  top: 9.7rem;
+  top: 12.7rem;
   left: 0;
   height: 4rem;
   width: 3rem;
@@ -172,12 +201,33 @@ justify-content: space-between; */
   border-right: 0.5rem solid var(--hs-red);
 }
 
-button:hover, #btnMenu:hover{
+button:hover, #btnMenu:hover, #btnLang:hover, #btnColor:hover{
   cursor: pointer;
 }
 
 .hidden{
   visibility: hidden;
+}
+
+.animationContainer{
+    position: absolute;
+    top: 75%;
+    height: 500%;
+    width: 20rem;
+}
+
+.bubbles {
+  position: absolute;
+  display: inline-block;
+  font-size: 2.55rem;
+  padding: 1em 2em;
+  filter: blur(0.05rem);
+}
+
+.bubbles2{
+  left: 50%;
+  -webkit-transform: scale(-1, -1);
+  transform: scale(-1,-1);
 }
 
 @media(max-width: 499px){

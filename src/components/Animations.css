@@ -1,0 +1,145 @@
+ 
+  .bubbles:before, .bubbles:after {
+    position: absolute;
+    content: "";
+    display: block;
+    width: 140%;
+    height: 100%;
+    left: -20%;
+    background-repeat: no-repeat;
+  }
+  .bubbles:before {
+    top: -75%;
+    background-image: var(--radGradientRed), var(--radGradient2Orange), var(--radGradientOrange), var(--radGradientYellow), var(--radGradient2Green), var(--radGradientGreen), var(--radGradientBlue), var(--radGradientViolet), var(--radGradientPurple);
+    background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%;
+  }
+  
+  .bubbles:after {
+    display: none;
+    bottom: -75%;
+    background-image: var(--radGradientRed), var(--radGradientOrange), var(--radGradientYellow), var(--radGradient2Green), var(--radGradientBlue), var(--radGradientViolet), var(--radGradientPurple);
+    background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%, 20% 20%;
+  }
+  .bubbles:before {
+    display: block;
+    animation: topBubbles ease-in-out 1.5s infinite;
+  }
+  .bubbles:after {
+    display: block;
+    animation: bottomBubbles ease-in-out 1.5s infinite;
+  }
+  
+  @keyframes topBubbles {
+    0% {
+      background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%, 40% 90%, 55% 90%, 70% 90%;
+    }
+    50% {
+      background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%, 50% 50%, 65% 20%, 90% 30%;
+    }
+    100% {
+      background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%, 50% 40%, 65% 10%, 90% 20%;
+      background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+    }
+  }
+  @keyframes bottomBubbles {
+    0% {
+      background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%, 70% -10%, 70% 0%;
+    }
+    50% {
+      background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%, 105% 0%;
+    }
+    100% {
+      background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%, 110% 10%;
+      background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+    }
+  }
+
+
+/* ---------- Lose-Animation ---------- */
+
+.drop{
+    position: absolute;
+    color: #fff;
+    font-size: 1rem;
+    filter: blur(0.6rem);
+    top:0%;
+    -webkit-animation-name:snowflakes-fall,snowflakes-shake;
+    -webkit-animation-duration:9s,3s;
+    -webkit-animation-timing-function:linear,ease-in-out;
+    -webkit-animation-iteration-count:infinite,infinite;
+    animation-name:snowflakes-fall,snowflakes-shake;
+    animation-duration:9s,3s;
+    animation-timing-function:linear,ease-in-out;
+    animation-iteration-count:infinite,infinite;
+}
+  
+.drop:nth-child(n+5){
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.8rem;
+    filter: blur(0.7rem);
+    -webkit-animation-duration:10.5s,4s;
+    animation-duration:10.5s,4s;
+}
+
+.drop:nth-child(1), .drop:nth-child(5){
+    left:5%;
+    -webkit-animation-delay:8s,2s;
+    animation-delay:8s,2s;
+}
+
+.drop:nth-child(2), .drop:nth-child(6){
+  left:30%;
+  -webkit-animation-delay:3.5s,1s;
+  animation-delay:3.5s,1s;
+}
+    
+.drop:nth-child(3), .drop:nth-child(7){    
+  left:60%;
+  -webkit-animation-delay:1s,0s;
+  animation-delay:1s,0s;
+}
+
+.drop:nth-child(4), .drop:nth-child(8){
+  left:85%;
+  -webkit-animation-delay:5s,1.5s;
+  animation-delay:5s,1.5s;
+}
+
+.drop:nth-child(5){
+  left:35%;
+}
+
+.drop:nth-child(6){
+  left:60%;
+}
+
+.drop:nth-child(7){ 
+  left:0%;
+}
+
+.drop:nth-child(8){
+  left:75%;
+}
+
+/*@-webkit-keyframes snowflakes-fall */ @keyframes snowflakes-fall{
+    0%{
+        top:0%
+    }
+    100%{
+        top:100%
+    }
+}
+/* @-webkit-keyframes snowflakes-shake  */@keyframes snowflakes-shake{
+    0%{
+        -webkit-transform:translateX(0);
+        transform:translateX(0)
+    }
+    50%{
+        -webkit-transform:translateX(2rem);
+        transform:translateX(2rem)
+    }
+    100%{
+        -webkit-transform:translateX(0);
+        transform:translateX(0)
+    }
+}
