@@ -3,6 +3,8 @@ import Logo from './images/HSA_Logo.png';
 import Popup from './components/Popup';
 import PopupS from './components/PopupSmall';
 import React, { useState } from 'react';
+import ShowGames from './Games/getGames.js';
+import NewGame from './Games/addGame.js';
 // import{ useState } from 'react';
 
 export default function App(){
@@ -38,12 +40,12 @@ export default function App(){
   return(
     <body>
       <div>
-        Other Content
+        <NewGame/>
       </div>
       <br/><br/><br/><br/>
       <br/><br/><br/><br/>
       <div>
-        Other Content
+        <ShowGames/>
       </div>
       <br/><br/><br/><br/><br/><br/><br/><br/>
       <div>
