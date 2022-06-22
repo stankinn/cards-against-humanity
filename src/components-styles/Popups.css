@@ -13,7 +13,8 @@
 
 .popupWindow{
     position: relative;
-    background-color: var(--bg-primary);
+    background-color: var(--bg-color);
+    color: var(--txt-color);
     height: 90vh;
     width: 80vw;
     border-radius: 1rem;
@@ -27,7 +28,7 @@
 .popupWindow.small:before {
     position: absolute;
     content: '';
-    background: var(--animation-gradient);
+    background: repeating-linear-gradient(90deg, #ff0000, #ff8400, #feff00, #1dff00, #00beff, #b500ff, #ff0000);
     background-size: 400%;
     height: 5.1rem;
     width: 20.1rem;
@@ -35,8 +36,8 @@
     animation: glowing 10s linear infinite;
 }
 
-.lost{
-    --animation-gradient: repeating-linear-gradient(90deg, #cecece, #555555, #cecece, #555555, #cecece);
+.popupWindow.small.lost:before{
+  background: repeating-linear-gradient(90deg, #cecece, #555555, #cecece, #555555, #cecece);
 }
 
 #btnClose{
@@ -45,18 +46,12 @@
     right: 0.8rem;
     height: 1.85rem;
     width: 1.85rem;
-    --hoverX: black;
-}
-
-#btnClose:hover{
-  cursor: pointer;
-  --hoverX: rgb(35, 35, 35);
 }
 
 #xBar1, #xBar2{
   position: absolute;
   width: 1.9rem;
-  border-top: 0.25rem solid var(--hoverX);
+  border-top: 0.25rem solid var(--btn-color);
   transition: 0.2s;
 }
 
@@ -71,7 +66,6 @@
 }
 
 .popupTitle{
-
 }
 
 .popupText{

@@ -10,7 +10,7 @@
   }
   .bubbles:before {
     top: -75%;
-    background-image: var(--radGradientRed), var(--radGradient2Orange), var(--radGradientOrange), var(--radGradientYellow), var(--radGradient2Green), var(--radGradientGreen), var(--radGradientBlue), var(--radGradientViolet), var(--radGradientPurple);
+    background-image: var(--radGradientRed), radial-gradient(circle, transparent 20%, #ff8400 20%, transparent 30%), var(--radGradientOrange), var(--radGradientYellow), var(--radGradient2Green), var(--radGradientGreen), var(--radGradientBlue), var(--radGradientViolet), var(--radGradientPurple);
     background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%;
   }
   
@@ -53,9 +53,38 @@
       background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
     }
   }
+  
+  .bubbles {
+    position: absolute;
+    display: inline-block;
+    font-size: 2.55rem;
+    padding: 1em 2em;
+    filter: blur(0.05rem);
+  }
+  
+  .bubbles2{
+    left: 50%;
+    -webkit-transform: scale(-1, -1);
+    transform: scale(-1,-1);
+  }
 
+.lost > .wonAnimation{
+  visibility: hidden;
+}
+
+.lost > .lostAnimation{
+  visibility: visible;
+}
 
 /* ---------- Lose-Animation ---------- */
+
+.lostAnimation{
+  position: absolute;
+  top: 75%;
+  height: 500%;
+  width: 20rem;
+  visibility: hidden;
+}
 
 .drop{
     position: absolute;
