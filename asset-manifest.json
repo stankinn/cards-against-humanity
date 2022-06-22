@@ -1,15 +1,14 @@
 {
   "files": {
-    "main.css": "/cards-against-humanity/static/css/main.706b04b5.css",
-    "main.js": "/cards-against-humanity/static/js/main.7429e76a.js",
+    "main.css": "/cards-against-humanity/static/css/main.aabc5795.css",
+    "main.js": "/cards-against-humanity/static/js/main.8c4ecb09.js",
     "static/media/HSA_Logo.png": "/cards-against-humanity/static/media/HSA_Logo.e87f881bbf16284ec732.png",
-    "static/media/BackgroundBig.png": "/cards-against-humanity/static/media/BackgroundBig.6794f0745256e7dee0c9.png",
     "index.html": "/cards-against-humanity/index.html",
-    "main.706b04b5.css.map": "/cards-against-humanity/static/css/main.706b04b5.css.map",
-    "main.7429e76a.js.map": "/cards-against-humanity/static/js/main.7429e76a.js.map"
+    "main.aabc5795.css.map": "/cards-against-humanity/static/css/main.aabc5795.css.map",
+    "main.8c4ecb09.js.map": "/cards-against-humanity/static/js/main.8c4ecb09.js.map"
   },
   "entrypoints": [
-    "static/css/main.706b04b5.css",
-    "static/js/main.7429e76a.js"
+    "static/css/main.aabc5795.css",
+    "static/js/main.8c4ecb09.js"
   ]
 }
