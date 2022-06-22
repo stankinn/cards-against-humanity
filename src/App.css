@@ -23,6 +23,7 @@
 
 body{
   background-color:var(--bg-color);
+  color: var(--txt-color);
   /* background-image: url("images/BackgroundBig.png");
   background-repeat: repeat;
   background-position: center top; */

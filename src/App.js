@@ -1,35 +1,35 @@
 import './App.css';
-import Menu from './components/Menu'
-import PopupAnimation from './components/PopupAnimation';
 import React, { useState } from 'react';
-import ShowGames from './Games/getGames.js';
-import NewGame from './Games/addGame.js';
+import {Menu, NewGame, PopupAnimation, ShowGames} from './components';
+
 
 export default function App(){
 
     const [lostPopup, setLostPopup] = useState(false);
     const [wonPopup, setWonPopup] = useState(false);
   
-    let languageStoredInLocalStorage = localStorage.getItem("language");
+    let languageStored = localStorage.getItem("language");
     let [language, setLanguage] = useState(
-      languageStoredInLocalStorage ? languageStoredInLocalStorage : "English"
+      languageStored ? languageStored : "English"
     );
 
   return(
     <body>
         <div>
-            <NewGame/>
+            <NewGame language={language}/>
         </div>
 
         <div>
-            <ShowGames/>
+            <ShowGames language={language}/>
         </div>
         
         <button onClick={() => setLostPopup(true)}> Verloren </button>
         <button onClick={() => setWonPopup(true)}> Gewonnen </button>
       
         <Menu language={language} handleSetLanguage={language =>{
-            setLanguage(language);}}/>
+            setLanguage(language);
+            storeLanguage(language);
+            }}/>
       
         <PopupAnimation trigger={lostPopup} setTrigger={setLostPopup}>
             <div className='popupWindow small lost'>
@@ -58,4 +58,8 @@ export default function App(){
 
     </body>
   )
+}
+
+function storeLanguage(language) {
+  localStorage.setItem("language", language);
 }
