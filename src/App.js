@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState } from 'react';
-import {Menu, NewGame, PopupAnimation, ShowGames} from './components';
+import {Menu, PopupAnimation, Games} from './components';
 
 
 export default function App(){
@@ -15,12 +15,9 @@ export default function App(){
 
   return(
     <body>
-        <div>
-            <NewGame language={language}/>
-        </div>
 
         <div>
-            <ShowGames language={language}/>
+            <Games language={language}/>
         </div>
         
         <button onClick={() => setLostPopup(true)}> Verloren </button>
