@@ -31,8 +31,8 @@ class NewPlayer extends React.Component {
     render() {
         return (
             <>
-                <button onClick={this.addPlayer}>New Player</button>
-                <input id='inputName'/>
+                <button className='button btn1' onClick={this.addPlayer}>New Player</button>
+                <input id='inputName' value={'enter Playername'}/>
             </>
         );
     }

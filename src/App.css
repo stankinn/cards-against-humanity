@@ -28,6 +28,23 @@
   --radGradient2Green: radial-gradient(circle, transparent 10%, #1dff00 15%, transparent 20%);
 }
 
+.btn1{
+  margin-left: 5rem;
+}
+
+.button, input{
+  font-size: 1rem;
+  text-align: center;
+
+  padding: .2rem;
+  border: .2rem solid var(--hs-red);
+  border-radius: .5rem;
+
+  background-color: var(--txt-color);
+  color: var(--bg-color);
+  font-weight: 500;
+}
+
 *{
   box-sizing: border-box;
   background-color: transparent;

@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState } from 'react';
-import {Menu, Player, NewGame, PopupAnimation, ShowGames, GameStatus} from './components';
+import {Menu, Player, PopupAnimation, GameStatus, Games} from './components';
 
 
 export default function App(){
@@ -15,16 +15,19 @@ export default function App(){
 
   return(
     <>
-        <div id='startPage' className=''>
+        {/* <div id='startPage' className='hidden'>
             <Player language={language}/>
             <NewGame/>
             <ShowGames/>
-        </div>
+        </div> */}
+
+        <Player/>
+        <Games/>
         
-        <button onClick={() => setLostPopup(true)}> Verloren </button>
-        <button onClick={() => setWonPopup(true)}> Gewonnen </button>
+        <button className='button' onClick={() => setLostPopup(true)}> Verloren </button>
+        <button className='button' onClick={() => setWonPopup(true)}> Gewonnen </button>
       
-        <div id='gamePage' className='hidden'>
+        <div id='gamePage' className=''>
           <GameStatus language={language}/>
         </div>
         

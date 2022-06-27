@@ -45,14 +45,6 @@ class ShowPlayer extends React.Component {
                 {/* {players.map(({ name, id }) => (
                     <p key={id}> {name}</p>
                 ))} */}
-                <p>MMMMMMMMMMMMMM</p>
-                <p>Player2</p>
-                <p>Annenym</p>
-                <p>3mpty</p>
-                <p>xPandorya</p>
-                <p>Gronkh</p>
-                <p>Kapuzenwurm</p>
-                <p>A</p>
               </div>
             </div>
         );
