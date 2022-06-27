@@ -1,0 +1,66 @@
+.gameLayout{
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+
+    grid-template-columns: fit-content(40%) fit-content(60%);
+    grid-template-rows: minmax(fit-content);
+    grid-gap: 1rem;
+    
+    justify-items: safe center;
+    padding: 0 2rem;
+    padding-top: .5rem;
+}
+
+#blackCard{
+    align-self: end;
+}
+
+#gameInfo{
+}
+
+.cardsBackground{
+    width: 100%;
+    background-color: var(--bg-cards);
+    border: .5rem solid var(--bg-cards);
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+#offeredCards{
+    grid-column: var(--grid-2_3to1_3);
+    grid-row: var(--grid-1_3to2_3);
+    padding-top: 0;
+    padding-bottom: .5rem;
+    padding-left: .2rem;
+}
+
+#playerCards{
+    grid-column: 1/3;
+    padding: 0;
+    padding-bottom: .5rem;
+    border-radius: 1rem 1rem 0 0;
+    border-bottom: 0;
+}
+
+.gameDiv{
+    overflow-y: auto;
+}
+
+.gameDiv::-webkit-scrollbar{
+    width: .5rem;
+}
+
+.gameDiv::-webkit-scrollbar-track{
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 1rem;
+}
+
+.gameDiv::-webkit-scrollbar-thumb{
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 1rem;
+}
+
+.gameDiv::-webkit-scrollbar-thumb:hover{
+    background-color: white;
+}

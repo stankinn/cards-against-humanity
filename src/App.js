@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState } from 'react';
-import {Menu, NewGame, PopupAnimation, ShowGames} from './components';
+import {Menu, Player, NewGame, PopupAnimation, ShowGames, GameStatus} from './components';
 
 
 export default function App(){
@@ -14,18 +14,20 @@ export default function App(){
     );
 
   return(
-    <body>
-        <div>
-            <NewGame language={language}/>
-        </div>
-
-        <div>
-            <ShowGames language={language}/>
+    <>
+        <div id='startPage' className=''>
+            <Player language={language}/>
+            <NewGame/>
+            <ShowGames/>
         </div>
         
         <button onClick={() => setLostPopup(true)}> Verloren </button>
         <button onClick={() => setWonPopup(true)}> Gewonnen </button>
       
+        <div id='gamePage' className='hidden'>
+          <GameStatus language={language}/>
+        </div>
+        
         <Menu language={language} handleSetLanguage={language =>{
             setLanguage(language);
             storeLanguage(language);
@@ -56,7 +58,7 @@ export default function App(){
             </div>
         </PopupAnimation>
 
-    </body>
+    </>
   )
 }
 

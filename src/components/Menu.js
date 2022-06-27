@@ -1,5 +1,4 @@
-import React, { useState, Fragment } from 'react';
-// import ReactHtmlParser from 'react-html-parser';
+import React, { useState } from 'react';
 import '../components-styles/Menu.css';
 import Logo from '../images/HSA_Logo.png';
 import Popup from './Popup';
@@ -23,10 +22,15 @@ export default function Menu(props) {
         closeInfo();
       }
 
+      function openHelp(){
+        setHelpPopup(true);
+        menu();
+      }
+
       function changeTheme(){
         if (document.body.getAttribute('data-theme') === 'light-theme') {
-          document.body.setAttribute('data-theme', 'fire-theme');
-        }else if(document.body.getAttribute('data-theme') === 'fire-theme'){
+          document.body.setAttribute('data-theme', 'seagreen-theme');
+        }else if(document.body.getAttribute('data-theme') === 'seagreen-theme'){
           document.body.setAttribute('data-theme', 'dark-theme'); 
         } else {
           document.body.setAttribute('data-theme', 'light-theme'); 
@@ -52,8 +56,8 @@ export default function Menu(props) {
   return (
     <>
     <Popup trigger={helpPopup} setTrigger={setHelpPopup}>
-      <h className='popupTitle'>Hilfe-Fenster</h>
-      <p className='popupText'>Hier werden die Grundfunktionen erklärt!</p>
+      <h2 className='popupTitle'>{content.helpTitle}</h2>
+      <p className='popupText'>{content.helpTxt}</p>
     </Popup>
 
       <div id='menu'>
@@ -68,7 +72,7 @@ export default function Menu(props) {
         <option className='langOption' value="German">DE</option>
       </select>
 
-      <button id='btnHelp' className='menuBtns closedMenu' onClick={() => setHelpPopup(true)}>?</button>
+      <button id='btnHelp' className='menuBtns closedMenu' onClick={openHelp}>?</button>
         
       <button id='btnColor' className='menuBtns closedMenu' onClick={changeTheme}>
         <div id='colorCircle'/>
@@ -77,12 +81,10 @@ export default function Menu(props) {
 
       <div id='infoPanel' className='closedInfo closedMenu'>
         <div className='infoPanelText'>
-          <Fragment>
             {content.hsaInfo1}<br/>
             <b>HOCHSCHULE ANHALT</b><br/>
             {content.hsaInfo2}<br/>
             <b>TONI BARTH</b> 
-          </Fragment>
         </div>
         <button className='arrow' title='Close' onClick={closeInfo}/>
         <img id='hsaLogo' className='closedInfo closedMenu' alt='HSA_Logo' src={Logo} />

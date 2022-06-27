@@ -9,7 +9,7 @@ function Popup(props) {
             <div id='xBar1'/>
             <div id='xBar2'/>
           </div>
-            {props.children}
+          {props.children}
         </div>
     </div>
   ) : '';

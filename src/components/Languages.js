@@ -6,12 +6,18 @@ export let lang = {
         helpTitle:'',
         helpTxt:'',
 
+        headerP:'Player',
+        headerG:'Game',
+        deleteButton:'delete',
+        newButton:'create new',
+        playButton:'PLAY',
+
         startGame:'',
         createPlayer:'',
         waitingPlayer:'',
 
-        roundCount:'',
-        playerPoints:'',
+        curCzar:'current czar: ',
+        playerPoints:'Points: ',
 
         playerWon:'YOU WON',
         playerLost:'YOU LOST',
@@ -23,12 +29,18 @@ export let lang = {
         helpTitle:'Hilfe-Fenster',
         helpTxt:'Hier werden die Grundfunktionen erklärt!',
 
+        headerP:'Spieler',
+        headerG:'Spiel',
+        deleteButton:'löschen',
+        newButton:'neu erstellen',
+        playButton:'SPIELEN',
+
         startGame:'',
         createPlayer:'',
         waitingPlayer:'',
 
-        roundCount:'',
-        playerPoints:'',
+        curCzar:'aktueller Zar: ',
+        playerPoints:'Punkte: ',
 
         playerWon:'GEWONNEN',
         playerLost:'VERLOREN',

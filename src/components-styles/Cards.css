@@ -1,0 +1,56 @@
+.card{
+    height: var(--cards-height);
+    width: 9.2rem;
+
+    font-size: 1rem;
+    text-align: center;
+
+    padding: .5rem;
+    border: .4rem solid;
+    border-radius: .5rem;
+
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+
+    overflow-y: auto;
+}
+
+.card.black{
+    background-color: black;
+    border-color: black;
+    color: white;
+}
+
+.card.white{
+    float: left;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    background-color: white;
+    border-color: white;
+    color: black;
+    font-weight: 500;
+    transition: .5s ease-in-out;
+    transition-property: transform, box-shadow;
+}
+
+.card.white:hover{
+    transform: translateY(-.7rem);
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 1);
+}
+
+.card::-webkit-scrollbar{
+    width: .4rem;
+}
+
+.card::-webkit-scrollbar-track{
+    background-color: rgba(50, 50, 50, 0.25);
+    border-radius: 1rem;
+}
+
+.card::-webkit-scrollbar-thumb{
+    background-color: rgba(50, 50, 50, 0.4);
+    border-radius: 1rem;
+}
+
+.card::-webkit-scrollbar-thumb:hover{
+    background-color: rgba(50, 50, 50, 0.8);
+}

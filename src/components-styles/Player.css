@@ -1,0 +1,132 @@
+#startLayout{
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+
+    grid-template: var(--gridStart);
+
+    grid-gap: 1rem;
+    
+    justify-items: safe center;
+    padding: 2rem;
+    background-color: var(--bg-color);
+}
+
+#headerP, #headerG{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#headerP, #headerG, #inputP, #inputG{
+    align-self: end;
+}
+
+#headerP{
+    grid-area: HeaderP;
+}
+
+#headerG{
+    grid-area: HeaderG;
+}
+
+#inputP{
+    grid-area: InputP;
+}
+
+#inputG{
+    grid-area: InputG;
+}
+
+#btnsP{
+    grid-area: ButtonsP;
+}
+
+#btnsG{
+    grid-area: ButtonsG;
+}
+
+#btnSt{
+    grid-area: StartBtn;
+    align-self: center;
+}
+
+.list{
+    width: 100%;
+    background-color: var(--bg-cards);
+    border: .5rem solid var(--bg-cards);
+    border-radius: 1rem;
+    overflow-y: auto;
+}
+
+.list > p:hover{
+    cursor: pointer;
+    color: var(--hs-red);
+}
+
+.list > p.active{
+    color: var(--hs-red);
+}
+
+.list > p, .input, .btnsStart, #btnStart{
+    min-width: 5rem;
+    font-size: 1rem;
+    text-align: center;
+
+    padding: .5rem;
+    border: .4rem solid;
+    border-radius: .5rem;
+
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+    float: left;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    background-color: white;
+    border-color: white;
+    color: black;
+    font-weight: 500;
+}
+.input, .btnsStart, #btnStart{
+    border: .2rem solid var(--bg-cards);
+    font-weight: 700;
+    margin: 0;
+}
+
+.btnsStart:hover, #btnStart:hover{
+    color: var(--hs-red);
+}
+
+.delBtn:hover, #btnStart:hover{
+    color: black;
+}
+
+.btnsStart{
+    padding: .2rem .5rem;
+}
+
+.delBtn{
+    margin-right: 2rem;
+}
+
+.delBtn, #btnStart{
+    background-color: var(--hs-red);
+    border-color: var(--hs-red);
+    color: white;
+}
+
+.list::-webkit-scrollbar{
+    width: .5rem;
+}
+
+.list::-webkit-scrollbar-track{
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 1rem;
+}
+
+.list::-webkit-scrollbar-thumb{
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 1rem;
+}
+
+.list::-webkit-scrollbar-thumb:hover{
+    background-color: white;
+}
