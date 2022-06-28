@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 class NewPlayer extends React.Component {
     
     constructor(){
@@ -8,26 +7,43 @@ class NewPlayer extends React.Component {
     this.addPlayer= this.addPlayer.bind(this);
     }
 
+    
     addPlayer() {
 
         var input = document.getElementById('inputName').value;
-        
         const serviceendpoint = "https://gruppe7.toni-barth.com";
-        fetch(serviceendpoint + '/players/',{
-            method: 'POST',
-            body:JSON.stringify({name: input}),
-            headers: {'Content-Type': 'application/json'}
+
+        fetch(serviceendpoint + '/players/')
+        .then(response => response.json())
+        .then(data=>{
+            if(data.players.length === 0){
+                
+                
+                fetch(serviceendpoint + '/players/',{
+                    method: 'POST',
+                    body:JSON.stringify({name: input}),
+                    headers: {'Content-Type': 'application/json'}
+                })
+                .then(res => res.json())
+                .then(data =>{
+                    console.log(data.id + ' New Player: ' + data.name)
+                    console.log('All Players: ' + JSON.stringify(data))
+                })
+                .catch((error) =>{
+                    console.error('Error: ', error);
+                });
+            }
+            else
+            {
+                console.log("all Players:" + JSON.stringify(data.players));
+            }
         })
-        .then(res => res.json())
-        .then(data =>{
-            console.log(data.id + ' New Player: ' + data.name)
-            console.log('All Players: ' + data)
-        })
-        .catch((error) =>{
-            console.error('Error: ', error);
-        });
+        .catch((error) => {
+            console.error('Error:', error);
+            });
+     
     }
-    
+
     render() {
         return (
             <>

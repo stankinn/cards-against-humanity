@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 class DeletePlayer extends React.Component {
     
     constructor(){
@@ -9,18 +8,22 @@ class DeletePlayer extends React.Component {
     }
 
     deletePlayer() {
-
         const serviceendpoint = "https://gruppe7.toni-barth.com";
-        fetch(serviceendpoint + '/players/:11', {
-            method: "DELETE",
-            headers: { "Content-Type": "application/json" }
-        })
-        .then(response => console.log(response));
+        fetch(serviceendpoint + '/players/')
+            .then(response => response.json())
+            .then(data=>{
+                var id= data.players[data.players.length-1].id;
+                fetch(serviceendpoint + '/players/' + id, {
+                    method: "DELETE",
+                    headers: { "Content-Type": "application/json" }
+                })
+                .then(res => console.log(res))
+        });
     }
     
     render() {
         return (
-            <button onClick={this.deletePlayer}>Delete Player</button>
+            <button className='button' onClick={this.deletePlayer}>Delete Player</button>
         );
     }
 }

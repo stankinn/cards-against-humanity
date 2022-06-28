@@ -20,6 +20,7 @@ export default function GameStatus(props) {
   return (
     <>
     <NewPlayer/>
+    <DeletePlayer/>
     </>
     // <div id='startLayout'>
     //     <div id='headerP' className='startDiv'>

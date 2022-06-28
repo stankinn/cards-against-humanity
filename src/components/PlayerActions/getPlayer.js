@@ -16,11 +16,10 @@ class ShowPlayer extends React.Component {
         fetch(serviceendpoint + '/players/')
         .then(response => response.json())
         .then(data=>{
-            if(data.players.lenght === 0){
-                this.setState({notice: 'No Player exixting.'});
+            if(data.players.length === 0){
+                this.setState({notice: 'No Player existing.'});
             }
             else{
-                players = data.players;
                 console.log(data.players);
             }
             console.log(players);
@@ -37,7 +36,7 @@ class ShowPlayer extends React.Component {
     componentDidUpdate(){
         this.showPlayer();
     }
-    
+
     render() {
         return (
             <div className='secBorder'>
