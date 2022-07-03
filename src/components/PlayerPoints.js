@@ -1,5 +1,5 @@
 import React from 'react';
-import { gameId } from './GameId';
+import {default as gameId } from './IDs/GameId';
 
 class PlayerPoints extends React.Component {
     

@@ -1,5 +1,6 @@
 import React from 'react';
-import gameId from './GameId';
+import {default as gameId} from './IDs/GameId';
+import {default as playerId} from './IDs/PlayerId';
 
 
 class Games extends React.Component {
@@ -31,10 +32,9 @@ class Games extends React.Component {
             {
                 for(var i = 0; i < data.games.length; i++){
                     if (data.games[i].running === false){
-
                         console.log("joining available game " + JSON.stringify(data.games[i]))
                         this.joinGame();
-                        // this.setState({notice: data});
+                        //this.setState({notice: data});
                     }
                 }
                 
@@ -112,20 +112,16 @@ class Games extends React.Component {
         
     }
 
-    joinGame() {
+  joinGame() {
 
         const serviceendpoint = "https://gruppe7.toni-barth.com";
-        //spielerID wird herausgefunden
-        fetch(serviceendpoint + '/players/')
-        .then(response => response.json())
-        .then(data=>{
-           var id= data.players[data.players.length-1].id;
-            console.log("PlayerID:" + id);
+        playerId.then(currPlayerId=>{
+            console.log("PlayerID:" + currPlayerId);
             //Freiem Spiel wird beigetreten
-            gameId.then(id => {
-                fetch(serviceendpoint + '/games/:'+ id, {
+            gameId.then(currGameId => {
+                fetch(serviceendpoint + '/games/:'+ currGameId, {
                     method: "PATCH",
-                    body: JSON.stringify({ player: 0/*Owner ID muss vom Spieler übernommen werden*/, action: "join"}),
+                    body: JSON.stringify({ player: currPlayerId, action: "join"}),
                     headers: { "Content-Type": "application/json" }
                 })
                 .then(response => response.json())
@@ -161,7 +157,6 @@ class Games extends React.Component {
         })
 
     }
-
     render() {
         return (
             <>

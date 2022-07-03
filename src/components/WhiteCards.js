@@ -1,26 +1,37 @@
 import React from 'react';
 import '../components-styles/Cards.css'
+import {default as gameId} from './IDs/GameId';
+import {default as playerId} from './IDs/PlayerId';
 
 class WhiteCards extends React.Component {
     
     constructor(){
         super();
-        this.state = {notice:''};
+        this.state = {cardText:''};
         this.whiteCards= this.whiteCards.bind(this);
     }
 
     whiteCards() {     
 
         const serviceendpoint = "https://gruppe7.toni-barth.com";
-        fetch(serviceendpoint + '/games/')
-        .then(response => response.json())
-        .then(data=>{
-            this.setState({notice: 'a hungry burger'});
+
+//weiße karten des spielers werden ausgegeben, werden laut API nur angezeigt, wenn das spiel läuft
+        playerId.then(thisPlayerId => {  
+            gameId.then(thisGameId => {
+                fetch(serviceendpoint + '/games/'+ thisGameId + '/cards', {
+                    method: "GET",
+                    body: JSON.stringify({ player: thisPlayerId}),
+                    headers: { "Content-Type": "application/json" }
+                })
+                .then(response => response.json())
+                .then(data=>{
+                    this.setState({cardText: data.text});
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            })
         })
-        .catch((error) => {
-            console.error('Error:', error);
-            });
-        
     }
 
     componentDidMount() {

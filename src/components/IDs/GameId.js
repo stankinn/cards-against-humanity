@@ -1,4 +1,4 @@
-export var gameId = new Promise(() =>{
+export default new Promise(() =>{
     fetch('https://gruppe7.toni-barth.com/players/')
     .then(response => response.json())
     .then(data=>{
@@ -24,5 +24,3 @@ export var gameId = new Promise(() =>{
         console.error('Error:', error);
     });
 });
-
-export default gameId;

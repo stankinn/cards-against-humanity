@@ -1,6 +1,7 @@
 import React from 'react';
 import '../components-styles/Cards.css'
-import gameId from './GameId';
+import {default as gameId } from './IDs/GameId';
+
 
 var cardText = [];
 var str = '';
