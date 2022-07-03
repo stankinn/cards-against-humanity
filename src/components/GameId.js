@@ -1,4 +1,4 @@
-function getGameId(){
+export var gameId = new Promise(() =>{
     fetch('https://gruppe7.toni-barth.com/players/')
     .then(response => response.json())
     .then(data=>{
@@ -10,7 +10,7 @@ function getGameId(){
                 for(var i = 0; i < data.games.length; i++){
                     for(var j = 0; j < data.games[i].players.length; j++){
                         if (data.games[i].players[j] === id){
-                            return data.games[i].id;
+                            data = data.games[i].id;
                         }
                     }
                 }
@@ -23,6 +23,6 @@ function getGameId(){
     .catch((error) => {
         console.error('Error:', error);
     });
-};
+});
 
-export var gameId = getGameId();
+export default gameId;

@@ -18,6 +18,7 @@ class Player extends React.Component {
     .then(data=>{
       if(data.players.length === 0){
         this.setState({content: 'No Player existing.'});
+        console.log("no players")
       }
       else{
         this.setState({content: data.players[0].name});

@@ -1,4 +1,5 @@
 import React from 'react';
+import gameId from './GameId';
 
 
 class Games extends React.Component {
@@ -23,7 +24,7 @@ class Games extends React.Component {
             console.log("all games:" + JSON.stringify(data.games))
             if(data.games.length === 0)
             {
-                //addGame();
+                this.addGame();
                 console.log("New game is being created")
             }
             else 
@@ -32,7 +33,7 @@ class Games extends React.Component {
                     if (data.games[i].running === false){
 
                         console.log("joining available game " + JSON.stringify(data.games[i]))
-                        //joinGame(0/*wird wieder vom spieler übernommen*/);
+                        this.joinGame();
                         // this.setState({notice: data});
                     }
                 }
@@ -73,11 +74,11 @@ class Games extends React.Component {
             });
     } 
 
-    componentDidUpdate() {
+    /*componentDidUpdate() {
        this.showPlayer();
-    }
+    }*/
 
-    addGame() {
+    addGame(){
 
         const serviceendpoint = "https://gruppe7.toni-barth.com";
         //spielerID wird herausgefunden
@@ -111,7 +112,7 @@ class Games extends React.Component {
         
     }
 
-    joinGame(gameID) {
+    joinGame() {
 
         const serviceendpoint = "https://gruppe7.toni-barth.com";
         //spielerID wird herausgefunden
@@ -121,7 +122,8 @@ class Games extends React.Component {
            var id= data.players[data.players.length-1].id;
             console.log("PlayerID:" + id);
             //Freiem Spiel wird beigetreten
-                fetch(serviceendpoint + '/games/:'+ gameID, {
+            gameId.then(id => {
+                fetch(serviceendpoint + '/games/:'+ id, {
                     method: "PATCH",
                     body: JSON.stringify({ player: 0/*Owner ID muss vom Spieler übernommen werden*/, action: "join"}),
                     headers: { "Content-Type": "application/json" }
@@ -133,6 +135,7 @@ class Games extends React.Component {
                 .catch((error) => {
                     console.error('Error:', error);
                 });
+            })
     })}
 
     deleteGame(){
