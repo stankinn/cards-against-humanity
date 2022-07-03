@@ -1,22 +1,35 @@
 import React from 'react';
-
-var curPlayer = 0;
+import { gameId } from './GameId';
 
 class PlayerPoints extends React.Component {
     
     constructor(){
         super();
-        this.state = {notice:''};
+        this.state = {notice: []};
         this.playerPoints= this.playerPoints.bind(this);
     }
 
     playerPoints() {     
 
         const serviceendpoint = "https://gruppe7.toni-barth.com";
-        fetch(serviceendpoint + '/games/:gameId')
+        fetch(serviceendpoint + '/games/')
         .then(response => response.json())
         .then(data=>{
-                // this.setState({notice: data.points[curPlayer]});
+            for(var i = 0; i < data.games.length; i++){
+                if(data.games[i].id === gameId){
+                    for(var j = 0; j < data.games[i].players.length; j++){
+                        fetch(serviceendpoint + '/games/' + gameId)
+                        .then(res => res.json())
+                        .then(gameData=>{
+                            this.setState({
+                                notice: this.state.notice.concat([data.games[i].players[j] + '_______' + gameData.points[j]])});
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                        });
+                    }
+                }
+            }
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -34,15 +47,10 @@ class PlayerPoints extends React.Component {
     
     render() {
         return (
-            <>
-            <p>Player1</p>
-            <p>Player2</p>
-            <p>Player3</p>
-            <p>Player4</p>
-                <p>Player1</p>
-                <p>Player2</p>
-                <p>Player3</p>
-                <p>Player4</p>
+            <> 
+                {this.state.notice.map(({ name, id }) => (
+                    <p key={id}> {name}</p>
+                ))}
             </>
         );
     }

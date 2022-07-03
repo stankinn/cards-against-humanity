@@ -1,24 +1,18 @@
 #startLayout{
     display: grid;
-    width: 100vw;
     height: 100vh;
+    width: 100vw;
 
     grid-template: var(--gridStart);
-
     grid-gap: 1rem;
     
     justify-items: safe center;
     padding: 2rem;
-    background-color: var(--bg-color);
 }
 
 #headerP, #headerG{
     font-size: 1.5rem;
     font-weight: bold;
-}
-
-#headerP, #headerG, #inputP, #inputG{
-    align-self: end;
 }
 
 #headerP{
@@ -29,23 +23,27 @@
     grid-area: HeaderG;
 }
 
-#inputP{
-    grid-area: InputP;
+#curPlayerName{
+    grid-area: CurName;
 }
 
-#inputG{
-    grid-area: InputG;
+#inputName{
+    grid-area: Input;
 }
 
-#btnsP{
+#delPlayerBtn, #newPlayerBtn{
     grid-area: ButtonsP;
 }
 
-#btnsG{
+#delGameBtn, #newGameBtn{
     grid-area: ButtonsG;
 }
 
-#btnSt{
+.list{
+    grid-area: List;
+}
+
+#btnStart{
     grid-area: StartBtn;
     align-self: center;
 }
@@ -55,43 +53,42 @@
     background-color: var(--bg-cards);
     border: .5rem solid var(--bg-cards);
     border-radius: 1rem;
+    padding: 1rem;
     overflow-y: auto;
 }
 
-.list > p:hover{
-    cursor: pointer;
-    color: var(--hs-red);
+.list > p{
+    padding: .2rem 0;
 }
 
-.list > p.active{
-    color: var(--hs-red);
-}
-
-.list > p, .input, .btnsStart, #btnStart{
+.delBtn, .newBtn, #inputName, #btnStart{ 
     min-width: 5rem;
     font-size: 1rem;
     text-align: center;
 
     padding: .5rem;
-    border: .4rem solid;
     border-radius: .5rem;
-
-    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
-    float: left;
-    margin-top: 1rem;
-    margin-left: 1rem;
-    background-color: white;
-    border-color: white;
-    color: black;
     font-weight: 500;
 }
-.input, .btnsStart, #btnStart{
+
+#inputName{
+    height: 3rem;
+}
+
+#btnStart{
+    padding: 1rem 5rem;
+    font-weight: 700;
+}
+
+.delBtn, .newBtn, #inputName{
+    background-color: white;
+    color: black;
     border: .2rem solid var(--bg-cards);
     font-weight: 700;
     margin: 0;
 }
 
-.btnsStart:hover, #btnStart:hover{
+.newBtn:hover{
     color: var(--hs-red);
 }
 
@@ -99,18 +96,30 @@
     color: black;
 }
 
-.btnsStart{
-    padding: .2rem .5rem;
+.delBtn, .newBtn{
+    padding: 0rem .5rem;
+}
+
+.newBtn{
+    margin-left: 8.5rem;
+    height: 2rem;
 }
 
 .delBtn{
-    margin-right: 2rem;
+    margin-right: 8.5rem;
+    height: 2rem;
 }
 
 .delBtn, #btnStart{
     background-color: var(--hs-red);
     border-color: var(--hs-red);
     color: white;
+}
+
+#btnStart.disabled{
+  cursor:not-allowed;
+  background-color: gray;
+  color: rgba(0, 0, 0, 0.3);
 }
 
 .list::-webkit-scrollbar{

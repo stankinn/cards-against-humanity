@@ -1,9 +1,9 @@
 import React from 'react';
 import '../components-styles/Cards.css'
+import { gameId } from './GameId';
 
 var cardText = [];
-var str = '_ + _ = success. '
-//  sdhfbks edifjkdjg sfiuhsjef jhsgd sidfh sfieuhsefe asfiuhasfuj ascouihasfojas asiuhjasfih asiuhjasifjh asfiubafjb asiuhasfijh sfiuhsfodih asicuh souhksvj asifuhaifkj asfjhbafjh asckibafjh.';
+var str = '';
 
 class BlackCard extends React.Component {
     
@@ -16,16 +16,17 @@ class BlackCard extends React.Component {
     blackCard() {     
 
         const serviceendpoint = "https://gruppe7.toni-barth.com";
-        fetch(serviceendpoint + '/games/')
+        fetch(serviceendpoint + '/games/' + gameId)
         .then(response => response.json())
         .then(data=>{
 
+            str = data.currentBlackCard.text;
             cardText = str.replaceAll('_', ' _______ ');
             this.setState({notice: cardText});
         })
         .catch((error) => {
             console.error('Error:', error);
-            });
+        });
         
     }
 

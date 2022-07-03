@@ -1,68 +1,109 @@
 import React from 'react'
-import NewPlayer from './PlayerActions/addPlayer';
-import ShowPlayer from './PlayerActions/getPlayer';
-import DeletePlayer from './PlayerActions/deletePlayer';
-import '../components-styles/Player.css'
-import {lang} from './Languages';
 
-export default function GameStatus(props) {
-
-  function startGame(){
-    document.getElementById('startPage').classList.add('hidden');
-    document.getElementById('gamePage').classList.remove('hidden');
+class Player extends React.Component {
+    
+  constructor(){
+  super();
+  this.state = {content: []};
+  this.showPlayer= this.showPlayer.bind(this);
+  this.addPlayer= this.addPlayer.bind(this);
+  this.deletePlayer= this.deletePlayer.bind(this);
+  }
+  
+  showPlayer() {
+    const serviceendpoint = "https://gruppe7.toni-barth.com";
+  
+    fetch(serviceendpoint + '/players/')
+    .then(response => response.json())
+    .then(data=>{
+      if(data.players.length === 0){
+        this.setState({content: 'No Player existing.'});
+      }
+      else{
+        this.setState({content: data.players[0].name});
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
   }
 
-  let content = lang;
-  props.language === "German"
-    ? (content = content.German)
-    : (content = content.English);
+  componentDidMount() {
+    this.showPlayer();
+  }
 
-  return (
-    <>
-    <NewPlayer/>
-    <DeletePlayer/>
-    </>
-    // <div id='startLayout'>
-    //     <div id='headerP' className='startDiv'>
-    //     {content.headerP}
-    //     </div>
+  componentDidUpdate(){
+      this.showPlayer();
+  }
 
-    //     <div id='headerG'  className='startDiv'>
-    //       {content.headerG}
-    //     </div>
+  addPlayer() {
 
-    //     <div id='listP' className='startDiv list'>
-    //       <ShowPlayer/>
-    //     </div>
+    var input = document.getElementById('inputName').value;
+    const serviceendpoint = "https://gruppe7.toni-barth.com";
 
-    //     <div id='listG' className='startDiv list'>
-    //       <ShowPlayer/>
-    //     </div>
+    fetch(serviceendpoint + '/players/')
+    .then(response => response.json())
+    .then(data=>{
+        if(data.players.length === 0){
+            if(input === ''){
+              input = 'Player69'
+            }
+            fetch(serviceendpoint + '/players/',{
+                method: 'POST',
+                body:JSON.stringify({name: input}),
+                headers: {'Content-Type': 'application/json'}
+            })
+            .then(res => res.json())
+            .then(data =>{
+                console.log(data.id + ' New Player: ' + data.name)
+            })
+            .catch((error) =>{
+                console.error('Error: ', error);
+            });
+        }
+        else
+        {
+            console.log("all Players:" + JSON.stringify(data));
+        }
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        });
+ 
+  }
 
-    //     <div id='inputP' className='startDiv'>
-    //       <input id='nameInput' className='input' maxLength={14}/>
-    //     </div>
-        
-    //     <div id='inputG' className='startDiv'>
-    //       <input id='gameInput' className='input' value={''} disabled/>
-    //     </div>
-        
-    //     <div id='btnsP' className='startDiv'>
-    //       <button className='btnsStart delBtn'>{content.deleteButton}</button>
-    //       <button className='btnsStart'>{content.newButton}</button>
-    //     </div>
-        
-    //     <div id='btnsG' className='startDiv'>
-    //       <button className='btnsStart delBtn'>{content.deleteButton}</button>
-    //       <button className='btnsStart'>{content.newButton}</button>
-    //     </div>
-        
-    //     <div id='btnSt' className='btnDiv startDiv'>
-    //       <button id='btnStart' onClick={startGame}>
-    //         {content.playButton}
-    //       </button>
-    //     </div>
-    // </div>
+  deletePlayer() {
+      const serviceendpoint = "https://gruppe7.toni-barth.com";
+      fetch(serviceendpoint + '/players/')
+          .then(response => response.json())
+          .then(data=>{
+            var id = 0;
+            if(data.players.length !== 0){
+              if(data.players.id !== 0){
+                id= data.players[data.players.length-1].id;
+              }
+              fetch(serviceendpoint + '/players/' + id, {
+                  method: "DELETE",
+                  headers: { "Content-Type": "application/json" }
+              })
+              .then(res => console.log(res))
+            }
+            else{
+              console.log('No Player existing.')
+            }
+      });
+  }
 
-  )
+  render() {
+    return (
+        <>
+          <p id='curPlayerName'>your Name: {this.state.content}</p>
+          <input id='inputName' maxLength={14}/>
+          <button id='delPlayerBtn' className='delBtn' onClick={this.deletePlayer}>Delete</button>
+          <button id='newPlayerBtn' className='newBtn' onClick={this.addPlayer}>New</button>
+        </>
+    );
 }
+}
+
+export default Player;

@@ -3,9 +3,9 @@ import BlackCard from './BlackCard';
 import WhiteCards from './WhiteCards';
 import PlayerPoints from './PlayerPoints';
 import {lang} from './Languages';
-import '../components-styles/GameStatus.css'
+import '../components-styles/Game.css'
 
-export default function GameStatus(props) {
+export default function Game(props) {
 
 
     let content = lang;
@@ -20,7 +20,7 @@ export default function GameStatus(props) {
       </div>
 
       <div id='gameInfo' className='gameDiv'>
-        
+        <PlayerPoints/>
       </div>
 
       <div id='offeredCards' className='gameDiv cardsBackground'>

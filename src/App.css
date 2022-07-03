@@ -28,23 +28,6 @@
   --radGradient2Green: radial-gradient(circle, transparent 10%, #1dff00 15%, transparent 20%);
 }
 
-.btn1{
-  margin-left: 5rem;
-}
-
-.button, input{
-  font-size: 1rem;
-  text-align: center;
-
-  padding: .2rem;
-  border: .2rem solid var(--hs-red);
-  border-radius: .5rem;
-
-  background-color: var(--txt-color);
-  color: var(--bg-color);
-  font-weight: 500;
-}
-
 *{
   box-sizing: border-box;
   background-color: transparent;
@@ -71,7 +54,6 @@ body[data-theme='seagreen-theme']{
   --next-bg-color: rgb(25, 25, 25);
   --txt-color: rgb(255, 208, 98);
   --btn-color: var(--txt-color);
-  --bg-cards: rgba(0, 0, 0, 0.2);
   --bg-cards: rgb(34, 115, 69);
 }
 
@@ -94,10 +76,12 @@ button:hover{
 @media(orientation: landscape){
   :root{
     --gridStart:
-      'HeaderP HeaderG'
-      'ListP ListG'
-      'InputP InputG'
-      'ButtonsP ButtonsG'
+      'HeaderP List'
+      'CurName List'
+      'Input List'
+      'ButtonsP List'
+      'HeaderG List'
+      'ButtonsG List'
       'StartBtn StartBtn';
   }
 }
@@ -106,13 +90,12 @@ button:hover{
   :root{
     --gridStart:
       'HeaderP'
-      'ListP'
-      'InputP'
+      'CurName'
+      'Input'
       'ButtonsP'
       'HeaderG'
-      'ListG'
-      'InputG'
       'ButtonsG'
+      'List'
       'StartBtn';
   }
 }
