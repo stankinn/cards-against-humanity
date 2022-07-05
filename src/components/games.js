@@ -57,7 +57,6 @@ class Games extends React.Component {
         fetch(serviceendpoint + '/games/')
         .then(response => response.json())
         .then(data=>{
-            console.log('Im Here!');
             if(data.games.length !== 0)
             {
                 for(var i = 0; i < data.games.length; i++){

@@ -10,11 +10,13 @@ export default function Start(props) {
     props.language === "German"
         ? (content = content.German)
         : (content = content.English);
+
+        console.log('START');
   return (
     <div id='startLayout'>
         <h1 id='headerP'>{content.headerP}</h1>
-        {/* <h>{content.deleteButton}</h>
-        <h >{content.newButton}</h> */}
+        {/*<h>{content.deleteButton}</h>
+        <h>{content.newButton}</h>*/}
         <Player/>
         <h1 id='headerG'>{content.headerG}</h1>
         <Games/>

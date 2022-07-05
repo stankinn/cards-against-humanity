@@ -4,7 +4,7 @@ class Player extends React.Component {
     
   constructor(){
   super();
-  this.state = {content: []};
+  this.state = {content: [], visible: ''};
   this.showPlayer= this.showPlayer.bind(this);
   this.addPlayer= this.addPlayer.bind(this);
   this.deletePlayer= this.deletePlayer.bind(this);
@@ -12,16 +12,16 @@ class Player extends React.Component {
   
   showPlayer() {
     const serviceendpoint = "https://gruppe7.toni-barth.com";
-  
+
     fetch(serviceendpoint + '/players/')
     .then(response => response.json())
     .then(data=>{
       if(data.players.length === 0){
-        this.setState({content: 'No Player existing.'});
-        console.log("no players")
+        this.setState({content: 'No Players existing.', visible: 'true'});  
+        
       }
       else{
-        this.setState({content: data.players[0].name});
+        this.setState({content: data.players[0].name, visible: 'false'});
       }
     })
     .catch((error) => {
@@ -48,6 +48,7 @@ class Player extends React.Component {
         if(data.players.length === 0){
             if(input === ''){
               input = 'Player69'
+              console.log('debug: ADD PLAYER');
             }
             fetch(serviceendpoint + '/players/',{
                 method: 'POST',
@@ -97,12 +98,12 @@ class Player extends React.Component {
 
   render() {
     return (
-        <>
-          <p id='curPlayerName'>your Name: {this.state.content}</p>
+        <div id= 'playerEdit'>
+          <p id='curPlayerName'>Your Name: {this.state.content}</p>
           <input id='inputName' maxLength={14}/>
           <button id='delPlayerBtn' className='delBtn' onClick={this.deletePlayer}>Delete</button>
           <button id='newPlayerBtn' className='newBtn' onClick={this.addPlayer}>New</button>
-        </>
+        </div>
     );
 }
 }
