@@ -15,9 +15,9 @@ export default function App(){
 
   return(
     <>
-        { <div id='startPage' className=''>
+        <div id='startPage' className=''>
           <Start language={language}/>
-        </div>}
+        </div>
 
         
         <button className='button' onClick={() => setLostPopup(true)}> Verloren </button>

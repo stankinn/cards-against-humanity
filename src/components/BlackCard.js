@@ -1,54 +1,77 @@
 import React from 'react';
 import '../components-styles/Cards.css'
-import {default as gameId } from './IDs/GameId';
+import { default as gameId } from './IDs/GameId';
 
 
 var cardText = [];
 var str = '';
 
 class BlackCard extends React.Component {
-    
-    constructor(){
+
+    constructor() {
         super();
-        this.state = {notice:[]};
-        this.blackCard= this.blackCard.bind(this);
+        this.state = { notice: [] };
+        this.blackCard = this.blackCard.bind(this);
     }
 
-    blackCard() {     
+    blackCard() {
 
         const serviceendpoint = "https://gruppe7.toni-barth.com";
 
-        gameId.then(id => {
-            console.log(id);
-            fetch(serviceendpoint + '/games/' + id)
+        fetch('https://gruppe7.toni-barth.com/players/')
             .then(response => response.json())
-            .then(data=>{
-                str = data.currentBlackCard.text;
-                cardText = str.replaceAll('_', ' _______ ');
-                this.setState({notice: cardText});
+            .then(data => {
+                if (data.players.length !== 0) {
+                    var id = data.players[data.players.length - 1].id;
+                    fetch('https://gruppe7.toni-barth.com/games/')
+                        .then(response => response.json())
+                        .then(data => {
+                            for (var i = 0; i < data.games.length; i++) {
+                                for (var j = 0; j < data.games[i].players.length; j++) {
+                                    if (data.games[i].players[j] === id) {
+                                        var gameID = data.games[i].id;
+                                    }
+                                }
+                            }
+                            fetch(serviceendpoint + '/games/' + gameID)
+                                .then(response => response.json())
+                                .then(data => {
+                                    str = data.currentBlackCard.text;
+                                    cardText = str.replaceAll('_', ' _______ ');
+                                    this.setState({ notice: cardText });
+                                })
+                                .catch((error) => {
+                                    console.error('Error:', error);
+                                });
+
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                        });
+                }
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
-        });
+
     }
 
     componentDidMount() {
-       this.blackCard();
-     }
-
-    componentDidUpdate(){
         this.blackCard();
     }
-    
+
+    componentDidUpdate() {
+        this.blackCard();
+    }
+
     render() {
         return (
-            <> 
-            <div className='card black'>
-                <p>
-                    {this.state.notice}
-                </p>
-            </div>
+            <>
+                <div className='card black'>
+                    <p>
+                        {this.state.notice}
+                    </p>
+                </div>
             </>
         );
     }
