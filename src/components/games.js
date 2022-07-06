@@ -25,7 +25,7 @@ class Games extends React.Component {
             console.log("all games:" + JSON.stringify(data.games))
             if(data.games.length === 0)
             {
-                this.addGame();
+                //this.addGame();
                 console.log("New game is being created")
             }
             else 
@@ -141,6 +141,8 @@ class Games extends React.Component {
         .then(data => {
             if(data.games.length !== 0){
                 var gameID = data.games[data.games.length-1].id;
+                console.log('All Games: ' + JSON.stringify(data.games));
+                console.log('Game to be deleted: ' + gameID);
             
                 fetch(serviceendpoint + '/games/' + gameID, {
                     method: "DELETE",

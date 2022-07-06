@@ -17,22 +17,29 @@ class BlackCard extends React.Component {
     blackCard() {
 
         const serviceendpoint = "https://gruppe7.toni-barth.com";
-
+        var gameID='';
+        var id = '';
         fetch('https://gruppe7.toni-barth.com/players/')
             .then(response => response.json())
             .then(data => {
                 if (data.players.length !== 0) {
-                    var id = data.players[data.players.length - 1].id;
+                    id = data.players[data.players.length - 1].id;
                     fetch('https://gruppe7.toni-barth.com/games/')
                         .then(response => response.json())
                         .then(data => {
                             for (var i = 0; i < data.games.length; i++) {
+                            
                                 for (var j = 0; j < data.games[i].players.length; j++) {
-                                    if (data.games[i].players[j] === id) {
-                                        var gameID = data.games[i].id;
+                                    
+                                    if (data.games[i].players[j].id === id) {
+                                        gameID = data.games[i].id;
+                                        
+                                        i = data.games.length;
+                                        break;
                                     }
                                 }
                             }
+                            console.log('GAME ID: '+ gameID);
                             fetch(serviceendpoint + '/games/' + gameID)
                                 .then(response => response.json())
                                 .then(data => {

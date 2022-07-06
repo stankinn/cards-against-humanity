@@ -11,7 +11,9 @@ export default new Promise(() =>{
                     for(var j = 0; j < data.games[i].players.length; j++){
                         if (data.games[i].players[j] === id){
                             data = data.games[i].id;
-                        }
+                            i = data.games.length;
+                            break;
+                        } 
                     }
                 }
             })

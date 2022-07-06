@@ -2,6 +2,7 @@ import React from 'react';
 import '../components-styles/Cards.css'
 import { default as gameId } from './IDs/GameId';
 import { default as playerId } from './IDs/PlayerId';
+import {isGameRunning} from './index';
 
 class WhiteCards extends React.Component {
 
@@ -14,7 +15,7 @@ class WhiteCards extends React.Component {
     whiteCards() {
 
         const serviceendpoint = "https://gruppe7.toni-barth.com";
-
+        var gameID = '';
         fetch('https://gruppe7.toni-barth.com/players/')
             .then(response => response.json())
             .then(data => {
@@ -25,16 +26,13 @@ class WhiteCards extends React.Component {
                         .then(data => {
                             for (var i = 0; i < data.games.length; i++) {
                                 for (var j = 0; j < data.games[i].players.length; j++) {
-                                    if (data.games[i].players[j] === playerId) {
-                                        var gameID = data.games[i].id;
+                                    if (data.games[i].players[j].id === playerId) {
+                                        gameID = data.games[i].id;
                                     }
                                 }
                             }
-                            fetch(serviceendpoint + '/games/' + gameID + '/cards' + playerId, {
-                                method: "GET",
-                                body: JSON.stringify({ player: playerId }),
-                                headers: { "Content-Type": "application/json" }
-                            })
+                            if (isGameRunning() === 'true'){
+                            fetch(serviceendpoint + '/games/' + gameID + '/cards/' + playerId)
                                 .then(response => response.json())
                                 .then(data => {
                                     this.setState({ cardText: data.text });
@@ -42,6 +40,7 @@ class WhiteCards extends React.Component {
                                 .catch((error) => {
                                     console.error('Error:', error);
                                 });
+                            }else{console.log('White Cards cannot be shown yet. Game is not running')}
                         })
                         .catch((error) => {
                             console.error('Error:', error);
