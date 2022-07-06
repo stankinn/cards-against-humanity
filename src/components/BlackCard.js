@@ -1,6 +1,7 @@
 import React from 'react';
 import '../components-styles/Cards.css'
 import { default as gameId } from './IDs/GameId';
+import {isGameRunning} from './index';
 
 
 var cardText = [];
@@ -40,6 +41,8 @@ class BlackCard extends React.Component {
                                 }
                             }
                             console.log('GAME ID: '+ gameID);
+
+                            if (isGameRunning === 'true'){
                             fetch(serviceendpoint + '/games/' + gameID)
                                 .then(response => response.json())
                                 .then(data => {
@@ -49,7 +52,10 @@ class BlackCard extends React.Component {
                                 })
                                 .catch((error) => {
                                     console.error('Error:', error);
-                                });
+                                });} else {
+
+                                    console.log('Black Card cannot be shown. Game is not running yet.');
+                                }
 
                         })
                         .catch((error) => {
