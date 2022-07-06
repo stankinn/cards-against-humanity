@@ -1,4 +1,5 @@
 import React from 'react'
+import {serviceendpoint, playerURL} from './index';
 
 class Player extends React.Component {
     
@@ -11,11 +12,8 @@ class Player extends React.Component {
   }
   
   showPlayer() {
-    const serviceendpoint = "https://gruppe7.toni-barth.com";
 
-    fetch(serviceendpoint + '/players/')
-    .then(response => response.json())
-    .then(data=>{
+    playerURL.then(data=>{
       if(data.players.length === 0){
         this.setState({content: 'No Players existing.', visible: 'true'});  
         
@@ -40,11 +38,8 @@ class Player extends React.Component {
   addPlayer() {
 
     var input = document.getElementById('inputName').value;
-    const serviceendpoint = "https://gruppe7.toni-barth.com";
 
-    fetch(serviceendpoint + '/players/')
-    .then(response => response.json())
-    .then(data=>{
+    playerURL.then(data=>{
         if(data.players.length === 0){
             if(input === ''){
               input = 'Player69'
@@ -75,10 +70,7 @@ class Player extends React.Component {
   }
 
   deletePlayer() {
-      const serviceendpoint = "https://gruppe7.toni-barth.com";
-      fetch(serviceendpoint + '/players/')
-          .then(response => response.json())
-          .then(data=>{
+      playerURL.then(data=>{
             var id = 0;
             if(data.players.length !== 0){
               if(data.players.id !== 0){

@@ -1,7 +1,5 @@
 import React from 'react';
-import { default as GameURL } from './URL/GameURL';
-import { default as PlayerURL } from './URL/PlayerURL';
-
+import {serviceendpoint, gameURL, playerURL} from './index';
 
 class Games extends React.Component {
     
@@ -17,15 +15,11 @@ class Games extends React.Component {
 
     checkGames() {
 
-        const serviceendpoint = "https://gruppe7.toni-barth.com";
-
-        fetch(serviceendpoint + '/games/')
-        .then(response => response.json())
-        .then(data=>{
+        gameURL.then(data=>{
             console.log("all games:" + JSON.stringify(data.games))
             if(data.games.length === 0)
             {
-                //this.addGame();
+                this.addGame();
                 console.log("New game is being created")
             }
             else 
@@ -46,17 +40,12 @@ class Games extends React.Component {
     }
 
     componentDidMount() {
-       this.checkGames();
        this.showPlayer();
     }
     
     showPlayer(){
 
-        const serviceendpoint = "https://gruppe7.toni-barth.com";
-
-        fetch(serviceendpoint + '/games/')
-        .then(response => response.json())
-        .then(data=>{
+        gameURL.then(data=>{
             if(data.games.length !== 0)
             {
                 for(var i = 0; i < data.games.length; i++){
@@ -80,18 +69,18 @@ class Games extends React.Component {
     addGame(){
 
         const serviceendpoint = "https://gruppe7.toni-barth.com";
+        var playerID= '';
+
         //spielerID wird herausgefunden
-        fetch(serviceendpoint + '/players/')
-        .then(response => response.json())
-        .then(data=>{
+        playerURL.then(data=>{
             if(data.players.length !== 0){
-                var id= data.players[data.players.length-1].id;
-                console.log("PlayerID:" + id);
+                playerID= data.players[data.players.length-1].id;
+                console.log("PlayerID:" + playerID);
 
                 //neues Spiel wird erstellt mit eigener SpielerID
                 fetch(serviceendpoint + '/games/', {
                     method: "POST",
-                    body: JSON.stringify({ owner: id}),
+                    body: JSON.stringify({ owner: playerID}),
                     headers: { "Content-Type": "application/json" }
                 })
                 .then(response => response.json())
@@ -113,9 +102,6 @@ class Games extends React.Component {
 
   joinGame() {
 
-        const serviceendpoint = "https://gruppe7.toni-barth.com";
-        let gameURL = GameURL();
-        let playerURL = PlayerURL();
         var playerID= '';
         var gameID= '';
         
@@ -124,29 +110,28 @@ class Games extends React.Component {
             playerID = data.players[data.players.length-1].id;
 
             gameURL.then(data =>{
+                console.log("all games: " + data.games.length);
+
                 for(var i = 0; i < data.games.length; i++){
-                    for(var j = 0; j < data.games[i].players.length; j++){
-                        if (data.games[i].players[j] === playerID){
+                    
+                        console.log("GAME OWNER: " + JSON.stringify(data.games[i].owner.id));
+                        console.log("PLAYER ID: " + playerID);
+                        if (data.games[i].owner.id != playerID){
                             gameID = data.games[i].id;
-                            i = data.games.length;
+                            console.log("GAME ID: " + gameID);
                             break;
                         } 
-                    }
                 }
-
+                //console.log("GAME ID: " + gameID);
                 fetch(serviceendpoint + '/games/'+ gameID + '/'+ playerID, {
                     method: "PATCH",
                     body: JSON.stringify({ player: playerID, action: "join"}),
                     headers: { "Content-Type": "application/json" }
                 })
                 .then(response => response.json())
-                .then(data=>{
-                    console.log(data.games)
-                })
                 .catch((error) => {
                     console.error('Error:', error);
                 });
-            
             })
 
         }
@@ -182,7 +167,7 @@ class Games extends React.Component {
     render() {
         return (
             <>
-                <button id= "newGameBtn" className='newBtn' onClick={this.addGame}>New Game</button>
+                <button id= "newGameBtn" className='newBtn' onClick={this.checkGames}>Play</button>
                 <button id= "delGameBtn" className='delBtn' onClick={this.deleteGame}>Delete Game</button>
                 <div className='list'>
                     {this.state.notice.map(({ name, id }) => (
