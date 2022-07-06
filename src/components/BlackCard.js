@@ -34,13 +34,11 @@ class BlackCard extends React.Component {
                                     
                                     if (data.games[i].players[j].id === playerID) {
                                         gameID = data.games[i].id;
-                                        console.log('GAME ID1: '+ gameID);
                                         i = data.games.length;
                                         break;
                                     }
                                 }
                             }
-                            console.log('GAME ID: '+ gameID);
 
                             if (isGameRunning === 'true'){
                             fetch(serviceendpoint + '/games/' + gameID)

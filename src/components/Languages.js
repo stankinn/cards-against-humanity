@@ -11,6 +11,8 @@ export let lang = {
         deleteButton:'delete',
         newButton:'create new',
         playButton:'PLAY',
+        leaveButton:'LEAVE',
+        endButton: 'END',
 
         startGame:'',
         createPlayer:'',
@@ -34,6 +36,8 @@ export let lang = {
         deleteButton:'löschen',
         newButton:'neu erstellen',
         playButton:'SPIELEN',
+        leaveButton:'VERLASSEN',
+        endButton: 'BEENDEN',
 
         startGame:'',
         createPlayer:'',

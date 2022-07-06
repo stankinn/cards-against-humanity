@@ -1,6 +1,6 @@
 import React from 'react';
-import { default as GameURL } from './URL/GameURL';
-import { default as PlayerURL } from './URL/PlayerURL';
+import { serviceendpoint, gameURL, playerURL } from './index';
+import { isGameRunning } from './index';
 
 class PlayerPoints extends React.Component {
 
@@ -12,9 +12,6 @@ class PlayerPoints extends React.Component {
 
     playerPoints() {
 
-        const serviceendpoint = "https://gruppe7.toni-barth.com";
-        let gameURL = GameURL();
-        let playerURL = PlayerURL();
         let gameId = '';
 
 
@@ -33,16 +30,31 @@ class PlayerPoints extends React.Component {
                         }
                     }
                 }
+                if (isGameRunning === 'false') {
 
+                    fetch(serviceendpoint + '/games/' + gameId)
+                        .then(res => res.json())
+                        .then(gameData => {
 
-                for (var i = 0; i < data.games.length; i++) {
+                            for (var j = 0; j < gameData.players.length; j++) {
+                                this.setState({
+                                    notice: this.state.notice.concat([gameData.players[j].name + '_______' + gameData.points[j]])
+                                });
+                            }
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                        });
+                } else { console.log("No points. Game is not running yet."); }
+
+                /*for (var i = 0; i < data.games.length; i++) {
                     if (data.games[i].id === gameId) {
                         for (var j = 0; j < data.games[i].players.length; j++) {
                             fetch(serviceendpoint + '/games/' + gameId)
                                 .then(res => res.json())
                                 .then(gameData => {
                                     this.setState({
-                                        notice: this.state.notice.concat([data.games[i].players[j] + '_______' + gameData.points[j]])
+                                        notice: this.state.notice.concat([data.games[i].players[j].name + '_______' + gameData.points[j]])
                                     });
                                 })
                                 .catch((error) => {
@@ -50,7 +62,7 @@ class PlayerPoints extends React.Component {
                                 });
                         }
                     }
-                }
+                }*/
             })
                 .catch((error) => {
                     console.error('Error:', error);
