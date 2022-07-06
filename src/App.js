@@ -14,17 +14,13 @@ export default function App(){
     );
 
   return(
-    <>
-        <div id='startPage' className=''>
-          <Start language={language}/>
-        </div>
-
-        
-        <button className='button' onClick={() => setLostPopup(true)}> Verloren </button>
-        <button className='button' onClick={() => setWonPopup(true)}> Gewonnen </button>
-      
+    <>      
         <div id='gamePage' className=''>
           <Game language={language}/>
+        </div>
+
+        <div id='startPage' className=''>
+          <Start language={language}/>
         </div>
         
         <Menu language={language} handleSetLanguage={language =>{
