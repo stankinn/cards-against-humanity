@@ -1,7 +1,7 @@
 import React from 'react';
 import '../components-styles/Cards.css'
-import { default as gameId } from './IDs/GameId';
-import { default as playerId } from './IDs/PlayerId';
+import { default as GameURL } from './URL/GameURL';
+import { default as PlayerURL } from './URL/PlayerURL';
 import {isGameRunning} from './index';
 
 class WhiteCards extends React.Component {

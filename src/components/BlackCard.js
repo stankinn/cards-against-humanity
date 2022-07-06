@@ -1,6 +1,6 @@
 import React from 'react';
 import '../components-styles/Cards.css'
-import { default as gameId } from './IDs/GameId';
+import {default as PlayerURL } from './URL/PlayerURL';
 import {isGameRunning} from './index';
 
 

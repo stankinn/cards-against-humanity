@@ -1,6 +1,6 @@
 import React from 'react';
-import {default as gameId} from './IDs/GameId';
-import {default as playerId} from './IDs/PlayerId';
+import { default as GameURL } from './URL/GameURL';
+import { default as PlayerURL } from './URL/PlayerURL';
 
 
 class Games extends React.Component {
@@ -114,13 +114,29 @@ class Games extends React.Component {
   joinGame() {
 
         const serviceendpoint = "https://gruppe7.toni-barth.com";
-        playerId.then(currPlayerId=>{
-            console.log("PlayerID:" + currPlayerId);
-            //Freiem Spiel wird beigetreten
-            gameId.then(currGameId => {
-                fetch(serviceendpoint + '/games/:'+ currGameId, {
+        let gameURL = GameURL();
+        let playerURL = PlayerURL();
+        var playerID= '';
+        var gameID= '';
+        
+        playerURL.then(data=>{  
+            if(data.players.length !== 0){
+            playerID = data.players[data.players.length-1].id;
+
+            gameURL.then(data =>{
+                for(var i = 0; i < data.games.length; i++){
+                    for(var j = 0; j < data.games[i].players.length; j++){
+                        if (data.games[i].players[j] === playerID){
+                            gameID = data.games[i].id;
+                            i = data.games.length;
+                            break;
+                        } 
+                    }
+                }
+
+                fetch(serviceendpoint + '/games/'+ gameID + '/'+ playerID, {
                     method: "PATCH",
-                    body: JSON.stringify({ player: currPlayerId, action: "join"}),
+                    body: JSON.stringify({ player: playerID, action: "join"}),
                     headers: { "Content-Type": "application/json" }
                 })
                 .then(response => response.json())
@@ -130,7 +146,12 @@ class Games extends React.Component {
                 .catch((error) => {
                     console.error('Error:', error);
                 });
+            
             })
+
+        }
+           
+            
     })}
 
     deleteGame(){

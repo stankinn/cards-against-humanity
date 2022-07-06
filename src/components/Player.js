@@ -98,12 +98,12 @@ class Player extends React.Component {
 
   render() {
     return (
-        <div id= 'playerEdit'>
+        <>
           <p id='curPlayerName'>Your Name: {this.state.content}</p>
           <input id='inputName' maxLength={14}/>
           <button id='delPlayerBtn' className='delBtn' onClick={this.deletePlayer}>Delete</button>
           <button id='newPlayerBtn' className='newBtn' onClick={this.addPlayer}>New</button>
-        </div>
+        </>
     );
 }
 }
