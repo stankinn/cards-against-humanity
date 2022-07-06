@@ -28,7 +28,7 @@ class PlayerPoints extends React.Component {
                 }
                 for (var i = 0; i < data.games.length; i++) {
                     for (var j = 0; j < data.games[i].players.length; j++) {
-                        if (data.games[i].players[j] === playerId) {
+                        if (data.games[i].players[j].id === playerId) {
                             gameId = data.games[i].id;
                         }
                     }

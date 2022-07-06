@@ -24,13 +24,9 @@ class Games extends React.Component {
             }
             else 
             {
-                for(var i = 0; i < data.games.length; i++){
-                    if (data.games[i].running === false){
-                        console.log("joining available game " + JSON.stringify(data.games[i]))
-                        this.joinGame();
-                        //this.setState({notice: data});
-                    }
-                }
+                console.log("joining available game")
+                this.joinGame();
+                //this.setState({notice: data});
                 
             }
         })
@@ -113,14 +109,9 @@ class Games extends React.Component {
                 console.log("all games: " + data.games.length);
 
                 for(var i = 0; i < data.games.length; i++){
-                    
-                        console.log("GAME OWNER: " + JSON.stringify(data.games[i].owner.id));
-                        console.log("PLAYER ID: " + playerID);
-                        if (data.games[i].owner.id != playerID){
-                            gameID = data.games[i].id;
-                            console.log("GAME ID: " + gameID);
-                            break;
-                        } 
+                    if (data.games[i].running === false){
+                        gameID = data.games[i].id;
+                    }
                 }
                 //console.log("GAME ID: " + gameID);
                 fetch(serviceendpoint + '/games/'+ gameID + '/'+ playerID, {
