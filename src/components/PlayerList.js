@@ -7,6 +7,7 @@ class PlayerList extends React.Component {
     super(props);
     this.state = {notice: []};
     this.gameID = '';
+    this.playerLength = '';
     this.ownerID = '';
     this.playerID = '';
     this.showPlayer= this.showPlayer.bind(this);
@@ -22,6 +23,7 @@ class PlayerList extends React.Component {
                         this.gameID = data.games[i].id;
                         this.setState({notice: data.games[i].players});
                         // this.setState({notice: this.state.notice.concat(data.games[i].players)});
+                        this.playerLength = data.games[i].players.length;
                         for (var j = 0; j < data.games[i].players.length; j++) {
                           if (data.games[i].players[j].id === data.games[i].owner.id) {
                             this.ownerID = data.games[i].owner.id;
@@ -43,7 +45,9 @@ class PlayerList extends React.Component {
         });
 
         if (this.ownerId === this.playerID) {
-            document.getElementById('startBtn').classList.remove('hidden');
+            if(this.playerLength >= 3){
+                document.getElementById('startBtn').classList.remove('hidden');
+            }
         }
     } 
     
@@ -56,22 +60,21 @@ class PlayerList extends React.Component {
     }
 
     startGame(){
-    
-        if (this.ownerId === this.playerID) {
-            document.getElementById('gameLobby').classList.add('hidden');
+            if (this.ownerId === this.playerID) {
+                document.getElementById('gameLobby').classList.add('hidden');
 
-            fetch(serviceendpoint + '/games/' + this.gameID + '/' + this.playerID, {
-                method: "PATCH",
-                body: JSON.stringify({ player: this.playerID, action: "start" }),
-                headers: { "Content-Type": "application/json" }
-            })
-            .then(res => res.json())
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-        } else {
-            console.log('Not the owner. Cannot start the game.');
-        }
+                fetch(serviceendpoint + '/games/' + this.gameID + '/' + this.playerID, {
+                    method: "PATCH",
+                    body: JSON.stringify({ player: this.playerID, action: "start" }),
+                    headers: { "Content-Type": "application/json" }
+                })
+                .then(res => res.json())
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            } else {
+                console.log('Not the owner. Cannot start the game.');
+            }
     }
 
     render() {
