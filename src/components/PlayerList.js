@@ -86,7 +86,7 @@ class PlayerList extends React.Component {
                         <p key={id}> {name}</p>
                     ))}
                 </div>
-                <button id='startBtn' className='continueBtn hiddens' onClick={this.startGame}>{this.props.startBtn}</button>
+                <button id='startBtn' className='continueBtn hidden' onClick={this.startGame}>{this.props.startBtn}</button>
             </>
         );
     }
