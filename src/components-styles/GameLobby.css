@@ -1,0 +1,59 @@
+.lobbyLayout{
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+
+    grid-template:
+      'Header'
+      'List'
+      'StartBtn';
+    grid-gap: 3rem;
+    
+    justify-items: safe center;
+    padding: 2rem;
+}
+
+#headerG{
+    grid-area: Header;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.continueBtn{
+    grid-area: StartBtn;
+}
+
+.list{
+    grid-area: List;
+    width: 80%;
+    background-color: var(--bg-cards);
+    border: .5rem solid var(--bg-cards);
+    border-radius: 1rem;
+    overflow-y: auto;
+}
+
+.list > p{
+    font-size: 1rem;
+    text-align: center;
+
+    padding: .5rem 1rem;
+    font-weight: 500;
+}
+
+.list::-webkit-scrollbar{
+    width: .5rem;
+}
+
+.list::-webkit-scrollbar-track{
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 1rem;
+}
+
+.list::-webkit-scrollbar-thumb{
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 1rem;
+}
+
+.list::-webkit-scrollbar-thumb:hover{
+    background-color: white;
+}

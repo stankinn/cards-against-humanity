@@ -1,6 +1,6 @@
 import React from 'react'
 import { lang } from './Languages';
-import { serviceendpoint, gameURL, playerURL } from './index';
+import { serviceendpoint, gameURL, playerURL } from './Imports';
 
 export default function End(props) {
 

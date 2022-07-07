@@ -1,5 +1,5 @@
 import React from 'react'
-import {serviceendpoint, playerURL} from './index';
+import {serviceendpoint, playerURL} from './Imports';
 
 class Player extends React.Component {
     
@@ -16,10 +16,11 @@ class Player extends React.Component {
     playerURL.then(data=>{
       if(data.players.length === 0){
         this.setState({content: 'No Players existing.', visible: 'true'});  
-        
+        document.getElementById('playBtn').classList.add('disabled');
       }
       else{
         this.setState({content: data.players[0].name, visible: 'false'});
+        document.getElementById('playBtn').classList.remove('disabled');
       }
     })
     .catch((error) => {
@@ -91,10 +92,9 @@ class Player extends React.Component {
   render() {
     return (
         <>
-          <p id='curPlayerName'>Your Name: {this.state.content}</p>
-          <input id='inputName' maxLength={14}/>
-          <button id='delPlayerBtn' className='delBtn' onClick={this.deletePlayer}>Delete</button>
-          <button id='newPlayerBtn' className='newBtn' onClick={this.addPlayer}>New</button>
+          <p id='curNameContent'>{this.state.content}</p>
+          <button className='delBtn' onClick={this.deletePlayer}>{this.props.delBtn}</button>
+          <button className='addBtn' onClick={this.addPlayer}>{this.props.addBtn}</button>
         </>
     );
 }

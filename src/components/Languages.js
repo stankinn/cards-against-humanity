@@ -7,16 +7,13 @@ export let lang = {
         helpTxt:'',
 
         headerP:'Player',
-        headerG:'Game',
-        deleteButton:'delete',
-        newButton:'create new',
+        curName:'Your Name: ',
+        delBtn:'delete',
+        addBtn:'create new',
         playButton:'PLAY',
-        leaveButton:'LEAVE',
-        endButton: 'END',
 
-        startGame:'',
-        createPlayer:'',
-        waitingPlayer:'',
+        headerG:'Game-ID: ',
+        startButton:'START GAME',
 
         curCzar:'current czar: ',
         playerPoints:'Points: ',
@@ -32,16 +29,13 @@ export let lang = {
         helpTxt:'Hier werden die Grundfunktionen erklärt!',
 
         headerP:'Spieler',
-        headerG:'Spiel',
-        deleteButton:'löschen',
-        newButton:'neu erstellen',
+        curName:'Dein Name: ',
+        delBtn:'löschen',
+        addBtn:'neu erstellen',
         playButton:'SPIELEN',
-        leaveButton:'VERLASSEN',
-        endButton: 'BEENDEN',
 
-        startGame:'',
-        createPlayer:'',
-        waitingPlayer:'',
+        headerG:'Spiel-ID: ',
+        startButton:'SPIEL STARTEN',
 
         curCzar:'aktueller Zar: ',
         playerPoints:'Punkte: ',
