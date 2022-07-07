@@ -13,10 +13,13 @@ class PlayerPoints extends React.Component {
     playerPoints() {
 
         let gameId = '';
+        let playerId = '';
 
 
         playerURL.then(data => {
-            var playerId = data.players[data.players.length - 1].id;
+            if (data.players.length > 0){
+            playerId = data.players[data.players.length - 1].id;
+            }
 
             gameURL.then(data => {
 

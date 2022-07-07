@@ -22,7 +22,7 @@ class PlayerList extends React.Component {
                     if (data.games[i].running === false){
                         this.gameID = data.games[i].id;
                         this.setState({notice: data.games[i].players});
-                        // this.setState({notice: this.state.notice.concat(data.games[i].players)});
+                        //this.setState({notice: this.state.notice.concat(data.games[i].players)});
                         this.playerLength = data.games[i].players.length;
                         for (var j = 0; j < data.games[i].players.length; j++) {
                           if (data.games[i].players[j].id === data.games[i].owner.id) {
@@ -38,7 +38,10 @@ class PlayerList extends React.Component {
         });
 
         playerURL.then(data => {
+
+            if (data.players.length > 0){
             this.playerID = data.players[data.players.length - 1].id;
+            }
         })
         .catch((error) => {
             console.error('Error:', error);

@@ -3,23 +3,22 @@ import {serviceendpoint, playerURL} from './Imports';
 
 class Player extends React.Component {
     
-  constructor(){
-  super();
-  this.state = {content: [], visible: ''};
+  constructor(props){
+  super(props);
+  this.state = {content: []};
   this.showPlayer= this.showPlayer.bind(this);
   this.addPlayer= this.addPlayer.bind(this);
   this.deletePlayer= this.deletePlayer.bind(this);
   }
   
   showPlayer() {
-
     playerURL.then(data=>{
       if(data.players.length === 0){
-        this.setState({content: 'No Players existing.', visible: 'true'});  
+        this.setState({content: 'No Players existing.'});  
         document.getElementById('playBtn').classList.add('disabled');
       }
       else{
-        this.setState({content: data.players[0].name, visible: 'false'});
+        this.setState(state => ({content: state= data.players[data.players.length-1].name}));
         document.getElementById('playBtn').classList.remove('disabled');
       }
     })
@@ -44,7 +43,6 @@ class Player extends React.Component {
         if(data.players.length === 0){
             if(input === ''){
               input = 'Player69'
-              console.log('debug: ADD PLAYER');
             }
             fetch(serviceendpoint + '/players/',{
                 method: 'POST',
@@ -72,12 +70,12 @@ class Player extends React.Component {
 
   deletePlayer() {
       playerURL.then(data=>{
-            var id = 0;
+            var playerId = 0;
             if(data.players.length !== 0){
               if(data.players.id !== 0){
-                id= data.players[data.players.length-1].id;
+                playerId= data.players[data.players.length-1].id;
               }
-              fetch(serviceendpoint + '/players/' + id, {
+              fetch(serviceendpoint + '/players/' + playerId, {
                   method: "DELETE",
                   headers: { "Content-Type": "application/json" }
               })
