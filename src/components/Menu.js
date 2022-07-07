@@ -29,8 +29,8 @@ export default function Menu(props) {
 
       function changeTheme(){
         if (document.body.getAttribute('data-theme') === 'light-theme') {
-          document.body.setAttribute('data-theme', 'seagreen-theme');
-        }else if(document.body.getAttribute('data-theme') === 'seagreen-theme'){
+          document.body.setAttribute('data-theme', 'purple-theme');
+        }else if(document.body.getAttribute('data-theme') === 'purple-theme'){
           document.body.setAttribute('data-theme', 'dark-theme'); 
         } else {
           document.body.setAttribute('data-theme', 'light-theme'); 
