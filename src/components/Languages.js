@@ -14,6 +14,7 @@ export let lang = {
 
         headerG:'Game-ID: ',
         startButton:'START GAME',
+        leaveButton: 'LEAVE GAME',
 
         curCzar:'current czar: ',
         playerPoints:'Points: ',
@@ -36,6 +37,7 @@ export let lang = {
 
         headerG:'Spiel-ID: ',
         startButton:'SPIEL STARTEN',
+        leaveButton: 'SPIEL VERLASSEN',
 
         curCzar:'aktueller Zar: ',
         playerPoints:'Punkte: ',

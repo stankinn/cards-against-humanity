@@ -3,8 +3,8 @@ import {serviceendpoint, playerURL} from './Imports';
 
 class Player extends React.Component {
     
-  constructor(props){
-  super(props);
+  constructor(){
+  super();
   this.state = {content: []};
   this.showPlayer= this.showPlayer.bind(this);
   this.addPlayer= this.addPlayer.bind(this);
@@ -18,7 +18,7 @@ class Player extends React.Component {
         document.getElementById('playBtn').classList.add('disabled');
       }
       else{
-        this.setState(state => ({content: state= data.players[data.players.length-1].name}));
+        this.setState((state)=> {return {content: state.content = data.players[data.players.length-1].name}});
         document.getElementById('playBtn').classList.remove('disabled');
       }
     })
@@ -27,12 +27,13 @@ class Player extends React.Component {
     });
   }
 
+
   componentDidMount() {
     this.showPlayer();
   }
 
   componentDidUpdate(){
-      this.showPlayer();
+    this.showPlayer();
   }
 
   addPlayer() {
@@ -52,6 +53,7 @@ class Player extends React.Component {
             .then(res => res.json())
             .then(data =>{
                 console.log(data.id + ' New Player: ' + data.name)
+                document.getElementById('playBtn').classList.remove('disabled');
             })
             .catch((error) =>{
                 console.error('Error: ', error);

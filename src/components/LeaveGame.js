@@ -17,7 +17,7 @@ export default function LeaveGame(props) {
         playerID = data.players[data.players.length-1].id;
 
         gameURL.then(data =>{
-            console.log("all games: " + data.games.length);
+            console.log("all games: " + JSON.stringify( data.games[0].players));
 
             for(var i = 0; i < data.games.length; i++){
                 if (data.games[i].running === false){
@@ -31,6 +31,7 @@ export default function LeaveGame(props) {
                 headers: { "Content-Type": "application/json" }
             })
             .then(response => response.json())
+            .then(()=>{document.getElementById('playerCreation').classList.remove('hidden');})
             .catch((error) => {
                 console.error('Error:', error);
             });
