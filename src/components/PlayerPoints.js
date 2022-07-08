@@ -1,16 +1,11 @@
 import React from 'react';
 import { serviceendpoint, gameURL, playerURL } from './Imports';
 import { isGameRunning } from './index';
+import {useState, useEffect} from 'react';
 
-class PlayerPoints extends React.Component {
+export default function PlayerPoints(){
 
-    constructor() {
-        super();
-        this.state = { notice: [] };
-        this.playerPoints = this.playerPoints.bind(this);
-    }
-
-    playerPoints() {
+    let [points, setPoints] = useState([]);
 
         let gameId = '';
         let playerId = '';
@@ -40,9 +35,7 @@ class PlayerPoints extends React.Component {
                         .then(gameData => {
 
                             for (var j = 0; j < gameData.players.length; j++) {
-                                this.setState({
-                                    notice: this.state.notice.concat([gameData.players[j].name + '_______' + gameData.points[j]])
-                                });
+                                setPoints(points[j]= gameData.players[j].name + '_______' + gameData.points[j]);
                             }
                         })
                         .catch((error) => {
@@ -73,25 +66,11 @@ class PlayerPoints extends React.Component {
         })
 
 
-    }
-
-    componentDidMount() {
-        this.playerPoints();
-    }
-
-    componentDidUpdate() {
-        this.playerPoints();
-    }
-
-    render() {
         return (
             <>
-                {this.state.notice.map(({ name, id }) => (
+                {points.map(({ name, id }) => (
                     <p key={id}> {name}</p>
                 ))}
             </>
         );
     }
-}
-
-export default PlayerPoints;

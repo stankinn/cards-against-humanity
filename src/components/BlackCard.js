@@ -2,20 +2,17 @@ import React from 'react';
 import '../components-styles/Cards.css'
 import {default as PlayerURL } from './URL/PlayerURL';
 import {isGameRunning} from './index';
+import {useState, useEffect} from 'react';
 
 
 var cardText = [];
 var str = '';
 
-class BlackCard extends React.Component {
+export default function BlackCard(){
 
-    constructor() {
-        super();
-        this.state = { notice: [] };
-        this.blackCard = this.blackCard.bind(this);
-    }
+    let [prompt, setPromt] = useState('');
 
-    blackCard() {
+    function blackCard() {
 
         const serviceendpoint = "https://gruppe7.toni-barth.com";
         var gameID='';
@@ -46,7 +43,7 @@ class BlackCard extends React.Component {
                                 .then(data => {
                                     str = data.currentBlackCard.text;
                                     cardText = str.replaceAll('_', ' _______ ');
-                                    this.setState({ notice: cardText });
+                                    setPromt({cardText});
                                 })
                                 .catch((error) => {
                                     console.error('Error:', error);
@@ -66,26 +63,14 @@ class BlackCard extends React.Component {
             });
 
     }
-
-    componentDidMount() {
-        this.blackCard();
-    }
-
-    componentDidUpdate() {
-        this.blackCard();
-    }
-
-    render() {
         return (
             <>
                 <div className='card black'>
                     <p>
-                        {this.state.notice}
+                        {prompt}
                     </p>
                 </div>
             </>
         );
-    }
+    
 }
-
-export default BlackCard;

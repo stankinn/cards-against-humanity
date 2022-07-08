@@ -31,7 +31,7 @@ export default function LeaveGame(props) {
                 headers: { "Content-Type": "application/json" }
             })
             .then(response => response.json())
-            .then(()=>{document.getElementById('playerCreation').classList.remove('hidden');})
+            .then(()=>{/*document.getElementById('playerCreation').classList.remove('hidden');*/})
             .catch((error) => {
                 console.error('Error:', error);
             });

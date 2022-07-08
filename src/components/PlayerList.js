@@ -1,32 +1,28 @@
 import React from 'react';
 import {serviceendpoint, gameURL, playerURL} from './Imports';
+import {useState, useEffect} from 'react';
 
-class PlayerList extends React.Component {
+export default function PlayerList(){
     
-    constructor(props){
-    super(props);
-    this.state = {notice: []};
-    this.gameID = '';
-    this.playerLength = '';
-    this.ownerID = '';
-    this.playerID = '';
-    this.showPlayer= this.showPlayer.bind(this);
-    this.startGame= this.startGame.bind(this);
-    }
-    
-    showPlayer(){
+    let [pList, setPList] = useState([]);
+    let gameID= '';
+    let ownerId = '';
+    let playerID = '';
+    let playerLength = 0;
+
+    function showPlayer(){
 
         gameURL.then(data=>{
             if(data.games.length !== 0){
                 for(var i = 0; i < data.games.length; i++){
                     if (data.games[i].running === false){
-                        this.gameID = data.games[i].id;
-                        this.setState({notice: data.games[i].players});
+                        gameID = data.games[i].id;
+                        setPList(pList[i] = data.games[i].players);
                         //this.setState({notice: this.state.notice.concat(data.games[i].players)});
-                        this.playerLength = data.games[i].players.length;
+                        playerLength = data.games[i].players.length;
                         for (var j = 0; j < data.games[i].players.length; j++) {
                           if (data.games[i].players[j].id === data.games[i].owner.id) {
-                            this.ownerID = data.games[i].owner.id;
+                            ownerId = data.games[i].owner.id;
                           }
                         }
                     }
@@ -40,35 +36,30 @@ class PlayerList extends React.Component {
         playerURL.then(data => {
 
             if (data.players.length > 0){
-            this.playerID = data.players[data.players.length - 1].id;
+            playerID = data.players[data.players.length - 1].id;
             }
         })
         .catch((error) => {
             console.error('Error:', error);
         });
 
-        if (this.ownerId === this.playerID) {
-            if(this.playerLength >= 3){
+        if (ownerId === playerID) {
+            if(playerLength >= 3){
                 document.getElementById('startBtn').classList.remove('hidden');
             }
         }
     } 
-    
-    componentDidMount() {
-       this.showPlayer();
-    }
 
-    componentDidUpdate() {
-       this.showPlayer();
-    }
+    useEffect(() => {showPlayer();})
+        
 
-    startGame(){
-            if (this.ownerId === this.playerID) {
+    function startGame(){
+            if (ownerId === playerID) {
                 document.getElementById('gameLobby').classList.add('hidden');
 
-                fetch(serviceendpoint + '/games/' + this.gameID + '/' + this.playerID, {
+                fetch(serviceendpoint + '/games/' + gameID + '/' + playerID, {
                     method: "PATCH",
-                    body: JSON.stringify({ player: this.playerID, action: "start" }),
+                    body: JSON.stringify({ player: playerID, action: "start" }),
                     headers: { "Content-Type": "application/json" }
                 })
                 .then(res => res.json())
@@ -80,19 +71,16 @@ class PlayerList extends React.Component {
             }
     }
 
-    render() {
+
         return (
             <>
-                <h1>{this.props.header}{this.gameID}</h1>
+                <h1>GAME {gameID}</h1>
                 <div className='list'>
-                    {this.state.notice.map(({ name, id }) => (
-                        <p key={id}> {name}</p>
+                    {pList.map(({ name, id }) => (
+                        <p key={id}>{name}</p>
                     ))}
                 </div>
-                <button id='startBtn' className='continueBtn hidden' onClick={this.startGame}>{this.props.startBtn}</button>
+                <button id='startBtn' className='continueBtn hidden' onClick={startGame}>START</button>
             </>
         );
-    }
 }
-
-export default PlayerList;

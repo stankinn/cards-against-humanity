@@ -1,17 +1,10 @@
 import React from 'react'
 import {serviceendpoint, gameURL, playerURL} from './Imports';
+import {useState, useEffect} from 'react';
 
-class Play extends React.Component {
+export default function Play(props){
     
-    constructor(props){
-    super(props);
-    this.state = {notice: []};
-    this.checkGames= this.checkGames.bind(this);
-    this.addGame = this.addGame.bind(this);
-    this.joinGame = this.joinGame.bind(this);
-    }
-
-    checkGames() {
+    function checkGames() {
         if(document.getElementById('playBtn').classList.contains('disabled')){
             console.log('No PLayer existing.')
         }else{
@@ -19,12 +12,11 @@ class Play extends React.Component {
             gameURL.then(data=>{
                 console.log("all games:" + JSON.stringify(data.games))
                 if(data.games.length === 0){
-                    this.addGame();
+                    addGame();
                     console.log("New game is being created")
                 }else {
                     console.log("joining available game")
-                    this.joinGame();
-                    //this.setState({notice: data});    
+                    joinGame();
                 }
             })
             .catch((error) => {
@@ -33,7 +25,7 @@ class Play extends React.Component {
         }
     }
 
-    addGame(){
+    function addGame(){
 
         const serviceendpoint = "https://gruppe7.toni-barth.com";
         var playerID= '';
@@ -64,7 +56,7 @@ class Play extends React.Component {
         
     }
 
-  joinGame() {
+  function joinGame() {
 
         var playerID= '';
         var gameID= '';
@@ -93,38 +85,6 @@ class Play extends React.Component {
                 });
             })
     })}  
-    
-//     leaveGame() {
-  
-//       var playerID= '';
-//       var gameID= '';
-      
-//       playerURL.then(data=>{  
-//           if(data.players.length !== 0){
-//           playerID = data.players[data.players.length-1].id;
-  
-//           gameURL.then(data =>{
-//               console.log("all games: " + data.games.length);
-  
-//               for(var i = 0; i < data.games.length; i++){
-//                   if (data.games[i].running === false){
-//                       gameID = data.games[i].id;
-//                   }
-//               }
-//               //console.log("GAME ID: " + gameID);
-//               fetch(serviceendpoint + '/games/'+ gameID + '/'+ playerID, {
-//                   method: "PATCH",
-//                   body: JSON.stringify({ player: playerID, action: "leave"}),
-//                   headers: { "Content-Type": "application/json" }
-//               })
-//               .then(response => response.json())
-//               .catch((error) => {
-//                   console.error('Error:', error);
-//               });
-//           })
-  
-//       }
-//   })}
   
   
     //   deleteGame(){
@@ -153,13 +113,10 @@ class Play extends React.Component {
   
     //   }
 
-  render() {
     return (
         <>
-            <button id='playBtn' className='continueBtn' onClick={this.checkGames}>{this.props.playBtn}</button>
+            <button id='playBtn' className='continueBtn' onClick={checkGames}>PLAY</button>
         </>
     );
-}
-}
 
-export default Play;
+}

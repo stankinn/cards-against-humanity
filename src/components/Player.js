@@ -1,47 +1,27 @@
 import React from 'react'
+import {useState, useEffect} from 'react';
 import {serviceendpoint, playerURL} from './Imports';
 
-class Player extends React.Component {
+export default function Player() {
+
     
-  constructor(){
-  super();
-  this.state = {content: []};
-  this.showPlayer= this.showPlayer.bind(this);
-  this.addPlayer= this.addPlayer.bind(this);
-  this.deletePlayer= this.deletePlayer.bind(this);
-  }
-  
-  showPlayer() {
+  let [name, setName] = useState('No Players existing.');
+
+  function showPlayer() {
     playerURL.then(data=>{
-      if(data.players.length === 0){
-        this.setState({content: 'No Players existing.'});  
+        setName (data.players[data.players.length-1].name);  
         document.getElementById('playBtn').classList.add('disabled');
-      }
-      else{
-        this.setState((state)=> {return {content: state.content = data.players[data.players.length-1].name}});
-        document.getElementById('playBtn').classList.remove('disabled');
-      }
     })
     .catch((error) => {
       console.error('Error:', error);
     });
   }
 
-
-  componentDidMount() {
-    this.showPlayer();
-  }
-
-  componentDidUpdate(){
-    this.showPlayer();
-  }
-
-  addPlayer() {
+  function addPlayer() {
 
     var input = document.getElementById('inputName').value;
 
     playerURL.then(data=>{
-        if(data.players.length === 0){
             if(input === ''){
               input = 'Player69'
             }
@@ -54,15 +34,13 @@ class Player extends React.Component {
             .then(data =>{
                 console.log(data.id + ' New Player: ' + data.name)
                 document.getElementById('playBtn').classList.remove('disabled');
+                showPlayer();
+              
             })
             .catch((error) =>{
                 console.error('Error: ', error);
             });
-        }
-        else
-        {
-            console.log("all Players:" + JSON.stringify(data));
-        }
+       
     })
     .catch((error) => {
         console.error('Error:', error);
@@ -70,8 +48,9 @@ class Player extends React.Component {
  
   }
 
-  deletePlayer() {
+  function deletePlayer() {
       playerURL.then(data=>{
+        
             var playerId = 0;
             if(data.players.length !== 0){
               if(data.players.id !== 0){
@@ -82,6 +61,9 @@ class Player extends React.Component {
                   headers: { "Content-Type": "application/json" }
               })
               .then(res => console.log(res))
+              .catch((error) =>{
+                console.error('Error: ', error);
+            });
             }
             else{
               console.log('No Player existing.')
@@ -89,15 +71,11 @@ class Player extends React.Component {
       });
   }
 
-  render() {
     return (
         <>
-          <p id='curNameContent'>{this.state.content}</p>
-          <button className='delBtn' onClick={this.deletePlayer}>{this.props.delBtn}</button>
-          <button className='addBtn' onClick={this.addPlayer}>{this.props.addBtn}</button>
+          <p id='curNameContent'>{name}</p>
+          <button className='delBtn' onClick={deletePlayer}>DEL</button>
+          <button className='addBtn' onClick={addPlayer}>ADD</button>
         </>
     );
 }
-}
-
-export default Player;

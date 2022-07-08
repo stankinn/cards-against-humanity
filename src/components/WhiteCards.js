@@ -3,16 +3,13 @@ import '../components-styles/Cards.css'
 import { default as GameURL } from './URL/GameURL';
 import { default as PlayerURL } from './URL/PlayerURL';
 import {isGameRunning} from './index';
+import {useState, useEffect} from 'react';
 
-class WhiteCards extends React.Component {
+export default function WhiteCards(){
 
-    constructor() {
-        super();
-        this.state = { cardText: '' };
-        this.whiteCards = this.whiteCards.bind(this);
-    }
+    let [answer, setAnswer] = useState([]);
 
-    whiteCards() {
+    //function whiteCardsText() {
 
         const serviceendpoint = "https://gruppe7.toni-barth.com";
         var gameID = '';
@@ -35,7 +32,9 @@ class WhiteCards extends React.Component {
                             fetch(serviceendpoint + '/games/' + gameID + '/cards/' + playerId)
                                 .then(response => response.json())
                                 .then(data => {
-                                    this.setState({ cardText: data.text });
+                                    for (var i = 0; i < 7; i++){
+                                    setAnswer(answer[i] = data[i].text);
+                                    }
                                 })
                                 .catch((error) => {
                                     console.error('Error:', error);
@@ -51,52 +50,43 @@ class WhiteCards extends React.Component {
                 console.error('Error:', error);
             });
 
-    }
+    //}
 
-    componentDidMount() {
-        this.whiteCards();
-    }
-
-    componentDidUpdate() {
-        this.whiteCards();
-    }
-
-    render() {
         return (
             <>
                 <div className='card white'>
                     <p>
-                        {this.state.notice}
+                        {answer[0]}
                     </p>
                 </div>
                 <div className='card white'>
                     <p>
-                        {this.state.notice}
+                        {answer[1]}
                     </p>
                 </div>
                 <div className='card white'>
                     <p>
-                        {this.state.notice}
+                        {answer[2]}
                     </p>
                 </div>
                 <div className='card white'>
                     <p>
-                        {this.state.notice}
+                        {answer[3]}
                     </p>
                 </div>
                 <div className='card white'>
                     <p>
-                        {this.state.notice}
+                        {answer[4]}
                     </p>
                 </div>
                 <div className='card white'>
                     <p>
-                        {this.state.notice}
+                        {answer[5]}
                     </p>
                 </div>
                 <div className='card white'>
                     <p>
-                        {this.state.notice}
+                        {answer[6]}
                     </p>
                 </div>
                 {/* <div className='card white'>
@@ -141,7 +131,4 @@ class WhiteCards extends React.Component {
             </div> */}
             </>
         );
-    }
 }
-
-export default WhiteCards;
