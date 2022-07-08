@@ -1,81 +1,86 @@
-import React from 'react'
-import {useState, useEffect} from 'react';
-import {serviceendpoint, playerURL} from './Imports';
+import React, {useState, useEffect} from 'react'
+import {serviceendpoint} from './Imports';
 
-export default function Player() {
+export default function Player(props) {
 
-    
-  let [name, setName] = useState('No Players existing.');
+  const playerID = localStorage.getItem('playerID');
+  const playerName = localStorage.getItem('playerName');
+  const [content, setContent] = useState(playerName ? playerName : 'No Player existing.');
 
-  function showPlayer() {
-    playerURL.then(data=>{
-        setName (data.players[data.players.length-1].name);  
-        document.getElementById('playBtn').classList.add('disabled');
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
+  function setPlayer(name, id) {
+    localStorage.setItem('playerName', name);
+    localStorage.setItem('playerID', id);
+    console.log('Your Player: ' + playerName + '(' + playerID + ')');
   }
+
+  useEffect(() =>{
+    if(playerID === null){
+      document.getElementById('playBtn').classList.add('disabled');
+    }else{
+      document.getElementById('playBtn').classList.remove('disabled');
+    }
+  })
 
   function addPlayer() {
 
     var input = document.getElementById('inputName').value;
 
-    playerURL.then(data=>{
-            if(input === ''){
-              input = 'Player69'
-            }
-            fetch(serviceendpoint + '/players/',{
-                method: 'POST',
-                body:JSON.stringify({name: input}),
-                headers: {'Content-Type': 'application/json'}
-            })
-            .then(res => res.json())
-            .then(data =>{
-                console.log(data.id + ' New Player: ' + data.name)
-                document.getElementById('playBtn').classList.remove('disabled');
-                showPlayer();
-              
-            })
-            .catch((error) =>{
-                console.error('Error: ', error);
-            });
-       
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-        });
- 
+    console.log('cur PlayerID: ' + playerID)
+
+    if(playerID !== null){
+      console.log('There already is a Player.');
+    }else{
+      if(input === ''){
+        input = 'Player69'
+      }
+      fetch(serviceendpoint + '/players/',{
+        method: 'POST',
+        body:JSON.stringify({name: input}),
+        headers: {'Content-Type': 'application/json'}
+      })
+      .then(res => res.json())
+      .then(data =>{
+        setPlayer(data.name, data.id);
+        setContent(data.name);
+        // document.getElementById('playBtn').classList.remove('disabled');
+      })
+      .catch((error) =>{
+        console.error('Error: ', error);
+      });
+    }
   }
 
   function deletePlayer() {
-      playerURL.then(data=>{
-        
-            var playerId = 0;
-            if(data.players.length !== 0){
-              if(data.players.id !== 0){
-                playerId= data.players[data.players.length-1].id;
-              }
-              fetch(serviceendpoint + '/players/' + playerId, {
-                  method: "DELETE",
-                  headers: { "Content-Type": "application/json" }
-              })
-              .then(res => console.log(res))
-              .catch((error) =>{
-                console.error('Error: ', error);
-            });
-            }
-            else{
-              console.log('No Player existing.')
-            }
+      
+    if(playerID === null){
+      console.log('No Player existing.');
+    }else{
+      fetch(serviceendpoint + '/players/' + playerID, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" }
+      })
+      .then(res =>{
+        if(res.ok){
+          setPlayer('No Player existing.', null);
+          localStorage.removeItem('playerID');
+          // localStorage.removeItem('playerName');
+          setContent('No Player existing.');
+        }
+        return res;
+      })
+      .then(res => console.log(res))
+      .catch((error) => {
+        console.error('Error:', error);
       });
+
+    }
   }
 
-    return (
-        <>
-          <p id='curNameContent'>{name}</p>
-          <button className='delBtn' onClick={deletePlayer}>DEL</button>
-          <button className='addBtn' onClick={addPlayer}>ADD</button>
-        </>
-    );
+  return (
+    <>
+      <p id='curNameContent'>{content}</p>
+      <button className='delBtn' onClick={deletePlayer}>delete</button>
+      <button className='addBtn' onClick={addPlayer}>new</button>
+    </>
+  );
 }

@@ -4,7 +4,10 @@ import {useState, useEffect} from 'react';
 
 export default function Play(props){
     
-    function checkGames() {
+  const playerID = localStorage.getItem('playerID');
+  const playerName = localStorage.getItem('playerName');
+
+  function checkGames() {
         if(document.getElementById('playBtn').classList.contains('disabled')){
             console.log('No PLayer existing.')
         }else{
@@ -28,12 +31,6 @@ export default function Play(props){
     function addGame(){
 
         const serviceendpoint = "https://gruppe7.toni-barth.com";
-        var playerID= '';
-
-        //spielerID wird herausgefunden
-        playerURL.then(data=>{
-                playerID= data.players[data.players.length-1].id;
-                console.log("PlayerID:" + playerID);
 
                 //neues Spiel wird erstellt mit eigener SpielerID
                 fetch(serviceendpoint + '/games/', {
@@ -49,21 +46,13 @@ export default function Play(props){
                 .catch((error) => {
                     console.error('Error:', error);
                 });
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
         
     }
 
   function joinGame() {
 
-        var playerID= '';
         var gameID= '';
         
-        playerURL.then(data=>{
-            playerID = data.players[data.players.length-1].id;
-
             gameURL.then(data =>{
                 console.log("all games: " + data.games.length);
 
@@ -84,7 +73,7 @@ export default function Play(props){
                     console.error('Error:', error);
                 });
             })
-    })}  
+    }  
   
   
     //   deleteGame(){
