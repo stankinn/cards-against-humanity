@@ -49,10 +49,10 @@ export default function Play(props){
         
             gameURL.then(data =>{
                 console.log("all games: " + data.games.length);
-
                 for(var i = 0; i < data.games.length; i++){
                     if (data.games[i].running === false){
                         gameID = data.games[i].id;
+                        
                     }
                 }
                 //console.log("GAME ID: " + gameID);

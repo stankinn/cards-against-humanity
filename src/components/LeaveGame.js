@@ -12,7 +12,7 @@ export default function LeaveGame(props) {
 
 function leave(){
     var gameID= '';
-        
+    
         gameURL.then(data =>{
             for(var i = 0; i < data.games.length; i++){
                 if (data.games[i].running === false){
