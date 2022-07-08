@@ -1,19 +1,15 @@
 import React from 'react'
-import {serviceendpoint, gameURL, playerURL} from './Imports';
-import {useState, useEffect} from 'react';
+import {serviceendpoint, gameURL, playerID} from './Imports';
 
 export default function Play(props){
-    
-  const playerID = localStorage.getItem('playerID');
-  const playerName = localStorage.getItem('playerName');
 
   function checkGames() {
+    console.log('play Button');
         if(document.getElementById('playBtn').classList.contains('disabled')){
             console.log('No PLayer existing.')
         }else{
                 
             gameURL.then(data=>{
-                console.log("all games:" + JSON.stringify(data.games))
                 if(data.games.length === 0){
                     addGame();
                     console.log("New game is being created")
@@ -29,8 +25,6 @@ export default function Play(props){
     }
 
     function addGame(){
-
-        const serviceendpoint = "https://gruppe7.toni-barth.com";
 
                 //neues Spiel wird erstellt mit eigener SpielerID
                 fetch(serviceendpoint + '/games/', {

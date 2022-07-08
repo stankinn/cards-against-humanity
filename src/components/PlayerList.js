@@ -77,7 +77,7 @@ export default function PlayerList(){
                 <h1>GAME {gameID}</h1>
                 <div className='list'>
                     {pList.map(({ name, id }) => (
-                        <p key={id}>{name}</p>
+                    <p key={id}>{id}{name}</p>
                     ))}
                 </div>
                 <button id='startBtn' className='continueBtn hidden' onClick={startGame}>START</button>

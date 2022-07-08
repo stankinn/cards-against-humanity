@@ -1,29 +1,22 @@
 import React from 'react'
 import { lang } from './Languages';
-import { serviceendpoint, gameURL, playerURL } from './Imports';
+import { serviceendpoint, gameURL, playerURL, playerID } from './Imports';
 
-export default function End(props) {
+export default function EndGame(props) {
 
   let content = lang;
   props.language === "German"
     ? (content = content.German)
     : (content = content.English);
 
+    function end(){
     let gameId = '';
-    let playerId = '';
     let ownerId = '';
 
-    playerURL.then(data => {
-      playerId = data.players[data.players.length - 1].id;
-
       gameURL.then(data => {
-
-        if (data.games.length === 0) {
-          console.log('There are no games yet.');
-        }
         for (var i = 0; i < data.games.length; i++) {
           for (var j = 0; j < data.games[i].players.length; j++) {
-            if (data.games[i].players[j].id === playerId) {
+            if (data.games[i].players[j].id === playerID) {
               gameId = data.games[i].id;
               ownerId = data.games[i].owner.id;
               i = data.games.length;
@@ -32,11 +25,11 @@ export default function End(props) {
           }
         }
 
-        if (ownerId === playerId) {
+        if (ownerId === playerID) {
 
-          fetch(serviceendpoint + '/games/' + gameId + '/' + playerId, {
+          fetch(serviceendpoint + '/games/' + gameId + '/' + playerID, {
             method: "PATCH",
-            body: JSON.stringify({ player: playerId, action: "end" }),
+            body: JSON.stringify({ player: playerID, action: "end" }),
             headers: { "Content-Type": "application/json" }
           })
             .then(res => res.json())
@@ -51,12 +44,12 @@ export default function End(props) {
         .catch((error) => {
           console.error('Error:', error);
         });
-    })
+}
 
 
   return (
     <div id='endGame'>
-      <button id='btnStart' className='disabled' onClick={End}>{content.endButton}</button>
+      <button id='btnStart' className='disabled' onClick={end}>{content.endButton}</button>
     </div>
   )
 }
