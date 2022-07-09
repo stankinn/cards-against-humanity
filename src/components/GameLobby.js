@@ -3,6 +3,7 @@ import '../components-styles/FirstPages.css'
 import PlayerList from './PlayerList';
 import {lang} from './Languages';
 import LeaveGame from './LeaveGame';
+import DeleteGame from './DeleteGame';
 
 export default function GameLobby(props) {
 
@@ -15,6 +16,7 @@ export default function GameLobby(props) {
     <div className='lobbyLayout'>
         <PlayerList header={content.headerG} startBtn={content.startButton}/>
         <LeaveGame btnLeave={content.leaveButton}/>
+        {/*<DeleteGame delGameBtn={content.deleteButton}/>*/}
     </div>
   )
 }

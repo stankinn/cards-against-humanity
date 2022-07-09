@@ -11,8 +11,8 @@ export default function Play(props){
                 
             gameURL.then(data=>{
                 if(data.games.length === 0){
-                    addGame();
                     console.log("New game is being created")
+                    addGame();
                 }else {
                     console.log("joining available game")
                     joinGame();
@@ -27,16 +27,14 @@ export default function Play(props){
     function addGame(){
 
                 //neues Spiel wird erstellt mit eigener SpielerID
+                console.log("player: " + playerID);
                 fetch(serviceendpoint + '/games/', {
                     method: "POST",
-                    body: JSON.stringify({ owner: playerID}),
+                    body: JSON.stringify({owner: playerID}),
                     headers: { "Content-Type": "application/json" }
                 })
                 .then(response => response.json())
-                .then(data=>{
-                    console.log(data.owner.name)
-                    document.getElementById('playerCreation').classList.add('hidden');
-                })
+                .then(()=>{document.getElementById('playerCreation').classList.add('hidden');})
                 .catch((error) => {
                     console.error('Error:', error);
                 });
@@ -69,33 +67,6 @@ export default function Play(props){
             })
     }  
   
-  
-    //   deleteGame(){
-  
-    //       const serviceendpoint = "https://gruppe7.toni-barth.com";
-    //       fetch(serviceendpoint + '/games/')
-    //       .then(response => response.json())
-    //       .then(data => {
-    //           if(data.games.length !== 0){
-    //               var gameID = data.games[data.games.length-1].id;
-    //               console.log('All Games: ' + JSON.stringify(data.games));
-    //               console.log('Game to be deleted: ' + gameID);
-              
-    //               fetch(serviceendpoint + '/games/' + gameID, {
-    //                   method: "DELETE",
-    //                   headers: { "Content-Type": "application/json" }
-    //               })
-    //               .then(response => response.json())
-    //               .catch((error) => {
-    //                   console.error('Error:', error);
-    //               });
-    //           }else{
-    //               console.log('No Games existing.');
-    //           }    
-    //       })
-  
-    //   }
-
     return (
         <>
             <button id='playBtn' className='continueBtn' onClick={checkGames}>PLAY</button>
