@@ -9,24 +9,12 @@ export default function LeaveGame(props) {
         ? (content = content.German)
         : (content = content.English);
 
-
-    function setGameID(id) {
-        sessionStorage.setItem('gameID', id);
-        console.log('Your Game: ' + sessionStorage.getItem('gameID'));
-    }
-
     function leave() {
-        var gameID = '';
+        var gameID = sessionStorage.getItem('gameID');
 
-        fetch(serviceendpoint + '/games/')
-            .then(res => res.json()).then(data => {
-                for (var i = 0; i < data.games.length; i++) {
-                    if (data.games[i].running === false) {
-                        setGameID(data.games[i].id);
-                    }
-                }
+      
                 console.log("PLAYER ID: " + playerID);
-                fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/' + Number(playerID), {
+                fetch(serviceendpoint + '/games/' + Number(gameID) + '/' + Number(playerID), {
                     method: 'PATCH',
                     body: JSON.stringify({ player: playerID, action: "leave" }),
                     headers: { "Content-Type": "application/json" }
@@ -39,7 +27,7 @@ export default function LeaveGame(props) {
                     .catch((error) => {
                         console.error('Error:', error);
                     });
-            })
+          
     }
 
     return (
