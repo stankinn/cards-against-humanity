@@ -15,15 +15,13 @@ function leave(){
     
         gameURL.then(data =>{
             for(var i = 0; i < data.games.length; i++){
-                console.log("here");
                 if (data.games[i].running === false){
                     gameID = data.games[i].id;
-                    console.log(gameID);
                 }
             }
             console.log("PLAYER ID: " + playerID);
             fetch(serviceendpoint + '/games/'+ gameID + '/'+ playerID, {
-                method: "PATCH",
+                method: 'PATCH',
                 body: JSON.stringify({ player: playerID, action: "leave"}),
                 headers: { "Content-Type": "application/json" }
             })

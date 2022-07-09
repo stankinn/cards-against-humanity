@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {serviceendpoint} from './Imports';
+import {playerURL, serviceendpoint} from './Imports';
 
 export default function Player(props) {
 
@@ -8,8 +8,8 @@ export default function Player(props) {
   const [content, setContent] = useState(playerName ? playerName : 'No Player existing.');
 
   function setPlayer(name, id) {
-    localStorage.setItem('playerName', name);
-    localStorage.setItem('playerID', id);
+    localStorage.setItem('playerName',name);
+    localStorage.setItem('playerID',id);
     console.log('Your Player: ' + playerName + '(' + playerID + ')');
   }
 
@@ -19,7 +19,10 @@ export default function Player(props) {
     }else{
       document.getElementById('playBtn').classList.remove('disabled');
     }
-  })
+    console.log(localStorage);
+
+    playerURL.then(data =>{console.log(data.players)})
+  })  
 
   function addPlayer() {
 
@@ -27,7 +30,7 @@ export default function Player(props) {
 
     console.log('cur PlayerID: ' + playerID)
 
-    if(playerID !== null){
+    if(playerID){
       console.log('There already is a Player.');
     }else{
       if(input === ''){
@@ -39,10 +42,9 @@ export default function Player(props) {
         headers: {'Content-Type': 'application/json'}
       })
       .then(res => res.json())
-      .then(data =>{
+      .then(data =>{ 
         setPlayer(data.name, data.id);
         setContent(data.name);
-        // document.getElementById('playBtn').classList.remove('disabled');
       })
       .catch((error) =>{
         console.error('Error: ', error);
@@ -52,26 +54,23 @@ export default function Player(props) {
 
   function deletePlayer() {
       
-    if(playerID === null){
+    console.log(localStorage);
+    if(!playerID){
       console.log('No Player existing.');
     }else{
       fetch(serviceendpoint + '/players/' + playerID, {
-        method: "DELETE",
+        method: 'DELETE',
         headers: { "Content-Type": "application/json" }
-      })
-      .then(res =>{
-        if(res.ok){
-          setPlayer('No Player existing.', null);
-          localStorage.removeItem('playerID');
-          // localStorage.removeItem('playerName');
-          setContent('No Player existing.');
-        }
-        return res;
       })
       .then(res => console.log(res))
       .catch((error) => {
         console.error('Error:', error);
       });
+
+      //setPlayer('No Player existing.', null);
+          localStorage.removeItem('playerID');
+          localStorage.removeItem('playerName');
+          setContent('No Player existing.');
 
     }
   }
