@@ -26,6 +26,11 @@ export default function Player(props) {
     .then(data => {
       console.log('Player: ' + JSON.stringify(data.players));
     })
+    fetch(serviceendpoint + '/games/')
+    .then(res => res.json())
+    .then(data => {
+      console.log('games: ' + JSON.stringify(data.games));
+    })
   })  
 
   function addPlayer() {
@@ -73,25 +78,20 @@ export default function Player(props) {
     if(!playerID){
       console.log('No Player existing.');
     }else{
-      fetch(serviceendpoint + '/players/' + playerID, {
+      fetch(serviceendpoint + '/players/' + Number(playerID), {
         method: 'DELETE',
         headers: { "Content-Type": "application/json" }
-      })
-      .then(res => {
-        if(res.ok){
-          localStorage.removeItem('playerID');
-          localStorage.removeItem('playerName');
-          setContent('No Player existing.');
-        }
-        return res
       })
       .then(res => console.log(res))
       .catch((error) => {
         console.error('Error:', error);
       });
-
+      localStorage.removeItem('playerID');
+      localStorage.removeItem('playerName');
+      setContent('No Player existing.');
     }
   }
+
 
   return (
     <>

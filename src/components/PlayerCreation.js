@@ -4,7 +4,6 @@ import Play from './Play'
 import '../components-styles/FirstPages.css'
 import {lang} from './Languages';
 
-
 export default function PlayerCreation(props) {
 
   let content = lang;
