@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {playerURL, serviceendpoint} from './Imports';
+import {serviceendpoint} from './Imports';
 
 export default function Player(props) {
 
@@ -19,9 +19,6 @@ export default function Player(props) {
     }else{
       document.getElementById('playBtn').classList.remove('disabled');
     }
-    console.log(localStorage);
-
-    playerURL.then(data =>{console.log(data.players)})
   })  
 
   function addPlayer() {

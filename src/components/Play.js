@@ -28,8 +28,9 @@ export default function Play(props) {
     }
 
     useEffect(() =>{
+    
         fetch(serviceendpoint + '/games/')
-        .then(res =>res.json()).then(data =>{console.log('players in game: ' + JSON.stringify(data.games[0].players))})
+        .then(res =>res.json()).then(data =>{console.log('Owner of the Game: ' + JSON.stringify(data.games[0].owner))})
       })
 
     function addGame() {
@@ -42,7 +43,7 @@ export default function Play(props) {
                 headers: {"Content-Type": "application/json"}
             })
                 .then(response => response.json())
-                //.then(() => { document.getElementById('playerCreation').classList.add('hidden'); })
+                .then(() => { document.getElementById('playerCreation').classList.add('hidden'); })
                 .catch((error) => {
                     console.error('Error:', error);
                 });
@@ -58,7 +59,6 @@ export default function Play(props) {
             for (var i = 0; i < data.games.length; i++) {
                 if (data.games[i].running === false) {
                     gameID = data.games[i].id;
-
                 }
             }
             //console.log("GAME ID: " + gameID);

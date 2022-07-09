@@ -19,7 +19,7 @@ export default function App(){
         <Game language={language}/>
       </div>
 
-      <div id='gameLobby' className='page'>
+      <div id='gameLobby' className='page '>
         <GameLobby language={language}/>
       </div>
 

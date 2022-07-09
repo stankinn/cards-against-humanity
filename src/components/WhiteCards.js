@@ -1,7 +1,6 @@
 import React from 'react';
 import '../components-styles/Cards.css'
-import { serviceendpoint, playerID } from './Imports';
-import { isGameRunning } from './index';
+import { serviceendpoint, playerID, isGameRunning } from './Imports';
 import { useState, useEffect } from 'react';
 
 export default function WhiteCards() {
@@ -9,6 +8,8 @@ export default function WhiteCards() {
     let [answer, setAnswer] = useState([]);
 
     var gameID = '';
+    var isRunning = false;
+
 
     fetch(serviceendpoint + '/games/')
     .then(res =>res.json()).then(data => {
@@ -16,16 +17,20 @@ export default function WhiteCards() {
                 for (var j = 0; j < data.games[i].players.length; j++) {
                     if (data.games[i].players[j].id === Number(playerID)) {
                         gameID = data.games[i].id;
+                        if(data.games[i].running===true){
+                            isRunning= true;
+                        }else{
+                            isRunning= false;
+                        }
                     }
                 }
             }
-            if (isGameRunning() === 'true') {
+            if(isRunning === 'true') {
                 fetch(serviceendpoint + '/games/' + gameID + '/cards/' + Number(playerID))
                     .then(response => response.json())
                     .then(data => {
-                        for (var i = 0; i < 7; i++) {
-                            setAnswer(answer[i] = data[i].text);
-                        }
+                            setAnswer(data.cards);
+
                     })
                     .catch((error) => {
                         console.error('Error:', error);
@@ -36,83 +41,116 @@ export default function WhiteCards() {
             console.error('Error:', error);
         });
 
+        if(isRunning === 'true') {
     return (
         <>
             <div className='card white'>
+                   
+                <p >{answer[0].text} </p>
+                  
+            </div>
+            <div className='card white'>
                 <p>
-                    {answer[0]}
+                    {answer[1].text}
                 </p>
             </div>
             <div className='card white'>
                 <p>
-                    {answer[1]}
+                    {answer[2].text}
                 </p>
             </div>
             <div className='card white'>
                 <p>
-                    {answer[2]}
+                    {answer[3].text}
                 </p>
             </div>
             <div className='card white'>
                 <p>
-                    {answer[3]}
+                    {answer[4].text}
                 </p>
             </div>
             <div className='card white'>
                 <p>
-                    {answer[4]}
+                    {answer[5].text}
                 </p>
             </div>
             <div className='card white'>
                 <p>
-                    {answer[5]}
+                    {answer[6].text}
+                </p>
+            </div>
+             <div className='card white'>
+                <p>
+                {answer[7].text}
                 </p>
             </div>
             <div className='card white'>
                 <p>
-                    {answer[6]}
-                </p>
-            </div>
-            {/* <div className='card white'>
-                <p>
-                    {this.state.notice}
+                {answer[8].text}
                 </p>
             </div>
             <div className='card white'>
                 <p>
-                    {this.state.notice}
+                {answer[9].text}
                 </p>
             </div>
-            <div className='card white'>
-                <p>
-                    {this.state.notice}
-                </p>
-            </div>
-            <div className='card white'>
-                <p>
-                    {this.state.notice}
-                </p>
-            </div>
-            <div className='card white'>
-                <p>
-                    {this.state.notice}
-                </p>
-            </div>
-            <div className='card white'>
-                <p>
-                    {this.state.notice}
-                </p>
-            </div>
-            <div className='card white'>
-                <p>
-                    {this.state.notice}
-                </p>
-            </div>
-            <div className='card white'>
-                <p>
-                    {this.state.notice}
-                </p>
-            </div> */}
         </>
     );
+} else
+{
+    return (
+        <>
+            <div className='card white'>
+                   
+                <p >{} </p>
+                  
+            </div>
+            <div className='card white'>
+                <p>
+                    {}
+                </p>
+            </div>
+            <div className='card white'>
+                <p>
+                    {}
+                </p>
+            </div>
+            <div className='card white'>
+                <p>
+                    {}
+                </p>
+            </div>
+            <div className='card white'>
+                <p>
+                    {}
+                </p>
+            </div>
+            <div className='card white'>
+                <p>
+                    {}
+                </p>
+            </div>
+            <div className='card white'>
+                <p>
+                    {}
+                </p>
+            </div>
+             <div className='card white'>
+                <p>
+                {}
+                </p>
+            </div>
+            <div className='card white'>
+                <p>
+                {}
+                </p>
+            </div>
+            <div className='card white'>
+                <p>
+                {}
+                </p>
+            </div>
+        </>
+    );
+}
 }

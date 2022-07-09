@@ -1,6 +1,5 @@
 import React from 'react';
-import { serviceendpoint, playerID } from './Imports';
-import { isGameRunning } from './index';
+import { serviceendpoint, playerID} from './Imports';
 import {useState, useEffect} from 'react';
 
 export default function PlayerPoints(){
@@ -8,6 +7,7 @@ export default function PlayerPoints(){
     let [points, setPoints] = useState([]);
 
         let gameId = '';
+        let isRunning= false;
 
         fetch(serviceendpoint + '/games/')
         .then(res =>res.json()).then(data => {
@@ -19,10 +19,15 @@ export default function PlayerPoints(){
                     for (var j = 0; j < data.games[i].players.length; j++) {
                         if (data.games[i].players[j].id === Number(playerID)) {
                             gameId = data.games[i].id;
+                            if(data.games[i].running===true){
+                                isRunning= true;
+                            }else{
+                                isRunning= false;
+                            }
                         }
                     }
                 }
-                if (isGameRunning === 'false') {
+                if (isRunning === 'false') {
 
                     fetch(serviceendpoint + '/games/' + gameId)
                         .then(res => res.json())
