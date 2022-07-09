@@ -1,6 +1,6 @@
 import React from 'react';
-import { serviceendpoint, playerID } from './Imports';
-import { lang } from './Languages';
+import { serviceendpoint } from '../Imports';
+import { lang } from '../Languages';
 
 export default function LeaveGame(props) {
 

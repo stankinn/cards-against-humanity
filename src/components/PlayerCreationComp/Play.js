@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react'
-import { serviceendpoint, gameURL} from './Imports';
+import React from 'react'
+import { serviceendpoint} from '../Imports';
 
 export default function Play(props) {
 

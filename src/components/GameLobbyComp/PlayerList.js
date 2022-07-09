@@ -1,5 +1,5 @@
 import React from 'react';
-import {serviceendpoint, playerID} from './Imports';
+import {serviceendpoint, playerID} from '../Imports';
 import {useState, useEffect} from 'react';
 
 export default function PlayerList(){

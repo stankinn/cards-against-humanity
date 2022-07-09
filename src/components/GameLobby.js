@@ -1,9 +1,9 @@
 import React from 'react'
 import '../components-styles/FirstPages.css'
-import PlayerList from './PlayerList';
+import PlayerList from './GameLobbyComp/PlayerList';
 import {lang} from './Languages';
-import LeaveGame from './LeaveGame';
-import DeleteGame from './DeleteGame';
+import LeaveGame from './GameLobbyComp/LeaveGame';
+import DeleteGame from './GameLobbyComp/DeleteGame';
 
 export default function GameLobby(props) {
 

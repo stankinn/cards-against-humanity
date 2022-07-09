@@ -1,6 +1,6 @@
 import React from 'react'
-import Player from './Player'
-import Play from './Play'
+import Player from './PlayerCreationComp/Player'
+import Play from './PlayerCreationComp/Play'
 import '../components-styles/FirstPages.css'
 import {lang} from './Languages';
 

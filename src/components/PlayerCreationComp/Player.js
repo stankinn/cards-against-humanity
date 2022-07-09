@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {serviceendpoint} from './Imports';
+import {serviceendpoint} from '../Imports';
 
 export default function Player(props) {
 

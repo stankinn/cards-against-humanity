@@ -1,5 +1,5 @@
 import React from 'react';
-import { serviceendpoint, playerID } from './Imports';
+import { serviceendpoint } from '../Imports';
 
 export default function DeleteGame() {
 
