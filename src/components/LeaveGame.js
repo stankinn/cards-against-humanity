@@ -19,10 +19,10 @@ function leave(){
                     gameID = data.games[i].id;
                 }
             }
-            console.log("PLAYER ID: " + playerID);
-            fetch(serviceendpoint + '/games/'+ gameID + '/'+ playerID, {
+            console.log("PLAYER ID: " + Number(playerID));
+            fetch(serviceendpoint + '/games/'+ gameID + '/'+ Number(playerID), {
                 method: 'PATCH',
-                body: JSON.stringify({ player: playerID, action: "leave"}),
+                body: JSON.stringify({ player: Number(playerID), action: "leave"}),
                 headers: { "Content-Type": "application/json" }
             })
             .then(response => response.json())

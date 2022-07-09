@@ -11,7 +11,7 @@ export default function DeleteGame() {
             //if (data.games.length !== 0) {
                 for (var i = 0; i < data.games.length; i++){
                     for (var j = 0; j < data.games[i].players.length; j++){
-                        if(data.games[i].players[j].id == playerID){
+                        if(data.games[i].players[j].id == Number(playerID)){
                             gameID= data.games[i].id;
                         }
                     }

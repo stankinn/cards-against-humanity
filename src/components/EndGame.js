@@ -16,7 +16,7 @@ export default function EndGame(props) {
       gameURL.then(data => {
         for (var i = 0; i < data.games.length; i++) {
           for (var j = 0; j < data.games[i].players.length; j++) {
-            if (data.games[i].players[j].id === playerID) {
+            if (data.games[i].players[j].id === Number(playerID)) {
               gameId = data.games[i].id;
               ownerId = data.games[i].owner.id;
               i = data.games.length;
@@ -25,11 +25,11 @@ export default function EndGame(props) {
           }
         }
 
-        if (ownerId === playerID) {
+        if (ownerId === Number(playerID)) {
 
-          fetch(serviceendpoint + '/games/' + gameId + '/' + playerID, {
+          fetch(serviceendpoint + '/games/' + gameId + '/' + Number(playerID), {
             method: "PATCH",
-            body: JSON.stringify({ player: playerID, action: "end" }),
+            body: JSON.stringify({ player: Number(playerID), action: "end" }),
             headers: { "Content-Type": "application/json" }
           })
             .then(res => res.json())

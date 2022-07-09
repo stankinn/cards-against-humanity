@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import { serviceendpoint, gameURL, playerID, playerURL } from './Imports';
+import { serviceendpoint, gameURL, playerID } from './Imports';
 
 export default function Play(props) {
 
@@ -9,7 +9,9 @@ export default function Play(props) {
             console.log('No PLayer existing.')
         } else {
 
-            gameURL.then(data => {
+            fetch(serviceendpoint + '/games/')
+            .then(res =>res.json())
+            .then(data => {
                 if (data.games.length === 0) {
                     console.log("New game is being created")
                     addGame();
@@ -32,11 +34,10 @@ export default function Play(props) {
     function addGame() {
 
         //neues Spiel wird erstellt mit eigener SpielerID
-        playerURL.then(data=>console.log(JSON.stringify(data.players)));
-            console.log("player: " + playerID);
+        
             fetch(serviceendpoint + '/games/', {
                 method: 'POST',
-                body: JSON.stringify({ owner: playerID }),
+                body: JSON.stringify({ owner: Number(playerID) }),
                 headers: {"Content-Type": "application/json"}
             })
                 .then(response => response.json())
@@ -44,13 +45,12 @@ export default function Play(props) {
                 .catch((error) => {
                     console.error('Error:', error);
                 });
-
     }
 
     function joinGame() {
 
         var gameID = '';
-
+    
         gameURL.then(data => {
             console.log("all games: " + data.games.length);
             for (var i = 0; i < data.games.length; i++) {
@@ -61,9 +61,9 @@ export default function Play(props) {
             }
             //console.log("GAME ID: " + gameID);
             document.getElementById('playerCreation').classList.add('hidden');
-            fetch(serviceendpoint + '/games/' + gameID + '/' + playerID, {
+            fetch(serviceendpoint + '/games/' + gameID + '/' + Number(playerID), {
                 method: 'PATCH',
-                body: JSON.stringify({ player: playerID, action: "join" }),
+                body: JSON.stringify({ player: Number(playerID), action: "join" }),
                 headers: { "Content-Type": "application/json" }
             })
                 .then(response => response.json())

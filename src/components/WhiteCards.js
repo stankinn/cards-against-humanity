@@ -13,13 +13,13 @@ export default function WhiteCards() {
   gameURL.then(data => {
             for (var i = 0; i < data.games.length; i++) {
                 for (var j = 0; j < data.games[i].players.length; j++) {
-                    if (data.games[i].players[j].id === playerID) {
+                    if (data.games[i].players[j].id === Number(playerID)) {
                         gameID = data.games[i].id;
                     }
                 }
             }
             if (isGameRunning() === 'true') {
-                fetch(serviceendpoint + '/games/' + gameID + '/cards/' + playerID)
+                fetch(serviceendpoint + '/games/' + gameID + '/cards/' + Number(playerID))
                     .then(response => response.json())
                     .then(data => {
                         for (var i = 0; i < 7; i++) {

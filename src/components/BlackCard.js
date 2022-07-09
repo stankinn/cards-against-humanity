@@ -21,7 +21,7 @@ export default function BlackCard() {
 
                 for (var j = 0; j < data.games[i].players.length; j++) {
 
-                    if (data.games[i].players[j].id === playerID) {
+                    if (data.games[i].players[j].id === Number(playerID)) {
                         gameID = data.games[i].id;
                         i = data.games.length;
                         break;

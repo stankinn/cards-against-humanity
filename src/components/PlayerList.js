@@ -32,7 +32,7 @@ export default function PlayerList(){
             console.error('Error:', error);
         });
 
-        if (ownerId === playerID) {
+        if (ownerId === Number(playerID)) {
             if(playerLength >= 3){
                 document.getElementById('startBtn').classList.remove('hidden');
             }
@@ -43,12 +43,12 @@ export default function PlayerList(){
         
 
     function startGame(){
-            if (ownerId === playerID) {
+            if (ownerId === Number(playerID)) {
                 document.getElementById('gameLobby').classList.add('hidden');
 
-                fetch(serviceendpoint + '/games/' + gameID + '/' + playerID, {
+                fetch(serviceendpoint + '/games/' + gameID + '/' + Number(playerID), {
                     method: "PATCH",
-                    body: JSON.stringify({ player: playerID, action: "start" }),
+                    body: JSON.stringify({ player: Number(playerID), action: "start" }),
                     headers: { "Content-Type": "application/json" }
                 })
                 .then(res => res.json())

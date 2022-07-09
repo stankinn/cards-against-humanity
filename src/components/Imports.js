@@ -5,5 +5,5 @@ export const serviceendpoint = "https://gruppe7.toni-barth.com";
 export let gameURL = GameURL();
 export let playerURL = PlayerURL();
 
-export const playerID = localStorage.getItem('playerID');
-export const playerName = localStorage.getItem('playerName');
+export var playerID = localStorage.getItem('playerID');
+export var playerName = localStorage.getItem('playerName');
