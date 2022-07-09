@@ -6,33 +6,33 @@ export default function LeaveGame(props) {
 
     let content = lang;
     props.language === "German"
-        ? (content = content.German)
-        : (content = content.English);
+      ? (content = content.German)
+      : (content = content.English);
 
-    function leave() {
-        var gameID = sessionStorage.getItem('gameID');
-
-      
-                console.log("PLAYER ID: " + playerID);
-                fetch(serviceendpoint + '/games/' + Number(gameID) + '/' + Number(playerID), {
-                    method: 'PATCH',
-                    body: JSON.stringify({ player: playerID, action: "leave" }),
-                    headers: { "Content-Type": "application/json" }
-                })
-                    .then(response => response.json())
-                    .then(() => {
-                        sessionStorage.removeItem('gameID');
-                        document.getElementById('playerCreation').classList.remove('hidden')
-                    })
-                    .catch((error) => {
-                        console.error('Error:', error);
-                    });
-          
-    }
+    function leave(){
+        
+        console.log("PLAYER ID: " + localStorage.getItem('playerID'));
+        fetch(serviceendpoint + '/games/'+ Number(sessionStorage.getItem('gameID')) + '/'+ Number(localStorage.getItem('playerID')), {
+            method: 'PATCH',
+            body: JSON.stringify({ player: localStorage.getItem('playerID'), action: "leave"}),
+            headers: { "Content-Type": "application/json" }
+        })
+        .then(res => {
+            if(res.ok){
+                sessionStorage.removeItem('gameID');
+                document.getElementById('playerCreation').classList.remove('hidden');
+            }
+            return res
+        })
+        .then(res => res.json())
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }  
 
     return (
         <div id='leaveGame'>
-            <button id='btnLeave' onClick={leave}>{content.leaveButton}</button>
+        <button id='btnLeave' onClick={leave}>{content.leaveButton}</button>
         </div>
     )
 }

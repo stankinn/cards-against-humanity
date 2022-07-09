@@ -7,11 +7,10 @@ export default function Play(props) {
 
   function setGameID(id) {
     sessionStorage.setItem('gameID', id);
-    console.log('Your Game: ' + sessionStorage.getItem('gameID'));
   }
 
     function checkGames() {
-        console.log('checkGames_spielerID: ' + playerID);
+        
         if (document.getElementById('playBtn').classList.contains('disabled')) {
             console.log('No PLayer existing.')
         } else {
@@ -24,18 +23,18 @@ export default function Play(props) {
                     for (var i = 0; i < data.games.length; i++) {
                         if (data.games[i].running === false) {
                             if(!sessionStorage.getItem('gameID')){
-                                console.log('try joing ' + data.games[i].id)
+                                console.log('try joing game ' + data.games[i].id + '...')
                                 setGameID(data.games[i].id);
                                 joinGame();
                             }
                         }
                     }
                     if(!sessionStorage.getItem('gameID')){
-                        console.log('try creating')
+                        console.log('try creating...')
                         addGame();
                     }
                 } else {
-                    console.log('try creating')
+                    console.log('try creating...')
                     addGame();
                 }
             })
@@ -57,15 +56,10 @@ export default function Play(props) {
             body: JSON.stringify({ owner: Number(localStorage.getItem('playerID'))}),
             headers: {"Content-Type": "application/json"}
         })
-        .then(res => {
-            if(res.ok){
-                console.log('Post ok')
-            }
-            return res
-        })
         .then(res => res.json())
         .then(data => {
             setGameID(data.id);
+            console.log('created game ' + Number(sessionStorage.getItem('gameID')) + ' successful.');
             document.getElementById('playerCreation').classList.add('hidden');
         })
         .catch((error) => {
@@ -75,7 +69,6 @@ export default function Play(props) {
 
     function joinGame() {
 
-        console.log("GAME ID: " + sessionStorage.getItem('gameID'));
         fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
             method: 'PATCH',
             body: JSON.stringify({ player: Number(localStorage.getItem('playerID')), action: "join" }),
@@ -83,7 +76,7 @@ export default function Play(props) {
         })
         .then(res => {
             if(res.ok){
-                console.log('Patch ok');
+                console.log('joined game ' + Number(sessionStorage.getItem('gameID')) + ' successful.');
                 document.getElementById('playerCreation').classList.add('hidden');
             }
             return res
