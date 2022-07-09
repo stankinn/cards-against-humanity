@@ -11,7 +11,8 @@ export default function PlayerList(){
 
     function showPlayer(){
 
-        gameURL.then(data=>{
+        fetch(serviceendpoint + '/games/')
+        .then(res =>res.json()).then(data=>{
             if(data.games.length !== 0){
                 for(var i = 0; i < data.games.length; i++){
 

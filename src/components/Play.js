@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import { serviceendpoint, gameURL, playerID } from './Imports';
+import { serviceendpoint, playerID } from './Imports';
 
 export default function Play(props) {
 
@@ -28,7 +28,8 @@ export default function Play(props) {
     }
 
     useEffect(() =>{
-        gameURL.then(data =>{console.log(data.games.length)})
+        fetch(serviceendpoint + '/games/')
+        .then(res =>res.json()).then(data =>{console.log('players in game: ' + JSON.stringify(data.games[0].players))})
       })
 
     function addGame() {
@@ -51,7 +52,8 @@ export default function Play(props) {
 
         var gameID = '';
     
-        gameURL.then(data => {
+        fetch(serviceendpoint + '/games/')
+        .then(res =>res.json()).then(data => {
             console.log("all games: " + data.games.length);
             for (var i = 0; i < data.games.length; i++) {
                 if (data.games[i].running === false) {
@@ -63,7 +65,7 @@ export default function Play(props) {
             document.getElementById('playerCreation').classList.add('hidden');
             fetch(serviceendpoint + '/games/' + gameID + '/' + Number(playerID), {
                 method: 'PATCH',
-                body: JSON.stringify({ player: Number(playerID), action: "join" }),
+                body: JSON.stringify({ player: playerID, action: "join" }),
                 headers: { "Content-Type": "application/json" }
             })
                 .then(response => response.json())

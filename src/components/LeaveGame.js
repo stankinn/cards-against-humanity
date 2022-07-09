@@ -1,5 +1,5 @@
 import React from 'react';
-import { serviceendpoint, gameURL, playerURL, playerID } from './Imports';
+import { serviceendpoint, playerID } from './Imports';
 import { lang } from './Languages';
 
 export default function LeaveGame(props) {
@@ -13,16 +13,17 @@ export default function LeaveGame(props) {
 function leave(){
     var gameID= '';
     
-        gameURL.then(data =>{
+    fetch(serviceendpoint + '/games/')
+    .then(res =>res.json()).then(data =>{
             for(var i = 0; i < data.games.length; i++){
                 if (data.games[i].running === false){
                     gameID = data.games[i].id;
                 }
             }
-            console.log("PLAYER ID: " + Number(playerID));
+            console.log("PLAYER ID: " + playerID);
             fetch(serviceendpoint + '/games/'+ gameID + '/'+ Number(playerID), {
                 method: 'PATCH',
-                body: JSON.stringify({ player: Number(playerID), action: "leave"}),
+                body: JSON.stringify({ player: playerID, action: "leave"}),
                 headers: { "Content-Type": "application/json" }
             })
             .then(response => response.json())

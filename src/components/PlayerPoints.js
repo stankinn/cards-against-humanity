@@ -1,5 +1,5 @@
 import React from 'react';
-import { serviceendpoint, gameURL, playerID } from './Imports';
+import { serviceendpoint, playerID } from './Imports';
 import { isGameRunning } from './index';
 import {useState, useEffect} from 'react';
 
@@ -9,7 +9,8 @@ export default function PlayerPoints(){
 
         let gameId = '';
 
-            gameURL.then(data => {
+        fetch(serviceendpoint + '/games/')
+        .then(res =>res.json()).then(data => {
 
                 if (data.games.length === 0) {
                     console.log('There are no games yet.');

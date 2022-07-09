@@ -1,6 +1,6 @@
 import React from 'react';
 import '../components-styles/Cards.css'
-import { serviceendpoint, gameURL, playerID } from './Imports';
+import { serviceendpoint, playerID } from './Imports';
 import { isGameRunning } from './index';
 import { useState, useEffect } from 'react';
 
@@ -10,7 +10,8 @@ export default function WhiteCards() {
 
     var gameID = '';
 
-  gameURL.then(data => {
+    fetch(serviceendpoint + '/games/')
+    .then(res =>res.json()).then(data => {
             for (var i = 0; i < data.games.length; i++) {
                 for (var j = 0; j < data.games[i].players.length; j++) {
                     if (data.games[i].players[j].id === Number(playerID)) {
