@@ -1,6 +1,5 @@
 import React from 'react';
 import '../components-styles/Cards.css'
-import { isGameRunning } from './index';
 import { useState, useEffect } from 'react';
 import { serviceendpoint, playerID } from './Imports';
 
@@ -10,10 +9,12 @@ var str = '';
 
 export default function BlackCard() {
 
-    let [prompt, setPromt] = useState('');
+    let [prompt, setPromt] = useState([]);
 
 
     var gameID = '';
+    var isRunning = false;
+
     fetch('https://gruppe7.toni-barth.com/games/')
         .then(response => response.json())
         .then(data => {
@@ -23,40 +24,48 @@ export default function BlackCard() {
 
                     if (data.games[i].players[j].id === Number(playerID)) {
                         gameID = data.games[i].id;
+                        if (data.games[i].running === true) {
+                            isRunning = true;
+                        } else {
+                            isRunning = false;
+                        }
                         i = data.games.length;
                         break;
                     }
                 }
             }
 
-            if (isGameRunning === 'true') {
+            //check if game is running: if so, display text
+
+            if (isRunning === 'true') {
                 fetch(serviceendpoint + '/games/' + gameID)
                     .then(response => response.json())
                     .then(data => {
                         str = data.currentBlackCard.text;
                         cardText = str.replaceAll('_', ' _______ ');
-                        setPromt({ cardText });
+                        setPromt(cardText);
                     })
                     .catch((error) => {
                         console.error('Error:', error);
                     });
             } else {
-
                 console.log('Black Card cannot be shown. Game is not running yet.');
             }
+
 
         })
         .catch((error) => {
             console.error('Error:', error);
         });
 
+    console.log(prompt)
 
     return (
         <>
             <div className='card black'>
-                <p>
-                    {prompt}
-                </p>
+
+                <p>{prompt}</p>
+
             </div>
         </>
     );

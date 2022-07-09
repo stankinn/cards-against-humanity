@@ -16,7 +16,7 @@ export default function GameLobby(props) {
     <div className='lobbyLayout'>
         <PlayerList header={content.headerG} startBtn={content.startButton}/>
         <LeaveGame btnLeave={content.leaveButton}/>
-        {/*<DeleteGame delGameBtn={content.deleteButton}/>*/}
+        {<DeleteGame delGameBtn={content.deleteButton}/>}
     </div>
   )
 }
