@@ -3,7 +3,7 @@ import {playerURL, serviceendpoint} from './Imports';
 
 export default function Player(props) {
 
-  const playerID = localStorage.getItem('playerID');
+  const playerID = Number(localStorage.getItem('playerID'));
   const playerName = localStorage.getItem('playerName');
   const [content, setContent] = useState(playerName ? playerName : 'No Player existing.');
 
@@ -21,7 +21,11 @@ export default function Player(props) {
     }
     console.log(localStorage);
 
-    playerURL.then(data =>{console.log(data.players)})
+    fetch(serviceendpoint + '/players/')
+    .then(res => res.json())
+    .then(data => {
+      console.log('Player: ' + JSON.stringify(data.players));
+    })
   })  
 
   function addPlayer() {
@@ -29,6 +33,11 @@ export default function Player(props) {
     var input = document.getElementById('inputName').value;
 
     console.log('cur PlayerID: ' + playerID)
+    fetch(serviceendpoint + '/players/')
+    .then(res => res.json())
+    .then(data => {
+      console.log('Player: ' + JSON.stringify(data.players));
+    })
 
     if(playerID){
       console.log('There already is a Player.');
@@ -54,7 +63,13 @@ export default function Player(props) {
 
   function deletePlayer() {
       
-    console.log(localStorage);
+    console.log('cur PlayerID: ' + playerID)
+    fetch(serviceendpoint + '/players/')
+    .then(res => res.json())
+    .then(data => {
+      console.log('Player: ' + JSON.stringify(data.players));
+    })
+
     if(!playerID){
       console.log('No Player existing.');
     }else{
@@ -62,15 +77,18 @@ export default function Player(props) {
         method: 'DELETE',
         headers: { "Content-Type": "application/json" }
       })
+      .then(res => {
+        if(res.ok){
+          localStorage.removeItem('playerID');
+          localStorage.removeItem('playerName');
+          setContent('No Player existing.');
+        }
+        return res
+      })
       .then(res => console.log(res))
       .catch((error) => {
         console.error('Error:', error);
       });
-
-      //setPlayer('No Player existing.', null);
-          localStorage.removeItem('playerID');
-          localStorage.removeItem('playerName');
-          setContent('No Player existing.');
 
     }
   }

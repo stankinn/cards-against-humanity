@@ -1,10 +1,17 @@
 import React, {useEffect} from 'react'
-import { serviceendpoint, playerID } from './Imports';
+import { serviceendpoint, gameURL} from './Imports';
 
 export default function Play(props) {
 
+  const playerID = Number(localStorage.getItem('playerID'));
+
+  function setGameID(id) {
+    sessionStorage.setItem('gameID', id);
+    console.log('Your Game: ' + sessionStorage.getItem('gameID'));
+  }
+
     function checkGames() {
-        console.log('play Button');
+        console.log('checkGames_spielerID: ' + playerID);
         if (document.getElementById('playBtn').classList.contains('disabled')) {
             console.log('No PLayer existing.')
         } else {
@@ -12,13 +19,24 @@ export default function Play(props) {
             fetch(serviceendpoint + '/games/')
             .then(res =>res.json())
             .then(data => {
-                if (data.games.length === 0) {
-                    console.log("New game is being created")
-                    addGame();
-
+                console.log(data.games.length)
+                if (data.games.length !== 0) {
+                    for (var i = 0; i < data.games.length; i++) {
+                        if (data.games[i].running === false) {
+                            if(!sessionStorage.getItem('gameID')){
+                                console.log('try joing ' + data.games[i].id)
+                                setGameID(data.games[i].id);
+                                joinGame();
+                            }
+                        }
+                    }
+                    if(!sessionStorage.getItem('gameID')){
+                        console.log('try creating')
+                        addGame();
+                    }
                 } else {
-                    console.log("joining available game")
-                    joinGame();
+                    console.log('try creating')
+                    addGame();
                 }
             })
                 .catch((error) => {
@@ -27,52 +45,53 @@ export default function Play(props) {
         }
     }
 
-    useEffect(() =>{
-        fetch(serviceendpoint + '/games/')
-        .then(res =>res.json()).then(data =>{console.log('players in game: ' + JSON.stringify(data.games[0].players))})
-      })
-
     function addGame() {
 
         //neues Spiel wird erstellt mit eigener SpielerID
-        
-            fetch(serviceendpoint + '/games/', {
-                method: 'POST',
-                body: JSON.stringify({ owner: Number(playerID) }),
-                headers: {"Content-Type": "application/json"}
-            })
-                .then(response => response.json())
-                //.then(() => { document.getElementById('playerCreation').classList.add('hidden'); })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
+
+        console.log('playerID: ' + playerID)
+        console.log('NumberplayerID: ' + Number(localStorage.getItem('playerID')))
+      
+        fetch(serviceendpoint + '/games/', {
+            method: 'POST',
+            body: JSON.stringify({ owner: Number(localStorage.getItem('playerID'))}),
+            headers: {"Content-Type": "application/json"}
+        })
+        .then(res => {
+            if(res.ok){
+                console.log('Post ok')
+            }
+            return res
+        })
+        .then(res => res.json())
+        .then(data => {
+            setGameID(data.id);
+            document.getElementById('playerCreation').classList.add('hidden');
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     }
 
     function joinGame() {
 
-        var gameID = '';
-    
-        fetch(serviceendpoint + '/games/')
-        .then(res =>res.json()).then(data => {
-            console.log("all games: " + data.games.length);
-            for (var i = 0; i < data.games.length; i++) {
-                if (data.games[i].running === false) {
-                    gameID = data.games[i].id;
-
-                }
-            }
-            //console.log("GAME ID: " + gameID);
-            document.getElementById('playerCreation').classList.add('hidden');
-            fetch(serviceendpoint + '/games/' + gameID + '/' + Number(playerID), {
-                method: 'PATCH',
-                body: JSON.stringify({ player: playerID, action: "join" }),
-                headers: { "Content-Type": "application/json" }
-            })
-                .then(response => response.json())
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
+        console.log("GAME ID: " + sessionStorage.getItem('gameID'));
+        fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
+            method: 'PATCH',
+            body: JSON.stringify({ player: Number(localStorage.getItem('playerID')), action: "join" }),
+            headers: { "Content-Type": "application/json" }
         })
+        .then(res => {
+            if(res.ok){
+                console.log('Patch ok');
+                document.getElementById('playerCreation').classList.add('hidden');
+            }
+            return res
+        })
+        .then(res => res.json())
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     }
 
     return (
