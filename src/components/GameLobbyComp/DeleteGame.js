@@ -22,13 +22,13 @@ export default function DeleteGame() {
                 //     console.error('Error:', error);
                 // });
 
-                fetch(serviceendpoint + '/games/' + sessionStorage.getItem('gameID'), {
+                fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')), {
                     method: "DELETE",
                     headers: { "Content-Type": "application/json" }
                 })
                 .then(res => {
                     if(res.ok){
-                        sessionStorage.removeItem('gameID');
+                        sessionStorage.clear();
                         document.getElementById('playerCreation').classList.remove('hidden')
                     }
                     return res

@@ -14,12 +14,12 @@ export default function LeaveGame(props) {
         console.log("PLAYER ID: " + localStorage.getItem('playerID'));
         fetch(serviceendpoint + '/games/'+ Number(sessionStorage.getItem('gameID')) + '/'+ Number(localStorage.getItem('playerID')), {
             method: 'PATCH',
-            body: JSON.stringify({ player: localStorage.getItem('playerID'), action: "leave"}),
+            body: JSON.stringify({ player: Number(localStorage.getItem('playerID')), action: "leave"}),
             headers: { "Content-Type": "application/json" }
         })
         .then(res => {
             if(res.ok){
-                sessionStorage.removeItem('gameID');
+                sessionStorage.clear();
                 document.getElementById('playerCreation').classList.remove('hidden');
             }
             return res

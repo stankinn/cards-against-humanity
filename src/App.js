@@ -8,7 +8,7 @@ export default function App(){
     const [lostPopup, setLostPopup] = useState(false);
     const [wonPopup, setWonPopup] = useState(false);
 
-    sessionStorage.removeItem('gameID');
+    sessionStorage.clear();
   
     let languageStored = localStorage.getItem("language");
     let [language, setLanguage] = useState(

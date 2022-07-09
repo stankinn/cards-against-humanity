@@ -59,6 +59,7 @@ export default function Play(props) {
         .then(res => res.json())
         .then(data => {
             setGameID(data.id);
+            sessionStorage.setItem('ownerID', data.owner.id);
             console.log('created game ' + Number(sessionStorage.getItem('gameID')) + ' successful.');
             document.getElementById('playerCreation').classList.add('hidden');
         })

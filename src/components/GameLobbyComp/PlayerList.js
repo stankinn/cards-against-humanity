@@ -1,12 +1,13 @@
 import React from 'react';
-import {serviceendpoint, playerID} from '../Imports';
+import {serviceendpoint} from '../Imports';
 import {useState, useEffect} from 'react';
 
 export default function PlayerList(){
     
+    const id = sessionStorage.getItem('gameID');
+
     let [pList, setPList] = useState([]);
-    let gameID= '';
-    let ownerId = '';
+    let [gameID] = useState(id);
     let playerLength = 0;
 
     function showPlayer(){
@@ -15,21 +16,11 @@ export default function PlayerList(){
         .then(res =>res.json()).then(data=>{
             if(data.games.length !== 0){
                 for(var i = 0; i < data.games.length; i++){
-
-                    if (data.games[i].running === false){
-                        gameID = data.games[i].id;
+                    if (data.games[i].running === Number(sessionStorage.getItem('gameID'))){
                         setPList(data.games[i].players);
                         playerLength = data.games[i].players.length;
-                        for (var j = 0; j < playerLength; j++) {
-                          if (data.games[i].players[j].id === data.games[i].owner.id) {
-                            ownerId = data.games[i].owner.id;
-                          }
-                        }
                     }
                 }
-            }
-            if(playerLength >= 3){
-                document.getElementById('startBtn').classList.remove('hidden');
             }
         })
         .catch((error) => {
@@ -38,42 +29,38 @@ export default function PlayerList(){
         
     } 
 
-    useEffect(() => {showPlayer();})
+    useEffect(() => {
+        showPlayer();
+        if(Number(sessionStorage.getItem('ownerID')) === Number(localStorage.getItem('playerID'))){
+            // if Player.length >= 3
+            document.getElementById('startBtn').classList.remove('hidden')
+            // else document.getElementById('startBtn').classList.add('hidden')
+            if(playerLength >= 3){
+                console.log('JETZT Button')
+            }
+        }
+    })
         
 
     function startGame(){
         fetch(serviceendpoint + '/games/')
         .then(res =>res.json()).then(data=>{
 
-            for(var i = 0; i < data.games.length; i++){
-
-                if (data.games[i].running === false){
-                    gameID = data.games[i].id;
-                    playerLength = data.games[i].players.length;
-                    for (var j = 0; j < playerLength; j++) {
-                      if (data.games[i].players[j].id === data.games[i].owner.id) {
-                        ownerId = data.games[i].owner.id;
-                      }
-                    }
-                }
-            }
-
-        console.log(ownerId);
-            if (ownerId === Number(playerID)) {
-                document.getElementById('gameLobby').classList.add('hidden');
-
-                fetch(serviceendpoint + '/games/' + gameID + '/' + Number(playerID), {
+                fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
                     method: "PATCH",
-                    body: JSON.stringify({ player: playerID, action: "start" }),
+                    body: JSON.stringify({ action: "start" }),
                     headers: { "Content-Type": "application/json" }
+                })
+                .then(res => {
+                    if(res.ok){
+                        document.getElementById('gameLobby').classList.add('hidden');
+                    }
+                    return res
                 })
                 .then(res => res.json())
                 .catch((error) => {
                     console.error('Error:', error);
                 });
-            } else {
-                console.log('Not the owner. Cannot start the game.');
-            }
         })
     }
 
