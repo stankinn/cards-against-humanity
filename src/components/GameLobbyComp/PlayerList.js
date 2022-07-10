@@ -5,10 +5,29 @@ import { useState, useEffect } from 'react';
 export default function PlayerList() {
 
     const id = sessionStorage.getItem('gameID');
+    var isGameRunning = false;
 
     let [pList, setPList] = useState([]);
     let [gameID] = useState(id);
     let playerLength = 0;
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+        fetch(serviceendpoint + '/games/')
+        .then(res => res.json()).then(data => {
+            if (data.games.length !== 0) {
+                for (var i = 0; i < data.games.length; i++) {
+                    if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
+                        console.log(data.games[i].running);
+                            document.getElementById('gameLobby').classList.add('hidden');
+                    }
+                }
+            }
+        });
+
+        }, 1000);
+        return () => clearInterval(interval);
+      }, []);
 
     function showPlayer() {
 
