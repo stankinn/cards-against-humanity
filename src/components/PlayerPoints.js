@@ -5,34 +5,10 @@ import {useState, useEffect} from 'react';
 export default function PlayerPoints(){
 
     let [finalList, setFinalList] = useState([]);
-
     let [playerList, setplayerList] = useState([]);
 
     var arr = [];
     var arrName = [];
-
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //         if(sessionStorage.getItem('gameID')){
-    //             fetch(serviceendpoint + '/games/')
-    //             .then(res => res.json())
-    //             .then(data => {
-    //                 if (data.games.length !== 0) {
-    //                     for (var i = 0; i < data.games.length; i++) {
-    //                         if(data.games[i].running === true){
-    //                             showPlayer()
-    //                         }
-    //                     }
-    //                 }
-    //             })
-    //             .catch((error) => {
-    //                 console.error('Error:', error);
-    //             });
-    //         }
-
-    //     }, 1000);
-    //     return () => clearInterval(interval);
-    //   }, []);
 
       useEffect(() =>{
         showPlayer();
@@ -84,14 +60,9 @@ export default function PlayerPoints(){
 
         return (
             <>
-            {finalList.map(({ name, points }) => (
-                <p key={name}>{name}.....{points}</p>
-            ))}
-
-            {/* {points.map((points) => (
-            <p>{points}</p>
-            ))} */}
-
+                {finalList.map(({ name, points }) => (
+                    <p key={name}>{name}.....{points}</p>
+                ))}
             </>
         );
     }
