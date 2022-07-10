@@ -9,28 +9,66 @@ export default function EndGame(props) {
     ? (content = content.German)
     : (content = content.English);
 
-    function end(){
+  function end(){
 
-        if (Number(sessionStorage.getItem('ownerID')) === Number(localStorage.getItem('playerID'))) {
+    if (Number(sessionStorage.getItem('ownerID')) === Number(localStorage.getItem('playerID'))) {
 
-          fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
-            method: "PATCH",
-            body: JSON.stringify({ player: Number(localStorage.getItem('playerID')), action: "end" }),
-            headers: { "Content-Type": "application/json" }
-          })
-            .then(res => res.json())
-            .catch((error) => {
-              console.error('Error:', error);
-            });
-        } else {
-          console.log('Not the owner. Cannot end the game.');
-        }
-}
+      fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
+        method: "PATCH",
+        body: JSON.stringify({ player: Number(localStorage.getItem('playerID')), action: "end" }),
+        headers: { "Content-Type": "application/json" }
+      })
+      .then(res => res.json())
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+    } else {
+      console.log('Not the owner. Cannot end the game.');
+    }
 
+    deleteGame();
+  }
+  
+  function deleteGame (){
+    
+    fetch(serviceendpoint + '/games/')
+    .then(res =>res.json()).then(data => {
+      console.log(JSON.stringify(data))
+      if (data.games.length !== 0) {
+        console.log('DEBUG GAME ID: ' + sessionStorage.getItem('gameID'));
+    
+        fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')), {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" }
+        })
+        .then(res => {
+          if(res.ok){
+            sessionStorage.clear();
+            document.getElementById('playerCreation').classList.remove('hidden');
+            document.getElementById('gameLobby').classList.remove('hidden');
+          }
+          return res
+        })
+        .then(res => res.json())
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+                        
+      } else {
+        console.log('No Games existing.');
+      }
+    })
+  }
 
   return (
-    <div id='endGame'>
-      <button id='btnStart' className='disabled' onClick={end}>END</button>
-    </div>
+    // <div id='endGame'>
+    //   <button id='btnStart' className='disabled' onClick={end}>ENDE</button>
+    // </div>
+      <div id='endGame' title='end Game' onClick={end}>
+        <button id='btnStart'>
+          <div id='endBar1'/>
+          <div id='endBar2'/>
+        </button>
+      </div>
   )
 }
