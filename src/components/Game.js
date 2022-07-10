@@ -9,11 +9,11 @@ import DeleteGame from './GameLobbyComp/DeleteGame';
 
 export default function Game(props) {
 
-
     let content = lang;
     props.language === "German"
         ? (content = content.German)
         : (content = content.English);
+
   return (
     <div className='gameLayout'>
 
@@ -32,13 +32,7 @@ export default function Game(props) {
       <div id='playerCards' className='gameDiv cardsBackground'>
         <WhiteCards/>
       </div>
-      <div id='deleteButton'>
-        <DeleteGame/>
-      </div>
-      <div id='deleteButton'>
-        <EndGame/>
-      </div>
-      
+      <EndGame/>
     </div>
 
   )
