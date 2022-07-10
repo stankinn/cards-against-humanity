@@ -1,5 +1,6 @@
 import React from 'react'
 import '../components-styles/FirstPages.css'
+import '../components-styles/GameLobby.css'
 import PlayerList from './GameLobbyComp/PlayerList';
 import {lang} from './Languages';
 import LeaveGame from './GameLobbyComp/LeaveGame';
@@ -16,7 +17,7 @@ export default function GameLobby(props) {
     <div className='lobbyLayout'>
         <PlayerList header={content.headerG} startBtn={content.startButton}/>
         <LeaveGame btnLeave={content.leaveButton}/>
-        {<DeleteGame delGameBtn={content.deleteButton}/>}
+        {/* {<DeleteGame delGameBtn={content.deleteButton}/>} */}
     </div>
   )
 }
