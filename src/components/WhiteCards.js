@@ -11,8 +11,7 @@ export default function WhiteCards() {
 
     useEffect(() => {
         console.log("ANSWER: " + answer);
-        console.log("RUNNING?: " + running);
-
+        //console.log("RUNNING?: " + running);
 
         fetch('https://gruppe7.toni-barth.com/games/')
         .then(response => response.json())
@@ -20,12 +19,10 @@ export default function WhiteCards() {
             for (var i = 0; i < data.games.length; i++) {
                 if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
                     if (data.games[i].running === true) {
-                        //running = true;
-                        console.log("HEREEEEE TRUE");
+                        //console.log("HEREEEEE TRUE");
                         fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/cards/' + Number(localStorage.getItem('playerID')))
                             .then(response => response.json())
                             .then(data => {
-                                //console.log("SETTING TEXT: " + JSON.stringify(data.cards));
                                 let cards = data.cards;
                                 setAnswer(cards);
                                 setRunning(true);
@@ -35,7 +32,6 @@ export default function WhiteCards() {
                             });
                         
                     } else {
-                        //running = false;
                         console.log('White Cards cannot be shown yet. Game is not running')
                         setRunning(false);
                     }
