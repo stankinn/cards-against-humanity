@@ -1,6 +1,7 @@
 import React from 'react'
 import BlackCard from './BlackCard';
 import WhiteCards from './WhiteCards';
+import CurCzar from './CurCzar';
 import PlayerPoints from './PlayerPoints';
 import EndGame from './EndGame';
 import {lang} from './Languages';
@@ -22,6 +23,7 @@ export default function Game(props) {
       </div>
 
       <div id='gameInfo' className='gameDiv'>
+        <CurCzar/>
         <PlayerPoints/>
       </div>
 

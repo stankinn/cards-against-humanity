@@ -11,8 +11,9 @@ export default function PlayerPoints(){
     var arrName = [];
 
       useEffect(() =>{
-        showPlayer();
+        // showPlayer();
       })
+
 
     function showPlayer() {
 
@@ -40,7 +41,6 @@ export default function PlayerPoints(){
             .then(data => {
                 if(data.points){
                     if(playerList.length === data.points.length){
-                        console.log('Its the same Length!')
                         for(var i = 0; i < playerList.length; i++){
                             arr = arr.concat({'name': playerList[i],'points': data.points[i]})
                         }
@@ -48,7 +48,6 @@ export default function PlayerPoints(){
                     }
                 }
             })
-
             .catch((error) => {
                 console.error('Error:', error);
             });
@@ -59,10 +58,10 @@ export default function PlayerPoints(){
     }
 
         return (
-            <>
+            <div className='playerPoints'>
                 {finalList.map(({ name, points }) => (
                     <p key={name}>{name}.....{points}</p>
                 ))}
-            </>
+            </div>
         );
     }
