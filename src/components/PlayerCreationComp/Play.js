@@ -50,7 +50,7 @@ export default function Play(props) {
 
         console.log('playerID: ' + playerID)
         console.log('NumberplayerID: ' + Number(localStorage.getItem('playerID')))
-      
+
         fetch(serviceendpoint + '/games/', {
             method: 'POST',
             body: JSON.stringify({ owner: Number(localStorage.getItem('playerID'))}),
@@ -58,15 +58,20 @@ export default function Play(props) {
         })
         .then(res => res.json())
         .then(data => {
-            setGameID(data.id);
-            sessionStorage.setItem('ownerID', data.owner.id);
-            console.log('created game ' + Number(sessionStorage.getItem('gameID')) + ' successful.');
+            console.log(JSON.stringify(data));
+                    setGameID(data.id);
+                    sessionStorage.setItem('ownerID', data.owner.id);
+                    console.log('created game ' + Number(sessionStorage.getItem('gameID')) + ' successful.');
+                
+            
             document.getElementById('playerCreation').classList.add('hidden');
         })
         .catch((error) => {
             console.error('Error:', error);
         });
     }
+
+
 
     function joinGame() {
 

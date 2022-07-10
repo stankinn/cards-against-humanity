@@ -16,9 +16,17 @@ export default function PlayerList(){
         .then(res =>res.json()).then(data=>{
             if(data.games.length !== 0){
                 for(var i = 0; i < data.games.length; i++){
-                    if (data.games[i].running === Number(sessionStorage.getItem('gameID'))){
+                    if (data.games[i].id === Number(sessionStorage.getItem('gameID'))){
                         setPList(data.games[i].players);
                         playerLength = data.games[i].players.length;
+                    }
+                }
+                if(Number(sessionStorage.getItem('ownerID')) === Number(localStorage.getItem('playerID'))){
+                    if(playerLength >= 3){
+                        document.getElementById('startBtn').classList.remove('hidden');
+                        console.log('JETZT Button')
+                    }else{
+                        document.getElementById('startBtn').classList.add('hidden');
                     }
                 }
             }
@@ -26,19 +34,10 @@ export default function PlayerList(){
         .catch((error) => {
             console.error('Error:', error);
         });
-        
     } 
 
     useEffect(() => {
         showPlayer();
-        if(Number(sessionStorage.getItem('ownerID')) === Number(localStorage.getItem('playerID'))){
-            // if Player.length >= 3
-            document.getElementById('startBtn').classList.remove('hidden')
-            // else document.getElementById('startBtn').classList.add('hidden')
-            if(playerLength >= 3){
-                console.log('JETZT Button')
-            }
-        }
     })
         
 

@@ -7,7 +7,7 @@ export default function DeleteGame() {
 
         fetch(serviceendpoint + '/games/')
         .then(res =>res.json()).then(data => {
-            
+            console.log(JSON.stringify(data))
             if (data.games.length !== 0) {
                 console.log('DEBUG GAME ID: ' + sessionStorage.getItem('gameID'));
                 // spiel beenden:
