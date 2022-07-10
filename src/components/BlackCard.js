@@ -10,10 +10,9 @@ var str = '';
 export default function BlackCard() {
 
     let [prompt, setPromt] = useState([]);
-
-
     //var gameID = '';
     var isRunning = false;
+    
 
     fetch('https://gruppe7.toni-barth.com/games/')
         .then(response => response.json())

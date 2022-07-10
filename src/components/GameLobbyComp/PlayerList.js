@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 export default function PlayerList() {
 
     const id = sessionStorage.getItem('gameID');
-    var isGameRunning = false;
 
     let [pList, setPList] = useState([]);
     let [gameID] = useState(id);
@@ -14,7 +13,8 @@ export default function PlayerList() {
     useEffect(() => {
         const interval = setInterval(() => {
         fetch(serviceendpoint + '/games/')
-        .then(res => res.json()).then(data => {
+        .then(res => res.json())
+        .then(data => {
             if (data.games.length !== 0) {
                 for (var i = 0; i < data.games.length; i++) {
                     if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
@@ -25,9 +25,11 @@ export default function PlayerList() {
                 }
             }
         });
+        showPlayer();
         }, 1000);
         return () => clearInterval(interval);
       }, []);
+
 
     function showPlayer() {
 
