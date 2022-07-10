@@ -8,39 +8,37 @@ export default function WhiteCards() {
     let [answer, setAnswer] = useState([]);
     let [running, setRunning] = useState();
 
-    
-    useEffect(() => {
-        fetch('https://gruppe7.toni-barth.com/games/')
-            .then(response => response.json())
-            .then(data => {
-                for (var i = 0; i < data.games.length; i++) {
-                    if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
-                        if (data.games[i].running === true) {
-                            console.log("HEREEEEE TRUE");
-                            fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/cards/' + Number(localStorage.getItem('playerID')))
+    fetch('https://gruppe7.toni-barth.com/games/')
+        .then(response => response.json())
+        .then(data => {
+            for (var i = 0; i < data.games.length; i++) {
+                if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
+                    if (data.games[i].running === true) {
+                        console.log("HEREEEEE TRUE");
+                        fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/cards/' + Number(localStorage.getItem('playerID')))
                             .then(response => response.json())
                             .then(data => {
-                                console.log("SETTING TEXT: " + JSON.stringify(data.cards));
+                                //console.log("SETTING TEXT: " + JSON.stringify(data.cards));
                                 setAnswer(data.cards);
                             })
                             .catch((error) => {
                                 console.error('Error:', error);
                             });
-                            setRunning(true);
-                        } else {
-                            console.log('White Cards cannot be shown yet. Game is not running') 
-                            setRunning(false);
-                        }
-                        i = data.games.length;
-                        break;
+                        setRunning(true);
+                    } else {
+                        console.log('White Cards cannot be shown yet. Game is not running')
+                        setRunning(false);
                     }
+                    i = data.games.length;
+                    break;
                 }
-            })
-    }, [])
-
-    //console.log("RUN " + { running }.running + '=== true');
+            }
+        })
 
     if ({ running }.running === true) {
+        console.log("TEXT: " + answer[0]);
+        console.log("TEXT3: " + {answer}.answer);
+        console.log("TEXT2: " + { answer });
         return (
             <>
                 <div className='card white'>
