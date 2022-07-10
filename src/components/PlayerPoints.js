@@ -47,8 +47,9 @@ export default function PlayerPoints(){
                 for (var i = 0; i < data.games.length; i++) {
                     if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
                         for(var j=0; j < data.games[i].players.length; j++){
-                            setplayerList(data.games[i].players[j].name);
+                            arrName = arrName.concat(data.games[i].players[j].name)
                         }
+                        setplayerList(arrName)
                     }
                 }
             }
@@ -57,35 +58,35 @@ export default function PlayerPoints(){
             console.error('Error:', error);
         });
         if(Number(sessionStorage.getItem('gameID'))){
+            try {
             fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')))
             .then(res => res.json())
             .then(data => {
-                console.log('Points: ' + data.points)
                 if(data.points){
                     if(playerList.length === data.points.length){
                         console.log('Its the same Length!')
                         for(var i = 0; i < playerList.length; i++){
-                            arr = arr.push({'name': playerList[i],'points': data.points[i]})
-                            console.log('Array: ' + JSON.stringify(arr));
+                            arr = arr.concat({'name': playerList[i],'points': data.points[i]})
                         }
                         setFinalList(arr)
-                        console.log('My finaleList: ' + finalList);
                     }
-
                 }
             })
 
             .catch((error) => {
                 console.error('Error:', error);
             });
+            } catch (error) {
+                console.log('error')
+            }
         }
     }
 
         return (
             <>
-            {/* {playerList.map(({ name, id }) => (
-                <p key={id}>{name}.....</p>
-            ))} */}
+            {finalList.map(({ name, points }) => (
+                <p key={name}>{name}.....{points}</p>
+            ))}
 
             {/* {points.map((points) => (
             <p>{points}</p>

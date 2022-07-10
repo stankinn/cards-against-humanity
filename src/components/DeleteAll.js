@@ -46,22 +46,23 @@ export default function DeleteAll() {
         fetch(serviceendpoint + '/players/')
         .then(res => res.json())
         .then(data => {
+            console.log(JSON.stringify(data.players))
             console.log('There are still ' + data.players.length + ' Player')
             // for(var i = 0; i < data.players.length; i++){
-                fetch(serviceendpoint + '/players/' + data.players[data.players.length-1].id, {
-                    method: 'DELETE',
-                    headers: { "Content-Type": "application/json" }
-                  })
-                  .then(res => {
-                    if(res.ok){
-                        console.log('Deleted Player: ' + data.players[data.players.length-1].id + ', ' + data.players.length + ' Players left')
-                    }
-                    return res
-                  })
-                  .then(res => console.log(res))
-                  .catch((error) => {
-                    console.error('Error:', error);
-                  });
+                // fetch(serviceendpoint + '/players/' + data.players[data.players.length-1].id, {
+                //     method: 'DELETE',
+                //     headers: { "Content-Type": "application/json" }
+                //   })
+                //   .then(res => {
+                //     if(res.ok){
+                //         console.log('Deleted Player: ' + data.players[data.players.length-1].id + ', ' + data.players.length + ' Players left')
+                //     }
+                //     return res
+                //   })
+                //   .then(res => console.log(res))
+                //   .catch((error) => {
+                //     console.error('Error:', error);
+                //   });
             // }
         })
     }
