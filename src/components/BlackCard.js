@@ -32,7 +32,7 @@ export default function BlackCard() {
             }
 
             //check if game is running: if so, display text
-           
+        
             if (isRunning === true) {
                 fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')))
                     .then(response => response.json())
@@ -47,7 +47,6 @@ export default function BlackCard() {
             } else {
                 console.log('Black Card cannot be shown. Game is not running yet.');
             }
-
 
         })
         .catch((error) => {

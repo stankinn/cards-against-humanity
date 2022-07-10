@@ -34,9 +34,8 @@ export default function PlayerList() {
             .catch((error) => {
                 console.error('Error:', error);
             });
-
     }
-
+    
     useEffect(() => {
         showPlayer();
     })
