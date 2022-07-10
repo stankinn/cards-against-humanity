@@ -11,9 +11,19 @@ export default function EndGame(props) {
 
   function end(){
 
-    if (Number(sessionStorage.getItem('ownerID')) === Number(localStorage.getItem('playerID'))) {
+fetch(serviceendpoint + '/games/')
+.then(res => res.json())
+.then(data => {
+  
+  for (var i = 0; i < data.games.length; i++){
 
-      fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
+
+
+//Number(sessionStorage.getItem('ownerID'))
+    if(data.games[i].owner.id  === Number(localStorage.getItem('playerID'))) {
+      var gameid= data.games[i].id;
+//Number(sessionStorage.getItem('gameID'))    
+      fetch(serviceendpoint + '/games/' + gameid + '/' + Number(localStorage.getItem('playerID')), {
         method: "PATCH",
         body: JSON.stringify({ player: Number(localStorage.getItem('playerID')), action: "end" }),
         headers: { "Content-Type": "application/json" }
@@ -26,33 +36,43 @@ export default function EndGame(props) {
       console.log('Not the owner. Cannot end the game.');
     }
 
-    deleteGame();
+   
+    
+    
+//deleteGame();
+
+}
+  })
   }
-  
+   
   function deleteGame (){
     
     fetch(serviceendpoint + '/games/')
     .then(res =>res.json()).then(data => {
       console.log(JSON.stringify(data))
       if (data.games.length !== 0) {
+        for (var i = 0; i < data.games.length; i++){
         console.log('DEBUG GAME ID: ' + sessionStorage.getItem('gameID'));
-    
-        fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')), {
+        if(data.games[i].owner.id  === Number(localStorage.getItem('playerID'))) {
+          var gameid= data.games[i].id;
+        }
+    //Number(sessionStorage.getItem('gameID'))
+        fetch(serviceendpoint + '/games/' + gameid, {
           method: "DELETE",
           headers: { "Content-Type": "application/json" }
         })
-        .then(res => {
+        /*.then(res => {
           if(res.ok){
             sessionStorage.clear();
             document.getElementById('playerCreation').classList.remove('hidden');
             document.getElementById('gameLobby').classList.remove('hidden');
           }
           return res
-        })
+        })*/
         .then(res => res.json())
         .catch((error) => {
           console.error('Error:', error);
-        });
+        });}
                         
       } else {
         console.log('No Games existing.');
