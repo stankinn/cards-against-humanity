@@ -28,7 +28,8 @@ export default function DeleteGame() {
                 .then(res => {
                     if(res.ok){
                         sessionStorage.clear();
-                        document.getElementById('playerCreation').classList.remove('hidden')
+                        document.getElementById('playerCreation').classList.remove('hidden');
+                        document.getElementById('gameLobby').classList.remove('hidden');
                     }
                     return res
                 })
