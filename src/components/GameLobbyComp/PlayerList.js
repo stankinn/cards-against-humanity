@@ -99,7 +99,7 @@ export default function PlayerList() {
 
     return (
         <>
-            <h1>GAME-ID: {gameID}</h1>
+            <h1>GAME {gameID}</h1>
             <div className='list'>
                 {pList.map(({ name, id }) => (
                     <p key={id}>{name} ({id})</p>
