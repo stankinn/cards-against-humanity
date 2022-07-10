@@ -40,11 +40,6 @@
     grid-area: Buttons;
 }
 
-.continueBtn{
-    grid-area: ContinueBtn;
-    align-self: center;
-}
-
 .delBtn, .addBtn, #inputName, .continueBtn{
     font-size: 1rem;
     text-align: center;
@@ -56,11 +51,6 @@
 
 #inputName{
     height: 3rem;
-}
-
-.continueBtn{
-    padding: 1rem 5rem;
-    font-weight: 700;
 }
 
 .delBtn, .addBtn, #inputName{
@@ -100,6 +90,10 @@
 }
 
 .continueBtn{
+    grid-area: ContinueBtn;
+    align-self: center;
+    padding: 1rem 5rem;
+    font-weight: 700;
     background-color: seagreen;
     border-color: seagreen;
     color: white;

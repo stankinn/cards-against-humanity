@@ -6,6 +6,7 @@
     grid-template:
       'Header'
       'List'
+      'LeaveBtn'
       'StartBtn';
     grid-gap: 3rem;
     
@@ -13,47 +14,22 @@
     padding: 2rem;
 }
 
-#headerG{
+.headerG{
     grid-area: Header;
-    font-size: 1.5rem;
-    font-weight: bold;
 }
 
-.continueBtn{
+#leaveBtn{
+    grid-area: LeaveBtn;
+    padding: .5rem 3rem;
+    background-color: var(--hs-red);
+    border-color: var(--hs-red);
+    color: white;
+}
+
+#leaveBtn:hover{
+    color: black;
+}
+
+#startBtn{
     grid-area: StartBtn;
-}
-
-.list{
-    grid-area: List;
-    width: 80%;
-    background-color: var(--bg-cards);
-    border: .5rem solid var(--bg-cards);
-    border-radius: 1rem;
-    overflow-y: auto;
-}
-
-.list > p{
-    font-size: 1rem;
-    text-align: center;
-
-    padding: .5rem 1rem;
-    font-weight: 500;
-}
-
-.list::-webkit-scrollbar{
-    width: .5rem;
-}
-
-.list::-webkit-scrollbar-track{
-    background-color: rgba(0, 0, 0, 0.25);
-    border-radius: 1rem;
-}
-
-.list::-webkit-scrollbar-thumb{
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 1rem;
-}
-
-.list::-webkit-scrollbar-thumb:hover{
-    background-color: white;
 }
