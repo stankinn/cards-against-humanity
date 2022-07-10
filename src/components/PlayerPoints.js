@@ -65,8 +65,8 @@ export default function PlayerPoints(){
                     if(playerList.length === data.points.length){
                         console.log('Its the same Length!')
                         for(var i = 0; i < playerList.length; i++){
-                            arr = arr.concat({name: playerList[i],points: data.points[i]})
-                            console.log('ArrayNamen: ' + arr);
+                            arr = arr.push({'name': playerList[i],'points': data.points[i]})
+                            console.log('Array: ' + JSON.stringify(arr));
                         }
                         setFinalList(arr)
                         console.log('My finaleList: ' + finalList);
@@ -83,16 +83,6 @@ export default function PlayerPoints(){
 
         return (
             <>
-            <ol>
-                <li>Player1</li>
-                <li>Player2</li>
-                <li>Player3</li>
-            </ol>
-            <ol>
-                <li>Punkte1</li>
-                <li>Punkte2</li>
-                <li>Punkte3</li>
-            </ol>
             {/* {playerList.map(({ name, id }) => (
                 <p key={id}>{name}.....</p>
             ))} */}
