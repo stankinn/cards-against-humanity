@@ -6,6 +6,7 @@ import { serviceendpoint, playerID } from './Imports';
 var cardText = [];
 var str = '';
 
+
 export default function BlackCard() {
 
     let [prompt, setPromt] = useState([]);

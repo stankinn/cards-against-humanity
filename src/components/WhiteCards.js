@@ -9,6 +9,7 @@ export default function WhiteCards() {
     let [running, setRunning] = useState();
     //let running= false;
 
+    
     useEffect(() => {
         console.log("ANSWER: " + answer);
         //console.log("RUNNING?: " + running);
