@@ -68,8 +68,8 @@ export default function DeleteAll() {
 
   return (
     <>
-        <button className='delBtn' onClick={deleteAllGames}>Delete last Games</button>
-        <button className='delBtn' onClick={deleteAllPlayer}>Delete last Player</button>
+        <button className='delBtn fixed' onClick={deleteAllGames}>Delete last Games</button>
+        <button id='fixedL' className='delBtn fixed' onClick={deleteAllPlayer}>Delete last Player</button>
     </>
   )
 }

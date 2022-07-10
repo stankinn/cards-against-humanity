@@ -66,6 +66,15 @@ button:hover{
   background-color: var(--bg-color);
 }
 
+.fixed{
+  position: fixed;
+  margin-left: 1rem;
+}
+
+#fixedL{
+  margin-left: 20rem;
+}
+
 
 @media(orientation: landscape){
   :root{
