@@ -92,7 +92,7 @@ export default function Play(props) {
             console.error('Error:', error);
         });
     }
-
+    
     return (
         <>
             <button id='playBtn' className='continueBtn' onClick={checkGames}>PLAY</button>

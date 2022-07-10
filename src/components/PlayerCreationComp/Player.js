@@ -21,6 +21,7 @@ export default function Player(props) {
     }
   })  
 
+  
   function addPlayer() {
 
     var input = document.getElementById('inputName').value;

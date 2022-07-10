@@ -12,7 +12,7 @@ export default function BlackCard() {
     let [prompt, setPromt] = useState([]);
 
 
-    var gameID = '';
+    //var gameID = '';
     var isRunning = false;
 
     fetch('https://gruppe7.toni-barth.com/games/')
@@ -20,10 +20,7 @@ export default function BlackCard() {
         .then(data => {
             for (var i = 0; i < data.games.length; i++) {
 
-                for (var j = 0; j < data.games[i].players.length; j++) {
-
-                    if (data.games[i].players[j].id === Number(playerID)) {
-                        gameID = data.games[i].id;
+                    if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
                         if (data.games[i].running === true) {
                             isRunning = true;
                         } else {
@@ -32,13 +29,12 @@ export default function BlackCard() {
                         i = data.games.length;
                         break;
                     }
-                }
             }
 
             //check if game is running: if so, display text
-
-            if (isRunning === 'true') {
-                fetch(serviceendpoint + '/games/' + gameID)
+           
+            if (isRunning === true) {
+                fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')))
                     .then(response => response.json())
                     .then(data => {
                         str = data.currentBlackCard.text;

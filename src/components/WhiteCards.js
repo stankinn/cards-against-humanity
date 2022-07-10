@@ -11,26 +11,27 @@ export default function WhiteCards() {
     var isRunning = false;
 
 
-    fetch(serviceendpoint + '/games/')
-    .then(res =>res.json()).then(data => {
+    fetch('https://gruppe7.toni-barth.com/games/')
+        .then(response => response.json())
+        .then(data => {
             for (var i = 0; i < data.games.length; i++) {
-                for (var j = 0; j < data.games[i].players.length; j++) {
-                    if (data.games[i].players[j].id === Number(playerID)) {
-                        gameID = data.games[i].id;
-                        if(data.games[i].running===true){
-                            isRunning= true;
-                        }else{
-                            isRunning= false;
+
+                    if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
+                        if (data.games[i].running === true) {
+                            isRunning = true;
+                        } else {
+                            isRunning = false;
                         }
+                        i = data.games.length;
+                        break;
                     }
-                }
             }
-            if(isRunning === 'true') {
-                fetch(serviceendpoint + '/games/' + gameID + '/cards/' + Number(playerID))
+            console.log(isRunning);
+            if(isRunning === true) {
+                fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/cards/' + Number(localStorage.getItem('playerID')))
                     .then(response => response.json())
                     .then(data => {
                             setAnswer(data.cards);
-
                     })
                     .catch((error) => {
                         console.error('Error:', error);
@@ -41,6 +42,8 @@ export default function WhiteCards() {
             console.error('Error:', error);
         });
 
+
+        
         if(isRunning === 'true') {
     return (
         <>

@@ -2,8 +2,10 @@ import React from 'react'
 import BlackCard from './BlackCard';
 import WhiteCards from './WhiteCards';
 import PlayerPoints from './PlayerPoints';
+import EndGame from './EndGame';
 import {lang} from './Languages';
 import '../components-styles/Game.css'
+import DeleteGame from './GameLobbyComp/DeleteGame';
 
 export default function Game(props) {
 
@@ -29,6 +31,12 @@ export default function Game(props) {
 
       <div id='playerCards' className='gameDiv cardsBackground'>
         <WhiteCards/>
+      </div>
+      <div id='deleteButton'>
+        <DeleteGame/>
+      </div>
+      <div id='deleteButton'>
+        <EndGame/>
       </div>
       
     </div>
