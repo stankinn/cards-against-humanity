@@ -18,13 +18,13 @@ export default function PlayerList() {
             if (data.games.length !== 0) {
                 for (var i = 0; i < data.games.length; i++) {
                     if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
-                        console.log(data.games[i].running);
+                        // console.log(data.games[i].running);
+                        if(data.games[i].running === true)
                             document.getElementById('gameLobby').classList.add('hidden');
                     }
                 }
             }
         });
-
         }, 1000);
         return () => clearInterval(interval);
       }, []);
