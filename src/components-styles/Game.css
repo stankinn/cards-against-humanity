@@ -17,6 +17,8 @@
 }
 
 #gameInfo{
+    align-self: center;
+    text-align: right;
 }
 
 .cardsBackground{
