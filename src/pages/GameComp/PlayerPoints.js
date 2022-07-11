@@ -11,7 +11,7 @@ export default function PlayerPoints(){
     var arrName = [];
 
       useEffect(() =>{
-        // showPlayer();
+        showPlayer();
       })
 
 
