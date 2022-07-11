@@ -32,6 +32,16 @@
     transition-property: transform, box-shadow;
 }
 
+.card.grey{
+    float: left;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    background-color: rgb(133, 133, 133);
+    border-color: rgb(133, 133, 133);
+    color: black;
+    font-weight: 500;
+}
+
 .card.white:hover{
     transform: translateY(-.7rem);
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 1);

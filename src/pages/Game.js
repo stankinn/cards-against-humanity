@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import BlackCard from './GameComp/BlackCard';
 import WhiteCards from './GameComp/WhiteCards';
 import CurCzar from './GameComp/CurCzar';
+import OfferedCards from './GameComp/OfferedCards';
 import PlayerPoints from './GameComp/PlayerPoints';
 import EndGame from './GameComp/EndGame';
 import PopupAnimation from '../Popups/PopupAnimation';
@@ -31,7 +32,7 @@ export default function Game(props) {
       </div>
 
       <div id='offeredCards' className='gameDiv cardsBackground'>
-        <WhiteCards language={props.language}/>
+        <OfferedCards language={props.language}/>
       </div>
 
       <div id='playerCards' className='gameDiv cardsBackground'>
