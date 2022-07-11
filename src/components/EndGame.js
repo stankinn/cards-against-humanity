@@ -11,9 +11,8 @@ export default function EndGame(props) {
 
   function end(){
 
-    if (Number(sessionStorage.getItem('ownerID')) === Number(localStorage.getItem('playerID'))) {
-
-      fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
+    if(Number(sessionStorage.getItem('ownerID'))  === Number(localStorage.getItem('playerID'))) {
+      fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID'))   + '/' + Number(localStorage.getItem('playerID')), {
         method: "PATCH",
         body: JSON.stringify({ player: Number(localStorage.getItem('playerID')), action: "end" }),
         headers: { "Content-Type": "application/json" }
@@ -26,9 +25,12 @@ export default function EndGame(props) {
       console.log('Not the owner. Cannot end the game.');
     }
 
-    deleteGame();
+   
+    
+ deleteGame();
+
   }
-  
+   
   function deleteGame (){
     
     fetch(serviceendpoint + '/games/')
@@ -36,7 +38,7 @@ export default function EndGame(props) {
       console.log(JSON.stringify(data))
       if (data.games.length !== 0) {
         console.log('DEBUG GAME ID: ' + sessionStorage.getItem('gameID'));
-    
+
         fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')), {
           method: "DELETE",
           headers: { "Content-Type": "application/json" }

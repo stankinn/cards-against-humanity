@@ -1,9 +1,9 @@
 import React from 'react'
 import Player from './PlayerCreationComp/Player'
 import Play from './PlayerCreationComp/Play'
-// import DeleteGame from './GameLobbyComp/DeleteGame'
 import '../components-styles/FirstPages.css'
 import {lang} from './Languages';
+import DeleteAll from './DeleteAll';
 
 export default function PlayerCreation(props) {
 
@@ -18,8 +18,8 @@ export default function PlayerCreation(props) {
       <p id='curName'>{content.curName}</p>
       <input id='inputName' maxLength={14}/>
       <Player delBtn={content.delBtn} addBtn={content.addBtn}/>
-      <Play playBtn={content.playButton}/>
-      {/* <DeleteGame/> */}
+      <Play playBtn={content.playButton}/> 
+      <DeleteAll/>
     </div>
   )
 }
