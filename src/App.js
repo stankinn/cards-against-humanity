@@ -3,17 +3,21 @@ import React, { useState } from 'react';
 import {PlayerCreation ,Game, Menu, PopupAnimation, GameLobby} from './components';
 
 
+
 export default function App(){
+
 
     const [lostPopup, setLostPopup] = useState(false);
     const [wonPopup, setWonPopup] = useState(false);
 
     sessionStorage.clear();
+
   
     let languageStored = localStorage.getItem("language");
     let [language, setLanguage] = useState(
       languageStored ? languageStored : "English"
     );
+
 
   return(
     <>      
@@ -34,6 +38,7 @@ export default function App(){
         storeLanguage(language);
       }}/>
       
+
       <PopupAnimation trigger={lostPopup} setTrigger={setLostPopup}>
         <div className='popupWindow small lost'>
           <div className='lostAnimation'>
