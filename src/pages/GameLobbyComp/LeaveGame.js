@@ -35,7 +35,7 @@ export default function LeaveGame(props) {
 
     return (
         <div id='leaveGame'>
-        <button id='leaveBtn' className='continueBtn' onClick={leave}>{content.leaveButton}</button>
+            <button id='leaveBtn' className='continueBtn' onClick={leave}>{content.leaveButton}</button>
         </div>
     )
 }

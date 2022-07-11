@@ -101,7 +101,7 @@ export default function Play(props) {
     
     return (
         <>
-            <button id='playBtn' className='continueBtn' onClick={checkGames}>PLAY</button>
+            <button id='playBtn' className='continueBtn' onClick={checkGames}>{content.playButton}</button>
         </>
     );
 

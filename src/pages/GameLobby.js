@@ -15,9 +15,9 @@ export default function GameLobby(props) {
 
   return (
     <div className='lobbyLayout'>
-        <PlayerList header={content.headerG} startBtn={content.startButton}/>
-        <LeaveGame btnLeave={content.leaveButton}/>
-        {/* {<DeleteGame delGameBtn={content.deleteButton}/>} */}
+      <PlayerList language={props.language}/>
+      <LeaveGame language={props.language}/>
+      {/* {<DeleteGame language={props.language}/>} */}
     </div>
   )
 }
