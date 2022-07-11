@@ -1,7 +1,6 @@
 import React from 'react'
-import { lang } from '../../Languages';
 import {useNavigate} from 'react-router-dom';
-import { serviceendpoint, gameURL,  playerID } from '../Imports';
+import { serviceendpoint} from '../Imports';
 
 export default function EndGame(props) {
 

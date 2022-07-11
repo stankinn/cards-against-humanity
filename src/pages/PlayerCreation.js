@@ -3,7 +3,7 @@ import Player from './PlayerCreationComp/Player'
 import Play from './PlayerCreationComp/Play'
 import '../components-styles/FirstPages.css'
 import {lang} from '../Languages';
-import DeleteAll from './DeleteAll';
+// import DeleteAll from './DeleteAll';
 
 export default function PlayerCreation(props) {
 
@@ -19,7 +19,7 @@ export default function PlayerCreation(props) {
       <input id='inputName' maxLength={14}/>
       <Player language={props.language}/>
       <Play language={props.language}/> 
-      <DeleteAll/>
+      {/* <DeleteAll/> */}
     </div>
   )
 }
