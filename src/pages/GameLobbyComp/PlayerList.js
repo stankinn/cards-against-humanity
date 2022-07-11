@@ -35,7 +35,7 @@ export default function PlayerList(props) {
         showPlayer();
         }, 1000);
         return () => clearInterval(interval);
-      }, []);
+      });
 
 
     function showPlayer() {

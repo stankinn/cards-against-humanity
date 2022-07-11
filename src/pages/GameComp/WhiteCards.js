@@ -59,8 +59,7 @@ export default function WhiteCards() {
             selectCards();
         }
 
-    }, [])
-
+    })
 
 
     function makeList(i) {
@@ -71,7 +70,7 @@ export default function WhiteCards() {
         const newSelection= [...list]
         newSelection.push({ answer }.answer[i].id);
         setList(newSelection); 
-
+        
     } else{
         console.log('No more cards can be added.');
     }   
@@ -83,7 +82,7 @@ export default function WhiteCards() {
         fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/cards/' + Number(localStorage.getItem('playerID')), 
         {
             method: "PUT",
-            body: JSON.stringify({ cards: [list]}),
+            body: JSON.stringify({ cards: list}),
             headers: { "Content-Type": "application/json" }
         })
         .then(response => response.json())

@@ -10,7 +10,7 @@ export default function DeleteAll() {
             console.log('There are still ' + data.games.length + ' Games')
             // for(var i = 0; i < data.games.length; i++){
                 if(data.games[data.games.length-1].running === true){
-                    fetch(serviceendpoint + '/games/' + data.games[data.games.length-1].id + data.games[data.games.length-1].owner.id, {
+                    fetch(serviceendpoint + '/games/' + data.games[data.games.length-1].id + '/' + data.games[data.games.length-1].owner.id, {
                         method: "PATCH",
                         body: JSON.stringify({ action: "end" }),
                         headers: { "Content-Type": "application/json" }
@@ -48,22 +48,21 @@ export default function DeleteAll() {
         .then(data => {
             console.log(JSON.stringify(data.players))
             console.log('There are still ' + data.players.length + ' Player')
-            // for(var i = 0; i < data.players.length; i++){
-                // fetch(serviceendpoint + '/players/' + data.players[data.players.length-1].id, {
-                //     method: 'DELETE',
-                //     headers: { "Content-Type": "application/json" }
-                //   })
-                //   .then(res => {
-                //     if(res.ok){
-                //         console.log('Deleted Player: ' + data.players[data.players.length-1].id + ', ' + data.players.length + ' Players left')
-                //     }
-                //     return res
-                //   })
-                //   .then(res => console.log(res))
-                //   .catch((error) => {
-                //     console.error('Error:', error);
-                //   });
-            // }
+            // const playerID = data.players[data.players.length-1].id;
+            //     fetch(serviceendpoint + '/players/' + playerID, {
+            //         method: 'DELETE',
+            //         headers: { "Content-Type": "application/json" }
+            //       })
+            //       .then(res => {
+            //         if(res.ok){
+            //             console.log('Deleted Player: ' + playerID + ', ' + data.players.length + ' Players left')
+            //         }
+            //         return res
+            //       })
+            //       .then(res => console.log(res))
+            //       .catch((error) => {
+            //         console.error('Error:', error);
+            //       });
         })
     }
 
