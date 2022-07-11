@@ -1,7 +1,7 @@
 import React from 'react';
-import '../components-styles/Cards.css'
+import '../../components-styles/Cards.css'
 import { useState, useEffect } from 'react';
-import { serviceendpoint, playerID } from './Imports';
+import { serviceendpoint, playerID } from '../Imports';
 
 var cardText = [];
 var str = '';

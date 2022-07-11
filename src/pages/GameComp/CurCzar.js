@@ -1,5 +1,5 @@
 import React from 'react'
-import { serviceendpoint} from './Imports';
+import { serviceendpoint} from '../Imports';
 import {useState, useEffect} from 'react';
 
 export default function CurCzar() {

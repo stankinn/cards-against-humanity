@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { serviceendpoint } from '../Imports';
-import { useState, useEffect } from 'react';
+import {useNavigate} from 'react-router-dom';
+import { lang } from '../../Languages';
 
-export default function PlayerList() {
+export default function PlayerList(props) {
 
     const id = sessionStorage.getItem('gameID');
+    let navigate = useNavigate();
 
     let [pList, setPList] = useState([]);
     let [gameID] = useState(id);
@@ -20,7 +22,7 @@ export default function PlayerList() {
                     if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
                         // console.log(data.games[i].running);
                         if(data.games[i].running === true)
-                            document.getElementById('gameLobby').classList.add('hidden');
+                        navigate('/game');
                     }
                 }
             }
@@ -80,7 +82,7 @@ export default function PlayerList() {
                                 })
                                     .then(res => {
                                         if (res.ok) {
-                                            document.getElementById('gameLobby').classList.add('hidden');
+                                            navigate('/game');
                                         }
                                         return res
                                     })
@@ -95,6 +97,11 @@ export default function PlayerList() {
             })
 
     }
+
+    let content = lang;
+    props.language === "German"
+      ? (content = content.German)
+      : (content = content.English);
 
 
     return (

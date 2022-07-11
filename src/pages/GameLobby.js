@@ -2,7 +2,7 @@ import React from 'react'
 import '../components-styles/FirstPages.css'
 import '../components-styles/GameLobby.css'
 import PlayerList from './GameLobbyComp/PlayerList';
-import {lang} from './Languages';
+import {lang} from '../Languages';
 import LeaveGame from './GameLobbyComp/LeaveGame';
 import DeleteGame from './GameLobbyComp/DeleteGame';
 

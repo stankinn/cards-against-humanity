@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {serviceendpoint} from '../Imports';
+import { lang } from '../../Languages';
 
 export default function Player(props) {
 
@@ -86,6 +87,11 @@ export default function Player(props) {
 
     }
   }
+
+  let contentLang = lang;
+  props.language === "German"
+    ? (contentLang = contentLang.German)
+    : (contentLang = contentLang.English);
 
   return (
     <>
