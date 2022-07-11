@@ -46,7 +46,7 @@ export let lang = {
                 'und dann auf "SPIELEN". Wenn kein Spiel geöffnet ist, erstellen Sie eine neue Lobby und werden der Besitzer. ' + 
                 'Als Besitzer können Sie das Spiel, mit mindestens drei Spielern in Ihrer Lobby, beginnen oder die bestehende Lobby löschen. ' +
                 'Sie kehren dann zum Hauptmenü zurück. Wenn du deinen Spieler löschen möchtest, klicke einfach auf "löschen" und dein Name ' +
-                'sollte nicht mehr aufgeführt sein.' +
+                'sollte nicht mehr aufgeführt sein. ' +
                 'Das Spiel ist in Runden unterteilt. Zu Beginn jeder Runde wird ein Zar ernannt. Der Zar nimmt selbst an der aktuellen ' + 
                 'Spielrunde nicht teil. Es erscheint eine schwarze Karte und der Zar liest den darauf befindlichen Lückentext vor. Der ' + 
                 'Lückentext kann auch in Form einer Frage vorliegen, bei der die Antwort ergänzt werden muss. Jeder Spieler außer dem ' + 

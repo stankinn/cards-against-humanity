@@ -12,7 +12,7 @@ export default function WhiteCards() {
     useEffect(() => {
         console.log("ANSWER: " + answer);
         //console.log("RUNNING?: " + running);
-
+        
         fetch('https://gruppe7.toni-barth.com/games/')
         .then(response => response.json())
         .then(data => {
