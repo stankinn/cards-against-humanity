@@ -29,7 +29,7 @@ export let lang = {
         leaveButton: 'LEAVE GAME',
         deleteButton: 'DELETE GAME',
 
-        curCzar:'current czar: ',
+        czar:'czar: ',
         playerPoints:'Points: ',
 
         playerWon:'YOU WON',
@@ -67,7 +67,7 @@ export let lang = {
         leaveButton: 'SPIEL VERLASSEN',
         deleteButton: 'SPIEL LÖSCHEN',
 
-        curCzar:'aktueller Zar: ',
+        czar:'Zar: ',
         playerPoints:'Punkte: ',
 
         playerWon:'GEWONNEN',

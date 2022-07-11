@@ -26,10 +26,10 @@ export default function App(){
         storeLanguage(language);
       }}/>
       <Routes>
-        <Route path='/cards-against-humanity' element={<PlayerCreation/>}/>
-        <Route path='/gameLobby' element={<GameLobby/>}/>
-        <Route path='/game' element={<Game/>}/>
-        <Route path='*' element={<ErrorPage/>}/>
+        <Route path='/cards-against-humanity' element={<PlayerCreation language={language}/>}/>
+        <Route path='/gameLobby' element={<GameLobby language={language}/>}/>
+        <Route path='/game' element={<Game language={language}/>}/>
+        <Route path='*' element={<ErrorPage language={language}/>}/>
       </Routes>
     </Router>
   )

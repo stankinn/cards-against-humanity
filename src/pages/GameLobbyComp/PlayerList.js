@@ -12,6 +12,11 @@ export default function PlayerList(props) {
     let [gameID] = useState(id);
     let playerLength = 0;
 
+    let content = lang;
+    props.language === "German"
+      ? (content = content.German)
+      : (content = content.English);
+
     useEffect(() => {
         const interval = setInterval(() => {
         fetch(serviceendpoint + '/games/')
@@ -34,21 +39,24 @@ export default function PlayerList(props) {
 
 
     function showPlayer() {
-
+        
         fetch(serviceendpoint + '/games/')
-            .then(res => res.json()).then(data => {
+            .then(res => res.json())
+            .then(data => {
                 if (data.games.length !== 0) {
                     for (var i = 0; i < data.games.length; i++) {
                         if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
-                            setPList(data.games[i].players);
-                            playerLength = data.games[i].players.length;
-                        }
-                    }
-                    if (Number(sessionStorage.getItem('ownerID')) === Number(localStorage.getItem('playerID'))) {
-                        if (playerLength >= 3) {
-                            document.getElementById('startBtn').classList.remove('hidden');
-                        } else {
-                            document.getElementById('startBtn').classList.add('hidden');
+                            if(!data.games[i].running){
+                                setPList(data.games[i].players);
+                                playerLength = data.games[i].players.length;
+                                if (Number(sessionStorage.getItem('ownerID')) === Number(localStorage.getItem('playerID'))) {
+                                    if (playerLength >= 3) {
+                                        document.getElementById('startBtn').classList.remove('hidden');
+                                    } else {
+                                        document.getElementById('startBtn').classList.add('hidden');
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -58,10 +66,6 @@ export default function PlayerList(props) {
                 console.error('Error:', error);
             });
     }
-    
-    useEffect(() => {
-        showPlayer();
-    })
 
     function startGame() {
 
@@ -98,21 +102,15 @@ export default function PlayerList(props) {
 
     }
 
-    let content = lang;
-    props.language === "German"
-      ? (content = content.German)
-      : (content = content.English);
-
-
     return (
         <>
-            <h1>GAME {gameID}</h1>
+            <h1>{content.headerG} {gameID}</h1>
             <div className='list'>
                 {pList.map(({ name, id }) => (
                     <p key={id}>{name} ({id})</p>
                 ))}
             </div>
-            <button id='startBtn' className='continueBtn hidden' onClick={startGame}>START</button>
+            <button id='startBtn' className='continueBtn hidden' onClick={startGame}>{content.startButton}</button>
         </>
     );
 }
