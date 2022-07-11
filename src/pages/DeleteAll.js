@@ -10,7 +10,7 @@ export default function DeleteAll() {
             console.log('There are still ' + data.games.length + ' Games')
             // for(var i = 0; i < data.games.length; i++){
                 if(data.games[data.games.length-1].running === true){
-                    fetch(serviceendpoint + '/games/' + data.games[data.games.length-1].id + data.games[data.games.length-1].owner.id, {
+                    fetch(serviceendpoint + '/games/' + data.games[data.games.length-1].id + '/' + data.games[data.games.length-1].owner.id, {
                         method: "PATCH",
                         body: JSON.stringify({ action: "end" }),
                         headers: { "Content-Type": "application/json" }
