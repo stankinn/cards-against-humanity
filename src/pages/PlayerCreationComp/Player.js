@@ -28,11 +28,6 @@ export default function Player(props) {
     var input = document.getElementById('inputName').value;
 
     console.log('cur PlayerID: ' + playerID)
-    fetch(serviceendpoint + '/players/')
-    .then(res => res.json())
-    .then(data => {
-      // console.log('Player: ' + JSON.stringify(data.players));
-    })
 
     if(playerID){
       console.log('There already is a Player.');
