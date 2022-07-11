@@ -26,7 +26,7 @@ export default function App(){
         storeLanguage(language);
       }}/>
       <Routes>
-        <Route path='/' element={<PlayerCreation/>}/>
+        <Route path='/cards-against-humanity' element={<PlayerCreation/>}/>
         <Route path='/gameLobby' element={<GameLobby/>}/>
         <Route path='/game' element={<Game/>}/>
         <Route path='*' element={<ErrorPage/>}/>

@@ -18,7 +18,7 @@ export default function LeaveGame(props) {
         .then(res => {
             if(res.ok){
                 sessionStorage.clear();
-                navigate('/');
+                navigate('/cards-against-humanity');
             }
             return res
         })
