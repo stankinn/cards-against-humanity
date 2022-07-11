@@ -19,7 +19,7 @@ export default function PlayerCreation(props) {
       <input id='inputName' maxLength={14}/>
       <Player delBtn={content.delBtn} addBtn={content.addBtn}/>
       <Play playBtn={content.playButton}/> 
-      <DeleteAll/>
+      {/* <DeleteAll/> */}
     </div>
   )
 }
