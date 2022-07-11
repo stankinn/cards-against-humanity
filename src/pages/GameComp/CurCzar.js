@@ -20,7 +20,6 @@ export default function CurCzar(props) {
             for(var i = 0; i < data.games.length; i++){
               if(data.games[i].id === Number(sessionStorage.getItem('gameID'))){
                 if(data.games[i].running){
-                  console.log('running...')
                   fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')))
                   .then(res => res.json())
                   .then(data => {
@@ -29,8 +28,6 @@ export default function CurCzar(props) {
                   .catch((error) => {
                     console.error('Error:', error);
                   });
-                }else{                  
-                  console.log('NOT running...')
                 }
               }
             }
