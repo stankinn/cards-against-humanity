@@ -1,13 +1,11 @@
 import React from 'react'
-import { lang } from './Languages';
-import { serviceendpoint, gameURL,  playerID } from './Imports';
+import { lang } from '../../Languages';
+import {useNavigate} from 'react-router-dom';
+import { serviceendpoint, gameURL,  playerID } from '../Imports';
 
 export default function EndGame(props) {
 
-  let content = lang;
-  props.language === "German"
-    ? (content = content.German)
-    : (content = content.English);
+  let navigate = useNavigate();
 
   function end(){
 
@@ -24,11 +22,7 @@ export default function EndGame(props) {
     } else {
       console.log('Not the owner. Cannot end the game.');
     }
-
-   
-    
- deleteGame();
-
+    deleteGame();
   }
    
   function deleteGame (){
@@ -46,8 +40,7 @@ export default function EndGame(props) {
         .then(res => {
           if(res.ok){
             sessionStorage.clear();
-            document.getElementById('playerCreation').classList.remove('hidden');
-            document.getElementById('gameLobby').classList.remove('hidden');
+            navigate('/');
           }
           return res
         })
@@ -63,9 +56,6 @@ export default function EndGame(props) {
   }
 
   return (
-    // <div id='endGame'>
-    //   <button id='btnStart' className='disabled' onClick={end}>ENDE</button>
-    // </div>
       <div id='endGame' title='end Game' onClick={end}>
         <button id='btnStart'>
           <div id='endBar1'/>

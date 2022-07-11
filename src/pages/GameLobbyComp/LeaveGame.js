@@ -1,13 +1,11 @@
 import React from 'react';
 import { serviceendpoint } from '../Imports';
-import { lang } from '../Languages';
+import {useNavigate} from 'react-router-dom';
+import { lang } from '../../Languages';
 
 export default function LeaveGame(props) {
 
-    let content = lang;
-    props.language === "German"
-      ? (content = content.German)
-      : (content = content.English);
+    let navigate = useNavigate();
 
     function leave(){
         console.log("PLAYER ID: " + localStorage.getItem('playerID'));
@@ -20,7 +18,7 @@ export default function LeaveGame(props) {
         .then(res => {
             if(res.ok){
                 sessionStorage.clear();
-                document.getElementById('playerCreation').classList.remove('hidden');
+                navigate('/');
             }
             return res
         })
@@ -29,6 +27,11 @@ export default function LeaveGame(props) {
             console.error('Error:', error);
         });
     }  
+
+    let content = lang;
+    props.language === "German"
+      ? (content = content.German)
+      : (content = content.English);
 
     return (
         <div id='leaveGame'>

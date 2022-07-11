@@ -1,13 +1,16 @@
 import React from 'react'
+import {useNavigate} from 'react-router-dom';
 import { serviceendpoint} from '../Imports';
+import { lang } from '../../Languages';
 
 export default function Play(props) {
 
-  const playerID = Number(localStorage.getItem('playerID'));
+    const playerID = Number(localStorage.getItem('playerID'));
+    let navigate = useNavigate();
 
-  function setGameID(id) {
-    sessionStorage.setItem('gameID', id);
-  }
+    function setGameID(id) {
+        sessionStorage.setItem('gameID', id);
+    }
 
     function checkGames() {
         
@@ -58,13 +61,11 @@ export default function Play(props) {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(JSON.stringify(data));
-                    setGameID(data.id);
-                    sessionStorage.setItem('ownerID', data.owner.id);
-                    console.log('created game ' + Number(sessionStorage.getItem('gameID')) + ' successful.');
+            setGameID(data.id);
+            sessionStorage.setItem('ownerID', data.owner.id);
+            console.log('created game ' + Number(sessionStorage.getItem('gameID')) + ' successful.');
+            navigate('/gameLobby');
                 
-            
-            document.getElementById('playerCreation').classList.add('hidden');
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -83,7 +84,7 @@ export default function Play(props) {
         .then(res => {
             if(res.ok){
                 console.log('joined game ' + Number(sessionStorage.getItem('gameID')) + ' successful.');
-                document.getElementById('playerCreation').classList.add('hidden');
+                navigate('/gameLobby');
             }
             return res
         })
@@ -92,6 +93,11 @@ export default function Play(props) {
             console.error('Error:', error);
         });
     }
+
+    let content = lang;
+    props.language === "German"
+      ? (content = content.German)
+      : (content = content.English);
     
     return (
         <>

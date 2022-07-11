@@ -1,7 +1,7 @@
 import React from 'react';
-import '../components-styles/Cards.css'
+import '../../components-styles/Cards.css'
 import { useState, useEffect } from 'react';
-import { serviceendpoint, playerID } from './Imports';
+import { serviceendpoint, playerID } from '../Imports';
 
 var cardText = [];
 var str = '';
@@ -12,6 +12,7 @@ export default function BlackCard() {
     let [prompt, setPromt] = useState([]);
     let [running, setRunning] = useState();
 
+    
     useEffect(() => {
         fetch('https://gruppe7.toni-barth.com/games/')
             .then(response => response.json())

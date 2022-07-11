@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import '../components-styles/Menu.css';
-import Logo from '../images/HSA_Logo.png';
-import Popup from './Popup';
+import './components-styles/Menu.css';
+import Logo from './images/HSA_Logo.png';
+import Popup from './Popups/Popup';
 import {lang} from './Languages';
 
 export default function Menu(props) {

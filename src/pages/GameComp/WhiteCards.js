@@ -1,6 +1,6 @@
 import React from 'react';
-import '../components-styles/Cards.css'
-import { serviceendpoint } from './Imports';
+import '../../components-styles/Cards.css'
+import { serviceendpoint } from '../Imports';
 import { useState, useEffect } from 'react';
 
 export default function WhiteCards() {

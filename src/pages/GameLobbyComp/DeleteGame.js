@@ -1,7 +1,10 @@
 import React from 'react';
 import { serviceendpoint } from '../Imports';
+import {useNavigate} from 'react-router-dom';
 
 export default function DeleteGame() {
+
+    let navigate = useNavigate();
 
     function deleteGame (){
 
@@ -28,8 +31,7 @@ export default function DeleteGame() {
                 .then(res => {
                     if(res.ok){
                         sessionStorage.clear();
-                        document.getElementById('playerCreation').classList.remove('hidden');
-                        document.getElementById('gameLobby').classList.remove('hidden');
+                        navigate('/');
                     }
                     return res
                 })
