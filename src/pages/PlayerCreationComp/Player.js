@@ -28,11 +28,6 @@ export default function Player(props) {
     var input = document.getElementById('inputName').value;
 
     console.log('cur PlayerID: ' + playerID)
-    fetch(serviceendpoint + '/players/')
-    .then(res => res.json())
-    .then(data => {
-      // console.log('Player: ' + JSON.stringify(data.players));
-    })
 
     if(playerID){
       console.log('There already is a Player.');
@@ -96,8 +91,8 @@ export default function Player(props) {
   return (
     <>
       <p id='curNameContent'>{content}</p>
-      <button className='delBtn' onClick={deletePlayer}>delete</button>
-      <button className='addBtn' onClick={addPlayer}>new</button>
+      <button className='delBtn' onClick={deletePlayer}>{contentLang.delBtn}</button>
+      <button className='addBtn' onClick={addPlayer}>{contentLang.addBtn}</button>
     </>
   );
 }

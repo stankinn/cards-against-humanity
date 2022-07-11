@@ -7,36 +7,35 @@ import EndGame from './GameComp/EndGame';
 import PopupAnimation from '../Popups/PopupAnimation';
 import {lang} from '../Languages';
 import '../components-styles/Game.css'
-import DeleteGame from './GameLobbyComp/DeleteGame';
 
 export default function Game(props) {
 
   const [lostPopup, setLostPopup] = useState(false);
   const [wonPopup, setWonPopup] = useState(false);
 
-    let content = lang;
-    props.language === "German"
-        ? (content = content.German)
-        : (content = content.English);
+  let content = lang;
+  props.language === "German"
+    ? (content = content.German)
+    : (content = content.English);
 
   return (
     <div className='gameLayout'>
 
       <div id='blackCard' className='gameDiv'>
-        <BlackCard/>
+        <BlackCard language={props.language}/>
       </div>
 
       <div id='gameInfo' className='gameDiv'>
-        <CurCzar/>
-        <PlayerPoints/>
+        <CurCzar language={props.language}/>
+        <PlayerPoints language={props.language}/>
       </div>
 
       <div id='offeredCards' className='gameDiv cardsBackground'>
-        <WhiteCards/>
+        <WhiteCards language={props.language}/>
       </div>
 
       <div id='playerCards' className='gameDiv cardsBackground'>
-        <WhiteCards/>
+        <WhiteCards language={props.language}/>
       </div>
       <EndGame/>
 
@@ -51,7 +50,7 @@ export default function Game(props) {
             <div className="drop">⬤</div>
             <div className="drop">⬤</div>
           </div>
-          <div className='popupCutout'>VERLOREN</div>
+          <div className='popupCutout'>{content.playerLost}</div>
         </div>
       </PopupAnimation>
 
@@ -61,7 +60,7 @@ export default function Game(props) {
             <div className='bubbles'/>
             <div className='bubbles bubbles2'/>
           </div>
-          <div className='popupCutout'>GEWONNEN</div>
+          <div className='popupCutout'>{content.playerWon}</div>
         </div>
       </PopupAnimation>
     </div>

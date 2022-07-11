@@ -7,6 +7,11 @@ import {lang} from './Languages';
 export default function Menu(props) {
 
     const [helpPopup, setHelpPopup] = useState(false);
+    
+    let content = lang;
+    props.language === "German"
+        ? (content = content.German)
+        : (content = content.English);
 
     function toggleClass(curClass, elementList){
         for (let i = 0; i < elementList.length; i++) {
@@ -49,10 +54,6 @@ export default function Menu(props) {
         document.getElementById('hsaLogo').classList.add('closedInfo');
       }
 
-      let content = lang;
-      props.language === "German"
-          ? (content = content.German)
-          : (content = content.English);
   return (
     <>
     <Popup trigger={helpPopup} setTrigger={setHelpPopup}>

@@ -8,6 +8,7 @@ export default function WhiteCards() {
     let [answer, setAnswer] = useState([]);
     let [running, setRunning] = useState();
     let [list, setList] = useState([]);
+    let [spaces, setSpaces] = useState();
     //let running= false;
 
     
@@ -42,20 +43,42 @@ export default function WhiteCards() {
                 }
             }
         })
+
+        fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')))
+        .then(response => response.json())
+        .then(data => {
+            var spaceNumber = data.currentBlackCard.pick;
+            console.log("HOW MANY SPACES: " + spaceNumber);
+            setSpaces(spaceNumber);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
+        if(list.length === spaces){
+            selectCards();
+        }
+
     }, [])
+
 
 
     function makeList(i) {
 
+    console.log('Selection: ' + list.length + ' out of ' + spaces + ' spaces.');
+     
+    if(list.length < spaces){
         const newSelection= [...list]
         newSelection.push({ answer }.answer[i].id);
-        setList(newSelection);
+        setList(newSelection); 
+
+    } else{
+        console.log('No more cards can be added.');
+    }   
+    
     }
 
-    /*function selectCard(){
-
-       
-
+    function selectCards(){
 
         fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/cards/' + Number(localStorage.getItem('playerID')), 
         {
@@ -65,7 +88,7 @@ export default function WhiteCards() {
         })
         .then(response => response.json())
 
-    }*/
+    }
 
     if ({running}.running === true) {
         return (
