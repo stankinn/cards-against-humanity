@@ -12,7 +12,6 @@ export default function BlackCard() {
     let [prompt, setPromt] = useState([]);
     let [running, setRunning] = useState();
 
-    
     useEffect(() => {
         fetch('https://gruppe7.toni-barth.com/games/')
             .then(response => response.json())

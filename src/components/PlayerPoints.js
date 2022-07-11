@@ -14,7 +14,6 @@ export default function PlayerPoints(){
         // showPlayer();
       })
 
-
     function showPlayer() {
 
         fetch(serviceendpoint + '/games/')

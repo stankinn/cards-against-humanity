@@ -7,6 +7,7 @@ export default function WhiteCards() {
     
     let [answer, setAnswer] = useState([]);
     let [running, setRunning] = useState();
+    let [list, setList] = useState([]);
     //let running= false;
 
     
@@ -44,54 +45,78 @@ export default function WhiteCards() {
     }, [])
 
 
+    function makeList(i) {
+
+        const newSelection= [...list]
+        newSelection.push({ answer }.answer[i].id);
+        setList(newSelection);
+    }
+
+    /*function selectCard(){
+
+       
+
+
+        fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/cards/' + Number(localStorage.getItem('playerID')), 
+        {
+            method: "PUT",
+            body: JSON.stringify({ cards: [list]}),
+            headers: { "Content-Type": "application/json" }
+        })
+        .then(response => response.json())
+
+    }*/
+
     if ({running}.running === true) {
         return (
             
             <>
-                <div className='card white'>
-                <p>{{ answer }.answer[0].text} </p>
+                <div className='card white' onClick={()=>makeList(0)}>
+                    <p >
+                        {{ answer }.answer[0].text} 
+                    </p>
                 </div>
-                <div className='card white'>
-                    <p>
+                <div  className='card white' onClick={()=>makeList(1)}>
+                    <p id='card2'>
                         {{ answer }.answer[1].text}
                     </p>
                 </div>
-                <div className='card white'>
+                <div className='card white' onClick={()=>makeList(2)}>
                     <p>
                         {{ answer }.answer[2].text}
                     </p>
                 </div>
-                <div className='card white'>
+                <div className='card white' onClick={()=>makeList(3)}>
                     <p>
                         {{ answer }.answer[3].text}
                     </p>
                 </div>
-                <div className='card white'>
+                <div className='card white' onClick={()=>makeList(4)}>
                     <p>
                         {{ answer }.answer[4].text}
                     </p>
                 </div>
-                <div className='card white'>
+                <div className='card white' onClick={()=>makeList(5)}>
                     <p>
                         {{ answer }.answer[5].text}
                     </p>
                 </div>
-                <div className='card white'>
+                <div className='card white' onClick={()=>makeList(6)}>
                     <p>
                         {{ answer }.answer[6].text}
                     </p>
                 </div>
-                <div className='card white'>
+                <div className='card white' onClick={()=>makeList(7)}>
                     <p>
                         {{ answer }.answer[7].text}
                     </p>
                 </div>
-                <div className='card white'>
+                <div className='card white' onClick={()=>makeList(8)}>
                     <p>
                         {{ answer }.answer[8].text}
                     </p>
                 </div>
-                <div className='card white'>
+                <div className='card white' onClick={()=>makeList(9)}>
                     <p>
                         {{ answer }.answer[9].text}
                     </p>
