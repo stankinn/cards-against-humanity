@@ -12,7 +12,7 @@ export default function PlayerPoints(){
 
       useEffect(() =>{
         showPlayer();
-      })
+      }, [])
 
 
     function showPlayer() {
