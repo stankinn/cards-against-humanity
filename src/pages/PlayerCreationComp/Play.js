@@ -9,7 +9,7 @@ export default function Play(props) {
     let navigate = useNavigate();
 
     function setGameID(id) {
-        sessionStorage.setItem('gameID', id);
+        localStorage.setItem('gameID', id);
     }
 
     function checkGames() {
@@ -25,14 +25,14 @@ export default function Play(props) {
                 if (data.games.length !== 0) {
                     for (var i = 0; i < data.games.length; i++) {
                         if (data.games[i].running === false) {
-                            if(!sessionStorage.getItem('gameID')){
+                            if(!localStorage.getItem('gameID')){
                                 console.log('try joing game ' + data.games[i].id + '...')
                                 setGameID(data.games[i].id);
                                 joinGame();
                             }
                         }
                     }
-                    if(!sessionStorage.getItem('gameID')){
+                    if(!localStorage.getItem('gameID')){
                         console.log('try creating...')
                         addGame();
                     }
@@ -62,8 +62,8 @@ export default function Play(props) {
         .then(res => res.json())
         .then(data => {
             setGameID(data.id);
-            sessionStorage.setItem('ownerID', data.owner.id);
-            console.log('created game ' + Number(sessionStorage.getItem('gameID')) + ' successful.');
+            localStorage.setItem('ownerID', data.owner.id);
+            console.log('created game ' + Number(localStorage.getItem('gameID')) + ' successful.');
             navigate('/gameLobby');
                 
         })
@@ -76,14 +76,14 @@ export default function Play(props) {
 
     function joinGame() {
 
-        fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
+        fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
             method: 'PATCH',
             body: JSON.stringify({ player: Number(localStorage.getItem('playerID')), action: "join" }),
             headers: { "Content-Type": "application/json" }
         })
         .then(res => {
             if(res.ok){
-                console.log('joined game ' + Number(sessionStorage.getItem('gameID')) + ' successful.');
+                console.log('joined game ' + Number(localStorage.getItem('gameID')) + ' successful.');
                 navigate('/gameLobby');
             }
             return res

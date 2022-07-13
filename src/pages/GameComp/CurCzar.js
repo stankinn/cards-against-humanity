@@ -18,9 +18,9 @@ export default function CurCzar(props) {
         .then(res => res.json())
         .then(data => {
             for(var i = 0; i < data.games.length; i++){
-              if(data.games[i].id === Number(sessionStorage.getItem('gameID'))){
+              if(data.games[i].id === Number(localStorage.getItem('gameID'))){
                 if(data.games[i].running){
-                  fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')))
+                  fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')))
                   .then(res => res.json())
                   .then(data => {
                     setCzar(data.czar.name)

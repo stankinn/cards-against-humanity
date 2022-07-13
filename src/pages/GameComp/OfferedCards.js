@@ -18,9 +18,9 @@ export default function OfferedCards() {
             .then(response => response.json())
             .then(data => {
                 for (var i = 0; i < data.games.length; i++) {
-                    if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
+                    if (data.games[i].id === Number(localStorage.getItem('gameID'))) {
                         if (data.games[i].running === true) {
-                            fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/cards/' + Number(localStorage.getItem('playerID')))
+                            fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')) + '/cards/' + Number(localStorage.getItem('playerID')))
                                 .then(response => response.json())
                                 .then(() => {
                                     setRunning(true);
@@ -41,13 +41,13 @@ export default function OfferedCards() {
 
 
         //offers des spielers einsehen
-        fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')))
+        fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')))
             .then(res => res.json())
             .then(data => {
                 setOffers(data.offers);
 
                 //status: waiting for players
-                fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')))
+                fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')))
                     .then(res => res.json())
                     .then(data => {
                         setPlayers(data.waitingForPlayers);

@@ -7,6 +7,9 @@ import {lang} from '../Languages';
 
 export default function PlayerCreation(props) {
 
+  localStorage.removeItem('gameID');
+  localStorage.removeItem('ownerID');
+  
   let content = lang;
   props.language === "German"
     ? (content = content.German)
