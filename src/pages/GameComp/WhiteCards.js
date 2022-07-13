@@ -55,6 +55,7 @@ export default function WhiteCards() {
 
         //offer cards, if enough cards have been selected
         if (list.length === spaces) {
+            console.log(list);
             fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/cards/' + Number(localStorage.getItem('playerID')),
                 {
                     method: "PUT",
