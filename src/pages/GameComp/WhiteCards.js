@@ -74,9 +74,10 @@ export default function WhiteCards() {
                         return res
                     })
                     .then(response => response.json())
-                getOffers();
-            }
-        }, 1000);
+                    getOffers();
+                }
+            
+        }, 500);
         return () => clearInterval(interval);
     })
 
@@ -144,7 +145,7 @@ export default function WhiteCards() {
                                 <div className='card white' onClick={() => chooseWinner()}>
 
                                     {offer.map((text) => {
-                                        return <p key={text.id}> {text.text}----</p>
+                                        return <p key={text.id}> -{text.text}-</p>
                                     })}
                                     
                                </div>
