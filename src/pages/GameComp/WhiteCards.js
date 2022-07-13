@@ -11,11 +11,10 @@ export default function WhiteCards() {
     let [spaces, setSpaces] = useState();
     //let running= false;
 
-
     useEffect(() => {
         //console.log("ANSWER: " + answer);
         //console.log("RUNNING?: " + running);
-        
+        const interval = setInterval(() => {
         fetch('https://gruppe7.toni-barth.com/games/')
             .then(response => response.json())
             .then(data => {
@@ -74,7 +73,9 @@ export default function WhiteCards() {
                 })
                 .then(response => response.json())
         }
-    }, [])
+    }, 500);
+    return () => clearInterval(interval);
+    })
 
     function makeList(id) {
         console.log("card ID: " +id);
@@ -90,7 +91,7 @@ export default function WhiteCards() {
 
     if ({ running }.running === true) {
 
-        
+
         return (
             <>
                 {answer.map((text) => (
