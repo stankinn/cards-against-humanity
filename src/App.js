@@ -19,16 +19,16 @@ export default function App(){
 
   return(     
     <Router>
-      <Menu language={language} handleSetLanguage={language =>{
-        setLanguage(language);
-        storeLanguage(language);
-      }}/>
       <Routes>
         <Route path='/cards-against-humanity' element={<PlayerCreation language={language}/>}/>
         <Route path='/gameLobby' element={<GameLobby language={language}/>}/>
         <Route path='/game' element={<Game language={language}/>}/>
         <Route path='*' element={<ErrorPage language={language}/>}/>
       </Routes>
+      <Menu language={language} handleSetLanguage={language =>{
+        setLanguage(language);
+        storeLanguage(language);
+      }}/>
     </Router>
   )
 }
