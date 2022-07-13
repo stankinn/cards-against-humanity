@@ -11,8 +11,6 @@ export default function WhiteCards() {
     let [spaces, setSpaces] = useState();   // how many cards need to be selected
     let [offers, setOffers] = useState();   // get offeres cards
     let [waitingPlayers, setPlayers] = useState();  //how many players have to make their offers
-    const filtered = filtered ? filtered : '';
-    
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -126,7 +124,7 @@ export default function WhiteCards() {
 
             //visible offer cards
             console.log("all players put in their offer");
-            filtered = offers.filter(offer => {
+            const filtered = offers.filter(offer => {
                 if (Object.keys(offer).length !== 0) {
                     return true;
                 } return false;
