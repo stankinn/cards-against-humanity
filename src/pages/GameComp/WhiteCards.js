@@ -73,7 +73,7 @@ export default function WhiteCards() {
                         return res
                     })
                     .then(response => response.json())
-                    getOffers();
+                getOffers();
             }
         }, 1000);
         return () => clearInterval(interval);
@@ -122,7 +122,7 @@ export default function WhiteCards() {
 
 
     if ({ running }.running === true) {
-        if (waitingPlayers === 0) {
+        if (waitingPlayers === 0 && list.length !== 0) {
 
             //visible offer cards
             console.log("all players put in their offer");
@@ -158,23 +158,25 @@ export default function WhiteCards() {
                 </>
             );
 
-        }else{
+        } else {
             return (
                 <>
                     <div id='offeredCards' className='gameDiv cardsBackground'>
 
-                            <>
-                            </>
+                        <>
 
-                        <div id='playerCards' className='gameDiv cardsBackground'>
-                            {answer.map((text) => (
-                                <div className='card white' onClick={() => makeList(text.id)}>
-                                    <p key={text.id} >{text.text}</p>
-                                </div>
-                            ))}
-                        </div>
+                        </>
 
                     </div>
+
+                    <div id='playerCards' className='gameDiv cardsBackground'>
+                        {answer.map((text) => (
+                            <div className='card white' onClick={() => makeList(text.id)}>
+                                <p key={text.id} >{text.text}</p>
+                            </div>
+                        ))}
+                    </div>
+
                 </>
             );
 
