@@ -40,6 +40,7 @@ export default function PlayerPoints(){
         .then(res => res.json())
         .then(data => {
             if(data.points){
+                console.log('points: ' + JSON.stringify(data.points))
                 if(playerList.length === data.points.length){
                     for(var i = 0; i < playerList.length; i++){
                         setFinalList({'name': playerList[i].name, 'id': playerList[i].id,'points': data.points[i]})
