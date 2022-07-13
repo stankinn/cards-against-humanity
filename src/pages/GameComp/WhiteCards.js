@@ -11,6 +11,7 @@ export default function WhiteCards() {
     let [spaces, setSpaces] = useState();   // how many cards need to be selected
     let [offers, setOffers] = useState();   // get offeres cards
     let [waitingPlayers, setPlayers] = useState();  //how many players have to make their offers
+    let [cardsOffered, setAlreadyOffered] = useState(false);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -94,11 +95,14 @@ export default function WhiteCards() {
 
     //get offers for display
     function getOffers() {
+        if(cardsOffered == false){ 
         fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')))
             .then(res => res.json())
             .then(data => {
                 setOffers(data.offers);
+                setAlreadyOffered(true);
             })
+        }
     }
 
     //Choose a winning card from offers
@@ -116,7 +120,6 @@ export default function WhiteCards() {
             })
             .then(res => res.json())
     }
-
 
 
     if ({ running }.running === true) {
@@ -143,7 +146,7 @@ export default function WhiteCards() {
                                 }
                             </div>
                         ))}
-
+                    </div>
                         <div id='playerCards' className='gameDiv cardsBackground'>
                             {answer.map((text) => (
                                 <div className='card white' onClick={() => makeList(text.id)}>
@@ -152,7 +155,6 @@ export default function WhiteCards() {
                             ))}
                         </div>
 
-                    </div>
                 </>
             );
 
