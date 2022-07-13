@@ -20,9 +20,9 @@ export default function WhiteCards() {
             .then(response => response.json())
             .then(data => {
                 for (var i = 0; i < data.games.length; i++) {
-                    if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
+                    if (data.games[i].id === Number(localStorage.getItem('gameID'))) {
                         if (data.games[i].running === true) {
-                            fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/cards/' + Number(localStorage.getItem('playerID')))
+                            fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')) + '/cards/' + Number(localStorage.getItem('playerID')))
                                 .then(response => response.json())
                                 .then(data => {
                                     let cards = data.cards;
@@ -43,7 +43,7 @@ export default function WhiteCards() {
                 }
             })
 
-        fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')))
+        fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')))
             .then(response => response.json())
             .then(data => {
                 var spaceNumber = data.currentBlackCard.pick;
@@ -53,14 +53,15 @@ export default function WhiteCards() {
                 console.error('Error:', error);
             });
 
+            
 
         //offer cards, if enough cards have been selected
         console.log('List length: ' + list.length)
         if (list.length === spaces) {
 
-            console.log('GAME: ' + Number(sessionStorage.getItem('gameID')));
+            console.log('GAME: ' + Number(localStorage.getItem('gameID')));
             console.log('PLAYER: ' + Number(localStorage.getItem('playerID')));
-            fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/cards/' + Number(localStorage.getItem('playerID')),
+            fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')) + '/cards/' + Number(localStorage.getItem('playerID')),
                 {
                     method: "PUT",
                     body: JSON.stringify({ cards: list }),
@@ -80,14 +81,12 @@ export default function WhiteCards() {
         console.log("card ID: " +id);
         if (list.length === spaces) {
             console.log('No more cards can be added.');
-
         } else {
 
             const newSelection = [...list]
             newSelection.push(id);
             setList(newSelection);
         }
-
     }
 
     if ({ running }.running === true) {
