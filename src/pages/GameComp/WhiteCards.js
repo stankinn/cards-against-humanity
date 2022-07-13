@@ -90,6 +90,7 @@ export default function WhiteCards() {
 
     if ({ running }.running === true) {
 
+        
         return (
             <>
                 {answer.map((text) => (

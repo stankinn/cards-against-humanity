@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 export default function OfferedCards() {
 
     let [running, setRunning] = useState();
-    let [offers, setOffers] = useState([]);
+    let [offers, setOffers] = useState();
     let [waitingPlayers, setPlayers] = useState();
     //let running= false;
 
@@ -66,14 +66,18 @@ export default function OfferedCards() {
             return (
                 <>
                     {filtered.map((offer) => (
-                        <div className='card grey'>
-                            <p key={offer.id}> </p>
+                        <div className='card white'>
+                        {
+                            offer.map((text)=>{
+                               return <p key={text.id}></p>
+                            })
+                        }
                         </div>
                     ))}
                 </>
             );
         } else {
-
+            
             //visible offer cards
             console.log("all players put in their offer");
             const filtered= offers.filter(offer => {if (Object.keys(offer).length !== 0) {
@@ -84,12 +88,15 @@ export default function OfferedCards() {
                 <>
                     {filtered.map((offer) => (
                         <div className='card white'>
-                            <p key={offer.id}> {offer.text}</p>
+                        {
+                            offer.map((text)=>{
+                               return <p key={text.id}> {text.text}</p>
+                            })
+                        }
                         </div>
                     ))}
                 </>
             );
-
         }
     }
 }
