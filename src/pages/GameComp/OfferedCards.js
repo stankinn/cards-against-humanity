@@ -14,6 +14,7 @@ export default function OfferedCards() {
     useEffect(() => {
 
         //check if game running
+        
         fetch(serviceendpoint + '/games/')
             .then(response => response.json())
             .then(data => {
