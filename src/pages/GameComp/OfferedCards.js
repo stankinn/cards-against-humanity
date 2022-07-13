@@ -11,7 +11,6 @@ export default function OfferedCards() {
     //let running= false;
 
 
-
     useEffect(() => {
 
         //check if game running
@@ -40,26 +39,31 @@ export default function OfferedCards() {
                 }
             })
 
+
         //offers des spielers einsehen
         fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')))
             .then(res => res.json())
             .then(data => {
                 setOffers(data.offers);
-                console.log(JSON.stringify("offers: " + JSON.stringify(data.offers)));
 
                 //status: waiting for players
                 fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')))
                     .then(res => res.json())
                     .then(data => {
                         setPlayers(data.waitingForPlayers);
+                        console.log(JSON.stringify(data.waitingForPlayers));
                     })
             })
     }, [])
 
+
     if ({ running }.running === true) {
 
-
         if (waitingPlayers > 0) {
+            var index= offers.indexOf([]);
+            if (index !== -1) {
+                offers.splice(index, 1);
+            }
             //gray offer cards
             return (
                 <>
@@ -73,6 +77,9 @@ export default function OfferedCards() {
         } else {
             //visible offer cards
             console.log("all players put in their offer");
+            offers.filter((offer) => offer!==[]);
+            console.log(offers.text)
+
             return (
                 <>
                     {offers.map((offer) => (
@@ -84,6 +91,5 @@ export default function OfferedCards() {
             );
 
         }
-
     }
 }

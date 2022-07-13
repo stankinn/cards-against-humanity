@@ -11,7 +11,6 @@ export default function WhiteCards() {
     let [spaces, setSpaces] = useState();
     //let running= false;
 
-
     useEffect(() => {
         //console.log("ANSWER: " + answer);
         //console.log("RUNNING?: " + running);
@@ -43,6 +42,7 @@ export default function WhiteCards() {
                 }
             })
 
+
         fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')))
             .then(response => response.json())
             .then(data => {
@@ -52,7 +52,6 @@ export default function WhiteCards() {
             .catch((error) => {
                 console.error('Error:', error);
             });
-
 
         //offer cards, if enough cards have been selected
         console.log('List length: ' + list.length)
@@ -76,6 +75,7 @@ export default function WhiteCards() {
         }
     }, [])
 
+
     function makeList(id) {
         console.log("card ID: " +id);
         if (list.length === spaces) {
@@ -89,6 +89,7 @@ export default function WhiteCards() {
         }
 
     }
+
 
     if ({ running }.running === true) {
 
