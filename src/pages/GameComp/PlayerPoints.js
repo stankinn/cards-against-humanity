@@ -14,7 +14,7 @@ export default function PlayerPoints(){
             showPlayer();
         }, 1000);
         return () => clearInterval(interval);
-    }, []);
+    });
 
     function showPlayer() {
  

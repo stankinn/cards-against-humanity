@@ -8,6 +8,7 @@ export default function OfferedCards(props) {
     let [running, setRunning] = useState();
     let [offers, setOffers] = useState();
     let [waitingPlayers, setPlayers] = useState();
+    var counter = 1;
     //let running= false;
 
     useEffect(() => {
@@ -45,7 +46,6 @@ export default function OfferedCards(props) {
                     setPlayers(data.waitingForPlayers);
                     console.log(JSON.stringify(data.waitingForPlayers));
                     //offers des spielers einsehen
-                    var counter = 1;
                     if(counter === 1){
                     fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')))
                         .then(res => res.json())
