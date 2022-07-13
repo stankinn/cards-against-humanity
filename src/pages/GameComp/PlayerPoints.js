@@ -10,9 +10,11 @@ export default function PlayerPoints(){
     var arrName = [];
 
       useEffect(() =>{
+        const interval = setInterval(() => {
         showPlayer();
-      },[])
-
+    }, 500);
+    return () => clearInterval(interval);
+      })
 
     function showPlayer() {
  
@@ -55,8 +57,8 @@ export default function PlayerPoints(){
 
         return (
             <div className='playerPoints'>
-                {finalList.map(({ name, points }) => (
-                    <p key={name}>{name}.....{points}</p>
+                {finalList.map(({ name, points, id }) => (
+                    <p key={id}>{name}.....{points}</p>
                 ))}
             </div>
         );
