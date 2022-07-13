@@ -11,7 +11,7 @@ export default function PlayerPoints(){
 
     useEffect(() =>{
         const interval = setInterval(() => {
-                showPlayer();
+            showPlayer();
         }, 1000);
         return () => clearInterval(interval);
     }, []);
@@ -53,7 +53,6 @@ export default function PlayerPoints(){
             console.error('Error:', error);
         });
     }
-    
         return (
             <div className='playerPoints'>
                 {finalList.map(({ name, id, points }) => (

@@ -15,7 +15,7 @@ export default function WhiteCards() {
     useEffect(() => {
         //console.log("ANSWER: " + answer);
         //console.log("RUNNING?: " + running);
-
+        
         fetch('https://gruppe7.toni-barth.com/games/')
             .then(response => response.json())
             .then(data => {
@@ -53,8 +53,6 @@ export default function WhiteCards() {
                 console.error('Error:', error);
             });
 
-            
-
         //offer cards, if enough cards have been selected
         console.log('List length: ' + list.length)
         if (list.length === spaces) {
@@ -91,6 +89,7 @@ export default function WhiteCards() {
 
     if ({ running }.running === true) {
 
+        
         return (
             <>
                 {answer.map((text) => (
