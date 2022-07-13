@@ -108,7 +108,6 @@ export default function WhiteCards() {
             })
         }
     }
-
     
     //Choose a winning card from offers
     function chooseWinner() {
@@ -119,13 +118,12 @@ export default function WhiteCards() {
                 headers: { "Content-Type": "application/json" }
             }).then(res => {
                 if (res.ok) {
-                    setList([]);
+                    //list = [];
                 }
                 return res
             })
             .then(res => res.json())
     }
-
 
     if ({ running }.running === true) {
         console.log("list: " + list.length)
@@ -144,13 +142,14 @@ export default function WhiteCards() {
                     <div id='offeredCards' className='gameDiv cardsBackground'>
 
                         {filtered.map((offer) => (
-                            <div className='card white' onClick={() => chooseWinner()}>
-                                {
-                                    offer.map((text) => {
-                                        return <p key={text.id}> {text.text}</p>
-                                    })
-                                }
-                            </div>
+                                <div className='card white' onClick={() => chooseWinner()}>
+
+                                    {offer.map((text) => {
+                                        return <p key={text.id}> {text.text}----</p>
+                                    })}
+                                    
+                               </div>
+                            
                         ))}
                     </div>
                         <div id='playerCards' className='gameDiv cardsBackground'>
