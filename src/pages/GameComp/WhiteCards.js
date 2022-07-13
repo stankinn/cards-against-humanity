@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../components-styles/Cards.css'
 import { serviceendpoint } from '../Imports';
+import OfferedCards from './OfferedCards';
 import { useState, useEffect } from 'react';
 
 export default function WhiteCards() {
@@ -52,14 +53,8 @@ export default function WhiteCards() {
                 console.error('Error:', error);
             });
 
-            
-
         //offer cards, if enough cards have been selected
-        console.log('List length: ' + list.length)
         if (list.length === spaces) {
-
-            console.log('GAME: ' + Number(sessionStorage.getItem('gameID')));
-            console.log('PLAYER: ' + Number(localStorage.getItem('playerID')));
             fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/cards/' + Number(localStorage.getItem('playerID')),
                 {
                     method: "PUT",
@@ -73,7 +68,8 @@ export default function WhiteCards() {
                     return res
                 })
                 .then(response => response.json())
-        }
+                
+            }
     }, 500);
     return () => clearInterval(interval);
     })
@@ -92,14 +88,19 @@ export default function WhiteCards() {
 
     if ({ running }.running === true) {
 
-
         return (
             <>
+                <div id='offeredCards' className='gameDiv cardsBackground'>
+                    <OfferedCards offerC={list}/>
+                </div>
+        
+                <div id='playerCards' className='gameDiv cardsBackground'>
                 {answer.map((text) => (
                     <div className='card white' onClick={()=>makeList(text.id)}>
                         <p key={text.id} >{text.text}</p>
                     </div>
                 ))}
+                </div>
             </>
         );
 

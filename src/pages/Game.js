@@ -28,13 +28,7 @@ export default function Game(props) {
         <PlayerPoints language={props.language}/>
       </div>
 
-      <div id='offeredCards' className='gameDiv cardsBackground'>
-        <OfferedCards language={props.language}/>
-      </div>
-
-      <div id='playerCards' className='gameDiv cardsBackground'>
-        <WhiteCards language={props.language}/>
-      </div>
+      <WhiteCards language={props.language}/>
       <EndGame/>
       <Result language={props.language}/>
     </div>
