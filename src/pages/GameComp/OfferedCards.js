@@ -56,10 +56,9 @@ export default function OfferedCards(props) {
                     }
                 })
 
-        }, 500);
+        }, 1000);
         return () => clearInterval(interval);
     }, [])
-
 
 
     function chooseWinner(){
@@ -73,8 +72,6 @@ export default function OfferedCards(props) {
         .then(res => res.json())
 
     }
-
-
 
     if ({ running }.running === true) {
 

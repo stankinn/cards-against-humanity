@@ -71,7 +71,7 @@ export default function WhiteCards() {
                 .then(response => response.json())
                 
             }
-    }, 500);
+    }, 1000);
     return () => clearInterval(interval);
     })
 
