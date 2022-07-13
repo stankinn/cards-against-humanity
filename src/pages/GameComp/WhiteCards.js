@@ -53,7 +53,6 @@ export default function WhiteCards() {
             });
 
             
-
         //offer cards, if enough cards have been selected
         console.log('List length: ' + list.length)
         if (list.length === spaces) {
