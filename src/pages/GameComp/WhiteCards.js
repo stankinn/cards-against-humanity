@@ -56,9 +56,10 @@ export default function WhiteCards() {
                     console.error('Error:', error);
                 });
 
+
             //offer cards, if enough cards have been selected
             if (list.length === spaces) {
-                console.log(list);
+                //console.log("list: " + list);
                 fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/cards/' + Number(localStorage.getItem('playerID')),
                     {
                         method: "PUT",
@@ -68,12 +69,14 @@ export default function WhiteCards() {
                     .then(res => {
                         if (res.ok) {
                             console.log("cards have been offered.");
+                            setAlreadyOffered(true);
                         }
                         return res
                     })
                     .then(response => response.json())
-                getOffers();
-            }
+                    getOffers();
+                }
+            
         }, 500);
         return () => clearInterval(interval);
     })
@@ -95,16 +98,18 @@ export default function WhiteCards() {
 
     //get offers for display
     function getOffers() {
-        if(cardsOffered == false){ 
+        if(cardsOffered === true){ 
         fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')))
             .then(res => res.json())
             .then(data => {
+                console.log("offers: " + JSON.stringify(data.offers));
                 setOffers(data.offers);
-                setAlreadyOffered(true);
+                setAlreadyOffered(false);
             })
         }
     }
 
+    
     //Choose a winning card from offers
     function chooseWinner() {
         fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')),
@@ -123,16 +128,17 @@ export default function WhiteCards() {
 
 
     if ({ running }.running === true) {
+        console.log("list: " + list.length)
         if (waitingPlayers === 0 && list.length !== 0) {
 
             //visible offer cards
-            console.log("all players put in their offer");
+            //console.log("all players put in their offer");
+            
             const filtered = offers.filter(offer => {
                 if (Object.keys(offer).length !== 0) {
                     return true;
                 } return false;
             });
-
             return (
                 <>
                     <div id='offeredCards' className='gameDiv cardsBackground'>
@@ -154,7 +160,6 @@ export default function WhiteCards() {
                                 </div>
                             ))}
                         </div>
-
                 </>
             );
 
