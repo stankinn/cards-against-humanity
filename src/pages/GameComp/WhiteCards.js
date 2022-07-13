@@ -104,7 +104,6 @@ export default function WhiteCards() {
             .then(data => {
                 console.log("offers: " + JSON.stringify(data.offers));
                 setOffers(data.offers);
-                setAlreadyOffered(false);
             })
         }
     }
@@ -119,6 +118,7 @@ export default function WhiteCards() {
             }).then(res => {
                 if (res.ok) {
                     //list = [];
+                setAlreadyOffered(false);
                 }
                 return res
             })
