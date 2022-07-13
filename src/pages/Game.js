@@ -2,7 +2,6 @@ import React from 'react'
 import BlackCard from './GameComp/BlackCard';
 import WhiteCards from './GameComp/WhiteCards';
 import CurCzar from './GameComp/CurCzar';
-import OfferedCards from './GameComp/OfferedCards';
 import PlayerPoints from './GameComp/PlayerPoints';
 import EndGame from './GameComp/EndGame';
 import Result from './GameComp/Result';
@@ -27,14 +26,7 @@ export default function Game(props) {
         <CurCzar language={props.language}/>
         <PlayerPoints language={props.language}/>
       </div>
-
-      <div id='offeredCards' className='gameDiv cardsBackground'>
-        <OfferedCards language={props.language}/>
-      </div>
-
-      <div id='playerCards' className='gameDiv cardsBackground'>
-        <WhiteCards language={props.language}/>
-      </div>
+      <WhiteCards language={props.language}/>
       <EndGame/>
       <Result language={props.language}/>
     </div>

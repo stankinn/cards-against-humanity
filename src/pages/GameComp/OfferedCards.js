@@ -3,11 +3,12 @@ import '../../components-styles/Cards.css'
 import { serviceendpoint } from '../Imports';
 import { useState, useEffect } from 'react';
 
-export default function OfferedCards() {
+export default function OfferedCards(props) {
 
     let [running, setRunning] = useState();
     let [offers, setOffers] = useState();
     let [waitingPlayers, setPlayers] = useState();
+    var counter = 1;
     //let running= false;
 
     useEffect(() => {
@@ -38,17 +39,14 @@ export default function OfferedCards() {
                     }
                 })
 
-            //offers des spielers einsehen
-
-
             //status: waiting for players
             fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')))
                 .then(res => res.json())
                 .then(data => {
                     setPlayers(data.waitingForPlayers);
                     console.log(JSON.stringify(data.waitingForPlayers));
-                    var counter = 1;
-                    if(data.waitingForPlayers === 0 && counter === 0){
+                    //offers des spielers einsehen
+                    if(counter === 1){
                     fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')))
                         .then(res => res.json())
                         .then(data => {
@@ -63,26 +61,28 @@ export default function OfferedCards() {
     }, [])
 
 
+
+    function chooseWinner(){
+
+        fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')),
+        {
+        method: "PUT",
+        body: JSON.stringify({ cards: props.offerC }),
+        headers: { "Content-Type": "application/json" }
+        })
+        .then(res => res.json())
+
+    }
+
+
+
     if ({ running }.running === true) {
 
         if (waitingPlayers > 0) {
-            const filtered = offers.filter(offer => {
-                if (Object.keys(offer).length !== 0) {
-                    return true;
-                } return false;
-            });
             //gray offer cards
             return (
                 <>
-                    {filtered.map((offer) => (
-                        <div className='card white'>
-                            {
-                                offer.map((text) => {
-                                    return <p key={text.id}></p>
-                                })
-                            }
-                        </div>
-                    ))}
+                    
                 </>
             );
         } else {
@@ -94,12 +94,12 @@ export default function OfferedCards() {
                     return true;
                 } return false;
             });
-            console.log(filtered);
+            console.log(props.offerC);
 
             return (
                 <>
                     {filtered.map((offer) => (
-                        <div className='card white'>
+                        <div className='card white' onClick={()=>chooseWinner()}>
                             {
                                 offer.map((text) => {
                                     return <p key={text.id}> {text.text}</p>
