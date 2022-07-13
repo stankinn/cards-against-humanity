@@ -10,7 +10,7 @@ export default function WhiteCards() {
     let [list, setList] = useState([]);
     let [spaces, setSpaces] = useState();
     //let running= false;
-
+    
 
     useEffect(() => {
         //console.log("ANSWER: " + answer);
