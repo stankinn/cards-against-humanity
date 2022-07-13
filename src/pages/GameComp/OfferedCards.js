@@ -39,7 +39,6 @@ export default function OfferedCards() {
                 }
             })
 
-
         //offers des spielers einsehen
         fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')))
             .then(res => res.json())
