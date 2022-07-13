@@ -12,8 +12,9 @@ export default function OfferedCards() {
 
 
     useEffect(() => {
+
         //check if game running
-        fetch('https://gruppe7.toni-barth.com/games/')
+        fetch(serviceendpoint + '/games/')
             .then(response => response.json())
             .then(data => {
                 for (var i = 0; i < data.games.length; i++) {
@@ -38,53 +39,38 @@ export default function OfferedCards() {
                 }
             })
 
-
-
-
-        //status: waiting for players
-        fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')))
+        //offers des spielers einsehen
+        fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')))
             .then(res => res.json())
             .then(data => {
-                setPlayers(data.waitingForPlayers);
-                console.log(JSON.stringify(data.waitingForPlayers));
-                
-                //offers des spielers ein mal einsehen
-                var counter= 1;
-                if(waitingPlayers === 0 && counter > 0){
-                
-                fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')))
+                setOffers(data.offers);
+
+                //status: waiting for players
+                fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')))
                     .then(res => res.json())
                     .then(data => {
-                        setOffers(data.offers);
+                        setPlayers(data.waitingForPlayers);
+                        console.log(JSON.stringify(data.waitingForPlayers));
                     })
-                    counter--;
-                    }
-
             })
-
     }, [])
 
-
-        
 
     if ({ running }.running === true) {
 
         if (waitingPlayers > 0) {
-            const filtered = offers.filter(offer => {
-                if (Object.keys(offer).length !== 0) {
-                    return true;
-                } return false;
-            });
+            const filtered= offers.filter(offer => {if (Object.keys(offer).length !== 0) {
+                return true;} return false;});
             //gray offer cards
             return (
                 <>
                     {filtered.map((offer) => (
                         <div className='card white'>
-                            {
-                                offer.map((text) => {
-                                    return <p key={text.id}></p>
-                                })
-                            }
+                        {
+                            offer.map((text)=>{
+                               return <p key={text.id}></p>
+                            })
+                        }
                         </div>
                     ))}
                 </>
@@ -93,22 +79,19 @@ export default function OfferedCards() {
 
             //visible offer cards
             console.log("all players put in their offer");
-            const filtered = offers.filter(offer => {
-                if (Object.keys(offer).length !== 0) {
-                    return true;
-                } return false;
-            });
+            const filtered= offers.filter(offer => {if (Object.keys(offer).length !== 0) {
+                return true;} return false;});
             console.log(filtered);
 
             return (
                 <>
                     {filtered.map((offer) => (
                         <div className='card white'>
-                            {
-                                offer.map((text) => {
-                                    return <p key={text.id}> {text.text}</p>
-                                })
-                            }
+                        {
+                            offer.map((text)=>{
+                               return <p key={text.id}> {text.text}</p>
+                            })
+                        }
                         </div>
                     ))}
                 </>

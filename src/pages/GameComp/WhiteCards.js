@@ -11,6 +11,7 @@ export default function WhiteCards() {
     let [spaces, setSpaces] = useState();
     //let running= false;
 
+
     useEffect(() => {
         //console.log("ANSWER: " + answer);
         //console.log("RUNNING?: " + running);
@@ -50,8 +51,6 @@ export default function WhiteCards() {
             .catch((error) => {
                 console.error('Error:', error);
             });
-
-            
 
         //offer cards, if enough cards have been selected
         console.log('List length: ' + list.length)

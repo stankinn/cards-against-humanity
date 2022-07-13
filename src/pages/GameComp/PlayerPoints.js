@@ -7,14 +7,14 @@ export default function PlayerPoints(){
     let [playerList, setplayerList] = useState([]);
 
     var arr = [];
-    var arrName = [];
+    var arrPlayer = [];
 
-      useEffect(() =>{
+    useEffect(() =>{
         const interval = setInterval(() => {
-        showPlayer();
-    }, 500);
-    return () => clearInterval(interval);
-      })
+            showPlayer();
+        }, 1000);
+        return () => clearInterval(interval);
+    }, []);
 
     function showPlayer() {
  
@@ -26,25 +26,8 @@ export default function PlayerPoints(){
                     if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
                         if(data.games[i].running){
                             for(var j=0; j < data.games[i].players.length; j++){
-                                arrName = arrName.concat(data.games[i].players[j].name)
+                                setplayerList(data.games[i].players[j])
                             }
-                            setplayerList(arrName)
-
-                            fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')))
-                            .then(res => res.json())
-                            .then(data => {
-                                if(data.points){
-                                    if(playerList.length === data.points.length){
-                                        for(var i = 0; i < playerList.length; i++){
-                                            arr = arr.concat({'name': playerList[i],'points': data.points[i]})
-                                        }
-                                        setFinalList(arr)
-                                    }
-                                }
-                            })
-                            .catch((error) => {
-                              console.error('Error:', error);
-                            });
                         }
                     }
                 }
@@ -53,11 +36,26 @@ export default function PlayerPoints(){
         .catch((error) => {
             console.error('Error:', error);
         });
+        fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')))
+        .then(res => res.json())
+        .then(data => {
+            if(data.points){
+                if(playerList.length === data.points.length){
+                    for(var i = 0; i < playerList.length; i++){
+                        setFinalList({'name': playerList[i].name, 'id': playerList[i].id,'points': data.points[i]})
+                    }
+                    // setFinalList(arr)
+                    console.log(JSON.stringify(finalList))
+                }
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     }
-
         return (
             <div className='playerPoints'>
-                {finalList.map(({ name, points, id }) => (
+                {finalList.map(({ name, id, points }) => (
                     <p key={id}>{name}.....{points}</p>
                 ))}
             </div>
