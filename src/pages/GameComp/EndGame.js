@@ -8,8 +8,8 @@ export default function EndGame(props) {
 
   function end(){
 
-    if(Number(sessionStorage.getItem('ownerID'))  === Number(localStorage.getItem('playerID'))) {
-      fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID'))   + '/' + Number(localStorage.getItem('playerID')), {
+    if(Number(localStorage.getItem('ownerID'))  === Number(localStorage.getItem('playerID'))) {
+      fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID'))   + '/' + Number(localStorage.getItem('playerID')), {
         method: "PATCH",
         body: JSON.stringify({ player: Number(localStorage.getItem('playerID')), action: "end" }),
         headers: { "Content-Type": "application/json" }
@@ -30,15 +30,17 @@ export default function EndGame(props) {
     .then(res =>res.json()).then(data => {
       console.log(JSON.stringify(data))
       if (data.games.length !== 0) {
-        console.log('DEBUG GAME ID: ' + sessionStorage.getItem('gameID'));
+        console.log('DEBUG GAME ID: ' + localStorage.getItem('gameID'));
 
-        fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')), {
+        fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')), {
           method: "DELETE",
           headers: { "Content-Type": "application/json" }
         })
         .then(res => {
           if(res.ok){
             sessionStorage.clear();
+            localStorage.removeItem('gameID');
+            localStorage.removeItem('ownerID');
             navigate('/cards-against-humanity');
           }
           return res
