@@ -11,7 +11,7 @@ export default function PlayerPoints(){
 
       useEffect(() =>{
         showPlayer();
-      }, [])
+      },[])
 
 
     function showPlayer() {
@@ -52,7 +52,6 @@ export default function PlayerPoints(){
             console.error('Error:', error);
         });
     }
-    
 
         return (
             <div className='playerPoints'>
