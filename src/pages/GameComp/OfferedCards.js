@@ -14,7 +14,7 @@ export default function OfferedCards() {
     useEffect(() => {
 
         //check if game running
-        fetch('https://gruppe7.toni-barth.com/games/')
+        fetch(serviceendpoint + '/games/')
             .then(response => response.json())
             .then(data => {
                 for (var i = 0; i < data.games.length; i++) {
@@ -76,7 +76,7 @@ export default function OfferedCards() {
                 </>
             );
         } else {
-            
+
             //visible offer cards
             console.log("all players put in their offer");
             const filtered= offers.filter(offer => {if (Object.keys(offer).length !== 0) {

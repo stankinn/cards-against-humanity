@@ -14,46 +14,39 @@ export default function EndGame(props) {
         body: JSON.stringify({ player: Number(localStorage.getItem('playerID')), action: "end" }),
         headers: { "Content-Type": "application/json" }
       })
+      .then(res =>{
+        if(res.ok){
+          deleteGame();
+        }
+        return res;
+      })
       .then(res => res.json())
       .catch((error) => {
         console.error('Error:', error);
       });
     } else {
-      console.log('Not the owner. Cannot end the game.');
+      sessionStorage.clear();
+      navigate('/cards-against-humanity');
     }
-    deleteGame();
   }
    
   function deleteGame (){
-    
-    fetch(serviceendpoint + '/games/')
-    .then(res =>res.json()).then(data => {
-      console.log(JSON.stringify(data))
-      if (data.games.length !== 0) {
-        console.log('DEBUG GAME ID: ' + sessionStorage.getItem('gameID'));
 
-        fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')), {
-          method: "DELETE",
-          headers: { "Content-Type": "application/json" }
-        })
-        .then(res => {
-          if(res.ok){
-            sessionStorage.clear();
-            // localStorage.removeItem('gameID');
-            // localStorage.removeItem('ownerID');
-            navigate('/cards-against-humanity');
-          }
-          return res
-        })
-        .then(res => res.json())
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-                        
-      } else {
-        console.log('No Games existing.');
-      }
+    fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')), {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" }
     })
+    .then(res => {
+      if(res.ok){
+        sessionStorage.clear();
+        navigate('/cards-against-humanity');
+      }
+      return res
+    })
+    .then(res => res.json())
+    .catch((error) => {
+      console.error('Error:', error);
+    });
   }
 
   return (
