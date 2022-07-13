@@ -7,10 +7,6 @@ import {PlayerCreation ,Game, GameLobby, ErrorPage} from './pages';
 
 export default function App(){
 
-    sessionStorage.clear();
-    localStorage.removeItem('gameID');
-    localStorage.removeItem('ownerID');
-
     function storeLanguage(language) {
       localStorage.setItem("language", language);
     }

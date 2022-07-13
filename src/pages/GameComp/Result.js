@@ -13,9 +13,9 @@ export default function Result(props) {
             fetch(serviceendpoint + '/games/')
             .then(res => res.json())
             .then(data => {
-                for(var i = 0; i < data.games.length; i++){
-                if(data.games[i].id === Number(localStorage.getItem('gameID'))){
-                    console.log('.winner: ' + data.games[i].winner);
+              for(var i = 0; i < data.games.length; i++){
+                if(data.games[i].id === Number(sessionStorage.getItem('gameID'))){
+                    // console.log('.winner: ' + data.games[i].winner);
                     if(data.games[i].winner){
                         console.log('there is a winner: ' + JSON.stringify(data.games[i].winner))
                         if(data.games[i].winner.id === Number(localStorage.getItem('playerID'))){
@@ -25,7 +25,7 @@ export default function Result(props) {
                         }
                     }
                 }
-                }
+              }
             })
             .catch((error) => {
                 console.error('Error:', error);

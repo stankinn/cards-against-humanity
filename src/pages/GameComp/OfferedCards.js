@@ -11,7 +11,6 @@ export default function OfferedCards() {
     //let running= false;
 
 
-
     useEffect(() => {
 
         //check if game running
@@ -19,9 +18,9 @@ export default function OfferedCards() {
             .then(response => response.json())
             .then(data => {
                 for (var i = 0; i < data.games.length; i++) {
-                    if (data.games[i].id === Number(localStorage.getItem('gameID'))) {
+                    if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
                         if (data.games[i].running === true) {
-                            fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')) + '/cards/' + Number(localStorage.getItem('playerID')))
+                            fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/cards/' + Number(localStorage.getItem('playerID')))
                                 .then(response => response.json())
                                 .then(() => {
                                     setRunning(true);
@@ -40,30 +39,33 @@ export default function OfferedCards() {
                 }
             })
 
+
         //offers des spielers einsehen
-        fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')))
+        fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')))
             .then(res => res.json())
             .then(data => {
                 setOffers(data.offers);
-                console.log(JSON.stringify("offers: " + JSON.stringify(data.offers)));
 
                 //status: waiting for players
-                fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')))
+                fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')))
                     .then(res => res.json())
                     .then(data => {
                         setPlayers(data.waitingForPlayers);
+                        console.log(JSON.stringify(data.waitingForPlayers));
                     })
             })
     }, [])
 
+
     if ({ running }.running === true) {
 
-
         if (waitingPlayers > 0) {
+            const filtered= offers.filter(offer => {if (Object.keys(offer).length !== 0) {
+                return true;} return false;});
             //gray offer cards
             return (
                 <>
-                    {offers.map((offer) => (
+                    {filtered.map((offer) => (
                         <div className='card grey'>
                             <p key={offer.id}> </p>
                         </div>
@@ -71,11 +73,16 @@ export default function OfferedCards() {
                 </>
             );
         } else {
+
             //visible offer cards
             console.log("all players put in their offer");
+            const filtered= offers.filter(offer => {if (Object.keys(offer).length !== 0) {
+                return true;} return false;});
+            console.log(filtered);
+
             return (
                 <>
-                    {offers.map((offer) => (
+                    {filtered.map((offer) => (
                         <div className='card white'>
                             <p key={offer.id}> {offer.text}</p>
                         </div>
@@ -84,6 +91,5 @@ export default function OfferedCards() {
             );
 
         }
-
     }
 }
