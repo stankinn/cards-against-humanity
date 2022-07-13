@@ -10,7 +10,7 @@ export default function LeaveGame(props) {
     function leave(){
         console.log("PLAYER ID: " + localStorage.getItem('playerID'));
        
-        fetch(serviceendpoint + '/games/'+ Number(localStorage.getItem('gameID')) + '/'+ Number(localStorage.getItem('playerID')), {
+        fetch(serviceendpoint + '/games/'+ Number(sessionStorage.getItem('gameID')) + '/'+ Number(localStorage.getItem('playerID')), {
             method: 'PATCH',
             body: JSON.stringify({ player: localStorage.getItem('playerID'), action: "leave"}),
             headers: { "Content-Type": "application/json" }
@@ -18,8 +18,8 @@ export default function LeaveGame(props) {
         .then(res => {
             if(res.ok){
                 sessionStorage.clear();
-                localStorage.removeItem('gameID');
-                localStorage.removeItem('ownerID');
+                // localStorage.removeItem('gameID');
+                // localStorage.removeItem('ownerID');
                 navigate('/cards-against-humanity');
             }
             return res
