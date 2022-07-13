@@ -14,6 +14,7 @@ export default function BlackCard() {
 
     
     useEffect(() => {
+        const interval = setInterval(() => {
         fetch('https://gruppe7.toni-barth.com/games/')
             .then(response => response.json())
             .then(data => {
@@ -45,9 +46,8 @@ export default function BlackCard() {
             .catch((error) => {
                 console.error('Error:', error);
             });
-
-        console.log(prompt)
-
+    }, 500);
+    return () => clearInterval(interval);
     }, [])
 
 
