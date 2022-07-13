@@ -60,14 +60,12 @@ export default function OfferedCards() {
     if ({ running }.running === true) {
 
         if (waitingPlayers > 0) {
-            var index= offers.indexOf([]);
-            if (index !== -1) {
-                offers.splice(index, 1);
-            }
+            const filtered= offers.filter(offer => {if (Object.keys(offer).length !== 0) {
+                return true;} return false;});
             //gray offer cards
             return (
                 <>
-                    {offers.map((offer) => (
+                    {filtered.map((offer) => (
                         <div className='card grey'>
                             <p key={offer.id}> </p>
                         </div>
@@ -75,14 +73,16 @@ export default function OfferedCards() {
                 </>
             );
         } else {
+
             //visible offer cards
             console.log("all players put in their offer");
-            offers.filter((offer) => offer!==[]);
-            console.log(offers.text)
+            const filtered= offers.filter(offer => {if (Object.keys(offer).length !== 0) {
+                return true;} return false;});
+            console.log(filtered);
 
             return (
                 <>
-                    {offers.map((offer) => (
+                    {filtered.map((offer) => (
                         <div className='card white'>
                             <p key={offer.id}> {offer.text}</p>
                         </div>
