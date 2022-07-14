@@ -9,9 +9,9 @@ export default function WhiteCards() {
     let [running, setRunning] = useState(); // check if game is running
     let [list, setList] = useState([]);     // set list of selected cards for offer
     let [spaces, setSpaces] = useState();   // how many cards need to be selected
-    let [offers, setOffers] = useState();   // get offeres cards
+    let [offers, setOffers] = useState();   // get offered cards
     let [waitingPlayers, setPlayers] = useState();  //how many players have to make their offers
-    let [cardsOffered, setAlreadyOffered] = useState(false);
+    var helpArray = [];
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -56,10 +56,10 @@ export default function WhiteCards() {
                     console.error('Error:', error);
                 });
 
-
             //offer cards, if enough cards have been selected
-            if (list.length === spaces) {
-                //console.log("list: " + list);
+
+            if (list.length === spaces && waitingPlayers > 0) {
+                console.log("list: " + list);
                 fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/cards/' + Number(localStorage.getItem('playerID')),
                     {
                         method: "PUT",
@@ -69,14 +69,19 @@ export default function WhiteCards() {
                     .then(res => {
                         if (res.ok) {
                             console.log("cards have been offered.");
-                            setAlreadyOffered(true);
+
                         }
                         return res
                     })
                     .then(response => response.json())
-                    getOffers();
-                }
-            
+                    
+            }
+            //show offers, once all players selected cards
+            if (waitingPlayers === 0) {
+                setList([]);
+                getOffers(); 
+            }
+
         }, 500);
         return () => clearInterval(interval);
     })
@@ -84,11 +89,10 @@ export default function WhiteCards() {
 
     //make an offer cards list
     function makeList(id) {
-        console.log("card ID: " + id);
+
         if (list.length === spaces) {
             console.log('No more cards can be added.');
         } else {
-
             const newSelection = [...list]
             newSelection.push(id);
             setList(newSelection);
@@ -98,66 +102,86 @@ export default function WhiteCards() {
 
     //get offers for display
     function getOffers() {
-        if(cardsOffered === true){ 
         fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')))
             .then(res => res.json())
             .then(data => {
-                console.log("offers: " + JSON.stringify(data.offers));
+                
                 setOffers(data.offers);
             })
-        }
     }
-    
+
     //Choose a winning card from offers
-    function chooseWinner() {
+    function chooseWinner(id) {
+
+        fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')))
+        .then(res => res.json())
+        .then(data => {
+
+            for(var i = 0; i < data.offers.length; i++){
+
+                if(data.offers[i].length>0){
+
+                for(var j = 0; j < data.offers[i].length; j++){
+                    if(data.offers[i][j].id === id ){
+                        console.log("GOT the winner ID");
+                        for(var k = 0; k < data.offers[i].length; k++){
+                            helpArray[k]=data.offers[i][k].id;
+                        }
+
+                }}}
+            } console.log("Winner ID List:" + helpArray);
+        
+
         fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')),
             {
                 method: "PUT",
-                body: JSON.stringify({ cards: list }),
+                body: JSON.stringify({ cards: helpArray }),
                 headers: { "Content-Type": "application/json" }
-            }).then(res => {
-                if (res.ok) {
-                    //list = [];
-                setAlreadyOffered(false);
-                }
-                return res
             })
             .then(res => res.json())
+
+            })
     }
 
     if ({ running }.running === true) {
-        console.log("list: " + list.length)
-        if (waitingPlayers === 0 && list.length !== 0) {
+        if (waitingPlayers === 0 && offers !== undefined) {
 
             //visible offer cards
             //console.log("all players put in their offer");
-            
+
             const filtered = offers.filter(offer => {
                 if (Object.keys(offer).length !== 0) {
                     return true;
                 } return false;
             });
+
             return (
                 <>
                     <div id='offeredCards' className='gameDiv cardsBackground'>
 
                         {filtered.map((offer) => (
-                                <div className='card white' onClick={() => chooseWinner()}>
-
-                                    {offer.map((text) => {
-                                        return <p key={text.id}> -{text.text}-</p>
-                                    })}
+                            
+                            <>
+                                {offer.map((text) => {
+                                    return (
+                                    <div className='card white' onClick={() => chooseWinner(text.id)}>
                                     
-                               </div>
+                                    <p key={text.id}> {text.text} </p>
+                                    
+                                    </div>);
+                                })}
+
+                            </>
+
                         ))}
                     </div>
-                        <div id='playerCards' className='gameDiv cardsBackground'>
-                            {answer.map((text) => (
-                                <div className='card white' onClick={() => makeList(text.id)}>
-                                    <p key={text.id} >{text.text}</p>
-                                </div>
-                            ))}
-                        </div>
+                    <div id='playerCards' className='gameDiv cardsBackground'>
+                        {answer.map((text) => (
+                            <div className='card white'>
+                                <p key={text.id} >{text.text}</p>
+                            </div>
+                        ))}
+                    </div>
                 </>
             );
 
@@ -167,7 +191,6 @@ export default function WhiteCards() {
                     <div id='offeredCards' className='gameDiv cardsBackground'>
 
                         <>
-
                         </>
 
                     </div>
