@@ -27,8 +27,8 @@ export default function Game(props) {
         <PlayerPoints language={props.language}/>
       </div>
       <WhiteCards language={props.language}/>
-      <EndGame/>
       <Result language={props.language}/>
+      <EndGame/>
     </div>
 
   )
