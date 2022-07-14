@@ -13,6 +13,7 @@ export default function CurCzar(props) {
         : (content = content.English);
 
       useEffect(() =>{
+        //check if game running. if so, set czar
         const interval = setInterval(() => {
         fetch(serviceendpoint + '/games/')
         .then(res => res.json())
@@ -38,7 +39,6 @@ export default function CurCzar(props) {
         }, 1000);
         return () => clearInterval(interval);
       }, []);
-    // });
 
   return (
     <p>{content.czar} {curCzar}</p>
