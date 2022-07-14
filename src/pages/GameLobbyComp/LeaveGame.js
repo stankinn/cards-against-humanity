@@ -8,8 +8,8 @@ export default function LeaveGame(props) {
     let navigate = useNavigate();
 
     function leave(){
-        console.log("PLAYER ID: " + localStorage.getItem('playerID'));
        
+        // leaving game and returning to start-page
         fetch(serviceendpoint + '/games/'+ Number(sessionStorage.getItem('gameID')) + '/'+ Number(localStorage.getItem('playerID')), {
             method: 'PATCH',
             body: JSON.stringify({ player: localStorage.getItem('playerID'), action: "leave"}),
@@ -18,8 +18,6 @@ export default function LeaveGame(props) {
         .then(res => {
             if(res.ok){
                 sessionStorage.clear();
-                // localStorage.removeItem('gameID');
-                // localStorage.removeItem('ownerID');
                 navigate('/cards-against-humanity');
             }
             return res

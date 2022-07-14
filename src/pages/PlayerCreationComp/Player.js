@@ -11,9 +11,9 @@ export default function Player(props) {
   function setPlayer(name, id) {
     localStorage.setItem('playerName',name);
     localStorage.setItem('playerID',id);
-    console.log('Your Player: ' + playerName + '(' + playerID + ')');
   }
 
+  // button is displayed depending on whether a player exists
   useEffect(() =>{
     if(!playerID){
       document.getElementById('playBtn').classList.add('disabled');
@@ -35,6 +35,7 @@ export default function Player(props) {
       if(input === ''){
         input = 'Player69'
       }
+      // player will be set on the input
       fetch(serviceendpoint + '/players/',{
         method: 'POST',
         body:JSON.stringify({name: input}),
@@ -53,16 +54,10 @@ export default function Player(props) {
 
   function deletePlayer() {
       
-    console.log('cur PlayerID: ' + playerID)
-    fetch(serviceendpoint + '/players/')
-    .then(res => res.json())
-    .then(data => {
-      console.log('Player: ' + JSON.stringify(data.players));
-    })
-
     if(!playerID){
       console.log('No Player existing.');
     }else{
+      // the player stored in localStorage will be deleted
       fetch(serviceendpoint + '/players/' + playerID, {
         method: 'DELETE',
         headers: { "Content-Type": "application/json" }

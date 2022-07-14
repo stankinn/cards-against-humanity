@@ -4,6 +4,7 @@ import Logo from './images/HSA_Logo.png';
 import Popup from './Popups/Popup';
 import {lang} from './Languages';
 
+// menu on the top left corner with a help-section, information about HS-Anhalt, theme and language selector
 export default function Menu(props) {
 
     const [helpPopup, setHelpPopup] = useState(false);
@@ -19,6 +20,7 @@ export default function Menu(props) {
         }
       }
     
+      // open or close menu depending on status
       function menu(){
         const openElements = ['menu', 'bar1', 'bar2', 'bar3'];
         const closedElements = ['btnMenu', 'hsaLogo', 'btnInfo', 'infoPanel', 'btnHelp', 'btnLang', 'btnColor'];
@@ -56,28 +58,28 @@ export default function Menu(props) {
 
   return (
     <>
-    <Popup trigger={helpPopup} setTrigger={setHelpPopup}>
-      <h2 className='popupTitle'>{content.helpTitle}</h2>
-      <p className='popupText'>{content.helpTxt}</p>
-    </Popup>
+      <Popup trigger={helpPopup} setTrigger={setHelpPopup}>
+        <h2 className='popupTitle'>{content.helpTitle}</h2>
+        <p className='popupText'>{content.helpTxt}</p>
+      </Popup>
 
       <div id='menu'>
-      <button id='btnMenu' className='closedMenu' onClick={menu}>
-        <div id='bar1'/>
-        <div id='bar2'/>
-        <div id='bar3'/>
-      </button>
+        <button id='btnMenu' className='closedMenu' onClick={menu}>
+          <div id='bar1'/>
+          <div id='bar2'/>
+          <div id='bar3'/>
+        </button>
 
-      <select id='btnLang' className='menuBtns closedMenu' value={props.language} onChange={e => props.handleSetLanguage(e.target.value)}>
-        <option className='langOption' value="English">EN</option>
-        <option className='langOption' value="German">DE</option>
-      </select>
+        <select id='btnLang' className='menuBtns closedMenu' value={props.language} onChange={e => props.handleSetLanguage(e.target.value)}>
+          <option className='langOption' value="English">EN</option>
+          <option className='langOption' value="German">DE</option>
+        </select>
 
-      <button id='btnHelp' className='menuBtns closedMenu' onClick={openHelp}>?</button>
-        
-      <button id='btnColor' className='menuBtns closedMenu' onClick={changeTheme}>
-        <div id='colorCircle'/>
-      </button>
+        <button id='btnHelp' className='menuBtns closedMenu' onClick={openHelp}>?</button>
+          
+        <button id='btnColor' className='menuBtns closedMenu' onClick={changeTheme}>
+          <div id='colorCircle'/>
+        </button>
       </div>
 
       <div id='infoPanel' className='closedInfo closedMenu'>

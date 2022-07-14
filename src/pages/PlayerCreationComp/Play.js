@@ -18,6 +18,8 @@ export default function Play(props) {
             console.log('No PLayer existing.')
         } else {
 
+            
+            // creating or joining available game
             fetch(serviceendpoint + '/games/')
             .then(res =>res.json())
             .then(data => {
@@ -49,11 +51,7 @@ export default function Play(props) {
 
     function addGame() {
 
-        //neues Spiel wird erstellt mit eigener SpielerID
-
-        console.log('playerID: ' + playerID)
-        console.log('NumberplayerID: ' + Number(localStorage.getItem('playerID')))
-
+        // new game with own playerID will be created and navigate to gameLobby
         fetch(serviceendpoint + '/games/', {
             method: 'POST',
             body: JSON.stringify({ owner: Number(localStorage.getItem('playerID'))}),
@@ -76,6 +74,7 @@ export default function Play(props) {
 
     function joinGame() {
 
+        // joining available game and navigate to gameLobby
         fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
             method: 'PATCH',
             body: JSON.stringify({ player: Number(localStorage.getItem('playerID')), action: "join" }),

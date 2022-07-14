@@ -38,8 +38,7 @@ export default function CurCzar(props) {
         }, 1000);
         return () => clearInterval(interval);
       }, []);
-    // });
-
+      
   return (
     <p>{content.czar} {curCzar}</p>
   )
