@@ -1,6 +1,7 @@
 import React from 'react'
 import { serviceendpoint } from './Imports'
 
+// only a debugging function
 export default function DeleteAll() {
 
     function deleteAllGames(){
@@ -8,7 +9,6 @@ export default function DeleteAll() {
         .then(res => res.json())
         .then(data => {
             console.log('There are still ' + data.games.length + ' Games')
-            // for(var i = 0; i < data.games.length; i++){
                 if(data.games[data.games.length-1].running === true){
                     fetch(serviceendpoint + '/games/' + data.games[data.games.length-1].id + '/' + data.games[data.games.length-1].owner.id, {
                         method: "PATCH",
@@ -34,8 +34,6 @@ export default function DeleteAll() {
                 .catch((error) => {
                   console.error('Error:', error);
                 });
-    
-            // }
         })
         .catch((error) => {
           console.error('Error:', error);

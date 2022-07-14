@@ -8,6 +8,7 @@ export default function Result(props) {
     const [lostPopup, setLostPopup] = useState(false);
     const [wonPopup, setWonPopup] = useState(false);
 
+    // if there is a winner an animation depending on the own result will be shown
     useEffect(() =>{
         const interval = setInterval(() => {
             fetch(serviceendpoint + '/games/')
@@ -15,9 +16,7 @@ export default function Result(props) {
             .then(data => {
               for(var i = 0; i < data.games.length; i++){
                 if(data.games[i].id === Number(sessionStorage.getItem('gameID'))){
-                    // console.log('.winner: ' + data.games[i].winner);
                     if(data.games[i].winner){
-                        console.log('there is a winner: ' + JSON.stringify(data.games[i].winner))
                         if(data.games[i].winner.id === Number(localStorage.getItem('playerID'))){
                             setWonPopup(true);
                         }else{

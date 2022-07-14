@@ -17,6 +17,7 @@ export default function PlayerList(props) {
       ? (content = content.German)
       : (content = content.English);
 
+      // look every second if the game is running and navigate to game if it is
     useEffect(() => {
         const interval = setInterval(() => {
         fetch(serviceendpoint + '/games/')
@@ -25,7 +26,6 @@ export default function PlayerList(props) {
             if (data.games.length !== 0) {
                 for (var i = 0; i < data.games.length; i++) {
                     if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
-                        // console.log(data.games[i].running);
                         if(data.games[i].running === true)
                         navigate('/game');
                     }
@@ -40,6 +40,7 @@ export default function PlayerList(props) {
 
     function showPlayer() {
         
+        // add players that are in the game to the list and show the play-button (only for the owner) if there are 3 or more players
         fetch(serviceendpoint + '/games/')
             .then(res => res.json())
             .then(data => {
@@ -60,7 +61,6 @@ export default function PlayerList(props) {
                         }
                     }
                 }
-                //console.log("PLAYERS IN THIS GAME: " + playerLength)
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -69,36 +69,33 @@ export default function PlayerList(props) {
 
     function startGame() {
 
+        // start the game if the player is the owner
         fetch(serviceendpoint + '/games/')
-            .then(res => res.json())
-            .then(data => {
-                for (var i = 0; i < data.games.length; i++) {
-                    if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
-                        if (data.games[i].owner.id === Number(sessionStorage.getItem('ownerID'))) {
-                            console.log('OWNER CORRECT');
-                            if (data.games[i].owner.id === Number(sessionStorage.getItem('ownerID'))) {
-                                console.log('YOU ARE THE OWNER');
-
-                                fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
-                                    method: "PATCH",
-                                    body: JSON.stringify({ action: "start" }),
-                                    headers: { "Content-Type": "application/json" }
-                                })
-                                    .then(res => {
-                                        if (res.ok) {
-                                            navigate('/game');
-                                        }
-                                        return res
-                                    })
-                                    .then(res => res.json())
-                                    .catch((error) => {
-                                        console.error('Error:', error);
-                                    });
+        .then(res => res.json())
+        .then(data => {
+            for (var i = 0; i < data.games.length; i++) {
+                if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
+                    if (data.games[i].owner.id === Number(sessionStorage.getItem('ownerID'))) {
+                    
+                        fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
+                            method: "PATCH",
+                            body: JSON.stringify({ action: "start" }),
+                            headers: { "Content-Type": "application/json" }
+                        })
+                        .then(res => {
+                            if (res.ok) {
+                                navigate('/game');
                             }
-                        }
+                            return res
+                        })
+                        .then(res => res.json())
+                        .catch((error) => {
+                            console.error('Error:', error);
+                        });
                     }
                 }
-            })
+            }
+        })
 
     }
 
