@@ -11,6 +11,7 @@ export default function WhiteCards() {
     let [spaces, setSpaces] = useState();   // how many cards need to be selected
     let [offers, setOffers] = useState();   // get offered cards
     let [waitingPlayers, setPlayers] = useState();  //how many players have to make their offers
+    var helpArray = [];
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -56,7 +57,7 @@ export default function WhiteCards() {
                 });
 
             //offer cards, if enough cards have been selected
-            //console.log("OFFERED?: " + cardsOffered);
+
             if (list.length === spaces && waitingPlayers > 0) {
                 console.log("list: " + list);
                 fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/cards/' + Number(localStorage.getItem('playerID')),
@@ -73,10 +74,11 @@ export default function WhiteCards() {
                         return res
                     })
                     .then(response => response.json())
-
+                    
             }
             //show offers, once all players selected cards
             if (waitingPlayers === 0) {
+                setList([]);
                 getOffers(); 
             }
 
@@ -109,17 +111,36 @@ export default function WhiteCards() {
     }
 
     //Choose a winning card from offers
-    function chooseWinner() {
+    function chooseWinner(id) {
+
+        fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')))
+        .then(res => res.json())
+        .then(data => {
+
+            for(var i = 0; i < data.offers.length; i++){
+
+                if(data.offers[i].length>0){
+
+                for(var j = 0; j < data.offers[i].length; j++){
+                    if(data.offers[i][j].id === id ){
+                        console.log("GOT the winner ID");
+                        for(var k = 0; k < data.offers[i].length; k++){
+                            helpArray[k]=data.offers[i][k].id;
+                        }
+
+                }}}
+            } console.log("Winner ID List:" + helpArray);
+        
 
         fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')),
             {
                 method: "PUT",
-                body: JSON.stringify({ cards: list }),
+                body: JSON.stringify({ cards: helpArray }),
                 headers: { "Content-Type": "application/json" }
             })
             .then(res => res.json())
 
-            
+            })
     }
 
     if ({ running }.running === true) {
@@ -139,13 +160,18 @@ export default function WhiteCards() {
                     <div id='offeredCards' className='gameDiv cardsBackground'>
 
                         {filtered.map((offer) => (
-                            <div className='card white' onClick={() => chooseWinner()}>
-
+                            
+                            <>
                                 {offer.map((text) => {
-                                    return <p key={text.id}> -{text.text}- </p>
+                                    return (
+                                    <div className='card white' onClick={() => chooseWinner(text.id)}>
+                                    
+                                    <p key={text.id}> {text.text} </p>
+                                    
+                                    </div>);
                                 })}
 
-                            </div>
+                            </>
 
                         ))}
                     </div>
