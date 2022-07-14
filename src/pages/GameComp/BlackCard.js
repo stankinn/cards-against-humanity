@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../components-styles/Cards.css'
 import { useState, useEffect } from 'react';
-import { serviceendpoint, playerID } from '../Imports';
+import { serviceendpoint } from '../Imports';
 
 var cardText = [];
 var str = '';
@@ -19,7 +19,7 @@ export default function BlackCard() {
             .then(response => response.json())
             .then(data => {
                 for (var i = 0; i < data.games.length; i++) {
-                    //check if game is running: if so, display text
+                    //check if selected game is running: if so, set prompt and running state
                     if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
                         if (data.games[i].running === true) {
                             fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')))
@@ -50,7 +50,7 @@ export default function BlackCard() {
     return () => clearInterval(interval);
     }, [])
 
-
+//display of text
     if ({ running }.running === true) {
         return (
             <>
@@ -66,7 +66,7 @@ export default function BlackCard() {
             <>
                 <div className='card black'>
 
-                    <p></p>
+                    <p> </p>
 
                 </div>
             </>
