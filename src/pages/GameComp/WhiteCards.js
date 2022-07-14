@@ -149,7 +149,6 @@ export default function WhiteCards() {
                                     })}
                                     
                                </div>
-                            
                         ))}
                     </div>
                         <div id='playerCards' className='gameDiv cardsBackground'>
