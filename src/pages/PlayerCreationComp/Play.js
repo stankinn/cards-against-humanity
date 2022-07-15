@@ -4,8 +4,7 @@ import { serviceendpoint} from '../Imports';
 import { lang } from '../../Languages';
 
 export default function Play(props) {
-
-    const playerID = Number(localStorage.getItem('playerID'));
+    
     let navigate = useNavigate();
 
     function setGameID(id) {

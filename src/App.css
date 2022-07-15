@@ -3,6 +3,7 @@
   font-family: 'Open Sans';
   --bg-color: rgb(25, 25, 25);
   --bg-cards: rgb(40, 40, 40);
+  --ol-color: rgb(0,0,0,0.8);
   --next-bg-color: white;
   --txt-color: white;
   --btn-color: var(--txt-color);

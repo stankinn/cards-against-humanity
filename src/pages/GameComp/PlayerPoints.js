@@ -11,15 +11,13 @@ export default function PlayerPoints(){
 
     useEffect(() =>{
         const interval = setInterval(() => { 
-            
             showPlayer();
-           // console.log(JSON.stringify("final List: " + finalList))
         }, 1000);
         return () => clearInterval(interval);
     });
 
     function showPlayer() {
- 
+ //get players in the game, set them as state
        fetch(serviceendpoint + '/games/')
         .then(res => res.json())
         .then(data => {
@@ -39,6 +37,7 @@ export default function PlayerPoints(){
         .catch((error) => {
             console.error('Error:', error);
         });
+        //make list of players with their points and their ids. this is the final player list for display
         fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')))
         .then(res => res.json())
         .then(data => {
