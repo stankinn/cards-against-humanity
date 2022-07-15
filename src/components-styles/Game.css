@@ -58,6 +58,7 @@
     background-color: var(--ol-color);
     border: .5rem solid var(--ol-color);
     z-index:9;
+    font-size: 2em;
 }
 
 .CzarText{

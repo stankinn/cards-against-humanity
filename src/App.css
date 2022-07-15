@@ -42,6 +42,7 @@ body[data-theme='light-theme']{
   --txt-color: black;
   --btn-color: var(--txt-color);
   --bg-cards: rgb(200, 200, 200);
+  --ol-color: rgba(128, 128, 128, 0.8);
 }
 
 body[data-theme='purple-theme']{
@@ -50,6 +51,7 @@ body[data-theme='purple-theme']{
   --txt-color: rgb(73, 178, 204);
   --btn-color: var(--txt-color);
   --bg-cards: rgb(74, 64, 96);
+  --ol-color: rgba(38, 28, 59, 0.8);
 }
 
 button:hover{
