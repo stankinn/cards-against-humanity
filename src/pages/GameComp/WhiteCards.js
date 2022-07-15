@@ -86,13 +86,12 @@ export default function WhiteCards(props) {
             }
             //show offers, once all players selected cards
             if (waitingPlayers === 0) {
-                  //added overlay if you are the czar
     
                 setList([]);
                 getOffers();
             }
             
-        //if you are the czar and still waiting for players, display text on screen
+        //if you are the czar and still waiting for players, display overlay on screen
         if (czarID === Number(localStorage.getItem('playerID')) && waitingPlayers > 0) {
         
         document.getElementById('overlay').style.visibility = "visible";
