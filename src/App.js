@@ -1,8 +1,8 @@
 import './App.css';
 import React, {useState} from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Menu from './Menu';
-import {PlayerCreation ,Game, GameLobby, ErrorPage} from './pages';
+import {PlayerCreation ,Game, GameLobby, ErrorPage, CardPacks} from './pages';
 
 
 export default function App(){
@@ -18,11 +18,16 @@ export default function App(){
 
 
   return(     
+
+    
     <Router>
+
+    <button className='addBtn'><Link to= './packInfo'> Packs </Link></button>
       <Routes>
         <Route path='/cards-against-humanity' element={<PlayerCreation language={language}/>}/>
         <Route path='/gameLobby' element={<GameLobby language={language}/>}/>
         <Route path='/game' element={<Game language={language}/>}/>
+        <Route path='/packInfo' element={<CardPacks/>}/>
         <Route path='*' element={<ErrorPage language={language}/>}/>
       </Routes>
       <Menu language={language} handleSetLanguage={language =>{
@@ -30,5 +35,6 @@ export default function App(){
         storeLanguage(language);
       }}/>
     </Router>
+  
   )
 }
