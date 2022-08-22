@@ -23,7 +23,7 @@ export default function WhiteCards(props) {
     useEffect(() => {
         const interval = setInterval(() => {
             //set running state and white cards
-            fetch('https://gruppe7.toni-barth.com/games/')
+            fetch(serviceendpoint + '/games/')
                 .then(response => response.json())
                 .then(data => {
                     for (var i = 0; i < data.games.length; i++) {
