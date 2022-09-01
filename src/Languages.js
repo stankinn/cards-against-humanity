@@ -30,6 +30,7 @@ export let lang = {
         deleteButton: 'DELETE GAME',
 
         czar:'czar: ',
+        czarWarning: 'You are the Czar.',
         playerPoints:'Points: ',
 
         playerWon:'YOU WON',
@@ -68,6 +69,7 @@ export let lang = {
         deleteButton: 'SPIEL LÖSCHEN',
 
         czar:'Zar: ',
+        czarWarning:'Du bist der Zar.',
         playerPoints:'Punkte: ',
 
         playerWon:'GEWONNEN',

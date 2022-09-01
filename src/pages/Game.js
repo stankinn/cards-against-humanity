@@ -24,12 +24,13 @@ export default function Game(props) {
 
       <div id='gameInfo' className='gameDiv'>
         <CurCzar language={props.language}/>
+
         <PlayerPoints language={props.language}/>
       </div>
+
       <WhiteCards language={props.language}/>
       <Result language={props.language}/>
       <EndGame/>
     </div>
-
   )
 }

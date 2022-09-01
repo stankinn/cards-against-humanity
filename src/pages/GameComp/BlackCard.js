@@ -15,7 +15,7 @@ export default function BlackCard() {
     
     useEffect(() => {
         const interval = setInterval(() => {
-        fetch('https://gruppe7.toni-barth.com/games/')
+        fetch(serviceendpoint + '/games/')
             .then(response => response.json())
             .then(data => {
                 for (var i = 0; i < data.games.length; i++) {

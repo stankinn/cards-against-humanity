@@ -2,8 +2,9 @@ import React from 'react';
 import '../../components-styles/Cards.css'
 import { serviceendpoint } from '../Imports';
 import { useState, useEffect } from 'react';
+import {lang} from '../../Languages';
 
-export default function WhiteCards() {
+export default function WhiteCards(props) {
 
     let [answer, setAnswer] = useState([]); // white cards text in general
     let [running, setRunning] = useState(); // check if game is running
@@ -11,12 +12,18 @@ export default function WhiteCards() {
     let [spaces, setSpaces] = useState();   // how many cards need to be selected
     let [offers, setOffers] = useState();   // get offered cards
     let [waitingPlayers, setPlayers] = useState();  //how many players have to make their offers
+    let [czarID, setCzarID] = useState();   //Czar ID for warning display
     var helpArray = [];
+
+    let content = lang;
+    props.language === "German"
+      ? (content = content.German)
+      : (content = content.English);
 
     useEffect(() => {
         const interval = setInterval(() => {
             //set running state and white cards
-            fetch('https://gruppe7.toni-barth.com/games/')
+            fetch(serviceendpoint + '/games/')
                 .then(response => response.json())
                 .then(data => {
                     for (var i = 0; i < data.games.length; i++) {
@@ -42,22 +49,23 @@ export default function WhiteCards() {
                         }
                     }
                 })
+
             //set space number from black card and waiting for players state
             fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')))
                 .then(response => response.json())
                 .then(data => {
                     var spaceNumber = data.currentBlackCard.pick;
                     var waiting = data.waitingForPlayers;
+                    var czar = data.czar.id;
                     setSpaces(spaceNumber);
                     setPlayers(waiting);
-
+                    setCzarID(czar);
                 })
                 .catch((error) => {
                     console.error('Error:', error);
                 });
 
             //offer cards, if enough cards have been selected
-
             if (list.length === spaces && waitingPlayers > 0) {
                 console.log("list: " + list);
                 fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/cards/' + Number(localStorage.getItem('playerID')),
@@ -78,9 +86,18 @@ export default function WhiteCards() {
             }
             //show offers, once all players selected cards
             if (waitingPlayers === 0) {
+    
                 setList([]);
                 getOffers();
             }
+            
+        //if you are the czar and still waiting for players, display overlay on screen
+        if (czarID === Number(localStorage.getItem('playerID')) && waitingPlayers > 0) {
+        
+        document.getElementById('overlay').style.visibility = "visible";
+        } else {
+        document.getElementById('overlay').style.visibility = "hidden";
+        }
 
         }, 500);
         return () => clearInterval(interval);
@@ -113,6 +130,7 @@ export default function WhiteCards() {
     //Choose a winning card from offers
     function chooseWinner(id) {
 
+        //search for correct offer and set it to a helping array
         fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')))
             .then(res => res.json())
             .then(data => {
@@ -123,7 +141,6 @@ export default function WhiteCards() {
 
                         for (var j = 0; j < data.offers[i].length; j++) {
                             if (data.offers[i][j].id === id) {
-                                console.log("GOT the winner ID");
                                 for (var k = 0; k < data.offers[i].length; k++) {
                                     helpArray[k] = data.offers[i][k].id;
                                 }
@@ -131,9 +148,8 @@ export default function WhiteCards() {
                             }
                         }
                     }
-                } console.log("Winner ID List:" + helpArray);
-
-
+                }
+                //use array to set the winning cards
                 fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')),
                     {
                         method: "PUT",
@@ -149,8 +165,6 @@ export default function WhiteCards() {
         if (waitingPlayers === 0 && offers !== undefined) {
 
             //visible offer cards
-            //console.log("all players put in their offer");
-
             const filtered = offers.filter(offer => {
                 if (Object.keys(offer).length !== 0) {
                     return true;
@@ -177,6 +191,7 @@ export default function WhiteCards() {
 
                         ))}
                     </div>
+                    <div id='overlay'> {content.czarWarning}</div>
                     <div id='playerCards' className='gameDiv cardsBackground'>
                         {answer.map((text) => (
                             <div className='card white'>
@@ -196,7 +211,7 @@ export default function WhiteCards() {
                         </>
 
                     </div>
-
+                    <div id='overlay'> {content.czarWarning}</div>
                     <div id='playerCards' className='gameDiv cardsBackground'>
                         {answer.map((text) => (
                             <div className='card white' onClick={() => makeList(text.id)}>
@@ -219,7 +234,6 @@ export default function WhiteCards() {
                     </>
 
                 </div>
-                
                 <div id='playerCards' className='gameDiv cardsBackground'>
                     <div className='card white'>
                         <p> </p>

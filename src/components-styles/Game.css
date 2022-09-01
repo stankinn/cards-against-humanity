@@ -45,6 +45,26 @@
     border-bottom: 0;
 }
 
+#overlay{
+    position: absolute;
+    visibility: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 50%;
+    margin-top: -5rem;
+    width: 100%;
+    height: 10rem;
+    background-color: var(--ol-color);
+    border: .5rem solid var(--ol-color);
+    z-index:9;
+    font-size: 2em;
+}
+
+.CzarText{
+    font-weight: bold;
+}
+
 .playerPoints{
     max-height: var(--cards-height);
     width: 100%;
