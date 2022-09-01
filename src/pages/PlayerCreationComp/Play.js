@@ -1,5 +1,5 @@
 import React from 'react'
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, Link} from 'react-router-dom';
 import { serviceendpoint} from '../Imports';
 import { lang } from '../../Languages';
 
@@ -16,35 +16,8 @@ export default function Play(props) {
         if (document.getElementById('playBtn').classList.contains('disabled')) {
             console.log('No PLayer existing.')
         } else {
-
-            
             // creating or joining available game
-            fetch(serviceendpoint + '/games/')
-            .then(res =>res.json())
-            .then(data => {
-                console.log(data.games.length)
-                if (data.games.length !== 0) {
-                    for (var i = 0; i < data.games.length; i++) {
-                        if (data.games[i].running === false) {
-                            if(!sessionStorage.getItem('gameID')){
-                                console.log('try joing game ' + data.games[i].id + '...')
-                                setGameID(data.games[i].id);
-                                joinGame();
-                            }
-                        }
-                    }
-                    if(!sessionStorage.getItem('gameID')){
-                        console.log('try creating...')
-                        addGame();
-                    }
-                } else {
-                    console.log('try creating...')
-                    addGame();
-                }
-            })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
+            navigate('/lobby');
         }
     }
 
@@ -99,7 +72,7 @@ export default function Play(props) {
     
     return (
         <>
-            <button id='playBtn' className='continueBtn' onClick={checkGames}>{content.playButton}</button>
+            <button id='playBtn' className='continueBtn' onClick={() => checkGames()}>{content.playButton}</button>
         </>
     );
 

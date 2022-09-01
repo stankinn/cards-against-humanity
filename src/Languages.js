@@ -24,6 +24,8 @@ export let lang = {
         addBtn:'create new',
         playButton:'PLAY',
 
+        noGames: 'No games available. Please create a new game.',
+
         headerG:'Game-ID: ',
         startButton:'START GAME',
         leaveButton: 'LEAVE GAME',
@@ -62,6 +64,8 @@ export let lang = {
         delBtn:'löschen',
         addBtn:'neu erstellen',
         playButton:'SPIELEN',
+
+        noGames: 'Keine Spiele vorhanden. Bitte erstelle ein neues.',
 
         headerG:'Spiel-ID: ',
         startButton:'SPIEL STARTEN',
