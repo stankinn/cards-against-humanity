@@ -25,6 +25,10 @@ export let lang = {
         playButton:'PLAY',
 
         noGames: 'No games available. Please create a new game.',
+        noGameClicked: 'please select a game',
+        infoPlayer: 'players in this Game: ',
+        infoPacks: 'card-packs in this Game: ',
+        infoGoal: 'how many points to win: ',
 
         headerG:'Game-ID: ',
         startButton:'START GAME',
@@ -66,6 +70,10 @@ export let lang = {
         playButton:'SPIELEN',
 
         noGames: 'Keine Spiele vorhanden. Bitte erstelle ein neues.',
+        noGameClicked: 'Bitte ein Spiel auswählen',
+        infoPlayer: 'Spieler im Spiel: ',
+        infoPacks: 'Karten-Packs im Spiel: ',
+        infoGoal: 'Punkte-Ziel: ',
 
         headerG:'Spiel-ID: ',
         startButton:'SPIEL STARTEN',
