@@ -25,8 +25,6 @@ export default function App() {
   return (
 
     <Router>
-
-      <Link to='./packInfo'><button className='addBtn'> Packs </button></Link>
       <Routes>
         <Route path='/cards-against-humanity' element={<PlayerCreation language={language} />} />
         <Route path='/lobby' element={<Lobby language={language} />} />

@@ -15,7 +15,7 @@
 #menu.open{
   top: 0;
   height: 3.15rem;
-  width: 12rem;
+  width: 15rem;
   border-radius: 0 0 0.5rem 0.5rem;
   transition-delay: .1ms;
 }
@@ -74,12 +74,12 @@
   color: var(--btn-color);
 }
 
-.menuBtns:hover, #btnMenu:hover, #colorCirlce:hover, #btnClose:hover{
+.menuBtns:hover, #btnMenu:hover, #colorCirlce:hover, #btnClose:hover, #cardTop:hover, #cardBot:hover{
   cursor: pointer;
   --btn-color: var(--hs-red);
 }
   
-#btnLang.closedMenu, #btnHelp.closedMenu , #btnColor.closedMenu{
+#btnLang.closedMenu, #btnHelp.closedMenu , #btnColor.closedMenu, #btnPacks.closedMenu{
   margin-top: -6rem;
   transition-delay: 0.1ms;
 }
@@ -110,6 +110,32 @@
   border-radius: 100%;
   border: 0.25rem solid var(--btn-color);
   background-color: var(--next-bg-color);
+}
+
+#btnPacks{
+  margin-left: 12.1rem;
+  width: 2.7rem;
+}
+
+#cardTop, #cardBot{
+  width: 1.5rem;
+  height: 2rem;
+  border-radius: 10%;
+  border: 0.15rem solid var(--btn-color);
+}
+
+#cardTop{
+  margin-top: -2.15rem;
+  margin-left: .6rem;
+  background-color: var(--bg-color);
+  transform: rotate(10deg);
+}
+
+#cardBot{
+  margin-top: -.1rem;
+  margin-left: .1rem;
+  background-color: var(--btn-color);
+  transform: rotate(-15deg);
 }
   
 #infoPanel{

@@ -2,9 +2,12 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { serviceendpoint } from '../Imports';
 import { lang } from '../../Languages';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import '../../components-styles/Packs.css';
 
 export default function GetAllPacks(props) {
+    
+    let navigate = useNavigate();
 
     let content = lang;
     props.language === "German"
@@ -55,6 +58,7 @@ export default function GetAllPacks(props) {
                     );
                 })}
             </div>
+            <button className='smallArrow' onClick={() => navigate(-1)}/>
         </>
 
     );
