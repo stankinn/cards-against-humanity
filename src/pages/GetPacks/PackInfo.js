@@ -1,8 +1,12 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { serviceendpoint } from '../Imports';
+import { useNavigate } from 'react-router-dom';
+import '../../components-styles/Packs.css'
 
 export default function GetPackInfo() {
+
+    let navigate = useNavigate();
 
     let [packWhiteCards, setWhiteCards] = useState([]);
     let [packBlackCards, setBlackCards] = useState([]);
@@ -63,6 +67,8 @@ export default function GetPackInfo() {
                     );
                 })}
             </>
+            
+            <button className='smallArrow' onClick={() => navigate(-1)}/>
         </>
 
     );
