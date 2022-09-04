@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { serviceendpoint } from '../Imports';
+import {useNavigate} from 'react-router-dom';
 import { lang } from '../../Languages';
+import '../../components-styles/Lobby.css'
 
 export default function PlayerList(props) {
+
+    let navigate = useNavigate();
 
     let [gameList, setGList] = useState([]);
     let [clickedGame, setClicked] = useState([]);
@@ -20,16 +24,13 @@ export default function PlayerList(props) {
     useEffect(() => {
         const interval = setInterval(() => {
 
-            // console.log('Players: ' + JSON.stringify(playerList));
-            // console.log('Pakcs: ' + JSON.stringify(packList));
-            // console.log('Goal: ' + JSON.stringify(curGoal));
-
             getGamesList();
-            if(clickedGame.length === 0){
+            if(clickedGame.length === 0 || gameList.length === 0){
                 setClicked(content.noGameClicked);
                 setPlayers([]);
                 setPacks([]);
                 setGoal(null);
+                // document.getElementById('joinBtn').classList.add('disabled');
             }
 
         }, 500);
@@ -50,6 +51,7 @@ export default function PlayerList(props) {
 
     function updateInfo(clickedID){
         setClicked(clickedID);
+        document.getElementById('joinBtn').classList.remove('disabled');
 
         fetch(serviceendpoint + '/games/')
         .then(response => response.json())
@@ -87,6 +89,31 @@ export default function PlayerList(props) {
             });
     }
 
+    function joinGame(){
+        if(!document.getElementById('joinBtn').classList.contains('disabled')){
+
+            sessionStorage.setItem('gameID', clickedGame);
+
+            // joining available game and navigate to gameLobby
+            fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
+                method: 'PATCH',
+                body: JSON.stringify({ player: Number(localStorage.getItem('playerID')), action: "join" }),
+                headers: { "Content-Type": "application/json" }
+            })
+            .then(res => {
+                if(res.ok){
+                    console.log('joined game ' + Number(sessionStorage.getItem('gameID')) + ' successful.');
+                    navigate('./' + Number(sessionStorage.getItem('gameID')))
+                }
+                return res
+            })
+            .then(res => res.json())
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    }
+
 
     if (gameList.length === 0) {
         return (
@@ -111,6 +138,7 @@ export default function PlayerList(props) {
                     </div>
                     <p>{content.infoGoal} {curGoal}</p>
                 </div>
+                <button id='joinBtn' className='continueBtn disabled' onClick={joinGame}>{content.join}</button>
             </>
         );
     } else {
@@ -141,6 +169,7 @@ export default function PlayerList(props) {
                     </div>
                     <p>{content.infoGoal} {curGoal}</p>
                 </div>
+                <button id='joinBtn' className='continueBtn disabled' onClick={joinGame}>{content.join}</button>
             </>
         );
     }
