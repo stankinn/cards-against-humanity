@@ -29,6 +29,7 @@ export let lang = {
         infoPlayer: 'players in this Game: ',
         infoPacks: 'card-packs in this Game: ',
         infoGoal: 'how many points to win: ',
+        join: 'join',
 
         headerG:'Game-ID: ',
         startButton:'START GAME',
@@ -74,6 +75,7 @@ export let lang = {
         infoPlayer: 'Spieler im Spiel: ',
         infoPacks: 'Karten-Packs im Spiel: ',
         infoGoal: 'Punkte-Ziel: ',
+        join: 'beitreten',
 
         headerG:'Spiel-ID: ',
         startButton:'SPIEL STARTEN',

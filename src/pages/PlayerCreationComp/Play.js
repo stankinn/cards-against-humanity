@@ -23,7 +23,7 @@ export default function Play(props) {
 
     function addGame() {
 
-        // new game with own playerID will be created and navigate to gameLobby
+        // new game with own playerID will be created and navigate to lobby
         fetch(serviceendpoint + '/games/', {
             method: 'POST',
             body: JSON.stringify({ owner: Number(localStorage.getItem('playerID'))}),
@@ -34,7 +34,7 @@ export default function Play(props) {
             setGameID(data.id);
             sessionStorage.setItem('ownerID', data.owner.id);
             console.log('created game ' + Number(sessionStorage.getItem('gameID')) + ' successful.');
-            navigate('/gameLobby');
+            navigate('/lobby');
                 
         })
         .catch((error) => {
@@ -46,7 +46,7 @@ export default function Play(props) {
 
     function joinGame() {
 
-        // joining available game and navigate to gameLobby
+        // joining available game and navigate to lobby
         fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
             method: 'PATCH',
             body: JSON.stringify({ player: Number(localStorage.getItem('playerID')), action: "join" }),
@@ -55,7 +55,7 @@ export default function Play(props) {
         .then(res => {
             if(res.ok){
                 console.log('joined game ' + Number(sessionStorage.getItem('gameID')) + ' successful.');
-                navigate('/gameLobby');
+                navigate('/lobby');
             }
             return res
         })
