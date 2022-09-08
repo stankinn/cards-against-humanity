@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { serviceendpoint } from '../Imports';
 import {useNavigate} from 'react-router-dom';
 import { lang } from '../../Languages';
-import '../../components-styles/Lobby.css'
 
 export default function GameList(props) {
 
@@ -25,17 +24,21 @@ export default function GameList(props) {
         const interval = setInterval(() => {
 
             getGamesList();
-            if(clickedGame.length === 0 || gameList.length === 0){
+            if(clickedGame === content.noGameClicked || gameList.length === 0){
                 setClicked(content.noGameClicked);
                 setPlayers([]);
                 setPacks([]);
                 setGoal(null);
-                // document.getElementById('joinBtn').classList.add('disabled');
+                document.getElementById('joinBtn').classList.add('disabled');
             }
 
         }, 500);
         return () => clearInterval(interval);
     });
+
+    useEffect(()=>{
+        updateInfo();
+    }, [clickedGame])
 
     function getGamesList() {
 
@@ -49,15 +52,15 @@ export default function GameList(props) {
             });
     }
 
-    function updateInfo(clickedID){
-        setClicked(clickedID);
+    function updateInfo(){
+        console.log('updated')
         document.getElementById('joinBtn').classList.remove('disabled');
 
         fetch(serviceendpoint + '/games/')
         .then(response => response.json())
         .then(data => {
             for (var i = 0; i < data.games.length; i++){
-                if(data.games[i].id === clickedID){
+                if(data.games[i].id === clickedGame){
                     setPlayers(data.games[i].players)
                     packDetails(data.games[i].packs)
                     setGoal(data.games[i].goal)
@@ -89,54 +92,56 @@ export default function GameList(props) {
     }
 
     function joinGame(){
-        if(!document.getElementById('joinBtn').classList.contains('disabled')){
+        // if(!document.getElementById('joinBtn').classList.contains('disabled')){
 
-            sessionStorage.setItem('gameID', clickedGame);
+        //     sessionStorage.setItem('gameID', clickedGame);
 
-            // joining available game and navigate to gameLobby
-            fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
-                method: 'PATCH',
-                body: JSON.stringify({ player: Number(localStorage.getItem('playerID')), action: "join" }),
-                headers: { "Content-Type": "application/json" }
-            })
-            .then(res => {
-                if(res.ok){
-                    console.log('joined game ' + Number(sessionStorage.getItem('gameID')) + ' successful.');
-                    navigate('./' + Number(sessionStorage.getItem('gameID')))
-                }
-                return res
-            })
-            .then(res => res.json())
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-        }
+        //     // joining available game and navigate to gameLobby
+        //     fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
+        //         method: 'PATCH',
+        //         body: JSON.stringify({ player: Number(localStorage.getItem('playerID')), action: "join" }),
+        //         headers: { "Content-Type": "application/json" }
+        //     })
+        //     .then(res => {
+        //         if(res.ok){
+        //             console.log('joined game ' + Number(sessionStorage.getItem('gameID')) + ' successful.');
+        //             navigate('./' + Number(sessionStorage.getItem('gameID')))
+        //         }
+        //         return res
+        //     })
+        //     .then(res => res.json())
+        //     .catch((error) => {
+        //         console.error('Error:', error);
+        //     });
+        // }
     }
 
 
     if (gameList.length === 0) {
         return (
             <>
-                <h1>CAH Lobby</h1>
-                <div className='list'>
+                <h1 className='header'>CAH Lobby</h1>
+                <div id='gamesList' className='list'>
                     <p>{content.noGames}</p>
                 </div>
-                <div className='list'>
-                    <h2>{content.headerG} {clickedGame}</h2>
-                    <p>{content.infoPlayer}</p>
-                    <div className='list'>
+
+                <div id='detailsList'>
+                    <p id='headerID'>{content.headerG} {clickedGame}</p>
+                    <p id='playerCont'>{content.infoPlayer}</p>
+                    <div id='playerList' className='lobbyList'>
                         {playerList.map((player) =>(
                             <p key={player.id}>{player.name} ({player.id})</p>
                         ))}
                     </div>
-                    <p>{content.infoPacks}</p>
-                    <div className='list'>
+                    <p id='packsCont'>{content.infoPacks}</p>
+                    <div id='packsList' className='lobbyList'>
                         {packList.map((pack) =>(
                             <p key={pack.id}>{pack.name}</p>
                         ))}
                     </div>
-                    <p>{content.infoGoal} {curGoal}</p>
+                    <p id='gamePoints'>{content.infoGoal} {curGoal}</p>
                 </div>
+
                 <button id='joinBtn' className='continueBtn disabled' onClick={joinGame}>{content.join}</button>
             </>
         );
@@ -144,30 +149,32 @@ export default function GameList(props) {
 
         return (
             <>
-                <h1>CAH Lobby</h1>
-                <div className='list'>
+                <h1 className='header'>CAH Lobby</h1>
+                <div id='gamesList' className='list'>
                     {gameList.map((game) => (
-                        <button id={game.id} onClick={updateInfo(game.id)}>
+                        <button id={game.id} onClick={() => setClicked(game.id)}>
                             {content.headerG} {game.id} [running?: {game.running}]
                         </button>
                     ))}
                 </div>
-                <div className='list'>
-                    <h2>{content.headerG} {clickedGame}</h2>
-                    <p>{content.infoPlayer}</p>
-                    <div className='list'>
+
+                <div id='detailsList'>
+                    <p id='headerID'>{content.headerG} {clickedGame}</p>
+                    <p id='playerCont'>{content.infoPlayer}</p>
+                    <div id='playerList' className='lobbyList'>
                         {playerList.map((player) =>(
-                            <p key={player.id}>{player.name}  ({player.id})</p>
+                            <p key={player.id}>{player.name} ({player.id})</p>
                         ))}
                     </div>
-                    <p>{content.infoPacks}</p>
-                    <div className='list'>
+                    <p id='packsCont'>{content.infoPacks}</p>
+                    <div id='packsList' className='lobbyList'>
                         {packList.map((pack) =>(
                             <p key={pack.id}>{pack.name}</p>
                         ))}
                     </div>
-                    <p>{content.infoGoal} {curGoal}</p>
+                    <p id='gamePoints'>{content.infoGoal} {curGoal}</p>
                 </div>
+
                 <button id='joinBtn' className='continueBtn disabled' onClick={joinGame}>{content.join}</button>
             </>
         );

@@ -7,13 +7,27 @@ import '../../components-styles/CreateGame.css'
 
 export default function CreateGame(props) {
 
+    const packsLength = 0;
      let content = lang;
     props.language === "German"
       ? (content = content.German)
       : (content = content.English);
 
+    fetch(serviceendpoint + '/packs/')
+    .then(response => response.json())
+    .then(data => {
+        packsLength = data.packs.length
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+
     let navigate = useNavigate();
     let [pointGoal, setGoal] = useState();
+    let [checkedPacks, setPacks] = useState(
+        new Array(packsLength).fill(false)
+    );
+    // https://www.freecodecamp.org/news/how-to-work-with-multiple-checkboxes-in-react/
 
 
     function setGameID(id) {
@@ -21,6 +35,10 @@ export default function CreateGame(props) {
     }
 
     function addGame() {
+
+        if(!pointGoal){
+            setGoal = 10;
+        }
 
         // new game with own playerID will be created and navigate to gameLobby
         fetch(serviceendpoint + '/games/', {
@@ -59,11 +77,14 @@ export default function CreateGame(props) {
       };
     
     return (
-        <>
-            <h2>Create Game</h2>
-            <input type='number' id='inputGoal' min={1} max={100} onChange={handleChange}/>
-            <button id='playBtn' className='continueBtn' onClick={() => addGame()}>Create</button>
-        </>
+        <div className='createLayout'>
+            <h2 id='headerCG'>Create Game</h2>
+            <p id='pointsCG'>Points</p>
+            <input type='number' id='inputGoal' className='input' min={1} max={100} onChange={handleChange}/>
+            <p id='packsCG'>Packs</p>
+            <div id='packsListCG' className='list'></div>
+            <button className='continueBtn' onClick={() => addGame()}>Create</button>
+        </div>
     );
 
 }

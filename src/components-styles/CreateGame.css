@@ -1,23 +1,43 @@
-#inputGoal{
-    grid-area: Input;
+.createLayout{
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+
+    grid-template:
+      'Header'
+      'Points'
+      'Input'
+      'Packs'
+      'PacksList'
+      'ContinueBtn';
+    grid-gap: 1rem;
+    
+    justify-items: safe center;
+    padding: 2rem;
+}
+
+#headerCG{
+    grid-area: Header;
+}
+
+#pointsCG{
+    grid-area: Points;
     align-self: flex-end;
 }
-#inputGoal{
-    font-size: 1rem;
-    text-align: center;
-
-    padding: .5rem;
-    border-radius: .5rem;
-    font-weight: 500;
-}
-#inputGoal{
-    height: 3rem;
-}
 
 #inputGoal{
-    background-color: white;
-    color: black;
-    border: .2rem solid var(--bg-cards);
-    font-weight: 700;
-    margin: 0;
+    grid-area: Input;
+}
+
+#packsCG{
+    grid-area: Packs;
+    align-self: flex-end;
+}
+
+#packsListCG{
+    grid-area: PacksList;
+}
+
+.continueBtn{
+    grid-area: ContinueBtn;
 }

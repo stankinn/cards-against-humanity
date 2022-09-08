@@ -40,7 +40,7 @@
     grid-area: Buttons;
 }
 
-.delBtn, .addBtn, #inputName, .continueBtn{
+.delBtn, .addBtn, input, .continueBtn{
     font-size: 1rem;
     text-align: center;
 
@@ -49,11 +49,11 @@
     font-weight: 500;
 }
 
-#inputName{
+input{
     height: 3rem;
 }
 
-.delBtn, .addBtn, #inputName{
+.delBtn, .addBtn, input{
     background-color: white;
     color: black;
     border: .2rem solid var(--bg-cards);
