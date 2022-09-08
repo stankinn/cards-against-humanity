@@ -29,6 +29,10 @@
     grid-area: Input;
 }
 
+li{
+list-style: none;}
+
+
 #packsCG{
     grid-area: Packs;
     align-self: flex-end;
