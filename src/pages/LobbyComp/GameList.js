@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import { lang } from '../../Languages';
 import '../../components-styles/Lobby.css'
 
-export default function PlayerList(props) {
+export default function GameList(props) {
 
     let navigate = useNavigate();
 
@@ -70,7 +70,6 @@ export default function PlayerList(props) {
     }
 
     function packDetails(allPacks){
-
 
             fetch(serviceendpoint + '/packs/')
             .then(response => response.json())
