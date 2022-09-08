@@ -72,7 +72,6 @@
 
 #playerCont{
     grid-area: Player;
-    align-self: flex-end;
 }
 
 #playerList{
