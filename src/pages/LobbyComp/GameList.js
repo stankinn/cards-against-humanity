@@ -92,28 +92,28 @@ export default function GameList(props) {
     }
 
     function joinGame(){
-        // if(!document.getElementById('joinBtn').classList.contains('disabled')){
+         if(!document.getElementById('joinBtn').classList.contains('disabled')){
 
-        //     sessionStorage.setItem('gameID', clickedGame);
+             sessionStorage.setItem('gameID', clickedGame);
 
-        //     // joining available game and navigate to gameLobby
-        //     fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
-        //         method: 'PATCH',
-        //         body: JSON.stringify({ player: Number(localStorage.getItem('playerID')), action: "join" }),
-        //         headers: { "Content-Type": "application/json" }
-        //     })
-        //     .then(res => {
-        //         if(res.ok){
-        //             console.log('joined game ' + Number(sessionStorage.getItem('gameID')) + ' successful.');
-        //             navigate('./' + Number(sessionStorage.getItem('gameID')))
-        //         }
-        //         return res
-        //     })
-        //     .then(res => res.json())
-        //     .catch((error) => {
-        //         console.error('Error:', error);
-        //     });
-        // }
+             //joining available game and navigate to gameLobby
+             fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
+                 method: 'PATCH',
+                 body: JSON.stringify({ player: Number(localStorage.getItem('playerID')), action: "join" }),
+                 headers: { "Content-Type": "application/json" }
+             })
+             .then(res => {
+                 if(res.ok){
+                     console.log('joined game ' + Number(sessionStorage.getItem('gameID')) + ' successful.');
+                     navigate('./' + Number(sessionStorage.getItem('gameID')))
+                 }
+                 return res
+             })
+             .then(res => res.json())
+             .catch((error) => {
+                 console.error('Error:', error);
+             });
+         }
     }
 
 
@@ -142,7 +142,7 @@ export default function GameList(props) {
                     <p id='gamePoints'>{content.infoGoal} {curGoal}</p>
                 </div>
 
-                <button id='joinBtn' className='continueBtn disabled' onClick={joinGame}>{content.join}</button>
+                <button id='joinBtn' className='continueBtn disabled' onClick={() =>joinGame()}>{content.join}</button>
             </>
         );
     } else {
@@ -175,7 +175,7 @@ export default function GameList(props) {
                     <p id='gamePoints'>{content.infoGoal} {curGoal}</p>
                 </div>
 
-                <button id='joinBtn' className='continueBtn disabled' onClick={joinGame}>{content.join}</button>
+                <button id='joinBtn' className='continueBtn disabled' onClick={() =>joinGame()}>{content.join}</button>
             </>
         );
     }
