@@ -8,12 +8,24 @@
       'Points'
       'Input'
       'Packs'
+      'SelectionBtn'
+      'DeselectionBtn'
       'PacksList'
       'ContinueBtn';
     grid-gap: 1rem;
     
     justify-items: safe center;
     padding: 2rem;
+}
+
+.selectBtn{
+    grid-area: SelectionBtn;
+    color: white;
+}
+
+.deselectBtn{
+    grid-area: DeselectionBtn;
+    color: white;
 }
 
 #headerCG{
@@ -28,10 +40,6 @@
 #inputGoal{
     grid-area: Input;
 }
-
-li{
-list-style: none;}
-
 
 #packsCG{
     grid-area: Packs;
