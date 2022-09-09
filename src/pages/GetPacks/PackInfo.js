@@ -53,20 +53,20 @@ export default function GetPackInfo() {
                     );
                 })}
             </>
-            <>
+            <div className='border'>
                 <h3 style={{color: "black"}}> Black: </h3>
                 {packBlackCards.map((black) => {
                     return (<>
 
 
-                        <h4 key={black.id} style={{color: "black"}}>
+                        <p className='packs' key={black.id} style={{color: "black"}}>
                             {black.text}
-                        </h4>
+                        </p>
 
                     </>
                     );
                 })}
-            </>
+            </div>
             
             <button className='smallArrow' onClick={() => navigate(-1)}/>
         </>

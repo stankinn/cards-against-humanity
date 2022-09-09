@@ -8,6 +8,7 @@ import '../../components-styles/Packs.css';
 export default function GetAllPacks(props) {
     
     let navigate = useNavigate();
+    let [clickedPack, setClicked] = useState([]);
 
     let content = lang;
     props.language === "German"
@@ -43,13 +44,13 @@ export default function GetAllPacks(props) {
     
     return (
         <>
-            <div className='Packs'>
+            <div className='border'>
                 {packs.map((pack) => {
 
                     return (
 
-                        <Link to={`${pack.id}`} onClick={() => getID(pack.id)}>
-                            <div className='card white'>
+                        <Link to={`${pack.id}`} onClick={() => setClicked(pack.id)}>
+                            <div className='packs'>
 
                                 <p key={pack.id}>{pack.name} (B: {pack.blackCardCount} / W: {pack.whiteCardCount}) </p>
 

@@ -1,0 +1,47 @@
+.createLayout{
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+
+    grid-template:
+      'Header'
+      'Points'
+      'Input'
+      'Packs'
+      'PacksList'
+      'ContinueBtn';
+    grid-gap: 1rem;
+    
+    justify-items: safe center;
+    padding: 2rem;
+}
+
+#headerCG{
+    grid-area: Header;
+}
+
+#pointsCG{
+    grid-area: Points;
+    align-self: flex-end;
+}
+
+#inputGoal{
+    grid-area: Input;
+}
+
+li{
+list-style: none;}
+
+
+#packsCG{
+    grid-area: Packs;
+    align-self: flex-end;
+}
+
+#packsListCG{
+    grid-area: PacksList;
+}
+
+.continueBtn{
+    grid-area: ContinueBtn;
+}
