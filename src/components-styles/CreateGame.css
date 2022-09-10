@@ -34,17 +34,17 @@
     background-color: var(--bg-cards);
     border-start-end-radius: 1rem;
     border-start-start-radius: 1rem;
-    width: 100%;
+    width: 80%;
 }
 #containerCG{
-    background-color: rgba(0, 0, 255, 0.462);
+    /* background-color: rgba(0, 0, 255, 0.462); */
     border-radius: .5rem;
 }
 #buttonsCG > button{
     float: left;
 }
 #packTitleCG{
-background-color: rgba(165, 42, 42, 0.405);
+/* background-color: rgba(165, 42, 42, 0.405); */
 }
 .checkboxCG{
     
@@ -73,7 +73,7 @@ background-color: rgba(165, 42, 42, 0.405);
 #packsListCG{
     grid-area: PacksList;
     display: grid;
-    width: 100%;
+    width: 80%;
     
     grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
     background-color: var(--bg-cards);
