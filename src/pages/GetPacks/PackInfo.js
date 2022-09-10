@@ -37,33 +37,25 @@ export default function GetPackInfo() {
 
     return (
         <>
-            <h2>{packTitle}</h2>
+            <h2 id='packTitle'>{packTitle}</h2>
 
-            <>
-                <h3 style={{color: "white"}}> White: </h3>
+            <div className='border detail'>
                 {packWhiteCards.map((white) => {
                     return (
-                        <>
+                        <div className='packs white'>
 
-                            <h4 key={white.id} style={{color: "white"}}>
-                                {white.text}
-                            </h4>
+                            <p key={white.id}>{white.text}</p>
 
-                        </>
+                        </div>
                     );
                 })}
-            </>
-            <div className='border'>
-                <h3 style={{color: "black"}}> Black: </h3>
                 {packBlackCards.map((black) => {
-                    return (<>
+                    return (
+                    <div className='packs black'>
 
+                        <p key={black.id}>{black.text}</p>
 
-                        <p className='packs' key={black.id} style={{color: "black"}}>
-                            {black.text}
-                        </p>
-
-                    </>
+                    </div>
                     );
                 })}
             </div>

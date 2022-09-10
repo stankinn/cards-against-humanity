@@ -8,11 +8,12 @@
       'Points'
       'Input'
       'Packs'
-      'SelectionBtn'
-      'DeselectionBtn'
+      /* 'SelectionBtn'
+      'DeselectionBtn' */
+      'Buttons'
       'PacksList'
       'ContinueBtn';
-    grid-gap: 1rem;
+    /* grid-gap: 1rem; */
     
     justify-items: safe center;
     padding: 2rem;
@@ -28,13 +29,35 @@
     color: white;
 }
 
+#buttonsCG{
+    grid-area: Buttons;
+    background-color: var(--bg-cards);
+    border-start-end-radius: 1rem;
+    border-start-start-radius: 1rem;
+    width: 100%;
+}
+#containerCG{
+    background-color: rgba(0, 0, 255, 0.462);
+    border-radius: .5rem;
+}
+#buttonsCG > button{
+    float: left;
+}
+#packTitleCG{
+background-color: rgba(165, 42, 42, 0.405);
+}
+.checkboxCG{
+    
+}
+
 #headerCG{
     grid-area: Header;
 }
 
 #pointsCG{
     grid-area: Points;
-    align-self: flex-end;
+    padding-top: 1rem;
+    padding-bottom: .5rem;
 }
 
 #inputGoal{
@@ -43,13 +66,43 @@
 
 #packsCG{
     grid-area: Packs;
-    align-self: flex-end;
+    padding-top: 1rem;
+    padding-bottom: .5rem;
 }
 
 #packsListCG{
     grid-area: PacksList;
+    display: grid;
+    width: 100%;
+    
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    background-color: var(--bg-cards);
+    border: .5rem solid var(--bg-cards);
+    border-end-end-radius: 1rem;
+    border-end-start-radius: 1rem;
+    overflow-y: auto;
+    grid-gap: 1rem;
 }
 
 .continueBtn{
     grid-area: ContinueBtn;
+    margin-top: 1.5rem;
+}
+
+#packsListCG::-webkit-scrollbar{
+width: .5rem;
+}
+
+#packsListCG::-webkit-scrollbar-track{
+background-color: rgba(0, 0, 0, 0.25);
+border-radius: 1rem;
+}
+
+#packsListCG::-webkit-scrollbar-thumb{
+background-color: rgba(255, 255, 255, 0.8);
+border-radius: 1rem;
+}
+
+#packsListCG::-webkit-scrollbar-thumb:hover{
+background-color: white;
 }
