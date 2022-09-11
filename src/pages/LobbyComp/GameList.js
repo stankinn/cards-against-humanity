@@ -106,7 +106,7 @@ export default function GameList(props) {
              .then(res => {
                  if(res.ok){
                      console.log('joined game ' + Number(sessionStorage.getItem('gameID')) + ' successful.');
-                     navigate('./' + Number(sessionStorage.getItem('gameID')))
+                     navigate('/lobby/' + Number(sessionStorage.getItem('gameID')));
                  }
                  return res
              })
