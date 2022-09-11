@@ -126,13 +126,13 @@ export default function CreateGame(props) {
 
     return (
         <div className='createLayout'>
-            <h2 id='headerCG'>Create Game</h2>
-            <p id='pointsCG'>Points</p>
+            <h2 id='headerCG'>{content.createGame}</h2>
+            <p id='pointsCG'>{content.points}</p>
             <input type='number' id='inputGoal' className='input' min={1} max={100} onChange={handleGoalChange} />
             <p id='packsCG'>Packs</p>
             <div id='buttonsCG'>
-                <button className='selectBtn' onClick={()=> addAllPacks()}>Select all</button>
-                <button className='deselectBtn' onClick={()=> deselectPacks()}>Deselect all</button>
+                <button className='selectBtn' onClick={()=> addAllPacks()}>{content.select}</button>
+                <button className='deselectBtn' onClick={()=> deselectPacks()}>{content.deselect}</button>
             </div>
             <div id='packsListCG'>
                 {packs.map((pack, index) => {
@@ -153,7 +153,7 @@ export default function CreateGame(props) {
                 })}
             </div>
 
-            <button className='continueBtn' onClick={() => addGame()}>Create</button>
+            <button className='continueBtn' onClick={() => addGame()}>{content.create}</button>
         </div>
     );
 
