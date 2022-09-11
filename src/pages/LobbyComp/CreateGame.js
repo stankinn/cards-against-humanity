@@ -131,23 +131,24 @@ export default function CreateGame(props) {
             <input type='number' id='inputGoal' className='input' min={1} max={100} onChange={handleGoalChange} />
             <p id='packsCG'>Packs</p>
             <div id='buttonsCG'>
-            <button className='selectBtn' onClick={()=> addAllPacks()}>Select all</button>
-            <button className='deselectBtn' onClick={()=> deselectPacks()}>Deselect all</button>
+                <button className='selectBtn' onClick={()=> addAllPacks()}>Select all</button>
+                <button className='deselectBtn' onClick={()=> deselectPacks()}>Deselect all</button>
             </div>
             <div id='packsListCG'>
                 {packs.map((pack, index) => {
                     return(
                         <div id='containerCG'>
-                            <input
-                                className='checkboxCG'
-                                id={`pack-checkbox-${index}`}
-                                type='checkbox' 
-                                key={pack.id} 
-                                value={pack.name}
-                                checked={checkedPacks[index]}
-                                onChange={()=> handleOnSelectionChange(index)}
-                            />
-                            <label id='packTitleCG' for={`pack-checkbox-${index}`}>{pack.name}</label>
+                            <div className='checkboxContainer'>
+                                <input
+                                    id={`pack-checkbox-${index}`}
+                                    type='checkbox' 
+                                    key={pack.id} 
+                                    value={pack.name}
+                                    checked={checkedPacks[index]}
+                                    onChange={()=> handleOnSelectionChange(index)}
+                                />
+                            </div>
+                            <p id='packTitleCG' for={`pack-checkbox-${index}`}>{pack.name}</p>
                         </div>);
                 })}
             </div>
