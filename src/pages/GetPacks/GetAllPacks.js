@@ -32,6 +32,11 @@ export default function GetAllPacks(props) {
         localStorage.setItem("packID", id);    
     }
 
+    const goBack = () =>{
+        localStorage.removeItem("packID", localStorage.getItem("packID"));    
+        navigate(-1);
+    }
+
     
     return (
         <>
@@ -50,7 +55,7 @@ export default function GetAllPacks(props) {
                     );
                 })}
             </div>
-            <button className='smallArrow' onClick={() => navigate(-1)}/>
+            <button className='smallArrow' onClick={() => goBack()}/>
         </>
 
     );

@@ -53,7 +53,7 @@ export default function GameList(props) {
     }
 
     function updateInfo(){
-        console.log('updated')
+
         document.getElementById('joinBtn').classList.remove('disabled');
 
         fetch(serviceendpoint + '/games/')
@@ -92,6 +92,7 @@ export default function GameList(props) {
     }
 
     function joinGame(){
+        
          if(!document.getElementById('joinBtn').classList.contains('disabled')){
 
              sessionStorage.setItem('gameID', clickedGame);
@@ -99,7 +100,7 @@ export default function GameList(props) {
              //joining available game and navigate to gameLobby
              fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
                  method: 'PATCH',
-                 body: JSON.stringify({ player: Number(localStorage.getItem('playerID')), action: "join" }),
+                 body: JSON.stringify({ action : "join" }),
                  headers: { "Content-Type": "application/json" }
              })
              .then(res => {
@@ -153,7 +154,7 @@ export default function GameList(props) {
                 <div id='gamesList' className='list'>
                     {gameList.map((game) => (
                         <button id={game.id} onClick={() => setClicked(game.id)}>
-                            {content.headerG} {game.id} [running?: {game.running}]
+                            {content.headerG} {game.id} [{game.running ? 'running' : 'not running'}]
                         </button>
                     ))}
                 </div>
