@@ -27,14 +27,20 @@ export let lang = {
         noGames: 'No games available. Please create a new game.',
         noGameClicked: 'please select a game',
         infoPlayer: 'players in this Game: ',
-        infoPacks: 'card-packs in this Game: ',
-        infoGoal: 'how many points to win: ',
+        infoPacks: 'packs in this Game: ',
+        infoGoal: 'points to win: ',
         join: 'join',
 
         headerG:'Game-ID: ',
         startButton:'START GAME',
         leaveButton: 'LEAVE GAME',
         deleteButton: 'DELETE GAME',
+
+        createGame: 'Create Game',
+        points: 'Points',
+        select: 'select all',
+        deselect: 'deselect all',
+        create: 'create',
 
         czar:'czar: ',
         czarWarning: 'You are the Czar.',
@@ -81,6 +87,12 @@ export let lang = {
         startButton:'SPIEL STARTEN',
         leaveButton: 'SPIEL VERLASSEN',
         deleteButton: 'SPIEL LÖSCHEN',
+
+        createGame: 'Spiel erstellen',
+        points: 'Punkte',
+        select: 'alle auswählen',
+        deselect: 'Auswahl aufheben',
+        create: 'erstellen',
 
         czar:'Zar: ',
         czarWarning:'Du bist der Zar.',

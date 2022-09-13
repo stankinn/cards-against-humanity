@@ -8,7 +8,6 @@ import '../../components-styles/Packs.css';
 export default function GetAllPacks(props) {
     
     let navigate = useNavigate();
-    let [clickedPack, setClicked] = useState([]);
 
     let content = lang;
     props.language === "German"
@@ -29,16 +28,13 @@ export default function GetAllPacks(props) {
             });
     }, [])
 
-    const getID = (id) => {
-        fetch(serviceendpoint + '/packs/' + id)
-            .then(response => response.json())
-            .then(data => {
-                props.setPackID(data.id);
-                localStorage.setItem("packID", data.id);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+    const setID = (id) => {
+        localStorage.setItem("packID", id);    
+    }
+
+    const goBack = () =>{
+        localStorage.removeItem("packID", localStorage.getItem("packID"));    
+        navigate(-1);
     }
 
     
@@ -49,8 +45,8 @@ export default function GetAllPacks(props) {
 
                     return (
 
-                        <Link to={`${pack.id}`} onClick={() => setClicked(pack.id)}>
-                            <div className='packs'>
+                        <Link to={`${pack.id}`} onClick={() => setID(pack.id)}>
+                            <div className='packs packsall'>
 
                                 <p key={pack.id}>{pack.name} (B: {pack.blackCardCount} / W: {pack.whiteCardCount}) </p>
 
@@ -59,7 +55,7 @@ export default function GetAllPacks(props) {
                     );
                 })}
             </div>
-            <button className='smallArrow' onClick={() => navigate(-1)}/>
+            <button className='smallArrow' onClick={() => goBack()}/>
         </>
 
     );

@@ -17,7 +17,7 @@ export default function Lobby(props) {
     <div className='allLobbyLayout'>
       <GameList language={props.language}/>
       <Link to= './create-game'>
-        <button id='createBtn' className='continueBtn' >Create Game</button>
+        <button id='createBtn' className='continueBtn' >{content.createGame}</button>
       </Link>
     </div>
   )

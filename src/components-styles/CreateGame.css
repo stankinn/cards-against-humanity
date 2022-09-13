@@ -8,9 +8,9 @@
       'Points'
       'Input'
       'Packs'
+      'Buttons'
       'PacksList'
       'ContinueBtn';
-    grid-gap: 1rem;
     
     justify-items: safe center;
     padding: 2rem;
@@ -22,26 +22,104 @@
 
 #pointsCG{
     grid-area: Points;
-    align-self: flex-end;
+    padding-top: 1rem;
+    padding-bottom: .5rem;
 }
 
 #inputGoal{
     grid-area: Input;
 }
 
-li{
-list-style: none;}
-
-
 #packsCG{
     grid-area: Packs;
-    align-self: flex-end;
+    padding-top: 1rem;
+    padding-bottom: .5rem;
+}
+
+#buttonsCG{
+    grid-area: Buttons;
+    background-color: var(--bg-cards);
+    border-start-end-radius: 1rem;
+    border-start-start-radius: 1rem;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+}
+
+#buttonsCG > button{
+    font-size: 1rem;
+    padding: 2rem;
+    padding-top: .5rem;
+    padding-bottom: 0;
+    color: var(--txt-color);
+}
+
+#buttonsCG > button:first-of-type:hover{
+    cursor: pointer;
+    color: seagreen;
+}
+
+#buttonsCG > button:last-of-type:hover{
+    cursor: pointer;
+    color: var(--hs-red);
 }
 
 #packsListCG{
     grid-area: PacksList;
+    display: grid;
+    width: 80%;
+    
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    background-color: var(--bg-cards);
+    border: .5rem solid var(--bg-cards);
+    border-end-end-radius: 1rem;
+    border-end-start-radius: 1rem;
+    overflow-y: auto;
+    grid-gap: 1rem;
+}
+
+#containerCG{
+    background-color: rgba(0, 0, 0, 0.25);
+    padding: .5rem;
+    width: 9rem;
+    border-radius: .5rem;
+    border-top-left-radius: .25rem;
+}
+
+.checkboxContainer{
+    margin-top: -.65rem;
+    margin-left: -.38rem;
+}
+
+.checkboxContainer > input:hover{
+    cursor: pointer;
+}
+
+#packTitleCG{
+    margin-top: -1rem;
+    margin-left: .5rem;
+    text-align: center;
 }
 
 .continueBtn{
     grid-area: ContinueBtn;
+    margin-top: 1.5rem;
+}
+
+#packsListCG::-webkit-scrollbar{
+    width: .5rem;
+}
+
+#packsListCG::-webkit-scrollbar-track{
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 1rem;
+}
+
+#packsListCG::-webkit-scrollbar-thumb{
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 1rem;
+}
+
+#packsListCG::-webkit-scrollbar-thumb:hover{
+    background-color: white;
 }
