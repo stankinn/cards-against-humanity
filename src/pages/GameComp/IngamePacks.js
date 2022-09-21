@@ -51,7 +51,7 @@ export default function PlayerPoints(props){
 
 
         return (
-        <div id='packsList' className='lobbyList'>
+        <div id='ingamePacks' className='ingameList'>
             {packList.map((pack) =>(
                 <p key={pack.id}>{pack.name}</p>
             ))}
