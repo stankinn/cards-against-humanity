@@ -27,9 +27,9 @@ export default function WhiteCards(props) {
                 .then(response => response.json())
                 .then(data => {
                     for (var i = 0; i < data.games.length; i++) {
-                        if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
+                        if (data.games[i].id === Number(localStorage.getItem('gameID'))) {
                             if (data.games[i].running === true) {
-                                fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/cards/' + Number(localStorage.getItem('playerID')))
+                                fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')) + '/cards/' + Number(localStorage.getItem('playerID')))
                                     .then(response => response.json())
                                     .then(data => {
                                         let cards = data.cards;
@@ -51,7 +51,7 @@ export default function WhiteCards(props) {
                 })
 
             //set space number from black card and waiting for players state
-            fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')))
+            fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')))
                 .then(response => response.json())
                 .then(data => {
                     var spaceNumber = data.currentBlackCard.pick;
@@ -68,7 +68,7 @@ export default function WhiteCards(props) {
             //offer cards, if enough cards have been selected
             if (list.length === spaces && waitingPlayers > 0) {
                 console.log("list: " + list);
-                fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/cards/' + Number(localStorage.getItem('playerID')),
+                fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')) + '/cards/' + Number(localStorage.getItem('playerID')),
                     {
                         method: "PUT",
                         body: JSON.stringify({ cards: list }),
@@ -119,7 +119,7 @@ export default function WhiteCards(props) {
 
     //get offers for display
     function getOffers() {
-        fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')))
+        fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')))
             .then(res => res.json())
             .then(data => {
 
@@ -131,7 +131,7 @@ export default function WhiteCards(props) {
     function chooseWinner(id) {
 
         //search for correct offer and set it to a helping array
-        fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')))
+        fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')))
             .then(res => res.json())
             .then(data => {
 
@@ -150,7 +150,7 @@ export default function WhiteCards(props) {
                     }
                 }
                 //use array to set the winning cards
-                fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')),
+                fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')),
                     {
                         method: "PUT",
                         body: JSON.stringify({ cards: helpArray }),

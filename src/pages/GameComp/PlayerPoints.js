@@ -23,7 +23,7 @@ export default function PlayerPoints(){
         .then(data => {
             if (data.games.length !== 0) {
                 for (var i = 0; i < data.games.length; i++) {
-                    if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
+                    if (data.games[i].id === Number(localStorage.getItem('gameID'))) {
                         if(data.games[i].running){
                             for(var j=0; j < data.games[i].players.length; j++){
                                 arrPlayer[j] = data.games[i].players[j];
@@ -38,7 +38,7 @@ export default function PlayerPoints(){
             console.error('Error:', error);
         });
         //make list of players with their points and their ids. this is the final player list for display
-        fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')))
+        fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')))
         .then(res => res.json())
         .then(data => {
             if(data.points){

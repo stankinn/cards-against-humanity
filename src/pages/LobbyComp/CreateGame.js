@@ -37,7 +37,7 @@ export default function CreateGame(props) {
 
 
     function setGameID(id) {
-        sessionStorage.setItem('gameID', id);
+        localStorage.setItem('gameID', id);
     }
 
     function addGame() {
@@ -68,9 +68,9 @@ export default function CreateGame(props) {
                 setGameID(data.id);
 
                 console.log("game: " + JSON.stringify(data));
-                sessionStorage.setItem('ownerID', data.owner.id);
-                console.log('created game ' + Number(sessionStorage.getItem('gameID')) + ' successful.');
-                navigate('/lobby/' + Number(sessionStorage.getItem('gameID')));
+                localStorage.setItem('ownerID', data.owner.id);
+                console.log('created game ' + Number(localStorage.getItem('gameID')) + ' successful.');
+                navigate('/lobby/' + Number(localStorage.getItem('gameID')));
             })
             .catch((error) => {
                 console.error('Error:', error);
