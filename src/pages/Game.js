@@ -3,6 +3,7 @@ import BlackCard from './GameComp/BlackCard';
 import WhiteCards from './GameComp/WhiteCards';
 import CurCzar from './GameComp/CurCzar';
 import PlayerPoints from './GameComp/PlayerPoints';
+import IngamePacks from './GameComp/IngamePacks';
 import EndGame from './GameComp/EndGame';
 import Result from './GameComp/Result';
 import {lang} from '../Languages';
@@ -29,6 +30,8 @@ export default function Game(props) {
         <PlayerPoints language={props.language}/>
        <Link to= "/gamePackInfo" target= "_blank" rel="noopener noreferrer"><button> Pack Details </button></Link>
       </div>
+
+      <IngamePacks language={props.languages}/>
 
       <WhiteCards language={props.language}/>
       <Result language={props.language}/>
