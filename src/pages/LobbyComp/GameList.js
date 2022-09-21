@@ -91,27 +91,29 @@ export default function GameList(props) {
     }
 
     function joinGame(){
-        if(!document.getElementById('joinBtn').classList.contains('disabled')){
+        
+         if(!document.getElementById('joinBtn').classList.contains('disabled')){
 
-            //joining available game and navigate to gameLobby
-            fetch(serviceendpoint + '/games/' + Number(clickedGame) + '/' + Number(localStorage.getItem('playerID')), {
-                method: 'PATCH',
-                body: JSON.stringify({ player: Number(localStorage.getItem('playerID')), action: "join" }),
-                headers: { "Content-Type": "application/json" }
-            })
-            .then(res => {
-                if(res.ok){
-                    sessionStorage.setItem('gameID', clickedGame);
-                    console.log('joined game ' + Number(clickedGame) + ' successful.');
-                    navigate('./' + Number(clickedGame))
-                }
-                return res
-            })
-            .then(res => res.json())
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-        }
+             sessionStorage.setItem('gameID', clickedGame);
+
+             //joining available game and navigate to gameLobby
+             fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
+                 method: 'PATCH',
+                 body: JSON.stringify({ action : "join" }),
+                 headers: { "Content-Type": "application/json" }
+             })
+             .then(res => {
+                 if(res.ok){
+                     console.log('joined game ' + Number(sessionStorage.getItem('gameID')) + ' successful.');
+                     navigate('/lobby/' + Number(sessionStorage.getItem('gameID')));
+                 }
+                 return res
+             })
+             .then(res => res.json())
+             .catch((error) => {
+                 console.error('Error:', error);
+             });
+         }
     }
 
 
@@ -151,7 +153,7 @@ export default function GameList(props) {
                 <div id='gamesList' className='list'>
                     {gameList.map((game) => (
                         <button id={game.id} onClick={() => setClicked(game.id)}>
-                            {content.headerG} {game.id} [running?: {game.running}]
+                            {content.headerG} {game.id} [{game.running ? 'running' : 'not running'}]
                         </button>
                     ))}
                 </div>

@@ -5,7 +5,7 @@ import { lang } from '../../Languages';
 import { Link, useNavigate } from 'react-router-dom';
 import '../../components-styles/Packs.css';
 
-export default function GetAllPacks(props) {
+export default function GetCurPacks(props) {
     
     let navigate = useNavigate();
 
@@ -14,26 +14,52 @@ export default function GetAllPacks(props) {
         ? (content = content.German)
         : (content = content.English);
 
-    let [packs, setPack] = useState([]);
+    let [curPackIds, setCurPackIds] = useState([]);
+    let [curPacks, setCurPacks] = useState([]);
+    let gameID = localStorage.getItem("gameID");
 
     useEffect(() => {
 
-        fetch(serviceendpoint + '/packs/')
+        //find your game and save the used pack ids
+        fetch(serviceendpoint + '/games/')
             .then(response => response.json())
             .then(data => {
-                setPack(data.packs);
+                
+                for(var i; i < data.games.length; i++){
+
+                    if(data.games.id === gameID){
+                        setCurPackIds(data.games.packs);
+                        currentPacks();
+                    }
+                }
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
     }, [])
 
+    //get matching packs from ids
+const currentPacks = () =>{
+
+    fetch(serviceendpoint + '/packs/')
+    .then(response => response.json())
+    .then(data => {
+        
+        
+
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+
+}
+
     const setID = (id) => {
-        localStorage.setItem("packID", id);    
+        localStorage.setItem("curPackID", id);    
     }
 
     const goBack = () =>{
-        localStorage.removeItem("packID", localStorage.getItem("packID"));    
+        localStorage.removeItem("curPackID", localStorage.getItem("curPackID"));
         navigate(-1);
     }
 
@@ -41,7 +67,7 @@ export default function GetAllPacks(props) {
     return (
         <>
             <div className='border'>
-                {packs.map((pack) => {
+                {curPacks.map((pack) => {
 
                     return (
 

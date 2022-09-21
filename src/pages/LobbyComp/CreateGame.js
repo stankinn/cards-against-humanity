@@ -42,8 +42,8 @@ export default function CreateGame(props) {
 
     function addGame() {
 
-        if (!pointGoal) {
-            setGoal = 10;
+        if (pointGoal === undefined) {
+            pointGoal = 10;
         }
 
         //if no packs selected, select all
@@ -54,7 +54,7 @@ export default function CreateGame(props) {
                     helpArr = helpArr.concat(pack.id);
                 }
               );
-                setSelectedPacks(helpArr);
+              selectedPacks = helpArr;
         }
 
         // new game with own playerID will be created and navigate to gameLobby

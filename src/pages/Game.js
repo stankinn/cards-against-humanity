@@ -7,6 +7,7 @@ import EndGame from './GameComp/EndGame';
 import Result from './GameComp/Result';
 import {lang} from '../Languages';
 import '../components-styles/Game.css'
+import { Link} from 'react-router-dom';
 
 export default function Game(props) {
 
@@ -26,6 +27,7 @@ export default function Game(props) {
         <CurCzar language={props.language}/>
 
         <PlayerPoints language={props.language}/>
+       <Link to= "/gamePackInfo" target= "_blank" rel="noopener noreferrer"><button> Pack Details </button></Link>
       </div>
 
       <WhiteCards language={props.language}/>
