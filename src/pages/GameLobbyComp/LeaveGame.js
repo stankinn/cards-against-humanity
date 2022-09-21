@@ -10,14 +10,15 @@ export default function LeaveGame(props) {
     function leave(){
        
         // leaving game and returning to start-page
-        fetch(serviceendpoint + '/games/'+ Number(sessionStorage.getItem('gameID')) + '/'+ Number(localStorage.getItem('playerID')), {
+        fetch(serviceendpoint + '/games/'+ Number(localStorage.getItem('gameID')) + '/'+ Number(localStorage.getItem('playerID')), {
             method: 'PATCH',
             body: JSON.stringify({ player: localStorage.getItem('playerID'), action: "leave"}),
             headers: { "Content-Type": "application/json" }
         })
         .then(res => {
             if(res.ok){
-                sessionStorage.clear();
+                localStorage.removeItem('gameID');
+                localStorage.removeItem('ownerID');
                 navigate('/lobby');
             }
             return res

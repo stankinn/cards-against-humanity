@@ -28,10 +28,11 @@ export default function GetCurPacks(props) {
             .then(response => response.json())
             .then(data => {
                 for (var i = 0; i < data.games.length; i++) {
+                    console.log(data.games[i].id);
                     if (data.games[i].id === Number(gameID)) {
 
                         gamePackIds = data.games[i].packs;
-
+                        console.log(gamePackIds);
                         
                     }
                     //get all packs again for comparison 
@@ -40,7 +41,7 @@ export default function GetCurPacks(props) {
                             .then(data => {
 
                                 allPacks = data.packs;
-
+                                console.log(gamePackIds);
                                 //filter matching packs and set as state
                                 setCurPacks(allPacks.filter(pack => gamePackIds.includes(pack.id)));
 
@@ -58,11 +59,11 @@ export default function GetCurPacks(props) {
 
 
     const setID = (id) => {
-        localStorage.setItem("curPackID", id);
+        localStorage.setItem("packID", id);
     }
 
     const goBack = () => {
-        localStorage.removeItem("curPackID", localStorage.getItem("curPackID"));
+        localStorage.removeItem("packID", localStorage.getItem("packID"));
         navigate(-1);
     }
 

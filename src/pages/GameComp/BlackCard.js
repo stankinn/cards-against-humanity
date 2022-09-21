@@ -20,9 +20,9 @@ export default function BlackCard() {
             .then(data => {
                 for (var i = 0; i < data.games.length; i++) {
                     //check if selected game is running: if so, set prompt and running state
-                    if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
+                    if (data.games[i].id === Number(localStorage.getItem('gameID'))) {
                         if (data.games[i].running === true) {
-                            fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')))
+                            fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')))
                                 .then(response => response.json())
                                 .then(data => {
                                     str = data.currentBlackCard.text;

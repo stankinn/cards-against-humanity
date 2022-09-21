@@ -5,7 +5,7 @@ import { lang } from '../../Languages';
 
 export default function PlayerList(props) {
 
-    const id = sessionStorage.getItem('gameID');
+    const id = localStorage.getItem('gameID');
     let navigate = useNavigate();
 
     let [pList, setPList] = useState([]);
@@ -25,7 +25,7 @@ export default function PlayerList(props) {
         .then(data => {
             if (data.games.length !== 0) {
                 for (var i = 0; i < data.games.length; i++) {
-                    if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
+                    if (data.games[i].id === Number(localStorage.getItem('gameID'))) {
                         if(data.games[i].running === true)
                         navigate('/game');
                     }
@@ -46,11 +46,11 @@ export default function PlayerList(props) {
             .then(data => {
                 if (data.games.length !== 0) {
                     for (var i = 0; i < data.games.length; i++) {
-                        if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
+                        if (data.games[i].id === Number(localStorage.getItem('gameID'))) {
                             if(!data.games[i].running){
                                 setPList(data.games[i].players);
                                 playerLength = data.games[i].players.length;
-                                if (Number(sessionStorage.getItem('ownerID')) === Number(localStorage.getItem('playerID'))) {
+                                if (Number(localStorage.getItem('ownerID')) === Number(localStorage.getItem('playerID'))) {
                                     if (playerLength >= 3) {
                                         document.getElementById('startBtn').classList.remove('hidden');
                                     } else {
@@ -74,10 +74,10 @@ export default function PlayerList(props) {
         .then(res => res.json())
         .then(data => {
             for (var i = 0; i < data.games.length; i++) {
-                if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
-                    if (data.games[i].owner.id === Number(sessionStorage.getItem('ownerID'))) {
+                if (data.games[i].id === Number(localStorage.getItem('gameID'))) {
+                    if (data.games[i].owner.id === Number(localStorage.getItem('ownerID'))) {
                     
-                        fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
+                        fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
                             method: "PATCH",
                             body: JSON.stringify({ action: "start" }),
                             headers: { "Content-Type": "application/json" }

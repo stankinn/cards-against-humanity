@@ -15,7 +15,7 @@ export default function Result(props) {
             .then(res => res.json())
             .then(data => {
               for(var i = 0; i < data.games.length; i++){
-                if(data.games[i].id === Number(sessionStorage.getItem('gameID'))){
+                if(data.games[i].id === Number(localStorage.getItem('gameID'))){
                     if(data.games[i].winner){
                         if(data.games[i].winner.id === Number(localStorage.getItem('playerID'))){
                             setWonPopup(true);
