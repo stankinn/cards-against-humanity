@@ -27,7 +27,7 @@ export default function Game(props) {
         <CurCzar language={props.language}/>
 
         <PlayerPoints language={props.language}/>
-       <Link to= "./gamePackInfo" target= "_blank" rel="noopener noreferrer"><button> Pack Details </button></Link>
+       <Link to= "/gamePackInfo" target= "_blank" rel="noopener noreferrer"><button> Pack Details </button></Link>
       </div>
 
       <WhiteCards language={props.language}/>
