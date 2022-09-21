@@ -48,7 +48,7 @@ export default function GetAllPacks(props) {
                         <Link to={`${pack.id}`} onClick={() => setID(pack.id)}>
                             <div className='packs packsall'>
 
-                                <p key={pack.id}>{pack.name} (B: {pack.blackCardCount} / W: {pack.whiteCardCount}) </p>
+                                <p key={pack.id}>{pack.name} ({content.black} {pack.blackCardCount} / {content.white} {pack.whiteCardCount}) </p>
 
                             </div>
                         </Link>

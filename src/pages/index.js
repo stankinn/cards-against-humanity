@@ -7,3 +7,4 @@ export {default as GetPackInfo} from './GetPacks/PackInfo';
 export {default as Lobby} from './Lobby';
 export {default as CreateGame} from './LobbyComp/CreateGame';
 export {default as GamePacks} from './GetPacks/GamePacks';
+export {default as GetGamePackInfo} from './GetPacks/GamePacksInfo';
