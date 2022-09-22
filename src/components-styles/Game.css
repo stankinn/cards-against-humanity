@@ -133,7 +133,7 @@
     width: 100%;
     border: .25rem solid transparent;
     border-radius: .5rem;
-    overflow-y: scroll;
+    overflow-y: auto;
 }  
 
 .ingameList > p{

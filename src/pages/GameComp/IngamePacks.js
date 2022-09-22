@@ -12,7 +12,9 @@ export default function PlayerPoints(props){
         ? (content = content.German)
         : (content = content.English);
 
-    updatePacks();
+    useEffect(() =>{
+        updatePacks();
+    }, []);
 
     function updatePacks(){
         fetch(serviceendpoint + '/games/')
@@ -20,7 +22,7 @@ export default function PlayerPoints(props){
         .then(data => {
             for (var i = 0; i < data.games.length; i++){
                 if (data.games[i].id === Number(localStorage.getItem('gameID'))) {
-                    packDetails(data.games[i].packs)
+                    updatePackList(data.games[i].packs)
                 }
             }
         })
@@ -29,14 +31,14 @@ export default function PlayerPoints(props){
         });
     }
     
-    function packDetails(allPacks){
+    function updatePackList(curPacks){
 
             fetch(serviceendpoint + '/packs/')
             .then(response => response.json())
             .then(data => {
                 for(var i = 0; i < data.packs.length; i++){
-                    for(var j = 0; j < allPacks.length; j++){
-                        if(data.packs[i].id === allPacks[j]){
+                    for(var j = 0; j < curPacks.length; j++){
+                        if(data.packs[i].id === curPacks[j]){
                             arr[j]={'name': data.packs[i].name, 'id': data.packs[i].id};
                         }
                     }
