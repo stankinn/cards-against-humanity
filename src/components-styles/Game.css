@@ -119,6 +119,10 @@
   width: 2.75rem;
 }
 
+.buttonPacks{
+    color: var(--txt-color);
+}
+
 #ingameDetails{
     color: var(--txt-color);
 }
