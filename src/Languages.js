@@ -45,6 +45,8 @@ export let lang = {
         czar:'czar: ',
         czarWarning: 'You are the Czar.',
         playerPoints:'Points: ',
+        black: 'Black: ',
+        white: 'White: ',
 
         playerWon:'YOU WON',
         playerLost:'YOU LOST',
@@ -97,6 +99,8 @@ export let lang = {
         czar:'Zar: ',
         czarWarning:'Du bist der Zar.',
         playerPoints:'Punkte: ',
+        black: 'Schwarz: ',
+        white: 'Weiß: ',
 
         playerWon:'GEWONNEN',
         playerLost:'VERLOREN',

@@ -53,7 +53,6 @@ export default function GameList(props) {
     }
 
     function updateInfo(){
-
         document.getElementById('joinBtn').classList.remove('disabled');
 
         fetch(serviceendpoint + '/games/')
@@ -95,18 +94,18 @@ export default function GameList(props) {
         
          if(!document.getElementById('joinBtn').classList.contains('disabled')){
 
-             sessionStorage.setItem('gameID', clickedGame);
+            localStorage.setItem('gameID', clickedGame);
 
              //joining available game and navigate to gameLobby
-             fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
+             fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
                  method: 'PATCH',
                  body: JSON.stringify({ action : "join" }),
                  headers: { "Content-Type": "application/json" }
              })
              .then(res => {
                  if(res.ok){
-                     console.log('joined game ' + Number(sessionStorage.getItem('gameID')) + ' successful.');
-                     navigate('/lobby/' + Number(sessionStorage.getItem('gameID')));
+                     console.log('joined game ' + Number(localStorage.getItem('gameID')) + ' successful.');
+                     navigate('/lobby/' + Number(localStorage.getItem('gameID')));
                  }
                  return res
              })

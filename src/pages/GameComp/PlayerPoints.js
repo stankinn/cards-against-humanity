@@ -5,6 +5,7 @@ export default function PlayerPoints(){
 
     let [finalList, setFinalList] = useState([]);
     let [playerList, setplayerList] = useState([]);
+    let [goal, setGoal] = useState();
 
     var arr = [];
     var arrPlayer = [];
@@ -17,18 +18,20 @@ export default function PlayerPoints(){
     });
 
     function showPlayer() {
- //get players in the game, set them as state
+
+        //get players in the game, set them as state and set the goal
        fetch(serviceendpoint + '/games/')
         .then(res => res.json())
         .then(data => {
             if (data.games.length !== 0) {
                 for (var i = 0; i < data.games.length; i++) {
-                    if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
+                    if (data.games[i].id === Number(localStorage.getItem('gameID'))) {
                         if(data.games[i].running){
                             for(var j=0; j < data.games[i].players.length; j++){
                                 arrPlayer[j] = data.games[i].players[j];
                             }
                             setplayerList(arrPlayer);
+                            setGoal(data.games[i].goal);
                         }
                     }
                 }
@@ -37,8 +40,9 @@ export default function PlayerPoints(){
         .catch((error) => {
             console.error('Error:', error);
         });
+        
         //make list of players with their points and their ids. this is the final player list for display
-        fetch(serviceendpoint + '/games/' + Number(sessionStorage.getItem('gameID')))
+        fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')))
         .then(res => res.json())
         .then(data => {
             if(data.points){
@@ -60,7 +64,7 @@ export default function PlayerPoints(){
         return (
             <div className='playerPoints'>
                 {finalList.map(({ name, id, points }) => (
-                    <p key={id}>{name}.....{points}</p>
+                    <p key={id}>{name}.....{points}/{goal}</p>
                 ))}
             </div>
         );
