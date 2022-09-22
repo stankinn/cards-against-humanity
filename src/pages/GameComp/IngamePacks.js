@@ -19,7 +19,7 @@ export default function PlayerPoints(props){
         .then(response => response.json())
         .then(data => {
             for (var i = 0; i < data.games.length; i++){
-                if (data.games[i].id === Number(sessionStorage.getItem('gameID'))) {
+                if (data.games[i].id === Number(localStorage.getItem('gameID'))) {
                     packDetails(data.games[i].packs)
                 }
             }

@@ -2,7 +2,7 @@ import './App.css';
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Menu from './Menu';
-import { PlayerCreation, Game, GameLobby, ErrorPage, GetPackInfo, GetAllPacks, Lobby, CreateGame, GamePacks, GetGamePackInfo } from './pages';
+import { PlayerCreation, Game, GameLobby, ErrorPage, GetPackInfo, GetAllPacks, Lobby, CreateGame, GamePacks } from './pages';
 
 
 export default function App() {
