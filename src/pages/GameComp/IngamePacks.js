@@ -14,7 +14,7 @@ export default function PlayerPoints(props){
 
     useEffect(() =>{
         updatePacks();
-    });
+    }, []);
 
     function updatePacks(){
         fetch(serviceendpoint + '/games/')
