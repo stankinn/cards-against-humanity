@@ -16,6 +16,8 @@
 
 .header{
     grid-area: Header;
+    font-size: 1.5rem;
+    margin-top: -1rem;
 }
 
 #gamesList{
@@ -40,7 +42,7 @@
     width: fit-content;
     width: 80%;
     height: 100%;
-    overflow: hidden;
+    overflow: auto;
     
     display: grid;
     grid-template:
@@ -54,6 +56,7 @@
     font-size: .9rem;
     grid-gap: .5rem;
     padding: 1rem;
+    border: .25rem solid transparent;
     border-radius: .75rem;
 
     background-color: var(--bg-cards);
@@ -77,6 +80,11 @@
 #playerList{
     grid-area: PlayerList;
     justify-self: left;
+    min-height: 1.5rem;
+}
+
+#playerList > p, #packsList > p{
+    padding: .1rem;
 }
 
 #packsCont{
@@ -86,6 +94,7 @@
 #packsList{
     grid-area: PacksList;
     justify-self: left;
+    min-height: 1.5rem;
 }
 
 #createBtn{
@@ -111,20 +120,20 @@
     padding: .25rem .5rem;
 }
 
-.lobbyList::-webkit-scrollbar{
+.lobbyList::-webkit-scrollbar, #detailsList::-webkit-scrollbar{
     width: .5rem;
 }
 
-.lobbyList::-webkit-scrollbar-track{
+.lobbyList::-webkit-scrollbar-track, #detailsList::-webkit-scrollbar-track{
     background-color: rgba(0, 0, 0, 0.25);
     border-radius: 1rem;
 }
 
-.lobbyList::-webkit-scrollbar-thumb{
+.lobbyList::-webkit-scrollbar-thumb, #detailsList::-webkit-scrollbar-thumb{
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 1rem;
 }
 
-.lobbyList::-webkit-scrollbar-thumb:hover{
+.lobbyList::-webkit-scrollbar-thumb:hover, #detailsList::-webkit-scrollbar-thumb:hover{
     background-color: white;
 }

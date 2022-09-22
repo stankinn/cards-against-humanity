@@ -169,7 +169,7 @@ export default function GameList(props) {
                     <p id='packsCont'>{content.infoPacks}</p>
                     <div id='packsList' className='lobbyList'>
                         {packList.map((pack) =>(
-                            <p key={pack.id}>{pack.name}</p>
+                            <p key={pack.id}>- {pack.name}</p>
                         ))}
                     </div>
                     <p id='gamePoints'>{content.infoGoal} {curGoal}</p>
