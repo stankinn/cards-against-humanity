@@ -2,6 +2,7 @@ import React from 'react';
 import '../../components-styles/Cards.css'
 import { useState, useEffect } from 'react';
 import { serviceendpoint } from '../Imports';
+import { useNavigate } from 'react-router-dom';
 
 var cardText = [];
 var str = '';
@@ -12,7 +13,8 @@ export default function BlackCard() {
     let [prompt, setPromt] = useState([]);
     let [running, setRunning] = useState();
 
-    
+    let navigate = useNavigate();
+
     useEffect(() => {
         const interval = setInterval(() => {
         fetch(serviceendpoint + '/games/')
@@ -34,8 +36,10 @@ export default function BlackCard() {
                                     console.error('Error:', error);
                                 });
                         } else {
-                            console.log('Black Card cannot be shown. Game is not running yet.');
+
+                            //if game is not running, return to gamelobby
                             setRunning(false);
+                            navigate('/lobby/' + Number(localStorage.getItem('gameID')));
                         }
                         i = data.games.length;
                         break;

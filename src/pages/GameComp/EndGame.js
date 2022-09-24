@@ -52,7 +52,7 @@ export default function EndGame(props) {
   }
 
   return (
-    <div id='endGame' title='end Game' onClick={end}>
+    <div id='endGame' title='end Game' onClick={() => end()}>
       <button id='btnStart'>
         <div id='endBar1' />
         <div id='endBar2' />
