@@ -4,19 +4,24 @@ export let lang = {
         hsaInfo2:'under the supervision of',
         
         helpTitle:'How to play!',
-        helpTxt:'If you want to change the Language of the game (cards not included) go to the upper left, click on the menu button and there ' +
-                'you can choose between German and English. ' + 
-                'To start a game players first have to choose a name which is visible for all players in a game lobby. Click on "new" to save ' +
-                'your name and then click "PLAY". If no game is open you will create a new lobby and will be the owner. As the owner you can ' +
-                'start the game with a minimum of three Players in your lobby or delete the existing lobby. You will come back to the main menu. ' +
-                'If you want to delete your player just click on "delete" and your name should not be listed anymore. ' +
-                'The game is divided into rounds. At the beginning of each round a czar is chosen. The czar himself does not participate in ' +
-                'the current round of the game. A black card appears and the czar reads out the cloze text on it. The cloze can also be in the ' +
+        helpTxt:'If you want to change the language of the game (cards only available in English), click on the menu button in the upper left corner ' +
+                'and choose between English and German there. To start a game, players must first choose a name that will be visible to all players ' +
+                'in the lobby. Click on "create new" to save your name and then on "PLAY". In the next step you will see all the current lobbies, ' +
+                'if there is one. If you click on a lobby, you will see more information in the lower section, such as the game ID, the points target, ' +
+                'the names of the players in that lobby and the card packs used. If you want to join a session, select the lobby you want to join and ' +
+                'click "join" at the bottom right. If you want to create a lobby, click "create game" in the bottom left corner and in the next step, ' +
+                'enter the target score and select the card packs to be used in the game. To create the lobby, you must now click on the "create" ' +
+                'button, which will take you to the next screen with a list of all players. To start the game, there must be at least 3 players in the ' +
+                'lobby. To leave the game, click on "LEAVE GAME" and you will return to the lobby overview. To start the game, click on ' +
+                '"START GAME". If you want to delete your player, just click on "delete" in the start menu and your name should not be listed ' +
+                'anymore. The game is divided into rounds. At the beginning of each round a czar is chosen. The czar himself does not participate in ' +
+                'the current round of the game. A black card appears, and the czar reads out the cloze text on it. The cloze can also be in the ' +
                 'form of a question, where the answer must be completed. Each player except the czar chooses a white card from his supply ' +
                 'whose content he thinks best matches the cloze or question, and selects it by clicking on it. After all players have ' +
                 'selected a card, the czar reads out the terms or phrases printed on it. He then chooses the card that he thinks best matches ' +
                 'the cloze or question he originally read aloud. The person who had chosen this card gets one point. ' +
-                'Then a new czar is chosen and new cards are revealed.',
+                'Then a new czar is chosen, and new cards are revealed.',
+        
 
         headerP:'Player',
         curName:'Your Name: ',
@@ -56,21 +61,27 @@ export let lang = {
         hsaInfo2:'unter der Aufsicht von',
 
         helpTitle:'Spielanleitung',
-        helpTxt:'Wenn Sie die Sprache des Spiels ändern möchten (Karten sind nicht enthalten), klicken Sie oben links auf den ' + 
-                'Menü-Button und wählen Sie dort zwischen Deutsch und Englisch. Um ein Spiel zu beginnen, müssen die Spieler zunächst ' +
-                'einen Namen wählen, der für alle Spieler in der Lobby sichtbar ist. Klicken Sie auf "neu erstellen", um Ihren Namen zu speichern ' + 
-                'und dann auf "SPIELEN". Wenn kein Spiel geöffnet ist, erstellen Sie eine neue Lobby und werden der Besitzer. ' + 
-                'Als Besitzer können Sie das Spiel, mit mindestens drei Spielern in Ihrer Lobby, beginnen oder die bestehende Lobby löschen. ' +
-                'Sie kehren dann zum Hauptmenü zurück. Wenn du deinen Spieler löschen möchtest, klicke einfach auf "löschen" und dein Name ' +
-                'sollte nicht mehr aufgeführt sein. ' +
-                'Das Spiel ist in Runden unterteilt. Zu Beginn jeder Runde wird ein Zar ernannt. Der Zar nimmt selbst an der aktuellen ' + 
-                'Spielrunde nicht teil. Es erscheint eine schwarze Karte und der Zar liest den darauf befindlichen Lückentext vor. Der ' + 
+        helpTxt:'Wenn Sie die Sprache des Spiels ändern möchten (Karten nur in Englischer Sprache vorhanden), klicken Sie oben links auf den ' +
+                'Menü-Button und wählen dort zwischen Deutsch und Englisch. Um ein Spiel zu beginnen, müssen die Spieler zunächst einen ' +
+                'Namen wählen, der für alle Spieler in der Lobby sichtbar ist. Klicken Sie auf „neu erstellen“, um Ihren Namen zu speichern und ' +
+                'dann auf „SPIELEN“. Im nächsten Schritt sind alle momentanen Lobbys zu sehen, falls eine vorhanden ist. Wird auf eine Lobby ' +
+                'geklickt, sieht man im Unteren Bereich weitere Informationen, wie die Spiel-ID, das Punkte-Ziel, die Namen der Spieler in dieser ' +
+                'Lobby und die verwendeten Karten-Packs. Wenn Sie einer Sitzung beitreten wollen, wählen Sie die gewünschte Lobby aus und ' +
+                'klicken unten rechts auf „beitreten“. Wenn Sie eine Lobby erstellen wollen, klicken Sie unten links auf „Spiel erstellen“ und '  +
+                'wählen im nächsten Schritt die Ziel-Punktzahl ein und wählen die Karten-Packs aus, die im Spiel verwendet werden sollen. ' +
+                'Zum Erstellen der Lobby müssen Sie nun auf den Button „erstellen“ klicken und gelangen so zum nächsten Screen mit einer ' +
+                'Liste aller Spieler. Um das Spiel starten zu können, müssen mindestens 3 Spieler in der Lobby sein. Um das Spiel zu verlassen, ' +
+                'klicken Sie auf „SPIEL VERLASSEN“ und Sie gelangen zur Lobbyübersicht zurück. Zum Starten klicken Sie auf „SPIEL STARTEN“. ' +
+                'Wenn Sie ihren Namen löschen wollen, klicken Sie im Hauptmenü auf "löschen" und Ihr zuvor ausgewählter Name sollte nicht mehr ' +
+                'angezeigt werden. Das Spiel ist in Runden unterteilt. Zu Beginn jeder Runde wird ein Zar ernannt. Der Zar nimmt selbst an der ' + 
+                'aktuellen Spielrunde nicht teil. Es erscheint eine schwarze Karte und der Zar liest den darauf befindlichen Lückentext vor. Der ' + 
                 'Lückentext kann auch in Form einer Frage vorliegen, bei der die Antwort ergänzt werden muss. Jeder Spieler außer dem ' + 
                 'Zar wählt eine weiße Karte aus seinem Vorrat, deren Inhalt seiner Meinung nach am besten zum Lückentext bzw. der Frage passt, ' + 
-                'und wählt diese durch anklicken aus. Nachdem alle Spieler eine Karte ausgewählt haben, liest der Zar die darauf abgedruckten ' +
+                'und wählt diese durch Anklicken aus. Nachdem alle Spieler eine Karte ausgewählt haben, liest der Zar die darauf abgedruckten ' +
                 'Begriffe oder Phrasen vor. Anschließend wählt er diejenige Karte, die seiner Meinung nach am besten zum ursprünglich von ihm ' + 
                 'vorgelesenen Lückentext bzw. zur vorgelesenen Frage passt. Derjenige, der diese Karte ausgewählt hatte, erhält einen Punkt. ' +
                 'Anschließend wird ein neuer Zar ausgewählt und neue Karten werden aufgedeckt.',
+        
 
         headerP:'Spieler',
         curName:'Dein Name: ',
