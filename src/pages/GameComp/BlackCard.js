@@ -35,7 +35,7 @@ export default function BlackCard() {
                                     .catch((error) => {
                                         console.error('Error:', error);
                                     });
-                            } else {
+                            } else if (data.games[i].running === true && data.games[i].winner === undefined){
 
                                 //if game is not running, return to gamelobby
                                 setRunning(false);
