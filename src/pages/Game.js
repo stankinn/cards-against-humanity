@@ -25,6 +25,7 @@ export default function Game(props) {
 
   let gameID = Number(localStorage.getItem("gameID"));
   let playerID = Number(localStorage.getItem("playerID"));
+  let ownerID = Number(localStorage.getItem("ownerID"));
 
 
   //tab close event listener, leave game when tab is closed
@@ -34,6 +35,7 @@ export default function Game(props) {
       event.preventDefault();
 
       //muss noch nach antwort gecheckt werden, erst dann leave
+      updateOwner();
       leave();
       
       return (event.returnValue = 'Are you sure you want to exit?');
@@ -64,7 +66,28 @@ export default function Game(props) {
       .catch((error) => {
         console.error('Error:', error);
       });
+  }
 
+  function updateOwner(){
+
+    if(playerID === ownerID){
+
+      fetch(serviceendpoint + '/games/')
+            .then(res => res.json())
+            .then(data => {
+                if (data.games.length !== 0) {
+                    for (var i = 0; i < data.games.length; i++) {
+                        if (data.games[i].id === gameID) {
+                            //update ownerID in local storage
+                            localStorage.setItem('ownerID', data.games[i].owner.id);
+                        }
+                    }
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
   }
 
   return (
