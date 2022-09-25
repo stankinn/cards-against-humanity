@@ -17,7 +17,7 @@ export default function PlayerList(props) {
       ? (content = content.German)
       : (content = content.English);
 
-      // look every second if the game is running and navigate to game if it is
+      // look if the game is running and navigate to game if it is
     useEffect(() => {
         const interval = setInterval(() => {
         fetch(serviceendpoint + '/games/')
@@ -33,7 +33,7 @@ export default function PlayerList(props) {
             }
         });
         showPlayer();
-        }, 1000);
+        }, 500);
         return () => clearInterval(interval);
       });
 
@@ -47,6 +47,9 @@ export default function PlayerList(props) {
                 if (data.games.length !== 0) {
                     for (var i = 0; i < data.games.length; i++) {
                         if (data.games[i].id === Number(localStorage.getItem('gameID'))) {
+
+                            //update ownerID, if previous owner left the game
+                            localStorage.setItem('ownerID', data.games[i].owner.id);
                             if(!data.games[i].running){
                                 setPList(data.games[i].players);
                                 playerLength = data.games[i].players.length;
