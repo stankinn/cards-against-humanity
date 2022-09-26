@@ -20,7 +20,6 @@ export default function CreateGame(props) {
     let [checkedPacks, setPacks] = useState([]); //determine which packs are checked (true or false values)                                      
     let helpArr = []; 
     let [selectedPacks, setSelectedPacks] = useState([]); 
-    // https://www.freecodecamp.org/news/how-to-work-with-multiple-checkboxes-in-react/
 
     useEffect(() => {
     fetch(serviceendpoint + '/packs/')
