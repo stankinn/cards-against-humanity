@@ -8,10 +8,14 @@
       'List'
       'LeaveBtn'
       'StartBtn';
-    grid-gap: 3rem;
+    grid-gap: 1rem;
     
     justify-items: safe center;
     padding: 2rem;
+}
+
+.list > p{
+    padding: .2rem 1rem;
 }
 
 .headerG{

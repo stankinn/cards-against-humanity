@@ -37,6 +37,7 @@
 
 #playerCards{
     grid-column: 1/3;
+    grid-row: 6;
     padding: 0;
     padding-bottom: .5rem;
     border-radius: 1rem 1rem 0 0;
@@ -44,18 +45,15 @@
 }
 
 #overlay{
-    position: absolute;
-    visibility: visible;
+    grid-column: 1/3;
+    grid-row: 6;
+    width: 100%;
+    background-color: var(--ol-color);
+    border-radius: 1rem 1rem 0 0;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 50%;
-    margin-top: -5rem;
-    width: 100%;
-    height: 10rem;
-    background-color: var(--ol-color);
-    border: .5rem solid transparent;
-    z-index:9;
     font-size: 2em;
 }
 
