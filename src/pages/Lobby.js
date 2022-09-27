@@ -4,6 +4,7 @@ import '../components-styles/GameLobby.css'
 import '../components-styles/Lobby.css'
 import {lang} from '../Languages';
 import GameList from './LobbyComp/GameList';
+import Home from './LobbyComp/Home';
 import {Link} from 'react-router-dom';
 
 export default function Lobby(props) {
@@ -14,7 +15,9 @@ export default function Lobby(props) {
     : (content = content.English);
 
   return (
+   
     <div className='allLobbyLayout'>
+      <Home/>
       <GameList language={props.language}/>
       <Link to= './create-game'>
         <button id='createBtn' className='continueBtn' >{content.createGame}</button>
