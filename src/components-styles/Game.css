@@ -4,8 +4,7 @@
     height: 100vh;
 
     grid-template-columns: fit-content(40%) fit-content(60%);
-    grid-template-rows: minmax(fit-content);
-    grid-gap: 1rem;
+    grid-gap: .5rem;
     
     justify-items: safe center;
     padding: 0 2rem;
@@ -16,9 +15,8 @@
     align-self: end;
 }
 
-#gameInfo{
-    align-self: center;
-    text-align: right;
+.bc{
+    grid-row: var(--BC-gridR);
 }
 
 .cardsBackground{
@@ -30,8 +28,8 @@
 }
 
 #offeredCards{
-    grid-column: var(--grid-2_3to1_3);
-    grid-row: var(--grid-1_3to2_3);
+    grid-column: var(--grid-column);
+    grid-row: var(--grid-row);
     padding-top: 0;
     padding-bottom: .5rem;
     padding-left: .2rem;
@@ -56,22 +54,26 @@
     width: 100%;
     height: 10rem;
     background-color: var(--ol-color);
-    border: .5rem solid var(--ol-color);
+    border: .5rem solid transparent;
     z-index:9;
     font-size: 2em;
 }
 
 .CzarText{
     font-weight: bold;
+    height: 2rem;
 }
 
 .playerPoints{
-    max-height: var(--cards-height);
-    width: 100%;
+    grid-column: var(--PP-gridC);
+    grid-row: var(--PP-gridR);
+    margin-top: -.75rem;
+    padding-right: .5rem;
 }
 
 .gameDiv, .playerPoints{
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .gameDiv::-webkit-scrollbar, .playerPoints::-webkit-scrollbar{
@@ -120,7 +122,17 @@
 }
 
 .buttonPacks{
+    margin-top: -.75rem;
+    margin-bottom: -.75rem;
+    grid-column: 1/3;
+    height: var(font-size);
+    justify-self: right;
+    padding-right: .5rem;
+}
+
+.buttonPacks button{
     color: var(--txt-color);
+    font-size: .75rem;
 }
 
 #ingameDetails{
@@ -128,8 +140,9 @@
 }
 
 .ingameList{
+    grid-row: 5;
     grid-column: 1/3;
-    height: 3.5rem;
+    max-height: 3.5rem;
     width: 100%;
     border: .25rem solid transparent;
     border-radius: .5rem;
@@ -137,7 +150,7 @@
 }  
 
 .ingameList > p{
-    float: left;
+    float: right;
     font-size: .7rem;
     padding-left: .2rem;
     padding-right: .2rem;
@@ -180,4 +193,36 @@
   
 #endBar2{
     transform: rotate(45deg) translate(0.4rem, -0.19rem);
+}
+
+#choosingBtn{
+    grid-column: 1/3;
+    grid-row: 5;
+    width: 100%;
+    background-color: var(--ol-color);
+    border-radius: .25rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#cardBtn, #winnerBtn{
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: .4rem;
+    padding: .2rem 1rem;
+    background-color: seagreen;
+    border-color: seagreen;
+    color: white;
+}
+
+#cardBtn:hover, #winnerBtn:hover{
+        color: black;
+}
+
+#cardBtn.disabeld, #winnerBtn.disabled{
+  cursor:not-allowed;
+  background-color: gray;
+  color: rgba(0, 0, 0, 0.3);
 }

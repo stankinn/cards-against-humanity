@@ -92,17 +92,19 @@ export default function Game(props) {
 
   return (
     <div className='gameLayout'>
-
-      <div id='blackCard' className='gameDiv'>
+      <div className='bc'>
         <BlackCard language={props.language} />
       </div>
 
-      <div id='gameInfo' className='gameDiv'>
-        <CurCzar language={props.language} />
-
-        <PlayerPoints language={props.language} />
-        <Link to="/gamePackInfo" target="_blank" rel="noopener noreferrer"><button className='buttonPacks' > Pack Details </button></Link>
+      <CurCzar language={props.language} />
+      <PlayerPoints language={props.language} />
+      
+      <div className='buttonPacks'>
+        <Link to="/gamePackInfo" target="_blank" rel="noopener noreferrer">
+          <button> Pack Details </button>
+        </Link>
       </div>
+      
       <IngamePacks language={props.languages} />
 
       <WhiteCards language={props.language} />

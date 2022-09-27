@@ -52,6 +52,7 @@ export let lang = {
         playerPoints:'Points: ',
         black: 'Black: ',
         white: 'White: ',
+        choose: 'choose',
 
         playerWon:'YOU WON',
         playerLost:'YOU LOST',
@@ -112,6 +113,7 @@ export let lang = {
         playerPoints:'Punkte: ',
         black: 'Schwarz: ',
         white: 'Weiß: ',
+        choose: 'wählen',
 
         playerWon:'GEWONNEN',
         playerLost:'VERLOREN',
