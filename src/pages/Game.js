@@ -21,39 +21,32 @@ export default function Game(props) {
     ? (content = content.German)
     : (content = content.English);
 
-  let [running, setRunning] = useState();
-
   let gameID = Number(localStorage.getItem("gameID"));
   let playerID = Number(localStorage.getItem("playerID"));
   let ownerID = Number(localStorage.getItem("ownerID"));
 
-
   //tab close event listener, leave game when tab is closed
   useEffect(() => {
-    
-    const handleTabClose = event => {
-      event.preventDefault();
 
-      //muss noch nach antwort gecheckt werden, erst dann leave
+
+    window.onbeforeunload = function () {
+
       updateOwner();
       leave();
-      
-      return (event.returnValue = 'Are you sure you want to exit?');
-    };
 
-    window.addEventListener('beforeunload', handleTabClose);
+      return;
+    }
 
-    return () => {
-      window.removeEventListener('beforeunload', handleTabClose);
-    };
   }, []);
 
   function leave() {
 
     fetch(serviceendpoint + '/games/' + gameID + '/' + playerID, {
       method: 'PATCH',
+      keepalive: true,
       body: JSON.stringify({ player: playerID, action: "leave" }),
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json" },
+      
     })
       .then(res => {
         if (res.ok) {
@@ -68,25 +61,25 @@ export default function Game(props) {
       });
   }
 
-  function updateOwner(){
+  function updateOwner() {
 
-    if(playerID === ownerID){
+    if (playerID === ownerID) {
 
-      fetch(serviceendpoint + '/games/')
-            .then(res => res.json())
-            .then(data => {
-                if (data.games.length !== 0) {
-                    for (var i = 0; i < data.games.length; i++) {
-                        if (data.games[i].id === gameID) {
-                            //update ownerID in local storage
-                            localStorage.setItem('ownerID', data.games[i].owner.id);
-                        }
-                    }
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+      fetch(serviceendpoint + '/games/',{ keepalive: true})
+        .then(res => res.json())
+        .then(data => {
+          if (data.games.length !== 0) {
+            for (var i = 0; i < data.games.length; i++) {
+              if (data.games[i].id === gameID) {
+                //update ownerID in local storage
+                localStorage.setItem('ownerID', data.games[i].owner.id);
+              }
+            }
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
     }
   }
 
