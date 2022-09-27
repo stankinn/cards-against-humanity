@@ -13,9 +13,10 @@ export default function WhiteCards(props) {
     let [offers, setOffers] = useState();   // get offered cards
     let [waitingPlayers, setPlayers] = useState();  //how many players have to make their offers
     let [czarID, setCzarID] = useState();   //Czar ID for warning display
-    let [offered, setOffered] = useState();
-    let [winner, setWinner] = useState();
-    var helpArray = [];
+    let [offered, setOffered] = useState(); //boolean
+    let [winner, setWinner] = useState();   //boolean
+    let [winningCards, setWinningCards] = useState([]); //chosen winner cards
+    var helpArray= [];
 
     let content = lang;
     props.language === "German"
@@ -194,7 +195,7 @@ export default function WhiteCards(props) {
                                     console.log('True und True')
                                     for (var k = 0; k < data.offers[i].length; k++) {
                                         document.getElementById(data.offers[i][k].id).classList.remove('active');
-                                        helpArray[k] = undefined;
+                                        setWinningCards(undefined);
                                         console.log('removed: '+ JSON.stringify(helpArray));
                                     }
                                     document.getElementById('choosingBtn').style.visibility = "hidden";
@@ -206,9 +207,11 @@ export default function WhiteCards(props) {
                                     console.log('False')
                                     for (var k = 0; k < data.offers[i].length; k++) {
                                         document.getElementById(data.offers[i][k].id).classList.add('active');
+                                        
                                         helpArray[k] = data.offers[i][k].id;
                                         console.log('add: '+ JSON.stringify(helpArray))
                                     }
+                                    setWinningCards(helpArray);
                                     document.getElementById('choosingBtn').style.visibility = "visible";
                                     setWinner(true)
                                 }
@@ -222,10 +225,11 @@ export default function WhiteCards(props) {
     }
 
     function chooseWinningCard(){
+
         fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')),
         {
             method: "PUT",
-            body: JSON.stringify({ cards: helpArray }),
+            body: JSON.stringify({ cards: winningCards }),
             headers: { "Content-Type": "application/json" }
         })
         .then(res => res.json())

@@ -35,13 +35,21 @@ export default function BlackCard() {
                                     .catch((error) => {
                                         console.error('Error:', error);
                                     });
-                            } else if (data.games[i].running === false && data.games[i].winner === undefined){
+                            } else if (data.games[i].running === false && data.games[i].winner === undefined) {
 
                                 //if game is not running, return to gamelobby
                                 setRunning(false);
-                               console.log("this bitch ain't running");
-                               console.log("owner: " + data.games[i].owner.id);
-                               navigate('/lobby/' + Number(localStorage.getItem('gameID')));
+                                console.log("this bitch ain't running");
+                                console.log("owner: " + data.games[i].owner.id);
+                                navigate('/lobby/' + Number(localStorage.getItem('gameID')));
+
+                            } else if (data.games[i].running === false && data.games[i].winner !== undefined) {
+
+                                //if game ended: wait, then return to lobby
+                                const endInterval = setInterval(() => {
+                                    navigate('/lobby/' + Number(localStorage.getItem('gameID')));
+                                }, 5000);
+                                return () => clearInterval(endInterval);
 
                             }
                             i = data.games.length;

@@ -27,8 +27,8 @@ export default function EndGame(props) {
         .catch((error) => {
           console.error('Error:', error);
         });
-   //if not the owner, just leave game 
-  } else {
+      //if not the owner, just leave game 
+    } else {
       leave();
     }
   }
@@ -65,7 +65,10 @@ export default function EndGame(props) {
         if (res.ok) {
           localStorage.removeItem('gameID');
           localStorage.removeItem('ownerID');
+          //if the game still exists, navigate to game lobby, else to main lobby
+          
           navigate('/lobby');
+          
         }
         return res
       })
