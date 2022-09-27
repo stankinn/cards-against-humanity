@@ -13,7 +13,7 @@ export default function PlayerPoints(){
     useEffect(() =>{
         const interval = setInterval(() => { 
             showPlayer();
-        }, 1000);
+        }, 500);
         return () => clearInterval(interval);
     });
 

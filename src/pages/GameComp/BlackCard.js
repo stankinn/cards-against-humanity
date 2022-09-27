@@ -35,12 +35,13 @@ export default function BlackCard() {
                                     .catch((error) => {
                                         console.error('Error:', error);
                                     });
-                            } else if (data.games[i].running === true && data.games[i].winner === undefined){
+                            } else if (data.games[i].running === false && data.games[i].winner === undefined){
 
                                 //if game is not running, return to gamelobby
                                 setRunning(false);
-
-                                navigate('/lobby/' + Number(localStorage.getItem('gameID')));
+                               console.log("this bitch ain't running");
+                               console.log("owner: " + data.games[i].owner.id);
+                               navigate('/lobby/' + Number(localStorage.getItem('gameID')));
 
                             }
                             i = data.games.length;
