@@ -94,6 +94,7 @@ export default function PlayerList(props) {
                             return res
                         })
                         .then(res => res.json())
+                        .then(data => {console.log(data.id + " running?: " + data.running + ", winner: " + data.winner.name)})
                         .catch((error) => {
                             console.error('Error:', error);
                         });

@@ -21,12 +21,12 @@ export default function Result(props) {
       .then(data => {
         for(var i = 0; i < data.games.length; i++){
           if(data.games[i].id === Number(localStorage.getItem('gameID'))){
-            if(data.games[i].winner){
-              if(data.games[i].winner.id === Number(localStorage.getItem('playerID'))){
-                setWonPopup(true);
-              }else{
-                setLostPopup(true);
-              }
+            if(data.games[i].winner && data.games[i].running === false){
+                if(data.games[i].winner.id === Number(localStorage.getItem('playerID'))){
+                    setWonPopup(true);
+                }else if(data.games[i].winner.id !== Number(localStorage.getItem('playerID'))){
+                    setLostPopup(true);
+                }
             }
           }
         }

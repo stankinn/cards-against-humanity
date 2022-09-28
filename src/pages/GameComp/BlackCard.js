@@ -29,24 +29,26 @@ export default function BlackCard() {
                         
                         }else if (data.games[i].running === false && data.games[i].winner === undefined) {
 
-                            //if game is not running, return to gamelobby
+                            //if game is not running, return to gamelobby    
+                            leave();
                             setRunning(false);
-                            console.log("this bitch ain't running");
-                            console.log("owner: " + data.games[i].owner.id);
-                            navigate('/lobby/' + Number(localStorage.getItem('gameID')));
 
                         } else if (data.games[i].running === false && data.games[i].winner !== undefined) {
-
+                                
                             //if game ended: wait, then return to lobby
-                            const endInterval = setInterval(() => {
-                                navigate('/lobby/' + Number(localStorage.getItem('gameID')));
+
+                            setTimeout(function () {
+                                console.log("leaving game");
+                                leave();
                             }, 8000);
-                            return () => clearInterval(endInterval);
+                            setRunning(false);
 
                         }
                         i = data.games.length;
-                         break;
+                        break;
                     }
+                    i = data.games.length;
+                    break;
                 }
             })
             .catch((error) => {
@@ -55,7 +57,7 @@ export default function BlackCard() {
             
         }, 500);
         return () => clearInterval(interval);
-    })
+    });
 
     function setBlackCard(){
         fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')))
@@ -69,6 +71,27 @@ export default function BlackCard() {
         .catch((error) => {
             console.error('Error:', error);
         });
+    }
+
+    function leave() {
+        // leaving game and returning to main lobby
+        fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
+            method: 'PATCH',
+            body: JSON.stringify({ player: localStorage.getItem('playerID'), action: "leave" }),
+            headers: { "Content-Type": "application/json" }
+        })
+            .then(res => {
+                if (res.ok) {
+                    localStorage.removeItem('gameID');
+                    localStorage.removeItem('ownerID');
+                    navigate('/lobby');
+                }
+                return res
+            })
+            .then(res => res.json())
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     }
 
     //display of text
