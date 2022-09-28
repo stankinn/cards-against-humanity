@@ -16,6 +16,9 @@ export default function WhiteCards(props) {
     let [offered, setOffered] = useState(); //has the player offered his cards
     let [winner, setWinner] = useState();   //did the czar choose a winning card/s
     let [winningCards, setWinningCards] = useState([]); //chosen winning card/s
+
+    let [order, setOrder] = useState();  
+
     var helpArray= [];
 
     let content = lang;
@@ -87,17 +90,42 @@ export default function WhiteCards(props) {
                     getOffers();
                     setOffered(true);
                     setWinner(false);
+
+                    // add OrderNumber to cards
+                    fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')) + '/offers/' + Number(localStorage.getItem('playerID')))
+                    .then(res => res.json())
+                    .then(data => {
+                        
+                        for (let i = 0; i < data.offers.length; i++) {
+                            if(data.offers[i].length > 0){
+                                for (let j = 0; j < spaces; j++) {
+                                    document.getElementById(data.offers[i][j].id).querySelector('#orderNumber').innerHTML = j;
+                                }
+                            }
+                        }
+
+                    })
                 }
             }
             
             //if you are the czar, display overlay on screen
             if (czarID === Number(localStorage.getItem('playerID'))) {
                 document.getElementById('overlay').style.visibility = "visible";
+                document.getElementById('czarWarning').style.visibility = "visible";
                 if(winner === true){
                     document.getElementById('choosingBtn').style.visibility = "visible";
                 }
             } else {
                 document.getElementById('overlay').style.visibility = "hidden";
+                document.getElementById('czarWarning').style.visibility = "hidden";
+            }
+
+            if(offered === true && czarID !== Number(localStorage.getItem('playerID'))){
+                document.getElementById('overlay').style.visibility = "visible";
+                document.getElementById('czarWarning').style.visibility = "hidden";
+            }else if(offered === false && czarID !== Number(localStorage.getItem('playerID'))){
+                document.getElementById('overlay').style.visibility = "hidden";
+                document.getElementById('czarWarning').style.visibility = "hidden";
             }
 
         }, 500);
@@ -117,9 +145,20 @@ export default function WhiteCards(props) {
             }
             // select card (add active and add card to offering list)
             else if(document.getElementById(id).classList.contains('active') !== true) {
-                 document.getElementById(id).classList.add('active');
-                 newSelection.push(id);
-                 console.log('added: ' + newSelection)
+                document.getElementById(id).classList.add('active');
+                newSelection.push(id);
+                console.log('added: ' + newSelection)
+                 
+                // add mark order in corner
+                let place;
+                for (let i = 0; i < newSelection.length; i++) {
+                    if(newSelection[i] === id){
+                        place = i;
+                    }
+                }
+
+                // add OrderNumber to card
+                document.getElementById(id).querySelector('#orderNumber').innerHTML = place;
             }
             // deselect card (remove active and remove card from offering list)
             else if(document.getElementById(id).classList.contains('active') === true){
@@ -130,8 +169,20 @@ export default function WhiteCards(props) {
                     newSelection.splice(index, 1); // 2nd parameter means remove one item only
                 }
                 console.log('removed: ' + newSelection)
+
+                // remove OrderNumber
+                document.getElementById(id).querySelector('#orderNumber').innerHTML = null;
+
+                // change OrderNumber to right order
+                for (let j = 0; j < newSelection.length; j++) {
+                    if(document.getElementById(newSelection[j]).classList.contains('active') === true){
+                        document.getElementById(newSelection[j]).querySelector('#orderNumber').innerHTML = j;
+                    }
+                }
+                
             }
-            setList(newSelection);
+
+            setList(newSelection); 
         }
     }
 
@@ -151,9 +202,10 @@ export default function WhiteCards(props) {
                     document.getElementById('choosingBtn').style.visibility = "hidden";
                     setOffered(true);
 
-                    // don't activate any cards after offering
+                    // don't activate any cards and remove OrderNumbers after offering
                     for (let i = 0; i < answer.length; i++) {
                         document.getElementById(answer[i].id).classList.remove('active');
+                        document.getElementById(answer[i].id).querySelector('#orderNumber').innerHTML = null;
                     }
                 }
                 return res
@@ -250,9 +302,8 @@ export default function WhiteCards(props) {
                                 {offer.map((text) => {
                                     return (
                                         <div id={text.id} className='card white' onClick={() => chooseWinner(text.id)}>
-
                                             <p key={text.id}> {text.text} </p>
-
+                                            <p id='orderNumber'></p>
                                         </div>);
                                 })}
 
@@ -267,13 +318,15 @@ export default function WhiteCards(props) {
 
                     <div id='playerCards' className='gameDiv cardsBackground'>
                         {answer.map((text) => (
-                            <div id={text.id} className='card white'>
+                            <div className='card white'>
                                 <p key={text.id} >{text.text}</p>
                             </div>
                         ))}
                     </div>
 
-                    <div id='overlay'> {content.czarWarning}</div>
+                    <div id='overlay'>
+                        <p id='czarWarning'>{content.czarWarning}</p>
+                    </div>
                     
                 </>
             );
@@ -293,11 +346,14 @@ export default function WhiteCards(props) {
                         {answer.map((text) => (
                             <div id={text.id}  className='card white' onClick={() => makeList(text.id)}>
                                 <p key={text.id} >{text.text}</p>
+                                <p id='orderNumber'></p>
                             </div>
                         ))}
                     </div>
 
-                    <div id='overlay'> {content.czarWarning}</div>
+                    <div id='overlay'>
+                        <p id='czarWarning'>{content.czarWarning}</p>
+                    </div>
                 </>
             );
 

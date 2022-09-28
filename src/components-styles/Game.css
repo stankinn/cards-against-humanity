@@ -58,6 +58,10 @@
     font-size: 2em;
 }
 
+#czarWarning{
+    visibility: hidden;
+}
+
 .CzarText{
     font-weight: bold;
     height: 2rem;

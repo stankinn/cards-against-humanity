@@ -37,6 +37,14 @@
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 1);
 }
 
+#orderNumber{
+    position:absolute;
+    display: flex;
+    top: -.28rem;
+    left: 0rem;
+    font-size: .85rem;
+}
+
 .card.white:active, .card.white.active{
     transform: translateY(-.7rem);
     color: var(--hs-red);
