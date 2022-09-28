@@ -5,9 +5,11 @@ import '../components-styles/Lobby.css'
 import {lang} from '../Languages';
 import GameList from './LobbyComp/GameList';
 import Home from './LobbyComp/Home';
-import {Link} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 export default function Lobby(props) {
+
+  let navigate = useNavigate();
 
   let content = lang;
   props.language === "German"
@@ -19,6 +21,7 @@ export default function Lobby(props) {
     <div className='allLobbyLayout'>
       <Home/>
       <GameList language={props.language}/>
+      <button id='createBtn' className='continueBtn' title='Create Game' onClick={() => navigate('./create-game')}>{content.createGame}</button>
     </div>
   )
 }

@@ -137,7 +137,6 @@ export default function GameList(props) {
                     </div>
                     <p id='gamePoints'>{content.infoGoal} {curGoal}</p>
                 </div>
-                <button id='createBtn' className='continueBtn' title='Create Game' onClick={() => navigate('./create-game')}>{content.createGame}</button>
                 <button id='joinBtn' className='continueBtn disabled' title='Join Game' onClick={() =>joinGame()}>{content.join}</button>
             </>
         );
@@ -170,8 +169,6 @@ export default function GameList(props) {
                     </div>
                     <p id='gamePoints'>{content.infoGoal} {curGoal}</p>
                 </div>
-
-                <button id='createBtn' className='continueBtn' title='Create Game' onClick={() => navigate('./create-game')}>{content.createGame}</button>
                 <button id='joinBtn' className='continueBtn disabled' onClick={() =>joinGame()}>{content.join}</button>
             </>
         );
