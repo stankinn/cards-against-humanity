@@ -24,11 +24,6 @@ export default function LeaveGame(props) {
                 return res
             })
             .then(res => res.json())
-            .then(data => {
-                if (data.players.length > 0) {
-
-                }
-            })
             .catch((error) => {
                 console.error('Error:', error);
             });

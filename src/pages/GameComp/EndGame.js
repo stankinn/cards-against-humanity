@@ -19,7 +19,7 @@ export default function EndGame(props) {
       })
         .then(res => {
           if (res.ok) {
-            navigate('/lobby/' + gameID);
+            deleteGame();
           }
           return res;
         })
@@ -65,7 +65,6 @@ export default function EndGame(props) {
         if (res.ok) {
           localStorage.removeItem('gameID');
           localStorage.removeItem('ownerID');
-          //if the game still exists, navigate to game lobby, else to main lobby
           
           navigate('/lobby');
           
