@@ -72,6 +72,10 @@
   visibility: hidden;
 }
 
+.wonAnimation{
+  margin: -5%;
+}
+
 .lost > .lostAnimation{
   visibility: visible;
 }

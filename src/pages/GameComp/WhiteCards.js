@@ -310,7 +310,16 @@ export default function WhiteCards(props) {
                     <></>
                 </div>
                 <div id='playerCards' className='gameDiv cardsBackground'>
-                    <></>
+                    <div className='card white'><p></p></div>
+                    <div className='card white'><p></p></div>
+                    <div className='card white'><p></p></div>
+                    <div className='card white'><p></p></div>
+                    <div className='card white'><p></p></div>
+                    <div className='card white'><p></p></div>
+                    <div className='card white'><p></p></div>
+                    <div className='card white'><p></p></div>
+                    <div className='card white'><p></p></div>
+                    <div className='card white'><p></p></div>
                 </div>
             </>
         );

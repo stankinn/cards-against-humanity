@@ -28,6 +28,8 @@
 
 .popupWindow.small:before {
     position: absolute;
+    top: 0;
+    left: 0;
     content: '';
     background: repeating-linear-gradient(90deg, #ff0000, #ff8400, #feff00, #1dff00, #00beff, #b500ff, #ff0000);
     background-size: 400%;
