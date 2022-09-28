@@ -10,12 +10,14 @@ export default function PlayerPoints(){
     var arr = [];
     var arrPlayer = [];
 
+    // update playerList every 0.5sec
     useEffect(() =>{
         const interval = setInterval(() => { 
             showPlayer();
         }, 500);
         return () => clearInterval(interval);
     });
+
 
     function showPlayer() {
 
@@ -53,7 +55,6 @@ export default function PlayerPoints(){
                         
                     }
                     setFinalList(arr);
-                    
                 }
             }
         })
@@ -61,11 +62,12 @@ export default function PlayerPoints(){
             console.error('Error:', error);
         });
     }
-        return (
-            <div className='playerPoints'>
-                {finalList.map(({ name, id, points }) => (
-                    <p key={id}>{name}.....{points}/{goal}</p>
-                ))}
-            </div>
-        );
-    }
+    
+    return (
+        <div className='playerPoints'>
+            {finalList.map(({ name, id, points }) => (
+                <p key={id}>{name}.....{points}/{goal}</p>
+            ))}
+        </div>
+    );
+}

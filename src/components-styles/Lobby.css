@@ -62,7 +62,8 @@
     background-color: var(--bg-cards);
 }
 
-.homeBtn:hover, #homeIconRoof:hover, #homeIcon:hover {
+#home:hover{
+/* .homeBtn:hover, #homeIconRoof:hover, #homeIcon:hover { */
     cursor: pointer;
    --btn-color: var(--hs-red);
   }
@@ -71,8 +72,20 @@
     position: fixed;
     top: 0.4rem;
     right: 0.4rem;
+    height: 2.75rem;
+    width: 2.75rem;
+    background-color: rgba(70, 70, 70, 0.5);
+    border-radius: 0.5rem;
+    transition: .6s;
+    transition-delay: 0.3s;
+    box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.5);
     overflow: hidden;
 }
+
+.homeBtn{
+    margin: .36rem;
+}
+
  #homeIconRoof, #homeIcon{
     width: 1.5rem;
     height: 2rem;
@@ -87,19 +100,16 @@
 
   border-bottom: 1rem solid var(--btn-color);
 }
+
 #homeIcon{
     margin-left: 0.29rem;
     width: 1.4rem; 
     height: 1rem; 
 
-    background-color: var(--btn-color);
-}
-#homeIconDoor{
+    border: .4rem solid var(--btn-color);
+    border-top: 0;
 
-    margin-left: 0.4rem;
-    width: 0.6rem; 
-    height: 0.6rem; 
-    background-color: var( --bg-color);
+    background-color: transparent;
 }
 
 #headerID{

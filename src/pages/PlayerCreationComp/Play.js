@@ -72,7 +72,7 @@ export default function Play(props) {
     
     return (
         <>
-            <button id='playBtn' className='continueBtn' onClick={() => checkGames()}>{content.playButton}</button>
+            <button id='playBtn' className='continueBtn' title='Play' onClick={() => checkGames()}>{content.playButton}</button>
         </>
     );
 

@@ -19,7 +19,7 @@ export default function PlayerCreation(props) {
     <div className='playerLayout'>
       <h1 id='headerP'>{content.headerP}</h1>
       <p id='curName'>{content.curName}</p>
-      <input id='inputName' className='input' maxLength={14}/>
+      <input id='inputName' className='input' title='Playername' maxLength={14}/>
       <Player language={props.language}/>
       <Play language={props.language}/> 
       {/* <DeleteAll/> */}

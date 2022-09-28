@@ -5,8 +5,6 @@ import { lang } from '../../Languages';
 
 export default function GameList(props) {
 
-    let navigate = useNavigate();
-
     let [gameList, setGList] = useState([]);
     let [clickedGame, setClicked] = useState([]);
     let [playerList, setPlayers] = useState([]);
@@ -15,15 +13,19 @@ export default function GameList(props) {
 
     var arr = [];
 
+    let navigate = useNavigate();
+
     let content = lang;
     props.language === "German"
         ? (content = content.German)
         : (content = content.English);
 
+    
     useEffect(() => {
         const interval = setInterval(() => {
 
             getGamesList();
+            // clear details output if there are no games or no game is selected
             if(clickedGame === content.noGameClicked || gameList.length === 0){
                 setClicked(content.noGameClicked);
                 setPlayers([]);
@@ -36,23 +38,8 @@ export default function GameList(props) {
         return () => clearInterval(interval);
     });
 
+    // display all details and enable joining when clicked
     useEffect(()=>{
-        updateInfo();
-    }, [clickedGame])
-
-    function getGamesList() {
-
-        fetch(serviceendpoint + '/games/')
-            .then(response => response.json())
-            .then(data => {
-                setGList(data.games);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-    }
-
-    function updateInfo(){
         document.getElementById('joinBtn').classList.remove('disabled');
 
         fetch(serviceendpoint + '/games/')
@@ -61,59 +48,68 @@ export default function GameList(props) {
             for (var i = 0; i < data.games.length; i++){
                 if(data.games[i].id === clickedGame){
                     setPlayers(data.games[i].players)
-                    packDetails(data.games[i].packs)
                     setGoal(data.games[i].goal)
+                    let gamePacks = data.games[i].packs;
+
+                    // search for the packs in the game and set name and id to setPacks State
+                    fetch(serviceendpoint + '/packs/')
+                    .then(response => response.json())
+                    .then(packsData => {
+                        for(var i = 0; i < packsData.packs.length; i++){
+                            for(var j = 0; j < gamePacks.length; j++){
+                                if(packsData.packs[i].id === gamePacks[j]){
+                                    arr[j]={'name': packsData.packs[i].name, 'id': packsData.packs[i].id};
+                                }
+                            }
+                        }
+                        setPacks(arr)
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
                 }
             }
         })
         .catch((error) => {
             console.error('Error:', error);
         });
-    }
+    }, [clickedGame])
 
-    function packDetails(allPacks){
-
-            fetch(serviceendpoint + '/packs/')
-            .then(response => response.json())
-            .then(data => {
-                for(var i = 0; i < data.packs.length; i++){
-                    for(var j = 0; j < allPacks.length; j++){
-                        if(data.packs[i].id === allPacks[j]){
-                            arr[j]={'name': data.packs[i].name, 'id': data.packs[i].id};
-                        }
-                    }
-                }
-                setPacks(arr)
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+    function getGamesList() {
+        fetch(serviceendpoint + '/games/')
+        .then(response => response.json())
+        .then(data => {
+            setGList(data.games);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     }
 
     function joinGame(){
         
-         if(!document.getElementById('joinBtn').classList.contains('disabled')){
+        if(!document.getElementById('joinBtn').classList.contains('disabled')){
 
             localStorage.setItem('gameID', clickedGame);
 
-             //joining available game and navigate to gameLobby
-             fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
-                 method: 'PATCH',
-                 body: JSON.stringify({ action : "join" }),
-                 headers: { "Content-Type": "application/json" }
-             })
-             .then(res => {
-                 if(res.ok){
-                     console.log('joined game ' + Number(localStorage.getItem('gameID')) + ' successful.');
-                     navigate('/lobby/' + Number(localStorage.getItem('gameID')));
-                 }
-                 return res
-             })
-             .then(res => res.json())
-             .catch((error) => {
-                 console.error('Error:', error);
-             });
-         }
+            //joining available game and navigate to gameLobby
+            fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
+                method: 'PATCH',
+                body: JSON.stringify({ action : "join" }),
+                headers: { "Content-Type": "application/json" }
+            })
+            .then(res => {
+                if(res.ok){
+                    console.log('joined game ' + Number(localStorage.getItem('gameID')) + ' successful.');
+                    navigate('/lobby/' + Number(localStorage.getItem('gameID')));
+                }
+                return res
+            })
+            .then(res => res.json())
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
     }
 
 

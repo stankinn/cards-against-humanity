@@ -17,62 +17,64 @@ export default function PlayerList(props) {
       ? (content = content.German)
       : (content = content.English);
 
-      // look if the game is running and navigate to game if it is
+    // look if the game is running and navigate to game if it is
     useEffect(() => {
         const interval = setInterval(() => {
-        fetch(serviceendpoint + '/games/')
-        .then(res => res.json())
-        .then(data => {
-            if (data.games.length !== 0) {
-                for (var i = 0; i < data.games.length; i++) {
-                    if (data.games[i].id === Number(localStorage.getItem('gameID'))) {
-                        if(data.games[i].running === true)
-                        navigate('/game');
+            fetch(serviceendpoint + '/games/')
+            .then(res => res.json())
+            .then(data => {
+                if (data.games.length !== 0) {
+                    for (var i = 0; i < data.games.length; i++) {
+                        if (data.games[i].id === Number(localStorage.getItem('gameID'))) {
+                            if(data.games[i].running === true)
+                            navigate('/game');
+                        }
                     }
                 }
-            }
-        });
-        showPlayer();
+            });
+            showPlayer();
         }, 500);
         return () => clearInterval(interval);
-      });
+    });
 
 
     function showPlayer() {
         
         // add players that are in the game to the list and show the play-button (only for the owner) if there are 3 or more players
         fetch(serviceendpoint + '/games/')
-            .then(res => res.json())
-            .then(data => {
-                if (data.games.length !== 0) {
-                    for (var i = 0; i < data.games.length; i++) {
-                        if (data.games[i].id === Number(localStorage.getItem('gameID'))) {
+        .then(res => res.json())
+        .then(data => {
+            if (data.games.length !== 0) {
+                for (var i = 0; i < data.games.length; i++) {
+                    if (data.games[i].id === Number(localStorage.getItem('gameID'))) {
 
-                            //update ownerID, if previous owner left the game
-                            localStorage.setItem('ownerID', data.games[i].owner.id);
-                            if(!data.games[i].running){
-                                setPList(data.games[i].players);
-                                playerLength = data.games[i].players.length;
-                                if (Number(localStorage.getItem('ownerID')) === Number(localStorage.getItem('playerID'))) {
-                                    if (playerLength >= 3) {
-                                        document.getElementById('startBtn').classList.remove('hidden');
-                                    } else {
-                                        document.getElementById('startBtn').classList.add('hidden');
-                                    }
+                        //update ownerID, if previous owner left the game
+                        localStorage.setItem('ownerID', data.games[i].owner.id);
+                        
+                        if(!data.games[i].running){
+                            setPList(data.games[i].players);
+                            playerLength = data.games[i].players.length;
+                            
+                            if (Number(localStorage.getItem('ownerID')) === Number(localStorage.getItem('playerID'))) {
+                                if (playerLength >= 3) {
+                                    document.getElementById('startBtn').classList.remove('hidden');
+                                } else {
+                                    document.getElementById('startBtn').classList.add('hidden');
                                 }
                             }
                         }
                     }
                 }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     }
 
     function startGame() {
 
-        // start the game if the player is the owner
+        // start the game if the player is the owner and navigate to the game
         fetch(serviceendpoint + '/games/')
         .then(res => res.json())
         .then(data => {

@@ -7,6 +7,7 @@ import '../../components-styles/Packs.css';
 
 export default function GetAllPacks(props) {
     
+    let [packs, setPack] = useState([]);
     let navigate = useNavigate();
 
     let content = lang;
@@ -14,18 +15,16 @@ export default function GetAllPacks(props) {
         ? (content = content.German)
         : (content = content.English);
 
-    let [packs, setPack] = useState([]);
-
     useEffect(() => {
 
         fetch(serviceendpoint + '/packs/')
-            .then(response => response.json())
-            .then(data => {
-                setPack(data.packs);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+        .then(response => response.json())
+        .then(data => {
+            setPack(data.packs);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     }, [])
 
     const setID = (id) => {

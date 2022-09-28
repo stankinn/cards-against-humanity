@@ -7,6 +7,13 @@ import '../../components-styles/Packs.css';
 
 export default function GetCurPacks(props) {
 
+    let [curPacks, setCurPacks] = useState([]);
+    let gameID = localStorage.getItem("gameID");
+
+    //helper variables
+    let allPacks;
+    let gamePackIds;
+
     let navigate = useNavigate();
 
     let content = lang;
@@ -14,48 +21,43 @@ export default function GetCurPacks(props) {
         ? (content = content.German)
         : (content = content.English);
 
-    let [curPacks, setCurPacks] = useState([]);
-    let gameID = localStorage.getItem("gameID");
-
-    //helper variables
-    let gamePackIds;
-    let allPacks;
-
     useEffect(() => {
 
         //find your game and save the used pack ids
         fetch(serviceendpoint + '/games/')
-            .then(response => response.json())
-            .then(data => {
-                for (var i = 0; i < data.games.length; i++) {
-                    console.log(data.games[i].id);
-                    if (data.games[i].id === Number(gameID)) {
-
-                        gamePackIds = data.games[i].packs;
-                        console.log(gamePackIds);
-                        
-                    }
-                    //get all packs again for comparison 
-                        fetch(serviceendpoint + '/packs/')
-                            .then(response => response.json())
-                            .then(data => {
-
-                                allPacks = data.packs;
-                                console.log(gamePackIds);
-                                //filter matching packs and set as state
-                                setCurPacks(allPacks.filter(pack => gamePackIds.includes(pack.id)));
-
-                            })
-                            .catch((error) => {
-                                console.error('Error:', error);
-                            });
+        .then(response => response.json())
+        .then(data => {
+            for (var i = 0; i < data.games.length; i++) {
+                console.log(data.games[i].id);
+                if (data.games[i].id === Number(gameID)) {
+                    gamePackIds = data.games[i].packs;
+                    console.log(gamePackIds);
                 }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+                getAllPacks();
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 
     }, [])
+
+    //get all packs again for comparison 
+    function getAllPacks(){
+        fetch(serviceendpoint + '/packs/')
+        .then(response => response.json())
+        .then(data => {
+            allPacks = data.packs;
+            console.log(gamePackIds);
+            
+            //filter matching packs and set as state
+            setCurPacks(allPacks.filter(pack => gamePackIds.includes(pack.id)));
+
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
 
 
     const setID = (id) => {

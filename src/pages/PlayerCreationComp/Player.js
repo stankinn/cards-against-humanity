@@ -86,8 +86,8 @@ export default function Player(props) {
   return (
     <>
       <p id='curNameContent'>{content}</p>
-      <button className='delBtn' onClick={deletePlayer}>{contentLang.delBtn}</button>
-      <button className='addBtn' onClick={addPlayer}>{contentLang.addBtn}</button>
+      <button className='delBtn' title='Delete Player' onClick={deletePlayer}>{contentLang.delBtn}</button>
+      <button className='addBtn' title='Add Player' onClick={addPlayer}>{contentLang.addBtn}</button>
     </>
   );
 }

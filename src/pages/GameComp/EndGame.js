@@ -17,40 +17,21 @@ export default function EndGame(props) {
         body: JSON.stringify({ player: playerID, action: "end" }),
         headers: { "Content-Type": "application/json" }
       })
-        .then(res => {
-          if (res.ok) {
-            navigate('/lobby/' + gameID);
-          }
-          return res;
-        })
-        .then(res => res.json())
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-      //if not the owner, just leave game 
-    } else {
-      leave();
-    }
-  }
-
-  function deleteGame() {
-
-    fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')), {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" }
-    })
       .then(res => {
         if (res.ok) {
-          localStorage.removeItem('ownerID');
-          localStorage.removeItem('gameID');
-          navigate('/lobby');
+          navigate('/lobby/' + gameID);
         }
-        return res
+        return res;
       })
       .then(res => res.json())
       .catch((error) => {
         console.error('Error:', error);
       });
+    
+    //if not the owner, just leave game 
+    } else {
+      leave();
+    }
   }
 
   function leave() {
@@ -61,21 +42,20 @@ export default function EndGame(props) {
       body: JSON.stringify({ player: localStorage.getItem('playerID'), action: "leave" }),
       headers: { "Content-Type": "application/json" }
     })
-      .then(res => {
-        if (res.ok) {
-          localStorage.removeItem('gameID');
-          localStorage.removeItem('ownerID');
-          //if the game still exists, navigate to game lobby, else to main lobby
-          
-          navigate('/lobby');
-          
-        }
-        return res
-      })
-      .then(res => res.json())
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    .then(res => {
+      if (res.ok) {
+        localStorage.removeItem('gameID');
+        localStorage.removeItem('ownerID');
+        
+        //if the game still exists, navigate to game lobby, else to main lobby
+        navigate('/lobby');
+      }
+      return res
+    })
+    .then(res => res.json())
+    .catch((error) => {
+      console.error('Error:', error);
+    });
   }
 
   return (

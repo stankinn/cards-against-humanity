@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { serviceendpoint } from '../Imports';
 import { lang } from '../../Languages';
 
@@ -7,13 +7,12 @@ import '../../components-styles/CreateGame.css'
 
 export default function CreateGame(props) {
 
-    
+    let navigate = useNavigate();
+
     let content = lang;
     props.language === "German"
         ? (content = content.German)
         : (content = content.English);
-
-    let navigate = useNavigate();
 
     let [pointGoal, setGoal] = useState();
     let [packs, setPackOffer] = useState([]); //all card packs
@@ -62,65 +61,57 @@ export default function CreateGame(props) {
             body: JSON.stringify({ owner: Number(localStorage.getItem('playerID')), goal: Number(pointGoal), packs: selectedPacks }),
             headers: { "Content-Type": "application/json" }
         })
-            .then(res => res.json())
-            .then(data => {
-                setGameID(data.id);
-
-                console.log("game: " + JSON.stringify(data));
-                localStorage.setItem('ownerID', data.owner.id);
-                console.log('created game ' + Number(localStorage.getItem('gameID')) + ' successful.');
-                navigate('/lobby/' + Number(localStorage.getItem('gameID')));
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+        .then(res => res.json())
+        .then(data => {
+            setGameID(data.id);
+            console.log("game: " + JSON.stringify(data));
+            localStorage.setItem('ownerID', data.owner.id);
+            console.log('created game ' + Number(localStorage.getItem('gameID')) + ' successful.');
+            navigate('/lobby/' + Number(localStorage.getItem('gameID')));
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     }
 
     const handleOnSelectionChange = (position) => {
-
-    ;
-    const updatedCheckedState = checkedPacks.map((item, index) =>
-      index === position ? !item : item
-    );
-    setPacks(updatedCheckedState);
-    
-    updatedCheckedState.map(
-        (currentState, index) => {
-          if (currentState === true) {
-            helpArr = helpArr.concat(packs[index].id);
-          }
-        }
-      );
+        ;
+        const updatedCheckedState = checkedPacks.map((item, index) =>
+        index === position ? !item : item
+        );
+        setPacks(updatedCheckedState);
+        
+        updatedCheckedState.map(
+            (currentState, index) => {
+                if (currentState === true) {
+                    helpArr = helpArr.concat(packs[index].id);
+                }
+            }
+        );
         setSelectedPacks(helpArr);
-}
+    }
 
 
     //Make sure the point goal input makes sense
     const handleGoalChange = event => {
         let result;
         if (event.target.value < 1) {
-
             event.target.value = 1;
-        } else if (event.target.value > 100) {
 
+        } else if (event.target.value > 100) {
             event.target.value = 100;
         }
-
         result = event.target.value
 
         setGoal(result);
     };
 
     function addAllPacks(){
-
         setPacks(new Array(packs.length).fill(true));
-
     }
 
     function deselectPacks(){
-
         setPacks(new Array(packs.length).fill(false));
-
     }
 
     return (

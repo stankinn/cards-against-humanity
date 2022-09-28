@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import BlackCard from './GameComp/BlackCard';
 import WhiteCards from './GameComp/WhiteCards';
 import CurCzar from './GameComp/CurCzar';
@@ -8,35 +8,28 @@ import EndGame from './GameComp/EndGame';
 import Result from './GameComp/Result';
 import { lang } from '../Languages';
 import '../components-styles/Game.css'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { serviceendpoint } from './Imports';
 
 
 export default function Game(props) {
 
-  let navigate = useNavigate();
+  let gameID = Number(localStorage.getItem("gameID"));
+  let playerID = Number(localStorage.getItem("playerID"));
+  let ownerID = Number(localStorage.getItem("ownerID"));
 
   let content = lang;
   props.language === "German"
     ? (content = content.German)
     : (content = content.English);
 
-  let gameID = Number(localStorage.getItem("gameID"));
-  let playerID = Number(localStorage.getItem("playerID"));
-  let ownerID = Number(localStorage.getItem("ownerID"));
-
   //tab close event listener, leave game when tab is closed
   useEffect(() => {
-
-
     window.onbeforeunload = function () {
-
       updateOwner();
       leave();
-
       return;
     }
-
   }, []);
 
   function leave() {
@@ -48,17 +41,17 @@ export default function Game(props) {
       headers: { "Content-Type": "application/json" },
       
     })
-      .then(res => {
-        if (res.ok) {
-          localStorage.removeItem('gameID');
-          localStorage.removeItem('ownerID');
-        }
-        return res
-      })
-      .then(res => res.json())
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    .then(res => {
+      if (res.ok) {
+        localStorage.removeItem('gameID');
+        localStorage.removeItem('ownerID');
+      }
+      return res
+    })
+    .then(res => res.json())
+    .catch((error) => {
+      console.error('Error:', error);
+    });
   }
 
   function updateOwner() {
@@ -66,20 +59,20 @@ export default function Game(props) {
     if (playerID === ownerID) {
 
       fetch(serviceendpoint + '/games/',{ keepalive: true})
-        .then(res => res.json())
-        .then(data => {
-          if (data.games.length !== 0) {
-            for (var i = 0; i < data.games.length; i++) {
-              if (data.games[i].id === gameID) {
-                //update ownerID in local storage
-                localStorage.setItem('ownerID', data.games[i].owner.id);
-              }
+      .then(res => res.json())
+      .then(data => {
+        if (data.games.length !== 0) {
+          for (var i = 0; i < data.games.length; i++) {
+            if (data.games[i].id === gameID) {
+              //update ownerID in local storage
+              localStorage.setItem('ownerID', data.games[i].owner.id);
             }
           }
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
     }
   }
 
@@ -94,7 +87,7 @@ export default function Game(props) {
       
       <div className='buttonPacks'>
         <Link to="/gamePackInfo" target="_blank" rel="noopener noreferrer">
-          <button> Pack Details </button>
+          <button title='Pack Details'> Pack Details </button>
         </Link>
       </div>
       

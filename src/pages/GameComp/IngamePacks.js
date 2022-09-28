@@ -12,51 +12,46 @@ export default function PlayerPoints(props){
         ? (content = content.German)
         : (content = content.English);
 
+    // display all used Packs at the beginning
     useEffect(() =>{
-        updatePacks();
-    }, []);
-
-    function updatePacks(){
         fetch(serviceendpoint + '/games/')
         .then(response => response.json())
         .then(data => {
             for (var i = 0; i < data.games.length; i++){
+                
+                // get all used packs from curGame
                 if (data.games[i].id === Number(localStorage.getItem('gameID'))) {
-                    updatePackList(data.games[i].packs)
+                    let curGamePacks = data.games[i].packs
+
+                    // put used packs name and id in setPacks State
+                    fetch(serviceendpoint + '/packs/')
+                    .then(response => response.json())
+                    .then(packData => {
+                        for(var i = 0; i < packData.packs.length; i++){
+                            for(var j = 0; j < curGamePacks.length; j++){
+                                if(packData.packs[i].id === curGamePacks[j]){
+                                    arr[j]={'name': packData.packs[i].name, 'id': packData.packs[i].id};
+                                }
+                            }
+                        }
+                    setPacks(arr)
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
                 }
             }
         })
         .catch((error) => {
             console.error('Error:', error);
         });
-    }
-    
-    function updatePackList(curPacks){
+    }, []);
 
-            fetch(serviceendpoint + '/packs/')
-            .then(response => response.json())
-            .then(data => {
-                for(var i = 0; i < data.packs.length; i++){
-                    for(var j = 0; j < curPacks.length; j++){
-                        if(data.packs[i].id === curPacks[j]){
-                            arr[j]={'name': data.packs[i].name, 'id': data.packs[i].id};
-                        }
-                    }
-                }
-                setPacks(arr)
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-    }
-
-
-
-        return (
+    return (
         <div id='ingamePacks' className='ingameList'>
             {packList.map((pack) =>(
                 <p key={pack.id}>{pack.name}</p>
             ))}
         </div>
-        );
-    }
+    );
+}

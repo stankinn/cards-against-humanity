@@ -6,30 +6,27 @@ import '../../components-styles/Packs.css'
 
 export default function GetPackInfo() {
 
-    let navigate = useNavigate();
-
     let [packWhiteCards, setWhiteCards] = useState([]);
     let [packBlackCards, setBlackCards] = useState([]);
     let [packTitle, setTitle] = useState();
 
     let packID= localStorage.getItem("packID");
 
+    let navigate = useNavigate();
 
     useEffect(() => {
         const interval = setInterval(() => {
-            console.log("ID: " + packID);
+            
             fetch(serviceendpoint + '/packs/' + packID)
-                .then(response => response.json())
-                .then(data => {
-
-                    setWhiteCards(data.white);
-                    setBlackCards(data.black);
-                    setTitle(data.name);
-
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
+            .then(response => response.json())
+            .then(data => {
+                setWhiteCards(data.white);
+                setBlackCards(data.black);
+                setTitle(data.name);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
 
         }, 500);
         return () => clearInterval(interval);
@@ -39,7 +36,6 @@ export default function GetPackInfo() {
         localStorage.removeItem("packID", packID);    
         navigate(-1);
     }
-
 
     return (
         <>

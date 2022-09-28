@@ -6,6 +6,11 @@ import { lang } from '../../Languages';
 export default function LeaveGame(props) {
 
     let navigate = useNavigate();
+    
+    let content = lang;
+    props.language === "German"
+        ? (content = content.German)
+        : (content = content.English);
 
     function leave() {
 
@@ -15,29 +20,19 @@ export default function LeaveGame(props) {
             body: JSON.stringify({ player: localStorage.getItem('playerID'), action: "leave" }),
             headers: { "Content-Type": "application/json" }
         })
-            .then(res => {
-                if (res.ok) {
-                    localStorage.removeItem('gameID');
-                    localStorage.removeItem('ownerID');
-                    navigate('/lobby');
-                }
-                return res
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.players.length > 0) {
-
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+        .then(res => {
+            if (res.ok) {
+                localStorage.removeItem('gameID');
+                localStorage.removeItem('ownerID');
+                navigate('/lobby');
+            }
+            return res
+        })
+        .then(res => res.json())
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     }
-
-    let content = lang;
-    props.language === "German"
-        ? (content = content.German)
-        : (content = content.English);
 
     return (
         <div id='leaveGame'>

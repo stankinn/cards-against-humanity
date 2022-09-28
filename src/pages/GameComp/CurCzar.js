@@ -16,29 +16,26 @@ export default function CurCzar(props) {
     //check if game running. if so, set czar
     const interval = setInterval(() => {
       fetch(serviceendpoint + '/games/')
-        .then(res => res.json())
-        .then(data => {
-          for (var i = 0; i < data.games.length; i++) {
-            if (data.games[i].id === Number(localStorage.getItem('gameID'))) {
-              if (data.games[i].running) {
-                fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')))
-                  .then(res => res.json())
-                  .then(data => {
-                    setCzar(data.czar);
-                  })
-                  .catch((error) => {
-                    console.error('Error:', error);
-                  });
-              }
+      .then(res => res.json())
+      .then(data => {
+        for (var i = 0; i < data.games.length; i++) {
+          if (data.games[i].id === Number(localStorage.getItem('gameID'))) {
+            if (data.games[i].running) {
+              fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')))
+              .then(res => res.json())
+              .then(data => {
+                setCzar(data.czar);
+              })
+              .catch((error) => {
+                console.error('Error:', error);
+              });
             }
           }
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-
-
-      
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });    
 
     }, 1000);
     return () => clearInterval(interval);

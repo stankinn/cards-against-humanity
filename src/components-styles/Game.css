@@ -45,6 +45,7 @@
 }
 
 #overlay{
+    visibility: hidden;
     grid-column: 1/3;
     grid-row: 6;
     width: 100%;
@@ -194,6 +195,7 @@
 }
 
 #choosingBtn{
+    visibility: hidden;
     grid-column: 1/3;
     grid-row: 5;
     width: 100%;
