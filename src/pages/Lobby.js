@@ -3,8 +3,8 @@ import '../components-styles/FirstPages.css'
 import '../components-styles/GameLobby.css'
 import '../components-styles/Lobby.css'
 import {lang} from '../Languages';
-import GameList from './LobbyComp/GameList';
-import Home from './LobbyComp/Home';
+import GameList from './MainLobbyComp/GameList';
+import Home from './MainLobbyComp/Home';
 import {useNavigate} from 'react-router-dom';
 
 export default function Lobby(props) {

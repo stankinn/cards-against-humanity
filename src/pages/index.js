@@ -5,5 +5,5 @@ export {default as ErrorPage} from './ErrorPage';
 export {default as GetAllPacks} from './GetPacks/GetAllPacks';
 export {default as GetPackInfo} from './GetPacks/PackInfo';
 export {default as Lobby} from './Lobby';
-export {default as CreateGame} from './LobbyComp/CreateGame';
+export {default as CreateGame} from './MainLobbyComp/CreateGame';
 export {default as GamePacks} from './GetPacks/GamePacks';

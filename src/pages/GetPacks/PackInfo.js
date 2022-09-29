@@ -32,11 +32,6 @@ export default function GetPackInfo() {
         return () => clearInterval(interval);
     }, [])
 
-    const goBack = () =>{
-        localStorage.removeItem("packID", packID);    
-        navigate(-1);
-    }
-
     return (
         <>
             <h2 id='packTitle'>{packTitle}</h2>
@@ -62,7 +57,6 @@ export default function GetPackInfo() {
                 })}
             </div>
             
-            <button className='smallArrow' onClick={() => goBack()}/>
         </>
 
     );

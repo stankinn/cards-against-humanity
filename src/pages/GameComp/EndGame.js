@@ -56,7 +56,7 @@ export default function EndGame(props) {
 
   function leave() {
 
-    // leaving game and returning to lobby
+    // leaving game and returning to main lobby
     fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')) + '/' + Number(localStorage.getItem('playerID')), {
       method: 'PATCH',
       body: JSON.stringify({ player: localStorage.getItem('playerID'), action: "leave" }),

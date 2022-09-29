@@ -25,6 +25,7 @@ export default function Game(props) {
 
   //tab close event listener, leave game when tab is closed
   useEffect(() => {
+    
     window.onbeforeunload = function () {
       updateOwner();
       leave();

@@ -1,4 +1,4 @@
-.smallArrow{
+/*.smallArrow{
     position: fixed;
     top: 1rem;
     left: 4rem;
@@ -9,14 +9,14 @@
     border-top-right-radius: 10%;
     transition: .3s ease-in-out;
   
-    /* arrow Left & Breiter */
+    // arrow Left & Breiter 
     transform: rotate(-135deg) skew(20deg, 20deg);
 }
     
 .smallArrow:hover{
   border-top: 0.5rem solid var(--btn-color);
   border-right: 0.5rem solid var(--btn-color);
-}
+}*/
 
 #packTitle{
   position:fixed;

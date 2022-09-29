@@ -64,14 +64,8 @@ export default function GetCurPacks(props) {
         localStorage.setItem("packID", id);
     }
 
-    const goBack = () => {
-        localStorage.removeItem("packID", localStorage.getItem("packID"));
-        navigate(-1);
-    }
-
 
     return (
-        <>
             <div className='border'>
                 {curPacks.map((pack) => {
 
@@ -87,8 +81,6 @@ export default function GetCurPacks(props) {
                     );
                 })}
             </div>
-            <button className='smallArrow' onClick={() => goBack()} />
-        </>
 
     );
 

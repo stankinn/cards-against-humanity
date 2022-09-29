@@ -99,7 +99,7 @@ export default function WhiteCards(props) {
                         for (let i = 0; i < data.offers.length; i++) {
                             if(data.offers[i].length > 0){
                                 for (let j = 0; j < spaces; j++) {
-                                    document.getElementById(data.offers[i][j].id).querySelector('#orderNumber').innerHTML = j;
+                                    document.getElementById(data.offers[i][j].id).querySelector('#orderNumber').innerHTML = j + 1;
                                 }
                             }
                         }
@@ -158,7 +158,7 @@ export default function WhiteCards(props) {
                 }
 
                 // add OrderNumber to card
-                document.getElementById(id).querySelector('#orderNumber').innerHTML = place;
+                document.getElementById(id).querySelector('#orderNumber').innerHTML = place + 1;
             }
             // deselect card (remove active and remove card from offering list)
             else if(document.getElementById(id).classList.contains('active') === true){
@@ -176,7 +176,7 @@ export default function WhiteCards(props) {
                 // change OrderNumber to right order
                 for (let j = 0; j < newSelection.length; j++) {
                     if(document.getElementById(newSelection[j]).classList.contains('active') === true){
-                        document.getElementById(newSelection[j]).querySelector('#orderNumber').innerHTML = j;
+                        document.getElementById(newSelection[j]).querySelector('#orderNumber').innerHTML = j + 1;
                     }
                 }
                 
