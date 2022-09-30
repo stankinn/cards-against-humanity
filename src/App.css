@@ -9,6 +9,14 @@
   --btn-color: var(--txt-color);
   --hs-red: #E3000B;
 
+  --help-grid:
+    'Header1 Header1'
+    'Text1 Image1'
+    'Header2 Header2'
+    'Text2 Image2';
+  --help-rows: 5% 42% 5% 42%;
+  --help-columns: minmax(50%) minmax(50%);
+
   --cards-height: 11rem;
   --PP-gridC: 1;
   --PP-gridR: 3;
@@ -80,6 +88,32 @@ button:hover{
 #fixedL{
   margin-left: 20rem;
 }
+
+@media(orientation: landscape){
+  :root{
+    --help-grid:
+      'Header1 Header1'
+      'Text1 Image1'
+      'Header2 Header2'
+      'Text2 Image2';
+    --help-rows: 5% 42% 5% 42%;
+    --help-columns: minmax(50%) minmax(50%);
+  }
+}
+
+@media(orientation: portrait){
+  :root{
+    --help-grid:
+      'Header1'
+      'Text1'
+      'Image1'
+      'Header2'
+      'Text2'
+      'Image2';
+    --help-rows: 5% 20% 20% 5% 20% 20%;
+    --help-columns: minmax(100%);
+  }
+}
   
 @media(max-width: 499px){
   :root{
@@ -98,6 +132,7 @@ button:hover{
 @media(min-width: 500px){
   :root{
     font-size: 1em;
+
     --PP-gridC: 1;
     --PP-gridR: 3;
     --BC-gridR: 1;
@@ -111,6 +146,7 @@ button:hover{
 @media(min-width: 850px){
   :root{
     font-size: 1em;
+
     --PP-gridC: 1;
     --PP-gridR: 3;
     --BC-gridR: 1;
@@ -124,6 +160,7 @@ button:hover{
 @media(min-width: 1300px){
   :root{
     font-size: 1.5em;
+
     --PP-gridC: 1;
     --PP-gridR: 3;
     --BC-gridR: 1;

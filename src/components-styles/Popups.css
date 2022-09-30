@@ -68,17 +68,130 @@
   transform: rotate(45deg) translate(-0.5rem, -0.45rem);
 }
 
+#curPage{
+  position: absolute;
+  font-size: .9rem;
+}
+
+#popupGrid{
+  display: grid;
+  width: 100%;
+  height: 100%;
+
+  grid-template: 
+    'ArrowL Cont ArrowR';
+  grid-template-columns: 1.5rem calc(100% - 3rem) 1.5rem;
+  grid-template-rows: 100%;
+
+  justify-items: safe center;
+  overflow: hidden;
+}
+
+.popupArrow{
+  align-self: center;
+  height: 2.3rem;
+  width: 2.3rem;
+  border-top: 0.3rem solid var(--txt-color);
+  border-right: 0.3rem solid var(--txt-color);
+  border-top-right-radius: 10%;
+  transition: .3s ease-in-out;
+}
+  
+.popupArrow:hover{
+  cursor: pointer;
+}
+
+.arrowL{
+  grid-area: ArrowL;
+  transform: rotate(-135deg) skew(20deg, 20deg);
+}
+
+.arrowL:hover{
+  border-top: 0.5rem solid var(--hs-red);
+  border-right: 0.5rem solid var(--hs-red);
+}
+
+.arrowR{
+  grid-area: ArrowR;
+  transform: rotate(45deg) skew(20deg, 20deg);
+  margin-left: -.8rem;
+}
+
+.arrowR:hover{
+  border-top: 0.5rem solid seagreen;
+  border-right: 0.5rem solid seagreen;
+}
+
+#popupContent{
+  grid-area: Cont;
+  display: grid;
+  width: 100%;
+  height: 100%;
+
+  grid-template: var(--help-grid);
+  grid-template-rows: var(--help-rows);
+  grid-template-columns: var(--help-columns);
+
+  justify-items: safe center;
+  grid-row-gap: 2%;
+}
+
 .popupTitle{
-  font-size: 2.0rem;
+  font-size: 1.25rem;
   font-weight: 500;
-  text-align: center;
+}
+
+.helpHeader1{
+  grid-area: Header1;
+}
+
+.helpText1{
+  grid-area: Text1;
+}
+
+.helpImage1{
+  grid-area: Image1;
+}
+
+.helpHeader2{
+  grid-area: Header2;
+}
+
+.helpText2{
+  grid-area: Text2;
+}
+
+.helpImage2{
+  grid-area: Image2;
 }
 
 .popupText{
-  font-size: 1.2rem;
-  margin: 1.5rem;
-  height: 65vh;
+  font-size: 1rem;
   overflow-y: auto;
+}
+
+.popupText::-webkit-scrollbar{
+  width: .25rem;
+}
+
+.popupText::-webkit-scrollbar-track{
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 1rem;
+}
+
+.popupText::-webkit-scrollbar-thumb{
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 1rem;
+}
+
+.popupText::-webkit-scrollbar-thumb:hover{
+  background-color: white;
+}
+
+.helpImg{
+  max-height: 100%;
+  max-width: 100%;
+  padding-left: .5rem;
 }
 
 .popupCutout{

@@ -67,6 +67,11 @@ export default function GameList(props) {
                     .catch((error) => {
                         console.error('Error:', error);
                     });
+
+                    console.log(data.games[i].running)
+                    if(data.games[i].running){
+                        document.getElementById('joinBtn').classList.add('disabled');
+                    }
                 }
             }
         })

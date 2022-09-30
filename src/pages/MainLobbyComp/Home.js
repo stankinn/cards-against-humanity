@@ -8,7 +8,7 @@ export default function Home() {
     let navigate = useNavigate();
 
     function goHome() {
-        navigate('/cards-against-humanity');
+        navigate('/home');
     }
 
     return (
