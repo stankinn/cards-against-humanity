@@ -21,7 +21,7 @@ export default function App() {
 
     <Router>
       <Routes>
-        <Route path='/home' element={<PlayerCreation language={language} />} />
+        <Route path='/cards-against-humanity' element={<PlayerCreation language={language} />} />
         <Route path='/lobby/*' element={<Lobby language={language} />} />
         <Route path='/lobby/create-game' element={<CreateGame language={language} />} />
         <Route path='/lobby/:id' element={<GameLobby language={language} />} />
