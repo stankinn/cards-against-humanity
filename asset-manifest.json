@@ -1,14 +1,29 @@
 {
   "files": {
-    "main.css": "/cards-against-humanity/static/css/main.b1a92e1d.css",
-    "main.js": "/cards-against-humanity/static/js/main.06d0dd2c.js",
+    "main.css": "/cards-against-humanity/static/css/main.9ef942e3.css",
+    "main.js": "/cards-against-humanity/static/js/main.af3f69ce.js",
+    "static/media/EndDE.gif": "/cards-against-humanity/static/media/EndDE.5673b7a828046b61491e.gif",
+    "static/media/EndEN.gif": "/cards-against-humanity/static/media/EndEN.8d80f5ed7f34765fbeef.gif",
+    "static/media/PlayerChooseDE.gif": "/cards-against-humanity/static/media/PlayerChooseDE.849f4ff865910dc76dd1.gif",
+    "static/media/PlayerChooseEN.gif": "/cards-against-humanity/static/media/PlayerChooseEN.dc7701d034bee14e12cf.gif",
+    "static/media/CzarChooseEN.gif": "/cards-against-humanity/static/media/CzarChooseEN.17630835915b32fbb749.gif",
+    "static/media/GameDE.gif": "/cards-against-humanity/static/media/GameDE.2f5da0792bd7d79118a4.gif",
+    "static/media/CzarChooseDE.gif": "/cards-against-humanity/static/media/CzarChooseDE.6e1b2e6ad39586ac599e.gif",
+    "static/media/GameEN.gif": "/cards-against-humanity/static/media/GameEN.7422809025bca673ba28.gif",
+    "static/media/JoinLeaveDE.gif": "/cards-against-humanity/static/media/JoinLeaveDE.29f4d34236a69786558b.gif",
+    "static/media/Language.gif": "/cards-against-humanity/static/media/Language.8d149a12ef909d27b61f.gif",
+    "static/media/JoinLeaveEN.gif": "/cards-against-humanity/static/media/JoinLeaveEN.a5e526df99d472e34123.gif",
+    "static/media/PlayerDE.gif": "/cards-against-humanity/static/media/PlayerDE.506e43f1d91db9d62fc4.gif",
+    "static/media/PlayerEN.gif": "/cards-against-humanity/static/media/PlayerEN.6a6638016415a18c74d2.gif",
+    "static/media/CzarDE.jpg": "/cards-against-humanity/static/media/CzarDE.dcee116fc2ac4be79fcf.jpg",
+    "static/media/CzarEN.jpg": "/cards-against-humanity/static/media/CzarEN.83660adbb2c55794aabd.jpg",
     "static/media/HSA_Logo.png": "/cards-against-humanity/static/media/HSA_Logo.e87f881bbf16284ec732.png",
     "index.html": "/cards-against-humanity/index.html",
-    "main.b1a92e1d.css.map": "/cards-against-humanity/static/css/main.b1a92e1d.css.map",
-    "main.06d0dd2c.js.map": "/cards-against-humanity/static/js/main.06d0dd2c.js.map"
+    "main.9ef942e3.css.map": "/cards-against-humanity/static/css/main.9ef942e3.css.map",
+    "main.af3f69ce.js.map": "/cards-against-humanity/static/js/main.af3f69ce.js.map"
   },
   "entrypoints": [
-    "static/css/main.b1a92e1d.css",
-    "static/js/main.06d0dd2c.js"
+    "static/css/main.9ef942e3.css",
+    "static/js/main.af3f69ce.js"
   ]
 }
