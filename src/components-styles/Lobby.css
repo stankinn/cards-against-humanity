@@ -1,4 +1,4 @@
-.allLobbyLayout{
+.allLobbyLayout{ /* Page Layout */
     display: grid;
     height: 100vh;
     width: 100vw;
@@ -14,17 +14,17 @@
     padding: 2rem;
 }
 
-.header{
+.header{ /* Page Header */
     grid-area: Header;
     font-size: 1.5rem;
     margin-top: -1rem;
 }
 
-#gamesList{
+#gamesList{ /* List with all Games */
     grid-area: GameList;
 }
 
-#gamesList > button{
+#gamesList > button{ /* each Game in the List */
     font-size: 1rem;
     width: 100%;
 
@@ -37,7 +37,9 @@
     color: seagreen;
 }
 
-#detailsList{
+/* ------ More Information on each Game ------ */
+
+#detailsList{ /* Layout for Information */
     grid-area: DetailsList;
     width: fit-content;
     width: 80%;
@@ -62,13 +64,83 @@
     background-color: var(--bg-cards);
 }
 
-#home:hover{
-/* .homeBtn:hover, #homeIconRoof:hover, #homeIcon:hover { */
-    cursor: pointer;
-   --btn-color: var(--hs-red);
-  }
+#headerID{ /* Information Header (=GameID) */
+    grid-area: HeaderL;
+    font-size: 1rem;
+    font-weight: 500;
+    justify-self: center;
+}
 
-#home{
+#gamePoints{ /* Game Goal */
+    grid-area: Points;
+}
+
+#playerCont{ /* 'Player in Game' Text */
+    grid-area: Player;
+}
+
+#playerList{ /* Container for all Players in Game */
+    grid-area: PlayerList;
+    justify-self: left;
+    min-height: 1.5rem;
+}
+
+#packsCont{ /* 'Packs in Game' Text */
+    grid-area: Packs;
+}
+
+#packsList{ /* Container for all Packs in Game */
+    grid-area: PacksList;
+    justify-self: left;
+    min-height: 1.5rem;
+}
+
+#createBtn{ /* Create Game Button */
+    grid-area: ButtonL;
+}
+
+#joinBtn{ /* Join Game Button */
+    grid-area: ButtonR;
+}
+
+.lobbyList{ /* Container for Players/Packs */
+    min-width: 5rem;
+    width: 80%;
+    background-color: rgba(100, 100, 100, 0.25);
+    border: .25rem solid transparent;
+    border-radius: .5rem;
+    overflow-y: auto;
+}
+
+.lobbyList > p{ /* each Player/Pack Text */
+    font-weight: 400;
+    font-size: .9rem;
+    padding: .1rem .5rem;
+}
+
+/* ----- Scrollbar for these Lists ----- */
+
+.lobbyList::-webkit-scrollbar, #detailsList::-webkit-scrollbar{
+    width: .5rem;
+}
+
+.lobbyList::-webkit-scrollbar-track, #detailsList::-webkit-scrollbar-track{
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 1rem;
+}
+
+.lobbyList::-webkit-scrollbar-thumb, #detailsList::-webkit-scrollbar-thumb{
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 1rem;
+}
+
+.lobbyList::-webkit-scrollbar-thumb:hover, #detailsList::-webkit-scrollbar-thumb:hover{
+    background-color: white;
+}
+
+/* ----- Home Button ----- */
+
+#home{ /* Button Background and Container */
     position: fixed;
     top: 0.4rem;
     right: 0.4rem;
@@ -82,11 +154,16 @@
     overflow: hidden;
 }
 
-.homeBtn{
+#home:hover{
+    cursor: pointer;
+   --btn-color: var(--hs-red);
+}
+
+.homeBtn{ /* Container for whole house icon */
     margin: .36rem;
 }
 
- #homeIconRoof, #homeIcon{
+#homeIconRoof, #homeIcon{
     width: 1.5rem;
     height: 2rem;
     border-color:var(--btn-color);
@@ -110,80 +187,4 @@
     border-top: 0;
 
     background-color: transparent;
-}
-
-#headerID{
-    grid-area: HeaderL;
-    font-size: 1rem;
-    font-weight: 500;
-    justify-self: center;
-}
-
-#gamePoints{
-    grid-area: Points;
-}
-
-#playerCont{
-    grid-area: Player;
-}
-
-#playerList{
-    grid-area: PlayerList;
-    justify-self: left;
-    min-height: 1.5rem;
-}
-
-#playerList > p, #packsList > p{
-    padding: .1rem;
-}
-
-#packsCont{
-    grid-area: Packs;
-}
-
-#packsList{
-    grid-area: PacksList;
-    justify-self: left;
-    min-height: 1.5rem;
-}
-
-#createBtn{
-    grid-area: ButtonL;
-}
-
-#joinBtn{
-    grid-area: ButtonR;
-}
-
-.lobbyList{
-    min-width: 5rem;
-    width: 80%;
-    background-color: rgba(100, 100, 100, 0.25);
-    border: .25rem solid transparent;
-    border-radius: .5rem;
-    overflow-y: auto;
-}
-
-.lobbyList > p{
-    font-weight: 400;
-    font-size: .9rem;
-    padding: .25rem .5rem;
-}
-
-.lobbyList::-webkit-scrollbar, #detailsList::-webkit-scrollbar{
-    width: .5rem;
-}
-
-.lobbyList::-webkit-scrollbar-track, #detailsList::-webkit-scrollbar-track{
-    background-color: rgba(0, 0, 0, 0.25);
-    border-radius: 1rem;
-}
-
-.lobbyList::-webkit-scrollbar-thumb, #detailsList::-webkit-scrollbar-thumb{
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 1rem;
-}
-
-.lobbyList::-webkit-scrollbar-thumb:hover, #detailsList::-webkit-scrollbar-thumb:hover{
-    background-color: white;
 }

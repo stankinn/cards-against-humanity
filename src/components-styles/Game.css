@@ -1,4 +1,4 @@
-.gameLayout{
+.gameLayout{ /* Page Layout */
     display: grid;
     width: 100vw;
     height: 100vh;
@@ -11,15 +11,11 @@
     padding-top: .5rem;
 }
 
-#blackCard{
-    align-self: end;
-}
-
-.bc{
+.bc{ /* Black Card Container */
     grid-row: var(--BC-gridR);
 }
 
-.cardsBackground{
+.cardsBackground{ /* Background for Player and Offered Cards */
     width: 100%;
     background-color: var(--bg-cards);
     border: .5rem solid var(--bg-cards);
@@ -27,7 +23,7 @@
     padding: 1rem;
 }
 
-#offeredCards{
+#offeredCards{ /* Offered Cards Container */
     grid-column: var(--grid-column);
     grid-row: var(--grid-row);
     padding-top: 0;
@@ -35,7 +31,7 @@
     padding-left: .2rem;
 }
 
-#playerCards{
+#playerCards{ /* Player Cards Container */
     grid-column: 1/3;
     grid-row: 6;
     padding: 0;
@@ -44,7 +40,7 @@
     border-bottom: 0;
 }
 
-#overlay{
+#overlay{ /* Overlay over Player Cards when Czar or already offered */
     visibility: hidden;
     grid-column: 1/3;
     grid-row: 6;
@@ -58,21 +54,23 @@
     font-size: 2em;
 }
 
-#czarWarning{
+#czarWarning{ /* 'You are Czar' Text on Overlay */
     visibility: hidden;
 }
 
-.CzarText{
+.CzarText{ /* current Czar Information Text */
     font-weight: bold;
     height: 2rem;
 }
 
-.playerPoints{
+.playerPoints{ /* all Playernames and their current Points */
     grid-column: var(--PP-gridC);
     grid-row: var(--PP-gridR);
     margin-top: -.75rem;
     padding-right: .5rem;
 }
+
+ /* ----- manage Overflow and Scrollbar for scrollable Container ----- */
 
 .gameDiv, .playerPoints{
     overflow-y: auto;
@@ -97,7 +95,9 @@
     background-color: white;
 }
 
-#endGame{
+/* ----- End Game Button -----*/
+
+#endGame{ /* End Game 'X' Container */
     position: fixed;
     top: 0.4rem;
     right: 0.4rem;
@@ -116,15 +116,22 @@
     --btn-color: var(--hs-red);
 }
 
-#btnMenu{
-  position: fixed;
-  top: 0.4rem;
-  left: 0.4rem;
-  height: 2.75rem;
-  width: 2.75rem;
+#endBar1, #endBar2{ /* 'X' divs */
+    position: absolute;
+    width: 1.9rem;
+    border-top: 0.25rem solid var(--btn-color);
+    transition: 0.2s;
 }
 
-.buttonPacks{
+#endBar1{
+    transform: rotate(-45deg) translate(.2rem, .42rem);
+}
+  
+#endBar2{
+    transform: rotate(45deg) translate(0.4rem, -0.19rem);
+}
+
+.buttonPacks{ /* Button for Packdetails */
     margin-top: -.75rem;
     margin-bottom: -.75rem;
     grid-column: 1/3;
@@ -138,11 +145,7 @@
     font-size: .75rem;
 }
 
-#ingameDetails{
-    color: var(--txt-color);
-}
-
-.ingameList{
+.ingameList{ /* used Packslist */
     grid-row: 5;
     grid-column: 1/3;
     max-height: 3.5rem;
@@ -150,9 +153,10 @@
     border: .25rem solid transparent;
     border-radius: .5rem;
     overflow-y: auto;
+    padding-right: .25rem;
 }  
 
-.ingameList > p{
+.ingameList > p{ /* Packs Title */
     float: right;
     font-size: .7rem;
     padding-left: .2rem;
@@ -164,6 +168,8 @@
     border: .1rem solid transparent;
     border-radius: .3rem;
 }
+
+ /* ----- smaller Scrollbar for Packslist ----- */
 
 .ingameList::-webkit-scrollbar{
     width: .3rem;
@@ -183,22 +189,9 @@
     background-color: rgba(150, 150, 150, 0.8);
 }
 
-#endBar1, #endBar2{
-    position: absolute;
-    width: 1.9rem;
-    border-top: 0.25rem solid var(--btn-color);
-    transition: 0.2s;
-}
+/* ----- choose Card/s Button ----- */
 
-#endBar1{
-    transform: rotate(-45deg) translate(.2rem, .42rem);
-}
-  
-#endBar2{
-    transform: rotate(45deg) translate(0.4rem, -0.19rem);
-}
-
-#choosingBtn{
+#choosingBtn{ /* Overlay over Packslist */
     visibility: hidden;
     grid-column: 1/3;
     grid-row: 5;
@@ -210,6 +203,8 @@
     justify-content: center;
     align-items: center;
 }
+
+/* -- offer and choose winner card Buttons -- */
 
 #cardBtn, #winnerBtn{
     font-size: 1rem;

@@ -1,4 +1,4 @@
-#menu{
+#menu{ /* Background for the Menu */
     position: fixed;
     top: 0.4rem;
     left: 0.4rem;
@@ -12,13 +12,15 @@
     overflow: hidden;
 }
   
-#menu.open{
+#menu.open{ /* make Background bigger on open menu */
   top: 0;
   height: 3.15rem;
   width: 15rem;
   border-radius: 0 0 0.5rem 0.5rem;
   transition-delay: .1ms;
 }
+
+/* --- Menu Button (opens/closes Menu) --- */
 
 #btnMenu{
   position: fixed;
@@ -61,7 +63,9 @@
 #bar3.open {
   transform: rotate(45deg) translate(-0.5rem, -0.45rem);
 }
-  
+
+/* ----- Style of each Menubutton ----- */
+
 .menuBtns{
   position:absolute;
   height: 2.6rem;
@@ -84,33 +88,35 @@
   transition-delay: 0.1ms;
 }
 
-#btnLang{
+#btnLang{ /* Language Button 'EN/DE' */
   margin-left: 3rem;
   appearance: none;
 }
 
-.langOption{
+.langOption{ /* Language Dropdown */
   background-color: var(--bg-color);
   color: var(--txt-color);
   font-size: 1rem;
 }
 
-#btnHelp{
+#btnHelp{ /* '?' Button (opens Help Popup) */
   margin-left: 6.8rem;
   padding: 0 .5rem;
 }
 
-#btnColor{
+#btnColor{ /* Theme Button */
   margin-left: 9.4rem;
 }
   
-#colorCircle{
+#colorCircle{ /* next Theme color */
   width: 1.75rem;
   height: 1.75rem;
   border-radius: 100%;
   border: 0.25rem solid var(--btn-color);
   background-color: var(--next-bg-color);
 }
+
+/* ----- Button to view all Packs ----- */
 
 #btnPacks{
   margin-left: 12.1rem;
@@ -137,6 +143,8 @@
   background-color: var(--btn-color);
   transform: rotate(-15deg);
 }
+
+ /* ----- HS-Panel ----- */
   
 #infoPanel{
   position: fixed;
@@ -178,7 +186,7 @@
   left: -6rem;
 }
   
-#btnInfo{
+#btnInfo{ /* Button over HS-Logo to open Panel */
   position: fixed;
   top: 4.7rem;
   left: 0;
@@ -193,7 +201,9 @@
   color: var(--hs-red);
   font-weight: 500;
 }
-  
+
+/* -- Arrow to close Panel -- */
+
 .arrow{
   position: absolute;
   right: -2%;
@@ -204,8 +214,6 @@
   border-right: 0.3rem solid var(--hs-red);
   border-top-right-radius: 10%;
   transition: .3s ease-in-out;
-
-  /* arrow Left & Breiter */
   transform: rotate(-135deg) skew(20deg, 20deg);
 }
   

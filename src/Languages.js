@@ -1,5 +1,7 @@
 export let lang = {
     English:{
+        error: 'Page not found!',
+
         hsaInfo1:'A project of the',
         hsaInfo2:'under the supervision of',
         
@@ -71,6 +73,8 @@ export let lang = {
         playerLost:'YOU LOST',
     },
     German:{
+        error: 'Seite nicht gefunden!',
+
         hsaInfo1:'Ein Projekt an der',
         hsaInfo2:'unter der Aufsicht von',
 

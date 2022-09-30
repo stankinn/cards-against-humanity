@@ -18,11 +18,11 @@
   --help-columns: minmax(50%) minmax(50%);
 
   --cards-height: 11rem;
-  --PP-gridC: 1;
-  --PP-gridR: 3;
-  --BC-gridR: 1;
-  --grid-row: 1/4;
-  --grid-column: 2/3;
+  --PP-gridC: 1; /* PlayerPoints grid-column */
+  --PP-gridR: 3; /* PlayerPoints grid-row */
+  --BC-gridR: 1; /* BlackCard grid-row */
+  --grid-row: 1/4; /* OfferedCards grid-row */
+  --grid-column: 2/3; /* OfferedCards grid-column */
 
   --radGradientRed: radial-gradient(circle, #ff0000 20%, transparent 20%);
   --radGradientOrange: radial-gradient(circle, #ff8400 20%, transparent 20%);

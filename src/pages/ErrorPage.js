@@ -1,7 +1,18 @@
 import React from 'react'
+import Home from './MainLobbyComp/Home'
+import { lang } from '../Languages';
 
-export default function ErrorPage() {
+export default function ErrorPage(props) {
+
+  let content = lang;
+  props.language === "German"
+    ? (content = content.German)
+    : (content = content.English);
+
   return (
-    <div>ERROR! Page not found!</div>
+    <>
+      <div id='errorPage'>ERROR! {content.error}</div>
+      <Home/>
+    </>
   )
 }

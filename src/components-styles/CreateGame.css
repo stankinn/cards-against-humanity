@@ -1,4 +1,4 @@
-.createLayout{
+.createLayout{ /* Page Layout */
     display: grid;
     height: 100vh;
     width: 100vw;
@@ -16,27 +16,27 @@
     padding: 2rem;
 }
 
-#headerCG{
+#headerCG{ /* Header */
     grid-area: Header;
 }
 
-#pointsCG{
+#pointsCG{ /* Points Text */
     grid-area: Points;
     padding-top: 1rem;
     padding-bottom: .5rem;
 }
 
-#inputGoal{
+#inputGoal{ /* Goal Inputfield */
     grid-area: Input;
 }
 
-#packsCG{
+#packsCG{ /* Packs Text */
     grid-area: Packs;
     padding-top: 1rem;
     padding-bottom: .5rem;
 }
 
-#buttonsCG{
+#buttonsCG{ /* PacksButton Container */
     grid-area: Buttons;
     background-color: var(--bg-cards);
     border-start-end-radius: 1rem;
@@ -46,7 +46,7 @@
     justify-content: center;
 }
 
-#buttonsCG > button{
+#buttonsCG > button{  /* Buttons in Container */
     font-size: 1rem;
     padding: 2rem;
     padding-top: .5rem;
@@ -54,17 +54,17 @@
     color: var(--txt-color);
 }
 
-#buttonsCG > button:first-of-type:hover{
+#buttonsCG > button:first-of-type:hover{ /* Select All > Green */
     cursor: pointer;
     color: seagreen;
 }
 
-#buttonsCG > button:last-of-type:hover{
+#buttonsCG > button:last-of-type:hover{ /* Deselect All > Red */
     cursor: pointer;
     color: var(--hs-red);
 }
 
-#packsListCG{
+#packsListCG{ /* Packslist Container */
     grid-area: PacksList;
     display: grid;
     width: 80%;
@@ -78,7 +78,7 @@
     grid-gap: 1rem;
 }
 
-#containerCG{
+#containerCG{ /* Container for each Card with Checkbox */
     background-color: rgba(0, 0, 0, 0.25);
     padding: .5rem;
     width: 9rem;
@@ -86,7 +86,7 @@
     border-top-left-radius: .25rem;
 }
 
-.checkboxContainer{
+.checkboxContainer{ /* => for positioning the Checkbox */
     margin-top: -.65rem;
     margin-left: -.38rem;
 }
@@ -95,16 +95,18 @@
     cursor: pointer;
 }
 
-#packTitleCG{
+#packTitleCG{ /* Pack Title and Pack Information */
     margin-top: -1rem;
     margin-left: .5rem;
     text-align: center;
 }
 
-.continueBtn{
+.continueBtn{ /* Create Game Button */
     grid-area: ContinueBtn;
     margin-top: 1.5rem;
 }
+
+/* ----- Scrollbar for Packslist ----- */
 
 #packsListCG::-webkit-scrollbar{
     width: .5rem;

@@ -1,4 +1,4 @@
-.popupBack{
+.popupBack{ /* Background for Popup */
     position: fixed;
     top: 0;
     left: 0;
@@ -11,7 +11,7 @@
     align-items: center;
 }
 
-.popupWindow{
+.popupWindow{ /* Container for all Content from Popup */
     position: relative;
     background-color: var(--bg-color);
     color: var(--txt-color);
@@ -21,7 +21,7 @@
     padding: 1rem;
 }
 
-.popupWindow.small{
+.popupWindow.small{ /* small Popup for Animations */
     height: 5.1rem;
     width: 20.1rem;
 }
@@ -43,7 +43,7 @@
   background: repeating-linear-gradient(90deg, #cecece, #555555, #cecece, #555555, #cecece);
 }
 
-#btnClose{
+#btnClose{ /* 'X' Button Container to close Popup */
     position: absolute;
     top: 0.8rem;
     right: 0.8rem;
@@ -51,7 +51,7 @@
     width: 1.85rem;
 }
 
-#xBar1, #xBar2{
+#xBar1, #xBar2{ /* 'X' divs */
   position: absolute;
   width: 1.9rem;
   border-top: 0.25rem solid var(--btn-color);
@@ -68,12 +68,12 @@
   transform: rotate(45deg) translate(-0.5rem, -0.45rem);
 }
 
-#curPage{
+#curPage{ /* small Numbers that show on wich page of the help Popup you are */
   position: absolute;
   font-size: .9rem;
 }
 
-#popupGrid{
+#popupGrid{ /* Layout from Popup Container */
   display: grid;
   width: 100%;
   height: 100%;
@@ -86,6 +86,8 @@
   justify-items: safe center;
   overflow: hidden;
 }
+
+ /* ----- Right and Left Arrow to change the Popup page ----- */
 
 .popupArrow{
   align-self: center;
@@ -122,7 +124,7 @@
   border-right: 0.5rem solid seagreen;
 }
 
-#popupContent{
+#popupContent{ /* Layout for the different Contents on the different Popup pages */
   grid-area: Cont;
   display: grid;
   width: 100%;
@@ -136,20 +138,15 @@
   grid-row-gap: 2%;
 }
 
-.popupTitle{
-  font-size: 1.25rem;
-  font-weight: 500;
-}
-
-.helpHeader1{
+.helpHeader1{ /* Header for first Information an a Popup page */
   grid-area: Header1;
 }
 
-.helpText1{
+.helpText1{ /* Text for first Information an a Popup page */
   grid-area: Text1;
 }
 
-.helpImage1{
+.helpImage1{ /* Image for first Information an a Popup page */
   grid-area: Image1;
 }
 
@@ -165,10 +162,23 @@
   grid-area: Image2;
 }
 
-.popupText{
+.popupTitle{ /* Header Style */
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.popupText{ /* Text Style */
   font-size: 1rem;
   overflow-y: auto;
 }
+
+.helpImg{ /* Image Style */
+  max-height: 100%;
+  max-width: 100%;
+  padding-left: .5rem;
+}
+
+/* ----- Scrollbar for Information Text ----- */
 
 .popupText::-webkit-scrollbar{
   width: .25rem;
@@ -188,11 +198,7 @@
   background-color: white;
 }
 
-.helpImg{
-  max-height: 100%;
-  max-width: 100%;
-  padding-left: .5rem;
-}
+/* ----- cutout & glowing Effect for small (=animated) Popups ----- */
 
 .popupCutout{
     position: absolute;

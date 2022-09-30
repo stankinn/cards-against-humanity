@@ -51,6 +51,8 @@
     box-shadow: 0 0 0.5rem var(--hs-red);
 }
 
+/* ----- Cards Scrollbar ----- */
+
 .card::-webkit-scrollbar{
     width: .4rem;
 }

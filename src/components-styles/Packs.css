@@ -1,33 +1,13 @@
-/*.smallArrow{
-    position: fixed;
-    top: 1rem;
-    left: 4rem;
-    height: 1.5rem;
-    width: 1.5rem;
-    border-top: 0.4rem solid var(--btn-color);
-    border-right: 0.4rem solid var(--btn-color);
-    border-top-right-radius: 10%;
-    transition: .3s ease-in-out;
-  
-    // arrow Left & Breiter 
-    transform: rotate(-135deg) skew(20deg, 20deg);
-}
-    
-.smallArrow:hover{
-  border-top: 0.5rem solid var(--btn-color);
-  border-right: 0.5rem solid var(--btn-color);
-}*/
-
-#packTitle{
+#packTitle{ /* Header (=current Packname) */
   position:fixed;
-  padding-top: .5rem;
-  height: 3rem;
+  padding-top: .75rem;
+  height: 3.7rem;
   width: 100%;
   text-align: center;
   background-color: var(--bg-cards);
 }
 
-.border{
+.border{ /* Border for whole page so the cards are not to close to some edge */
   display: grid;
   width: 100vw;
   height: 100vh;
@@ -39,11 +19,11 @@
   padding-right: 1.25rem;
 }
 
-.border.detail{
+.border.detail{ /* different Backgroundcolor so the white and black cards are visible */
   background-color: var(--bg-cards);
 }
 
-.packs{
+.packs{ /* Contaier for each Pack */
   height: 5.9rem;
   min-width: 8.5rem;
 
@@ -66,18 +46,20 @@
   transition-property: transform, box-shadow;
 }
 
-.packs.black{
+.packs.black{ /* Black Pack Cards Style */
     font-weight: 400;
     background-color: black;
     border-color: black;
     color: white;
 }
 
-.packs.white{
+.packs.white{ /* White Pack Cards Style */
   background-color: white;
   border-color: white;
   color: black;
 }
+
+/* ----- Scrollbar for Black and White Pack Cards ----- */
 
 .packs::-webkit-scrollbar{
   width: .3rem;
@@ -97,10 +79,7 @@
     background-color: rgba(50, 50, 50, 0.8);
 }
 
-.packsall:hover{
-  transform: translateY(-.7rem);
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 1);
-}
+/* ----- Scrollbar for Pack Cards ----- */
 
 .packsall::-webkit-scrollbar-track{
   background-color: rgba(0, 0, 0, 0.25);
@@ -114,4 +93,9 @@
 
 .packsall::-webkit-scrollbar-thumb:hover{
   background-color: white;
+}
+
+.packsall:hover{ /* enable hover only on the Packs Container */
+  transform: translateY(-.7rem);
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 1);
 }

@@ -1,4 +1,4 @@
-.lobbyLayout{
+.lobbyLayout{ /* Page Layout */
     display: grid;
     height: 100vh;
     width: 100vw;
@@ -14,15 +14,17 @@
     padding: 2rem;
 }
 
-.list > p{
+.list > p{ /* different Padding for Players(Name and ID) Text */
     padding: .2rem 1rem;
 }
 
-.headerG{
+.headerG{ /* Page Header */
     grid-area: Header;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
-#leaveBtn{
+#leaveBtn{ /* leave Lobby Button */
     grid-area: LeaveBtn;
     padding: .5rem 3rem;
     background-color: var(--hs-red);
@@ -34,6 +36,6 @@
     color: black;
 }
 
-#startBtn{
+#startBtn{ /* start Game Button */
     grid-area: StartBtn;
 }

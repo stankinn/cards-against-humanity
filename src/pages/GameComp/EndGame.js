@@ -34,26 +34,6 @@ export default function EndGame(props) {
     }
   }
 
-  // function deleteGame() {
-
-  //   fetch(serviceendpoint + '/games/' + Number(localStorage.getItem('gameID')), {
-  //     method: "DELETE",
-  //     headers: { "Content-Type": "application/json" }
-  //   })
-  //     .then(res => {
-  //       if (res.ok) {
-  //         localStorage.removeItem('ownerID');
-  //         localStorage.removeItem('gameID');
-  //         navigate('/lobby');
-  //       }
-  //       return res
-  //     })
-  //     .then(res => res.json())
-  //     .catch((error) => {
-  //       console.error('Error:', error);
-  //     });
-  // }
-
   function leave() {
 
     // leaving game and returning to main lobby
